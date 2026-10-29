@@ -11,6 +11,7 @@ import { Navbar } from '@/components/Navbar';
 import { HeroBanner } from '@/components/HeroBanner';
 import { BrandMarquee } from '@/components/BrandMarquee';
 import { BentoTrustGrid } from '@/components/BentoTrustGrid';
+import { FlagshipSpotlight } from '@/components/FlagshipSpotlight';
 import { FilterSidebar } from '@/components/FilterSidebar';
 import { PhoneCard } from '@/components/PhoneCard';
 import dynamic from 'next/dynamic';
@@ -661,6 +662,10 @@ function HomeContent() {
             })}
           </div>
         </section>
+
+        {/* Cinematic Flagship Deal of the Day Spotlight */}
+        <FlagshipSpotlight onOpenEMIModal={() => setActivePolicyModal('installments')} />
+
 
         {/* PriceOye Inspired: Shop by Budget Rail */}
         <section className="mt-5 p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row sm:items-center justify-between gap-3">

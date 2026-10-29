@@ -68,7 +68,7 @@ export const PhoneCard = React.memo(function PhoneCard({
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative flex flex-col justify-between bg-white rounded-2xl p-2.5 sm:p-5 border border-slate-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-xl hover:border-[#48afff] hover:-translate-y-1.5 transition-all duration-300"
+      className="group relative flex flex-col justify-between bg-white rounded-3xl p-3 sm:p-5 border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-2xl hover:border-sky-400 hover:-translate-y-2 transition-all duration-300"
     >
       {/* Top Badges & Compare Toggle */}
       <div>
@@ -117,7 +117,7 @@ export const PhoneCard = React.memo(function PhoneCard({
         {/* Product Image Canvas */}
         <Link
           href={`/product/${phone.slug}`}
-          className="block relative w-full h-32 sm:h-52 my-1 bg-white p-1 sm:p-2 overflow-hidden flex items-center justify-center"
+          className="block relative w-full h-36 sm:h-52 my-1.5 rounded-2xl bg-gradient-to-b from-slate-50 via-slate-50/50 to-white p-2 sm:p-3 overflow-hidden flex items-center justify-center border border-slate-100 group-hover:border-sky-200 transition-colors"
         >
           <div className="w-full h-full flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-105">
             <PhoneImageWithFallback
@@ -307,7 +307,7 @@ export const PhoneCard = React.memo(function PhoneCard({
             disabled={!isSelectionInStock}
             className={`group/btn col-span-8 flex items-center justify-center gap-1 py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-xl text-[11px] sm:text-xs font-black transition-all btn-shimmer btn-press ${
               isSelectionInStock
-                ? 'bg-[#48afff] hover:bg-[#229eff] text-white shadow-md shadow-[#48afff]/25 hover:shadow-lg hover:shadow-[#48afff]/40 cursor-pointer'
+                ? 'bg-gradient-to-r from-[#48afff] to-[#1084d0] hover:from-[#229eff] hover:to-[#0b3c68] text-white shadow-md shadow-[#48afff]/25 hover:shadow-xl hover:shadow-[#48afff]/40 cursor-pointer'
                 : 'bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300'
             }`}
           >
@@ -326,7 +326,7 @@ export const PhoneCard = React.memo(function PhoneCard({
             title="Add to Cart"
             className={`group/cart col-span-4 flex items-center justify-center py-2 sm:py-2.5 px-1 sm:px-2 rounded-xl text-xs font-bold transition-all btn-press ${
               isSelectionInStock
-                ? 'bg-[#136ab5] hover:bg-[#0f5492] text-white cursor-pointer shadow-md shadow-[#136ab5]/20 hover:shadow-lg hover:shadow-[#136ab5]/30'
+                ? 'bg-slate-900 hover:bg-slate-800 text-white cursor-pointer shadow-md shadow-slate-900/15 hover:shadow-lg hover:shadow-slate-900/25'
                 : 'bg-slate-100 text-slate-300 cursor-not-allowed'
             }`}
           >
