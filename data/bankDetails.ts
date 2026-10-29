@@ -1,4 +1,4 @@
-// Official Store Bank & Raast Transfer Information for Navira Traders
+// Official Store Bank & Raast Transfer Information for Nawira Traders
 
 export interface BankAccountInfo {
   bankName: string;
@@ -10,13 +10,13 @@ export interface BankAccountInfo {
 }
 
 export const STORE_BANK_DETAILS = {
-  accountTitle: 'Navira Traders',
+  accountTitle: 'Nawira Traders',
   raastId: '03135221200',
-  raastTitle: 'Navira Traders / Hamza Latif',
+  raastTitle: 'Nawira Traders / Hamza Latif',
   primaryBank: {
     bankName: 'Meezan Bank Ltd',
     branch: 'Abbottabad / Main Branch',
-    accountTitle: 'Navira Traders',
+    accountTitle: 'Nawira Traders',
     accountNumber: '0201-0108920192',
     cleanAccountNumber: '02010108920192',
     iban: 'PK42MEZN0002010108920192',
@@ -24,7 +24,7 @@ export const STORE_BANK_DETAILS = {
   secondaryBank: {
     bankName: 'Bank Alfalah',
     branch: 'Islamic Banking Branch',
-    accountTitle: 'Navira Traders',
+    accountTitle: 'Nawira Traders',
     accountNumber: '5501-5001239871',
     cleanAccountNumber: '55015001239871',
     iban: 'PK12ALFH55015001239871',

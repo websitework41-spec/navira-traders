@@ -102,7 +102,7 @@ export function TradeInEstimatorModal({
   const selectedConditionObj = CONDITIONS.find((c) => c.id === selectedCondition);
 
   // Build WhatsApp text
-  const whatsappTradeInMessage = `Hi Navira Traders! I would like to trade in my old phone for an upgrade:
+  const whatsappTradeInMessage = `Hi Nawira Traders! I would like to trade in my old phone for an upgrade:
 📱 My Old Phone: ${selectedBrand} ${selectedModel?.model} (${selectedStorage})
 ✨ Condition: ${selectedConditionObj?.label}
 📶 PTA Status: ${isPtaApproved ? 'Official PTA Approved' : 'Non-PTA / JV'}

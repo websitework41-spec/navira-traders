@@ -9,6 +9,8 @@ import { matchesSearchQuery } from '@/lib/search';
 import { Smartphone, FilterState, CartItem, SmartphoneVariant, SmartphoneColor } from '@/types';
 import { Navbar } from '@/components/Navbar';
 import { HeroBanner } from '@/components/HeroBanner';
+import { BrandMarquee } from '@/components/BrandMarquee';
+import { BentoTrustGrid } from '@/components/BentoTrustGrid';
 import { FilterSidebar } from '@/components/FilterSidebar';
 import { PhoneCard } from '@/components/PhoneCard';
 import dynamic from 'next/dynamic';
@@ -588,6 +590,16 @@ function HomeContent() {
           onFilterKeypad={handleFilterKeypad}
           onOpenEMIModal={() => setActivePolicyModal('installments')}
         />
+        {/* Interactive Infinite Brand Marquee */}
+        <BrandMarquee
+          onSelectBrand={handleSelectBrand}
+          activeBrand={filters.selectedBrands.length === 1 ? filters.selectedBrands[0] : undefined}
+          brandCounts={catalog.reduce((acc, p) => {
+            acc[p.brand] = (acc[p.brand] || 0) + 1;
+            return acc;
+          }, {} as Record<string, number>)}
+        />
+
 
         {/* PriceOye Inspired: Shop by Brand Avatar Grid */}
         <section className="mt-8">
@@ -1031,209 +1043,8 @@ function HomeContent() {
           </div>
         </section>
 
-        {/* Customer Assurances & Official Policies Section */}
-        <section id="policies" className="mt-16 pt-12 border-t border-slate-200 scroll-mt-24">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-[#136ab5] text-xs font-bold uppercase tracking-wider mb-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#136ab5]" />
-              100% Customer Protection
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 font-sans tracking-tight">
-              Customer Assurances &amp; Official Policies
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-2">
-              Online mobile shopping in Pakistan requires rock-solid confidence. Explore our complete policies or click any assurance for full details.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {/* 1. Open Parcel */}
-            <div
-              id="open-parcel"
-              onClick={() => setActivePolicyModal('open-parcel')}
-              className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3 cursor-pointer card-hover-fx group scroll-mt-24"
-            >
-              <div className="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 text-[#136ab5] flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                <PackageCheck className="w-6 h-6 stroke-[2.2]" />
-              </div>
-              <h3 className="text-sm font-bold text-slate-950 flex items-center justify-between font-sans">
-                <span className="group-hover:text-[#136ab5] transition-colors">Open-Parcel Delivery Policy</span>
-                <ArrowRight className="w-4 h-4 text-[#136ab5] group-hover:translate-x-1.5 transition-transform" />
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                When the courier rider arrives, open the flyer and inspect the phone box and factory seals before paying cash. 100% scam-free doorstep inspection.
-              </p>
-              <Link
-                href="/policies#open-parcel"
-                onClick={(e) => e.stopPropagation()}
-                className="pt-2 text-xs font-bold text-[#136ab5] flex items-center gap-1 hover:underline cursor-pointer"
-              >
-                <span>View Full Open-Parcel Policy</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* 2. PTA DIRBS */}
-            <div
-              id="pta-guide"
-              onClick={() => setActivePolicyModal('pta-guide')}
-              className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3 cursor-pointer card-hover-fx group scroll-mt-24"
-            >
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                <ShieldCheck className="w-6 h-6 stroke-[2.2]" />
-              </div>
-              <h3 className="text-sm font-bold text-slate-950 flex items-center justify-between font-sans">
-                <span className="group-hover:text-emerald-700 transition-colors">PTA DIRBS Verification Guide</span>
-                <ArrowRight className="w-4 h-4 text-emerald-600 group-hover:translate-x-1.5 transition-transform" />
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Every mobile is registered with Pakistan Telecommunication Authority (DIRBS) with full customs tax cleared for lifetime SIM validity.
-              </p>
-              <Link
-                href="/policies#pta-guide"
-                onClick={(e) => e.stopPropagation()}
-                className="pt-2 text-xs font-bold text-emerald-600 flex items-center gap-1 hover:underline cursor-pointer"
-              >
-                <span>View DIRBS Verification Guide</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* 3. 0% EMI Installments */}
-            <div
-              id="installments"
-              onClick={() => setActivePolicyModal('installments')}
-              className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3 cursor-pointer card-hover-fx group scroll-mt-24"
-            >
-              <div className="w-11 h-11 rounded-2xl bg-purple-50 border border-purple-200 text-purple-700 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                <CreditCard className="w-6 h-6 stroke-[2.2]" />
-              </div>
-              <h3 className="text-sm font-bold text-slate-950 flex items-center justify-between font-sans">
-                <span className="group-hover:text-purple-700 transition-colors">0% Markup EMI Installments</span>
-                <ArrowRight className="w-4 h-4 text-purple-600 group-hover:translate-x-1.5 transition-transform" />
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Flexible 3, 6, and 12-month zero-interest financing on Meezan Bank, Bank Alfalah, Faysal Bank, and Silkbank credit cards.
-              </p>
-              <Link
-                href="/policies#installments"
-                onClick={(e) => e.stopPropagation()}
-                className="pt-2 text-xs font-bold text-purple-600 flex items-center gap-1 hover:underline cursor-pointer"
-              >
-                <span>View 0% EMI Terms &amp; Banks</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* 4. Official Brand Warranty */}
-            <div
-              id="warranty"
-              onClick={() => setActivePolicyModal('warranty')}
-              className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3 cursor-pointer card-hover-fx group scroll-mt-24"
-            >
-              <div className="w-11 h-11 rounded-2xl bg-indigo-50 border border-indigo-200 text-indigo-700 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                <Award className="w-6 h-6 stroke-[2.2]" />
-              </div>
-              <h3 className="text-sm font-bold text-slate-950 flex items-center justify-between font-sans">
-                <span className="group-hover:text-indigo-700 transition-colors">1-Year Official Brand Warranty</span>
-                <ArrowRight className="w-4 h-4 text-indigo-600 group-hover:translate-x-1.5 transition-transform" />
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Official service center support across Karachi, Lahore, Islamabad, Faisalabad, and Multan (Samsung, Mercantile, Carlcare, Airlink).
-              </p>
-              <Link
-                href="/policies#warranty"
-                onClick={(e) => e.stopPropagation()}
-                className="pt-2 text-xs font-bold text-indigo-600 flex items-center gap-1 hover:underline cursor-pointer"
-              >
-                <span>View Warranty Claim Centers</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* 5. COD Terms */}
-            <div
-              id="cod-terms"
-              onClick={() => setActivePolicyModal('cod-terms')}
-              className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3 cursor-pointer card-hover-fx group scroll-mt-24"
-            >
-              <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                <Truck className="w-6 h-6 stroke-[2.2]" />
-              </div>
-              <h3 className="text-sm font-bold text-slate-950 flex items-center justify-between font-sans">
-                <span className="group-hover:text-amber-700 transition-colors">Cash on Delivery Terms</span>
-                <ArrowRight className="w-4 h-4 text-amber-600 group-hover:translate-x-1.5 transition-transform" />
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Free shipping on all orders over Rs. 2,000. Express 24-48h courier dispatch via TCS Express, Leopards, and PostEx nationwide.
-              </p>
-              <Link
-                href="/policies#cod-terms"
-                onClick={(e) => e.stopPropagation()}
-                className="pt-2 text-xs font-bold text-amber-600 flex items-center gap-1 hover:underline cursor-pointer"
-              >
-                <span>View Full COD Shipping Terms</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* 6. 7-Day Replacement Guarantee */}
-            <div
-              id="replacement-guarantee"
-              onClick={() => setActivePolicyModal('replacement-guarantee')}
-              className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3 cursor-pointer card-hover-fx group scroll-mt-24"
-            >
-              <div className="w-11 h-11 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                <RotateCcw className="w-6 h-6 stroke-[2.2]" />
-              </div>
-              <h3 className="text-sm font-bold text-slate-950 flex items-center justify-between font-sans">
-                <span className="group-hover:text-rose-700 transition-colors">7-Day Replacement Guarantee</span>
-                <ArrowRight className="w-4 h-4 text-rose-600 group-hover:translate-x-1.5 transition-transform" />
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Out-of-the-box hardware defect protection. Quick WhatsApp hassle-free replacement process within 7 days of parcel delivery.
-              </p>
-              <Link
-                href="/policies#replacement-guarantee"
-                onClick={(e) => e.stopPropagation()}
-                className="pt-2 text-xs font-bold text-rose-600 flex items-center gap-1 hover:underline cursor-pointer"
-              >
-                <span>View Replacement Terms</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* 7. Privacy Policy & Security */}
-            <div
-              id="privacy-security"
-              onClick={() => setActivePolicyModal('privacy-security')}
-              className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3 cursor-pointer card-hover-fx group scroll-mt-24 col-span-1 md:col-span-2 lg:col-span-3"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-slate-100 border border-slate-300 text-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    <ShieldCheck className="w-6 h-6 stroke-[2.2]" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-slate-950 font-sans group-hover:text-[#136ab5] transition-colors">
-                      Privacy Policy &amp; Bank-Grade Security
-                    </h3>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      256-bit SSL encrypted transactions. Strictly zero spam policy. We never share customer phone numbers or CNIC information.
-                    </p>
-                  </div>
-                </div>
-                <Link
-                  href="/policies#privacy-security"
-                  className="px-4 py-2 rounded-full bg-slate-950 hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1.5 shrink-0 self-start sm:self-center transition-colors"
-                >
-                  <span>Explore All 7 Policies</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Apple-Style Bento Trust Grid */}
+        <BentoTrustGrid onOpenPolicyModal={setActivePolicyModal} />
       </main>
 
       {/* Floating Comparison Drawer */}
@@ -1364,7 +1175,7 @@ function HomeContent() {
                     <li><strong>Nokia &amp; Itel:</strong> HMD Global and authorized nationwide centers.</li>
                   </ul>
                   <p className="text-[11px] text-slate-400">
-                    Your Navira Traders invoice serves as your valid proof of purchase for all warranty claims.
+                    Your Nawira Traders invoice serves as your valid proof of purchase for all warranty claims.
                   </p>
                 </>
               )}
@@ -1444,7 +1255,7 @@ export default function Home() {
     <Suspense
       fallback={
         <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-500 font-bold">
-          Loading Navira Traders Catalog...
+          Loading Nawira Traders Catalog...
         </div>
       }
     >

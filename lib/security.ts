@@ -1,5 +1,5 @@
 /**
- * Navira Traders - Security Hardening & Input Sanitization Engine
+ * Nawira Traders - Security Hardening & Input Sanitization Engine
  * 
  * Provides defense against:
  * - Cross-Site Scripting (XSS)

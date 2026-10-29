@@ -870,10 +870,10 @@ export function QuickPurchaseModal({
                       </button>
                       <button
                         type="button"
-                        onClick={() => handleApplyCoupon('NAVIRA500')}
+                        onClick={() => handleApplyCoupon('NAWIRA500')}
                         className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-sky-50 text-[#0b3c68] border border-sky-100 hover:bg-sky-100 transition-colors cursor-pointer"
                       >
-                        NAVIRA500
+                        NAWIRA500
                       </button>
                     </div>
                   </div>
@@ -1110,8 +1110,8 @@ export function QuickPurchaseModal({
               <a
                 href={`https://wa.me/923135221200?text=${encodeURIComponent(
                   paymentMethod === 'bank'
-                    ? `📦 *NAVIRA TRADERS — BANK TRANSFER PAYMENT RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${generatedOrderId}\n👤 *Customer:* ${fullName}\n📞 *Mobile:* ${phoneNumber}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${city}, Pakistan\n🏠 *Address:* ${deliveryAddress}\n📱 *Item:* ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\n🎨 *Color:* ${currentColor?.name || 'Default'}\n💰 *Amount Transferred:* ${formatPKR(finalPrice)}\n🏦 *Method:* Direct Bank Transfer / Raast (Meezan Bank)\n${bankTxRef ? `📝 *Sender Reference / TID:* ${bankTxRef}\n` : ''}──────────────────────\n_I have completed the bank transfer. Attaching payment receipt screenshot here for verification & immediate dispatch._`
-                    : `📦 *NAVIRA TRADERS — ORDER CONFIRMATION RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${generatedOrderId}\n👤 *Customer:* ${fullName}\n📞 *Mobile:* ${phoneNumber}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${city}, Pakistan\n🏠 *Address:* ${deliveryAddress}\n📱 *Item:* ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\n🎨 *Color:* ${currentColor?.name || 'Default'}\n💰 *Total Payable:* ${formatPKR(finalPrice)} (Open-Parcel COD)\n🚚 *Courier:* TCS Express (24-48 Hours Delivery)\n🛡️ *PTA Status:* 100% Official PTA Approved\n──────────────────────\n_I just placed this order. Please confirm dispatch tracking details._`
+                    ? `📦 *NAWIRA TRADERS — BANK TRANSFER PAYMENT RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${generatedOrderId}\n👤 *Customer:* ${fullName}\n📞 *Mobile:* ${phoneNumber}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${city}, Pakistan\n🏠 *Address:* ${deliveryAddress}\n📱 *Item:* ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\n🎨 *Color:* ${currentColor?.name || 'Default'}\n💰 *Amount Transferred:* ${formatPKR(finalPrice)}\n🏦 *Method:* Direct Bank Transfer / Raast (Meezan Bank)\n${bankTxRef ? `📝 *Sender Reference / TID:* ${bankTxRef}\n` : ''}──────────────────────\n_I have completed the bank transfer. Attaching payment receipt screenshot here for verification & immediate dispatch._`
+                    : `📦 *NAWIRA TRADERS — ORDER CONFIRMATION RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${generatedOrderId}\n👤 *Customer:* ${fullName}\n📞 *Mobile:* ${phoneNumber}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${city}, Pakistan\n🏠 *Address:* ${deliveryAddress}\n📱 *Item:* ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\n🎨 *Color:* ${currentColor?.name || 'Default'}\n💰 *Total Payable:* ${formatPKR(finalPrice)} (Open-Parcel COD)\n🚚 *Courier:* TCS Express (24-48 Hours Delivery)\n🛡️ *PTA Status:* 100% Official PTA Approved\n──────────────────────\n_I just placed this order. Please confirm dispatch tracking details._`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1130,8 +1130,8 @@ export function QuickPurchaseModal({
                 type="button"
                 onClick={() => {
                   const receiptMsg = paymentMethod === 'bank'
-                    ? `📦 NAVIRA TRADERS — BANK TRANSFER RECEIPT\nOrder ID: ${generatedOrderId}\nCustomer: ${fullName}\nPhone: ${phoneNumber}\n${customerEmail ? `Email: ${customerEmail}\n` : ''}Address: ${deliveryAddress}, ${city}\nItem: ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\nTotal: ${formatPKR(finalPrice)}\nPayment: Direct Bank Transfer (Meezan Bank / Raast)\n${bankTxRef ? `Sender Ref: ${bankTxRef}\n` : ''}Raast ID: ${STORE_BANK_DETAILS.raastId}\nMeezan IBAN: ${STORE_BANK_DETAILS.primaryBank.iban}`
-                    : `📦 NAVIRA TRADERS — ORDER RECEIPT\nOrder ID: ${generatedOrderId}\nCustomer: ${fullName}\nPhone: ${phoneNumber}\n${customerEmail ? `Email: ${customerEmail}\n` : ''}Address: ${deliveryAddress}, ${city}\nItem: ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\nTotal: ${formatPKR(finalPrice)} (Open-Parcel COD)\nCourier: TCS Express (24-48 Hours Delivery)\nPTA Status: 100% Official PTA Approved`;
+                    ? `📦 NAWIRA TRADERS — BANK TRANSFER RECEIPT\nOrder ID: ${generatedOrderId}\nCustomer: ${fullName}\nPhone: ${phoneNumber}\n${customerEmail ? `Email: ${customerEmail}\n` : ''}Address: ${deliveryAddress}, ${city}\nItem: ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\nTotal: ${formatPKR(finalPrice)}\nPayment: Direct Bank Transfer (Meezan Bank / Raast)\n${bankTxRef ? `Sender Ref: ${bankTxRef}\n` : ''}Raast ID: ${STORE_BANK_DETAILS.raastId}\nMeezan IBAN: ${STORE_BANK_DETAILS.primaryBank.iban}`
+                    : `📦 NAWIRA TRADERS — ORDER RECEIPT\nOrder ID: ${generatedOrderId}\nCustomer: ${fullName}\nPhone: ${phoneNumber}\n${customerEmail ? `Email: ${customerEmail}\n` : ''}Address: ${deliveryAddress}, ${city}\nItem: ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\nTotal: ${formatPKR(finalPrice)} (Open-Parcel COD)\nCourier: TCS Express (24-48 Hours Delivery)\nPTA Status: 100% Official PTA Approved`;
                   if (navigator.clipboard) {
                     navigator.clipboard.writeText(receiptMsg);
                     setCopiedReceipt(true);

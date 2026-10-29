@@ -164,7 +164,7 @@ export function HelperBot() {
     {
       id: 'welcome',
       sender: 'bot',
-      text: `👋 **Hello! Welcome to Navira Traders.**
+      text: `👋 **Hello! Welcome to Nawira Traders.**
 
 I'm your **Personal Mobile Advisor**. Whether you're comparing smartphones, verifying PTA approval, checking 0% EMI bank installments, or inquiring about Open-Parcel delivery, I'm here to assist you.
 
@@ -293,7 +293,7 @@ Tap any question below or type your question to get instant guidance!`,
       {
         id: `welcome-${Date.now()}`,
         sender: 'bot',
-        text: `👋 Chat reset! How can I assist you today with Navira Traders smartphones or orders?`,
+        text: `👋 Chat reset! How can I assist you today with Nawira Traders smartphones or orders?`,
         timestamp: 'Just now',
       },
     ]);
@@ -304,7 +304,7 @@ Tap any question below or type your question to get instant guidance!`,
       {/* Floating Trigger Launcher Button */}
       {!isOpen && (
         <aside
-          aria-label="Navira Traders Live Support"
+          aria-label="Nawira Traders Live Support"
           className="fixed bottom-[128px] sm:bottom-[88px] right-4 sm:right-6 z-40 flex items-center"
         >
           <button
@@ -312,8 +312,8 @@ Tap any question below or type your question to get instant guidance!`,
               setIsOpen(true);
               setHasUnread(false);
             }}
-            aria-label="Ask Navira Traders Support"
-            title="Chat with Navira Traders Specialist"
+            aria-label="Ask Nawira Traders Support"
+            title="Chat with Nawira Traders Specialist"
             className="group relative flex items-center gap-2 pl-3.5 pr-4 py-2.5 rounded-full bg-[#0b3c68] hover:bg-[#082e50] text-white shadow-xl shadow-[#0b3c68]/30 hover:shadow-[#0b3c68]/50 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/60 cursor-pointer"
           >
             {/* Online Pulse Indicator */}
@@ -339,10 +339,10 @@ Tap any question below or type your question to get instant guidance!`,
       {/* Floating Chat Modal Window */}
       {isOpen && (
         <section
-          aria-label="Navira Traders Customer Support"
+          aria-label="Nawira Traders Customer Support"
           className="fixed bottom-0 sm:bottom-6 left-0 right-0 sm:left-auto sm:right-6 z-50 w-full sm:w-[420px] h-[88vh] sm:h-[600px] max-h-[92vh] rounded-t-3xl sm:rounded-3xl shadow-2xl bg-white border border-slate-200/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom duration-200"
         >
-          {/* Header matching Navira Traders Blue Theme */}
+          {/* Header matching Nawira Traders Blue Theme */}
           <div className="px-4 py-3.5 bg-gradient-to-r from-[#0b3c68] via-[#0f497a] to-[#136ab5] text-white flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-3">
               <div className="relative">
@@ -354,7 +354,7 @@ Tap any question below or type your question to get instant guidance!`,
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="text-sm font-black tracking-tight text-white flex items-center gap-1">
-                    Navira Traders Assistant
+                    Nawira Traders Assistant
                     <Sparkles className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
                   </h3>
                   <span className="text-[9px] uppercase font-black tracking-wider px-1.5 py-0.5 rounded-full bg-[#f88b2a] text-white shadow-xs">
@@ -394,7 +394,7 @@ Tap any question below or type your question to get instant guidance!`,
               Direct Helpline: <strong className="font-bold text-[#0b3c68]">+92 313 5221200</strong>
             </span>
             <a
-              href="https://wa.me/923135221200?text=Hi%20Navira%20Traders!%20I%20have%20an%20inquiry%20regarding%20mobile%20phones."
+              href="https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry%20regarding%20mobile%20phones."
               target="_blank"
               rel="noopener noreferrer"
               className="text-emerald-700 hover:text-emerald-800 font-extrabold flex items-center gap-1 bg-emerald-100/60 hover:bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-200 transition-colors"
@@ -499,7 +499,7 @@ Tap any question below or type your question to get instant guidance!`,
 
           {/* Footer note */}
           <div className="px-3 py-1.5 bg-slate-50 text-center text-[10px] text-slate-500 border-t border-slate-100 font-medium">
-            Navira Traders • 100% PTA Approved &amp; Open-Parcel Delivery
+            Nawira Traders • 100% PTA Approved &amp; Open-Parcel Delivery
           </div>
         </section>
       )}

@@ -117,7 +117,7 @@ export function AuthModal() {
     setIsLoading(false);
 
     if (res.success) {
-      setSuccessMessage('Account created successfully! Welcome to Navira Traders.');
+      setSuccessMessage('Account created successfully! Welcome to Nawira Traders.');
       setTimeout(() => {
         closeAuthModal();
       }, 1000);
@@ -145,7 +145,7 @@ export function AuthModal() {
 
           <h2 className="text-xl sm:text-2xl font-black tracking-tight">
             {authModalMode === 'login' && 'Welcome Back'}
-            {authModalMode === 'signup' && 'Create Navira Traders Account'}
+            {authModalMode === 'signup' && 'Create Nawira Traders Account'}
             {authModalMode === 'forgot' && 'Account Recovery'}
           </h2>
           <p className="text-xs text-slate-400 mt-1 max-w-xs mx-auto">
@@ -270,7 +270,7 @@ export function AuthModal() {
 
               <div className="text-center pt-2 border-t border-slate-100">
                 <p className="text-xs text-slate-500">
-                  New to Navira Traders?{' '}
+                  New to Nawira Traders?{' '}
                   <button
                     type="button"
                     onClick={() => openAuthModal('signup')}
@@ -429,7 +429,7 @@ export function AuthModal() {
                   Mobile Account Password Assistance
                 </p>
                 <p>
-                  Navira Traders accounts use secure mobile credentials. If you are already logged in, you can update your password directly from the <strong>My Account &gt; Security</strong> tab.
+                  Nawira Traders accounts use secure mobile credentials. If you are already logged in, you can update your password directly from the <strong>My Account &gt; Security</strong> tab.
                 </p>
                 <p>
                   If you are locked out or forgot your password, contact our verified support helpline on WhatsApp from your registered SIM. Our team will verify your account and help you regain instant access.
@@ -438,7 +438,7 @@ export function AuthModal() {
 
               <a
                 href={`https://wa.me/923135221200?text=${encodeURIComponent(
-                  `Hi Navira Traders! I forgot my account password. My registered mobile number is: ${phone || '03XXXXXXXXX'}. Please assist me with account recovery.`
+                  `Hi Nawira Traders! I forgot my account password. My registered mobile number is: ${phone || '03XXXXXXXXX'}. Please assist me with account recovery.`
                 )}`}
                 target="_blank"
                 rel="noreferrer"

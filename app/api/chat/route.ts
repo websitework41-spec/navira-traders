@@ -18,7 +18,7 @@ function getSmartAssistantResponse(query: string): string {
   }
 
   if (q.includes('iphone') || q.includes('apple')) {
-    return `🍏 **Apple iPhone Series on Navira Traders**:
+    return `🍏 **Apple iPhone Series on Nawira Traders**:
 1. [**Apple iPhone 15**](/product/apple-iphone-15): Starting from Rs. 264,999
 2. [**Apple iPhone 16**](/product/apple-iphone-16): Starting from Rs. 338,999
 3. [**Apple iPhone 17 Pro**](/product/apple-iphone-17-pro): Starting from Rs. 434,999
@@ -129,7 +129,7 @@ All 22 keypad phones have lifetime PTA DIRBS approval and Open-Parcel delivery!`
   // 3. Trust Assurances & Store Policies
   if (q.includes('open parcel') || q.includes('open-parcel') || q.includes('check before payment') || q.includes('rider') || q.includes('unboxing')) {
     return `📦 **Open-Parcel Cash on Delivery (COD)**:
-Navira Traders offers 100% Open-Parcel Delivery across Pakistan:
+Nawira Traders offers 100% Open-Parcel Delivery across Pakistan:
 1. **Rider Arrival**: Courier rider delivers flyer to your doorstep.
 2. **Open Flyer**: You are legally authorized to open the courier flyer in the rider's presence.
 3. **Inspect Seal**: Verify brand, model, color, and make sure retail box factory seals are intact.
@@ -139,7 +139,7 @@ Navira Traders offers 100% Open-Parcel Delivery across Pakistan:
 
   if (q.includes('pta') || q.includes('dirbs') || q.includes('approved') || q.includes('verify') || q.includes('tax')) {
     return `✅ **100% Official PTA-Approved Guarantee**:
-Every phone on Navira Traders is legally imported with customs taxes paid in full.
+Every phone on Nawira Traders is legally imported with customs taxes paid in full.
 **How to verify DIRBS**:
 1. Dial **\`*#06#\`** on the phone keypad to get the 15-digit IMEI.
 2. SMS the IMEI to **8484** (PTA DIRBS shortcode).
@@ -164,7 +164,7 @@ All our mobile phones carry official manufacturer warranties claimable at author
 - **Tecno & Infinix**: Carlcare Centers nationwide.
 - **Vivo & Oppo**: Official Brand Service Centers.
 - **Nokia & Itel**: Authorized nationwide centers.
-Your Navira Traders tax invoice serves as valid official proof of purchase.`;
+Your Nawira Traders tax invoice serves as valid official proof of purchase.`;
   }
 
   if (q.includes('return') || q.includes('replace') || q.includes('guarantee') || q.includes('defect')) {
@@ -188,12 +188,12 @@ If your device arrives with an out-of-the-box hardware defect:
 We are available Mon-Sat (9:00 AM - 10:00 PM PKT):
 - **Phone Helpline**: [+92 313 5221200](tel:+923135221200)
 - **Direct WhatsApp**: [Chat on WhatsApp (+92 313 5221200)](https://wa.me/923135221200)
-- **Email**: support@naviratraders.pk
+- **Email**: support@nawiratraders.com
 - **Fulfillment Hubs**: Lahore (Gulberg III), Karachi (Shahrah-e-Faisal), Islamabad (Blue Area).`;
   }
 
   if (q.includes('track') || q.includes('order status') || q.includes('where is my order')) {
-    return `📦 **Track Your Navira Traders Order**:
+    return `📦 **Track Your Nawira Traders Order**:
 To track your order, click the **"Track Order"** link in the top bar or enter your Order ID (format: \`HPS-XXXXXX\` or \`VPK-XXXXXX\`).
 You can also message our WhatsApp helpline at **+92 313 5221200** with your name and city for an instant courier dispatch update!`;
   }
@@ -218,8 +218,8 @@ Use our catalog display filter to explore all 120Hz AMOLED models!`;
   }
 
   // Default friendly assistant response
-  return `👋 Welcome to **Navira Traders**!
-I'm **NaviraBot**, your AI shopping specialist. Here is how I can help you:
+  return `👋 Welcome to **Nawira Traders**!
+I'm **NawiraBot**, your AI shopping specialist. Here is how I can help you:
 - 📱 **Phone Recommendations**: Tell me your budget (e.g. *"Best phone under 40k"* or *"Keypad phone"*).
 - 📦 **Open-Parcel COD**: How you can inspect before paying the courier rider.
 - ✅ **PTA DIRBS Approval**: Verification instructions via SMS 8484.
@@ -230,7 +230,7 @@ I'm **NaviraBot**, your AI shopping specialist. Here is how I can help you:
 What phone or policy can I help you with today?`;
 }
 
-const SYSTEM_PROMPT = `You are "NaviraBot", the official AI shopping and support assistant for Navira Traders (naviratraders.pk) - Pakistan's premier PTA-Approved Mobile Marketplace.
+const SYSTEM_PROMPT = `You are "NawiraBot", the official AI shopping and support assistant for Nawira Traders (nawiratraders.com) - Pakistan's premier PTA-Approved Mobile Marketplace.
 Respond concisely, politely, and professionally in English using bold text and bullet points. Always emphasize 100% PTA approval, Open-Parcel delivery, and official brand warranties. If the user wants human support, direct them to WhatsApp +92 313 5221200.`;
 
 export async function POST(req: NextRequest) {

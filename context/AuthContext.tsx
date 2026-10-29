@@ -131,9 +131,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 : '';
               const newProfile: UserProfile = {
                 uid: currentUser.uid,
-                name: currentUser.displayName || 'Navira Traders Customer',
+                name: currentUser.displayName || 'Nawira Traders Customer',
                 phone: phoneFromEmail,
-                email: currentUser.email || `${phoneFromEmail}@naviratraders.pk`,
+                email: currentUser.email || `${phoneFromEmail}@nawiratraders.com`,
                 addresses: [],
                 createdAt: serverTimestamp(),
               };
@@ -152,7 +152,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             // Fallback profile if Firestore is restricted
             setProfile({
               uid: currentUser.uid,
-              name: currentUser.displayName || 'Navira Traders Customer',
+              name: currentUser.displayName || 'Nawira Traders Customer',
               phone: currentUser.email ? currentUser.email.replace(/@(naviratraders\.pk|hamzaphonestore\.pk|voltphone\.pk)/, '') : '',
               email: currentUser.email || '',
               addresses: [],
@@ -261,7 +261,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         (err.code === 'auth/invalid-credential' ||
           err.code === 'auth/user-not-found' ||
           err.code === 'auth/wrong-password') &&
-        syntheticEmail.endsWith('@naviratraders.pk')
+        syntheticEmail.endsWith('@nawiratraders.com')
       ) {
         try {
           const legacyEmail = `${phoneCheck.cleanPhone}@voltphone.pk`;

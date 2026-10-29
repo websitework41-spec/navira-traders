@@ -257,8 +257,8 @@ export default function AdminPortalPage() {
     if (
       normalizedPasscode === savedPin ||
       normalizedPasscode === 'admin786' ||
-      normalizedPasscode === 'navira2026' ||
-      normalizedPasscode === 'navira786' ||
+      normalizedPasscode === 'nawira2026' ||
+      normalizedPasscode === 'nawira786' ||
       normalizedPasscode === 'hamza2026' ||
       normalizedPasscode === 'hamza786' ||
       normalizedPasscode === 'voltphone2026'
@@ -356,7 +356,7 @@ export default function AdminPortalPage() {
           .join(', ')
       : 'Smartphone Order';
 
-    return `Assalam-o-Alaikum *${order.customerName}*! 📱\n\nShukriya aapka *Navira Traders* (naviratraders.pk) se order karne ka.\n\n📦 *Order Summary:*\n• Order ID: *#${order.orderId}*\n• Item(s): ${itemList}\n• Total Payable (COD): *Rs. ${formatPKR(order.totalPKR)}*\n• Delivery Address: *${order.address}, ${order.city}*\n• Courier: *${order.courier || 'TCS Express'} (Open-Parcel Inspection Allowed)*\n\n🛡️ *100% Official PTA Approved with 1-Year Brand Warranty.*\n\n⚠️ *Dispatch Confirmation Notice:*\nCourier parcel dispatch karne ke liye barah-e-karam apna order confirm farma dein:\n👉 *Reply '1' ya 'CONFIRM'* to Dispatch Order\n👉 *Reply '2' ya 'CANCEL'* to Cancel Order\n\nAgar delivery address ya phone number tabdeel karna ho toh yahan reply karein.\n\nShukriya!\n*Team Navira Traders*\n📞 Official Support: 0300-1234567`;
+    return `Assalam-o-Alaikum *${order.customerName}*! 📱\n\nShukriya aapka *Nawira Traders* (nawiratraders.com) se order karne ka.\n\n📦 *Order Summary:*\n• Order ID: *#${order.orderId}*\n• Item(s): ${itemList}\n• Total Payable (COD): *Rs. ${formatPKR(order.totalPKR)}*\n• Delivery Address: *${order.address}, ${order.city}*\n• Courier: *${order.courier || 'TCS Express'} (Open-Parcel Inspection Allowed)*\n\n🛡️ *100% Official PTA Approved with 1-Year Brand Warranty.*\n\n⚠️ *Dispatch Confirmation Notice:*\nCourier parcel dispatch karne ke liye barah-e-karam apna order confirm farma dein:\n👉 *Reply '1' ya 'CONFIRM'* to Dispatch Order\n👉 *Reply '2' ya 'CANCEL'* to Cancel Order\n\nAgar delivery address ya phone number tabdeel karna ho toh yahan reply karein.\n\nShukriya!\n*Team Nawira Traders*\n📞 Official Support: 0300-1234567`;
   };
 
   // Anti-Fake Order Verification Statistics
@@ -1024,7 +1024,7 @@ export default function AdminPortalPage() {
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#008060] to-[#004c3f] mx-auto flex items-center justify-center text-white text-xl font-black shadow-lg shadow-[#008060]/20">
               HPS
             </div>
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight">Navira Traders Admin</h1>
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight">Nawira Traders Admin</h1>
             <p className="text-xs text-slate-500 max-w-xs mx-auto">
               Shopify-grade Merchant Portal for Inventory, Orders, and Catalog Fulfillment.
             </p>
@@ -1078,7 +1078,7 @@ export default function AdminPortalPage() {
               href="/"
               className="text-xs text-slate-500 hover:text-[#008060] transition-colors inline-flex items-center gap-1 font-semibold"
             >
-              ← Back to Navira Traders
+              ← Back to Nawira Traders
             </Link>
           </div>
         </div>
@@ -1165,7 +1165,7 @@ export default function AdminPortalPage() {
             </div>
             <div>
               <div className="font-bold text-sm tracking-tight text-white flex items-center gap-1.5">
-                Navira <span className="text-[#00a47c] text-xs">Traders</span>
+                Nawira <span className="text-[#00a47c] text-xs">Traders</span>
               </div>
               <div className="text-[10px] font-semibold text-slate-400">Shopify Store Admin</div>
             </div>
@@ -1466,7 +1466,7 @@ export default function AdminPortalPage() {
                     Welcome back, Admin 👋
                   </h2>
                   <p className="text-xs text-slate-500 mt-1">
-                    Here is what is happening in your Navira Traders mobile store today.
+                    Here is what is happening in your Nawira Traders mobile store today.
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
@@ -1733,7 +1733,7 @@ export default function AdminPortalPage() {
                         </span>
                       </div>
                       <h3 className="text-base sm:text-lg font-black text-white tracking-tight">
-                        {analyticsStats?.activeNow || 0} active shoppers viewing Navira Traders right now
+                        {analyticsStats?.activeNow || 0} active shoppers viewing Nawira Traders right now
                       </h3>
                     </div>
                   </div>
@@ -2292,7 +2292,7 @@ export default function AdminPortalPage() {
                                     visitor.customerName || 'Dear Customer'
                                   )}!%20We%20noticed%20you%20were%20interested%20in%20the%20${encodeURIComponent(
                                     topProduct?.name || 'smartphone'
-                                  )}%20at%20Navira%20Traders.%20Would%20you%20like%20to%20place%20an%20order%20with%20our%20Open-Parcel%20Cash%20on%20Delivery%20service?`}
+                                  )}%20at%20Nawira%20Traders.%20Would%20you%20like%20to%20place%20an%20order%20with%20our%20Open-Parcel%20Cash%20on%20Delivery%20service?`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="px-2.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1 shrink-0 shadow-2xs"
@@ -2450,7 +2450,7 @@ export default function AdminPortalPage() {
                                         visitor.customerName || 'Dear Customer'
                                       )}!%20We%20noticed%20you%20were%20interested%20in%20the%20${encodeURIComponent(
                                         topProduct?.name || 'smartphone'
-                                      )}%20at%20Navira%20Traders.%20Would%20you%20like%20to%20place%20an%20order%20with%20our%20Open-Parcel%20Cash%20on%20Delivery%20service?`}
+                                      )}%20at%20Nawira%20Traders.%20Would%20you%20like%20to%20place%20an%20order%20with%20our%20Open-Parcel%20Cash%20on%20Delivery%20service?`}
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       className="px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1 transition-all shadow-xs"
@@ -4785,7 +4785,7 @@ export default function AdminPortalPage() {
                         </button>
                         <a
                           href={`https://wa.me/${customer.cleanWhatsAppPhone}?text=${encodeURIComponent(
-                            `Assalam o Alaikum ${customer.name}! This is Hamza from Navira Traders. Thank you for your orders with us! How is your smartphone performing? Let us know if you need any warranty claim or accessory upgrade.`
+                            `Assalam o Alaikum ${customer.name}! This is Hamza from Nawira Traders. Thank you for your orders with us! How is your smartphone performing? Let us know if you need any warranty claim or accessory upgrade.`
                           )}`}
                           target="_blank"
                           rel="noreferrer"
@@ -4821,7 +4821,7 @@ export default function AdminPortalPage() {
                     </label>
                     <input
                       type="text"
-                      defaultValue="Navira Traders"
+                      defaultValue="Nawira Traders"
                       className="w-full bg-[#f9fafb] border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#008060]"
                     />
                   </div>
@@ -5336,7 +5336,7 @@ export default function AdminPortalPage() {
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
               <a
                 href={`https://wa.me/${viewingCustomerHistory.cleanWhatsAppPhone}?text=${encodeURIComponent(
-                  `Assalam o Alaikum ${viewingCustomerHistory.name}! This is Hamza from Navira Traders.`
+                  `Assalam o Alaikum ${viewingCustomerHistory.name}! This is Hamza from Nawira Traders.`
                 )}`}
                 target="_blank"
                 rel="noreferrer"
@@ -5487,7 +5487,7 @@ export default function AdminPortalPage() {
 
             <div className="border-b border-slate-200 pb-5 flex items-start justify-between">
               <div>
-                <h2 className="text-2xl font-black text-slate-900">Navira Traders</h2>
+                <h2 className="text-2xl font-black text-slate-900">Nawira Traders</h2>
                 <p className="text-xs text-slate-500">Official Mobile Marketplace &amp; Logistics</p>
                 <p className="text-xs text-slate-500">PTA-Approved Direct Dispatch Delivery Note</p>
               </div>
@@ -6316,7 +6316,7 @@ function ProductFormModal({ product, onClose, onSaved }: ProductFormModalProps) 
                   <option value="draft">Draft / Archived</option>
                 </select>
                 <p className="text-[11px] text-slate-500">
-                  This product will be immediately purchasable on Navira Traders when active.
+                  This product will be immediately purchasable on Nawira Traders when active.
                 </p>
               </div>
 

@@ -561,8 +561,8 @@ export function CartDrawer({
                 <a
                   href={`https://wa.me/923135221200?text=${encodeURIComponent(
                     paymentMethod === 'bank'
-                      ? `📦 *NAVIRA TRADERS — BANK TRANSFER PAYMENT RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${confirmedOrderId}\n👤 *Customer:* ${customerName}\n📞 *Mobile:* ${customerPhone}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${selectedCity}, Pakistan\n🏠 *Address:* ${customerAddress}\n📱 *Items:* ${items.map((i) => `${i.phone.name} (${i.selectedVariant.ram}/${i.selectedVariant.storage}) x${i.quantity}`).join(', ')}\n💰 *Amount Transferred:* ${formatPKR(finalTotalPKR)}\n🏦 *Method:* Direct Bank Transfer / Raast (Meezan Bank)\n${bankTxRef ? `📝 *Sender Reference / TID:* ${bankTxRef}\n` : ''}──────────────────────\n_I have completed the bank transfer. Attaching payment receipt screenshot here for verification & immediate dispatch._`
-                      : `📦 *NAVIRA TRADERS — ORDER CONFIRMATION RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${confirmedOrderId}\n👤 *Customer:* ${customerName}\n📞 *Mobile:* ${customerPhone}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${selectedCity}, Pakistan\n🏠 *Address:* ${customerAddress}\n📱 *Items:* ${items.map((i) => `${i.phone.name} (${i.selectedVariant.ram}/${i.selectedVariant.storage}) x${i.quantity}`).join(', ')}\n💰 *Total Payable:* ${formatPKR(finalTotalPKR)} (Open-Parcel COD)\n🚚 *Courier:* TCS Express (24-48 Hours Delivery)\n🛡️ *PTA Status:* 100% Official PTA Approved\n──────────────────────\n_I just placed this order. Please confirm dispatch tracking details._`
+                      ? `📦 *NAWIRA TRADERS — BANK TRANSFER PAYMENT RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${confirmedOrderId}\n👤 *Customer:* ${customerName}\n📞 *Mobile:* ${customerPhone}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${selectedCity}, Pakistan\n🏠 *Address:* ${customerAddress}\n📱 *Items:* ${items.map((i) => `${i.phone.name} (${i.selectedVariant.ram}/${i.selectedVariant.storage}) x${i.quantity}`).join(', ')}\n💰 *Amount Transferred:* ${formatPKR(finalTotalPKR)}\n🏦 *Method:* Direct Bank Transfer / Raast (Meezan Bank)\n${bankTxRef ? `📝 *Sender Reference / TID:* ${bankTxRef}\n` : ''}──────────────────────\n_I have completed the bank transfer. Attaching payment receipt screenshot here for verification & immediate dispatch._`
+                      : `📦 *NAWIRA TRADERS — ORDER CONFIRMATION RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${confirmedOrderId}\n👤 *Customer:* ${customerName}\n📞 *Mobile:* ${customerPhone}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${selectedCity}, Pakistan\n🏠 *Address:* ${customerAddress}\n📱 *Items:* ${items.map((i) => `${i.phone.name} (${i.selectedVariant.ram}/${i.selectedVariant.storage}) x${i.quantity}`).join(', ')}\n💰 *Total Payable:* ${formatPKR(finalTotalPKR)} (Open-Parcel COD)\n🚚 *Courier:* TCS Express (24-48 Hours Delivery)\n🛡️ *PTA Status:* 100% Official PTA Approved\n──────────────────────\n_I just placed this order. Please confirm dispatch tracking details._`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -586,8 +586,8 @@ export function CartDrawer({
                   onClick={() => {
                     const itemsText = items.map((i) => `${i.phone.name} (${i.selectedVariant.ram}/${i.selectedVariant.storage}) x${i.quantity}`).join(', ');
                     const receiptMsg = paymentMethod === 'bank'
-                      ? `📦 NAVIRA TRADERS — BANK TRANSFER RECEIPT\nOrder ID: ${confirmedOrderId}\nCustomer: ${customerName}\nPhone: ${customerPhone}\n${customerEmail ? `Email: ${customerEmail}\n` : ''}Destination: ${selectedCity}, Pakistan\nAddress: ${customerAddress}\nItems: ${itemsText}\nTotal: ${formatPKR(finalTotalPKR)}\nPayment: Direct Bank Transfer (Meezan Bank / Raast)\n${bankTxRef ? `Sender Ref: ${bankTxRef}\n` : ''}Raast ID: ${STORE_BANK_DETAILS.raastId}\nMeezan IBAN: ${STORE_BANK_DETAILS.primaryBank.iban}`
-                      : `📦 NAVIRA TRADERS — ORDER RECEIPT\nOrder ID: ${confirmedOrderId}\nCustomer: ${customerName}\nPhone: ${customerPhone}\n${customerEmail ? `Email: ${customerEmail}\n` : ''}Destination: ${selectedCity}, Pakistan\nAddress: ${customerAddress}\nItems: ${itemsText}\nTotal: ${formatPKR(finalTotalPKR)} (Open-Parcel COD)\nCourier: TCS Express (24-48 Hours Delivery)\nPTA: 100% Official PTA Approved`;
+                      ? `📦 NAWIRA TRADERS — BANK TRANSFER RECEIPT\nOrder ID: ${confirmedOrderId}\nCustomer: ${customerName}\nPhone: ${customerPhone}\n${customerEmail ? `Email: ${customerEmail}\n` : ''}Destination: ${selectedCity}, Pakistan\nAddress: ${customerAddress}\nItems: ${itemsText}\nTotal: ${formatPKR(finalTotalPKR)}\nPayment: Direct Bank Transfer (Meezan Bank / Raast)\n${bankTxRef ? `Sender Ref: ${bankTxRef}\n` : ''}Raast ID: ${STORE_BANK_DETAILS.raastId}\nMeezan IBAN: ${STORE_BANK_DETAILS.primaryBank.iban}`
+                      : `📦 NAWIRA TRADERS — ORDER RECEIPT\nOrder ID: ${confirmedOrderId}\nCustomer: ${customerName}\nPhone: ${customerPhone}\n${customerEmail ? `Email: ${customerEmail}\n` : ''}Destination: ${selectedCity}, Pakistan\nAddress: ${customerAddress}\nItems: ${itemsText}\nTotal: ${formatPKR(finalTotalPKR)} (Open-Parcel COD)\nCourier: TCS Express (24-48 Hours Delivery)\nPTA: 100% Official PTA Approved`;
                     if (navigator.clipboard) {
                       navigator.clipboard.writeText(receiptMsg);
                       setCopiedReceipt(true);
@@ -1159,10 +1159,10 @@ export function CartDrawer({
                           </button>
                           <button
                             type="button"
-                            onClick={() => handleApplyCoupon('NAVIRA500')}
+                            onClick={() => handleApplyCoupon('NAWIRA500')}
                             className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-sky-50 text-[#0b3c68] border border-sky-100 hover:bg-sky-100 transition-colors cursor-pointer"
                           >
-                            NAVIRA500
+                            NAWIRA500
                           </button>
                         </div>
                       </div>

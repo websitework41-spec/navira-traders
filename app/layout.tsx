@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Navira Traders | Pakistan's #1 PTA-Approved Mobile Marketplace",
+  title: "Nawira Traders | Pakistan's #1 PTA-Approved Mobile Marketplace",
   description:
     "Explore 220+ PTA-Approved smartphones and button phones with official prices, 0% EMI installments, Open-Parcel delivery, and official 1-year brand warranties.",
 };

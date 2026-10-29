@@ -338,7 +338,7 @@ export default function ProductDetailPage() {
   const faqs = [
     {
       q: 'Is this phone 100% PTA Approved & DIRBS registered?',
-      a: 'Yes, absolutely! Every single smartphone sold at Navira Traders is 100% officially PTA Approved with all Pakistani customs duties and taxes paid in full. You can verify the IMEI on the official PTA DIRBS portal (dirbs.pta.gov.pk) or by sending SMS to 8484.',
+      a: 'Yes, absolutely! Every single smartphone sold at Nawira Traders is 100% officially PTA Approved with all Pakistani customs duties and taxes paid in full. You can verify the IMEI on the official PTA DIRBS portal (dirbs.pta.gov.pk) or by sending SMS to 8484.',
     },
     {
       q: 'How does Open-Parcel Delivery work?',
@@ -346,7 +346,7 @@ export default function ProductDetailPage() {
     },
     {
       q: 'How do I claim the 1-Year Official Brand Warranty?',
-      a: 'Your smartphone comes with an official brand warranty valid at all authorized service centers nationwide across Pakistan. Simply present the invoice from Navira Traders and the stamped warranty card inside the box.',
+      a: 'Your smartphone comes with an official brand warranty valid at all authorized service centers nationwide across Pakistan. Simply present the invoice from Nawira Traders and the stamped warranty card inside the box.',
     },
     {
       q: 'How does the 0% Markup Monthly Installment work?',
@@ -605,7 +605,7 @@ export default function ProductDetailPage() {
             <div className="bg-white rounded-3xl p-5 sm:p-7 border border-slate-200/80 shadow-[0_2px_16px_rgba(0,0,0,0.04)] space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
-                  Navira Traders Best Price
+                  Nawira Traders Best Price
                 </span>
                 {/* Stock Status Badge */}
                 {isSelectionInStock ? (
@@ -649,7 +649,7 @@ export default function ProductDetailPage() {
                 <div className="p-3 rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/80 text-emerald-800 text-xs font-bold flex items-center gap-2">
                   <Zap className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>
-                    ⚡ Navira Traders Guarantee: You save{' '}
+                    ⚡ Nawira Traders Guarantee: You save{' '}
                     <strong className="font-black text-emerald-900">{formatPKR(savings)}</strong> on
                     this model with Free Nationwide Shipping!
                   </span>
@@ -894,7 +894,7 @@ export default function ProductDetailPage() {
 
                 {/* Direct WhatsApp Instant Order Button */}
                 <a
-                  href={`https://wa.me/923135221200?text=Hi%20Navira%20Traders!%20I%20want%20to%20order%20the%20${encodeURIComponent(
+                  href={`https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20want%20to%20order%20the%20${encodeURIComponent(
                     phone.name
                   )}%20(${encodeURIComponent(selectedColor.name)},%20${encodeURIComponent(
                     selectedVariant.ram
@@ -927,7 +927,7 @@ export default function ProductDetailPage() {
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-xs uppercase font-black tracking-widest text-sky-200">
-                    Navira Traders Assurance
+                    Nawira Traders Assurance
                   </span>
                   <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-[#fef3eb] text-[#f47708]">
                     2x Money Back

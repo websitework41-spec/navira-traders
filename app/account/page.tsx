@@ -86,7 +86,7 @@ export default function AccountPage() {
         <div className="flex-1 max-w-5xl mx-auto w-full p-6 sm:p-12 flex items-center justify-center">
           <div className="text-center space-y-3">
             <div className="w-10 h-10 border-4 border-[#48afff] border-t-transparent rounded-full animate-spin mx-auto" />
-            <p className="text-xs font-bold text-slate-500">Loading your Navira Traders profile...</p>
+            <p className="text-xs font-bold text-slate-500">Loading your Nawira Traders profile...</p>
           </div>
         </div>
         <Footer />
@@ -279,7 +279,7 @@ export default function AccountPage() {
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-xl sm:text-2xl font-black tracking-tight">
-                  {profile?.name || user.displayName || 'Navira Traders Customer'}
+                  {profile?.name || user.displayName || 'Nawira Traders Customer'}
                 </h1>
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                   <ShieldCheck className="w-3 h-3" /> PTA Verified
@@ -430,7 +430,7 @@ export default function AccountPage() {
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      Navira Traders Account ID
+                      Nawira Traders Account ID
                     </label>
                     <input
                       type="text"

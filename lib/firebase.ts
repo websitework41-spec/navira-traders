@@ -2,7 +2,7 @@ import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-// Navira Traders Firebase Configuration
+// Nawira Traders Firebase Configuration
 export const firebaseConfig = {
   apiKey: "AIzaSyB4ZMA-IE5LRVaEU9mtT36CPjIlS9fb2t4",
   authDomain: "navira-traders.firebaseapp.com",
@@ -48,10 +48,10 @@ export function validatePakistaniMobile(phone: string): { isValid: boolean; clea
 
 /**
  * Converts a Pakistani mobile number into a stable synthetic email address.
- * E.g. 03001234567 -> 03001234567@naviratraders.pk
+ * E.g. 03001234567 -> 03001234567@nawiratraders.com
  */
 export function phoneToSyntheticEmail(phone: string): string {
   const result = validatePakistaniMobile(phone);
   const clean = result.isValid ? result.cleanPhone : phone.replace(/\D/g, '');
-  return `${clean}@naviratraders.pk`;
+  return `${clean}@nawiratraders.com`;
 }

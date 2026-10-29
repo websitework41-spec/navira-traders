@@ -208,7 +208,7 @@ export function Footer() {
                 <Zap className="w-5 h-5 fill-cyan-400 stroke-cyan-400" />
               </div>
               <span className="text-xl font-black tracking-tight text-white font-sans">
-                NAVIRA <span className="text-[#48afff]">TRADERS</span>
+                NAWIRA <span className="text-[#48afff]">TRADERS</span>
                 <span className="text-[10px] font-bold px-1.5 py-0.5 ml-1 rounded bg-slate-800 text-sky-300">
                   PK
                 </span>
@@ -386,7 +386,7 @@ export function Footer() {
                   <span>+92 313 5221200</span>
                 </a>
                 <a
-                  href="https://wa.me/923135221200?text=Hi%20Navira%20Traders!%20I%20have%20an%20inquiry."
+                  href="https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-emerald-400 font-bold hover:text-emerald-300 transition-colors"
@@ -396,7 +396,7 @@ export function Footer() {
                 </a>
                 <div className="flex items-center gap-2 text-slate-400">
                   <Mail className="w-3.5 h-3.5 text-[#48afff] flex-shrink-0" />
-                  <span>support@naviratraders.pk</span>
+                  <span>support@nawiratraders.com</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -435,7 +435,7 @@ export function Footer() {
         {/* Bottom Legal & Copyright Bar */}
         <div className="mt-6 pt-6 border-t border-slate-850 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500 text-center sm:text-left">
           <div>
-            {`© ${new Date().getFullYear()} Navira Traders. All rights reserved. Registered NTN & SECP Compliant Pakistani Marketplace.`}
+            {`© ${new Date().getFullYear()} Nawira Traders. All rights reserved. Registered NTN & SECP Compliant Pakistani Marketplace.`}
           </div>
           <div className="flex items-center gap-3">
             <span>Prices synchronized live with official distributor stock</span>

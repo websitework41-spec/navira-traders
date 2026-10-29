@@ -262,7 +262,7 @@ export function Navbar({
               </a>
               <span className="text-white/40 hidden sm:inline">•</span>
               <a
-                href="https://wa.me/923135221200?text=Hi%20Navira%20Traders!%20I%20have%20an%20inquiry%20regarding%20mobile%20phones."
+                href="https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry%20regarding%20mobile%20phones."
                 target="_blank"
                 rel="noreferrer"
                 className="hover:bg-white/20 flex items-center gap-1 sm:gap-1.5 transition-all text-white font-bold hover:scale-105 active:scale-95 bg-white/10 px-2 sm:px-2.5 py-0.5 rounded-full border border-white/20"
@@ -280,7 +280,7 @@ export function Navbar({
         <div className="bg-[#48afff] text-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-14 sm:h-20 gap-1.5 sm:gap-4">
-              {/* Navira Traders Brand Logo */}
+              {/* Nawira Traders Brand Logo */}
               <Link href="/" className="flex items-center gap-1 sm:gap-3 shrink min-w-0 group">
                 <div className="w-7 h-7 sm:w-11 sm:h-11 rounded-lg sm:rounded-2xl bg-white text-[#0b3c68] flex items-center justify-center shadow-md group-hover:scale-105 transition-all shrink-0">
                   <Zap className="w-3.5 h-3.5 sm:w-6 sm:h-6 fill-[#0b3c68] stroke-[#0b3c68]" />
@@ -288,7 +288,7 @@ export function Navbar({
                 <div className="min-w-0">
                   <div className="flex items-center gap-1 sm:gap-1.5">
                     <span className="text-xs sm:text-2xl font-black tracking-tight text-white font-sans flex items-center gap-0.5 sm:gap-1">
-                      <span>NAVIRA</span>
+                      <span>NAWIRA</span>
                       <span className="bg-white text-[#0b3c68] px-1 sm:px-2 py-0.5 rounded sm:rounded-lg text-[9px] sm:text-lg font-black shadow-xs tracking-normal">
                         TRADERS
                       </span>
