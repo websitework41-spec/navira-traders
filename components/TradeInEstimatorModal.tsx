@@ -349,13 +349,13 @@ Please confirm exchange doorstep inspection and order booking!`;
         {/* Modal Footer CTA */}
         <div className="p-4 sm:p-5 border-t border-slate-100 bg-slate-50/70 flex flex-col sm:flex-row items-center gap-2.5 shrink-0">
           <a
-            href={`https://wa.me/923135221200?text=${encodeURIComponent(whatsappTradeInMessage)}`}
+            href={`https://wa.me/923018543131?text=${encodeURIComponent(whatsappTradeInMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:flex-1 py-3 px-4 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-emerald-600/20 cursor-pointer"
           >
             <MessageSquare className="w-4 h-4 fill-white/20" />
-            <span>Confirm Trade-In on WhatsApp (+92 313 5221200)</span>
+            <span>Confirm Trade-In on WhatsApp (+92 301 8543131)</span>
           </a>
 
           <button

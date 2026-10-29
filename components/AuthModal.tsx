@@ -437,7 +437,7 @@ export function AuthModal() {
               </div>
 
               <a
-                href={`https://wa.me/923135221200?text=${encodeURIComponent(
+                href={`https://wa.me/923018543131?text=${encodeURIComponent(
                   `Hi Nawira Traders! I forgot my account password. My registered mobile number is: ${phone || '03XXXXXXXXX'}. Please assist me with account recovery.`
                 )}`}
                 target="_blank"
@@ -445,7 +445,7 @@ export function AuthModal() {
                 className="w-full py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white font-bold text-xs tracking-wide transition-all shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>Chat on WhatsApp Helpline (+92 313 5221200)</span>
+                <span>Chat on WhatsApp Helpline (+92 301 8543131)</span>
               </a>
 
               <button

@@ -11,7 +11,7 @@ export interface BankAccountInfo {
 
 export const STORE_BANK_DETAILS = {
   accountTitle: 'Nawira Traders',
-  raastId: '03135221200',
+  raastId: '03018543131',
   raastTitle: 'Nawira Traders / Hamza Latif',
   primaryBank: {
     bankName: 'Meezan Bank Ltd',
@@ -29,6 +29,6 @@ export const STORE_BANK_DETAILS = {
     cleanAccountNumber: '55015001239871',
     iban: 'PK12ALFH55015001239871',
   },
-  whatsappHelpline: '+92 313 5221200',
-  whatsappRaw: '923135221200',
+  whatsappHelpline: '+92 301 8543131',
+  whatsappRaw: '923018543131',
 };

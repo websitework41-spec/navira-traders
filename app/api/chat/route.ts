@@ -170,7 +170,7 @@ Your Nawira Traders tax invoice serves as valid official proof of purchase.`;
   if (q.includes('return') || q.includes('replace') || q.includes('guarantee') || q.includes('defect')) {
     return `🔄 **7-Day Replacement Guarantee**:
 If your device arrives with an out-of-the-box hardware defect:
-1. Contact our WhatsApp helpline at **+92 313 5221200** within 7 days.
+1. Contact our WhatsApp helpline at **+92 301 8543131** within 7 days.
 2. Provide your order tracking code (e.g. HPS-XXXXXX or VPK-XXXXXX).
 3. Handset must be in original condition with box and accessories.
 4. An immediate replacement handset will be dispatched at zero additional charge!`;
@@ -186,8 +186,8 @@ If your device arrives with an out-of-the-box hardware defect:
   if (q.includes('contact') || q.includes('call') || q.includes('whatsapp') || q.includes('number') || q.includes('support') || q.includes('helpline')) {
     return `📞 **Official Customer Support**:
 We are available Mon-Sat (9:00 AM - 10:00 PM PKT):
-- **Phone Helpline**: [+92 313 5221200](tel:+923135221200)
-- **Direct WhatsApp**: [Chat on WhatsApp (+92 313 5221200)](https://wa.me/923135221200)
+- **Phone Helpline**: [+92 301 8543131](tel:+923018543131)
+- **Direct WhatsApp**: [Chat on WhatsApp (+92 301 8543131)](https://wa.me/923018543131)
 - **Email**: support@nawiratraders.com
 - **Fulfillment Hubs**: Lahore (Gulberg III), Karachi (Shahrah-e-Faisal), Islamabad (Blue Area).`;
   }
@@ -195,7 +195,7 @@ We are available Mon-Sat (9:00 AM - 10:00 PM PKT):
   if (q.includes('track') || q.includes('order status') || q.includes('where is my order')) {
     return `📦 **Track Your Nawira Traders Order**:
 To track your order, click the **"Track Order"** link in the top bar or enter your Order ID (format: \`HPS-XXXXXX\` or \`VPK-XXXXXX\`).
-You can also message our WhatsApp helpline at **+92 313 5221200** with your name and city for an instant courier dispatch update!`;
+You can also message our WhatsApp helpline at **+92 301 8543131** with your name and city for an instant courier dispatch update!`;
   }
 
   if (q.includes('5g') || q.includes('gaming')) {
@@ -225,13 +225,13 @@ I'm **NawiraBot**, your AI shopping specialist. Here is how I can help you:
 - ✅ **PTA DIRBS Approval**: Verification instructions via SMS 8484.
 - 💳 **0% EMI Installments**: Banks and tenures supported.
 - 🛡️ **Brand Warranties**: Official nationwide service centers.
-- 📞 **Helpline**: WhatsApp support available at **+92 313 5221200**.
+- 📞 **Helpline**: WhatsApp support available at **+92 301 8543131**.
 
 What phone or policy can I help you with today?`;
 }
 
 const SYSTEM_PROMPT = `You are "NawiraBot", the official AI shopping and support assistant for Nawira Traders (nawiratraders.com) - Pakistan's premier PTA-Approved Mobile Marketplace.
-Respond concisely, politely, and professionally in English using bold text and bullet points. Always emphasize 100% PTA approval, Open-Parcel delivery, and official brand warranties. If the user wants human support, direct them to WhatsApp +92 313 5221200.`;
+Respond concisely, politely, and professionally in English using bold text and bullet points. Always emphasize 100% PTA approval, Open-Parcel delivery, and official brand warranties. If the user wants human support, direct them to WhatsApp +92 301 8543131.`;
 
 export async function POST(req: NextRequest) {
   try {

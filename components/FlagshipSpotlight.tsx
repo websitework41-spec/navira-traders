@@ -156,7 +156,7 @@ export function FlagshipSpotlight({ onOpenEMIModal }: FlagshipSpotlightProps) {
               </Link>
 
               <a
-                href="https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20am%20interested%20in%20the%20Samsung%20Galaxy%20S24%20Ultra%20Deal%20of%20the%20Day."
+                href="https://wa.me/923018543131?text=Hi%20Nawira%20Traders!%20I%20am%20interested%20in%20the%20Samsung%20Galaxy%20S24%20Ultra%20Deal%20of%20the%20Day."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-bold border border-white/20 hover:border-white/40 transition-all cursor-pointer backdrop-blur-md"

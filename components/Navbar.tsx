@@ -207,7 +207,7 @@ export function Navbar({
     } else {
       setTrackError(true);
       setTrackResult(
-        `No order found with Tracking ID "${cleanTrack}". Please verify your order number (e.g. HPS-786110) or contact our WhatsApp helpline at +92 313 5221200.`
+        `No order found with Tracking ID "${cleanTrack}". Please verify your order number (e.g. HPS-786110) or contact our WhatsApp helpline at +92 301 8543131.`
       );
     }
   };
@@ -253,23 +253,23 @@ export function Navbar({
               </button>
               <span className="text-white/40 hidden sm:inline">•</span>
               <a
-                href="tel:+923135221200"
+                href="tel:+923018543131"
                 className="hover:text-white flex items-center gap-1 transition-all hidden sm:flex hover:scale-105"
                 title="Direct Phone Helpline"
               >
                 <Phone className="w-3 h-3 text-white" />
-                <span>+92 313 5221200</span>
+                <span>+92 301 8543131</span>
               </a>
               <span className="text-white/40 hidden sm:inline">•</span>
               <a
-                href="https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry%20regarding%20mobile%20phones."
+                href="https://wa.me/923018543131?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry%20regarding%20mobile%20phones."
                 target="_blank"
                 rel="noreferrer"
                 className="hover:bg-white/20 flex items-center gap-1 sm:gap-1.5 transition-all text-white font-bold hover:scale-105 active:scale-95 bg-white/10 px-2 sm:px-2.5 py-0.5 rounded-full border border-white/20"
                 title="Chat with Us on WhatsApp"
               >
                 <MessageSquare className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-300" />
-                <span className="hidden sm:inline">WhatsApp: +92 313 5221200</span>
+                <span className="hidden sm:inline">WhatsApp: +92 301 8543131</span>
                 <span className="sm:hidden">WhatsApp</span>
               </a>
             </div>

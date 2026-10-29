@@ -12,7 +12,7 @@ export function WhatsAppFloatingButton() {
   }
 
   const defaultMsg = 'Hi Nawira Traders! I am looking for a smartphone with Open-Parcel COD';
-  const whatsappUrl = `https://wa.me/923135221200?text=${encodeURIComponent(defaultMsg)}`;
+  const whatsappUrl = `https://wa.me/923018543131?text=${encodeURIComponent(defaultMsg)}`;
 
   return (
     <aside
@@ -24,7 +24,7 @@ export function WhatsAppFloatingButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Nawira Traders on WhatsApp"
-        title="Direct WhatsApp Helpline: +92 313 5221200 (Chat with Mobile Specialists)"
+        title="Direct WhatsApp Helpline: +92 301 8543131 (Chat with Mobile Specialists)"
         className="relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-xl shadow-emerald-600/30 hover:shadow-emerald-600/50 hover:scale-110 active:scale-95 transition-all duration-200 border-2 border-white/40 group cursor-pointer"
       >
         {/* Subtle Online Pulse Dot */}

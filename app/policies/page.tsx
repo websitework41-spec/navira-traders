@@ -262,7 +262,7 @@ export default function PoliciesPage() {
           <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 space-y-2 text-xs sm:text-sm text-rose-950">
             <h4 className="font-bold">Conditions for Replacement:</h4>
             <ul className="list-disc pl-5 space-y-1 text-xs">
-              <li>Report the defect within 7 days of parcel receipt by contacting WhatsApp: <strong>+92 313 5221200</strong>.</li>
+              <li>Report the defect within 7 days of parcel receipt by contacting WhatsApp: <strong>+92 301 8543131</strong>.</li>
               <li>Handset must be free from physical drops, cracks, liquid spillage, or unauthorized rooting/jailbreaking.</li>
               <li>Original retail box, IMEI matching paperwork, charger, and bundled accessories must be returned in complete condition.</li>
               <li>Once verified by our inspection team, an immediate replacement unit will be dispatched at no extra cost.</li>
@@ -391,14 +391,14 @@ export default function PoliciesPage() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <a
-              href="tel:+923135221200"
+              href="tel:+923018543131"
               className="px-5 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold flex items-center gap-2 transition-colors"
             >
               <Phone className="w-4 h-4 text-[#48afff]" />
-              <span>+92 313 5221200</span>
+              <span>+92 301 8543131</span>
             </a>
             <a
-              href="https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20have%20a%20question%20about%20store%20policies."
+              href="https://wa.me/923018543131?text=Hi%20Nawira%20Traders!%20I%20have%20a%20question%20about%20store%20policies."
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black flex items-center gap-2 shadow-md transition-all"

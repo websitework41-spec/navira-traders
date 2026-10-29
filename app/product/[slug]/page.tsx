@@ -894,7 +894,7 @@ export default function ProductDetailPage() {
 
                 {/* Direct WhatsApp Instant Order Button */}
                 <a
-                  href={`https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20want%20to%20order%20the%20${encodeURIComponent(
+                  href={`https://wa.me/923018543131?text=Hi%20Nawira%20Traders!%20I%20want%20to%20order%20the%20${encodeURIComponent(
                     phone.name
                   )}%20(${encodeURIComponent(selectedColor.name)},%20${encodeURIComponent(
                     selectedVariant.ram
@@ -906,7 +906,7 @@ export default function ProductDetailPage() {
                   className="w-full py-3.5 px-5 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-black text-xs sm:text-sm transition-all shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2 cursor-pointer btn-press"
                 >
                   <MessageSquare className="w-4 h-4 fill-white/20" />
-                  <span>Order via WhatsApp (+92 313 5221200)</span>
+                  <span>Order via WhatsApp (+92 301 8543131)</span>
                 </a>
               </div>
             </div>

@@ -379,20 +379,20 @@ export function Footer() {
             </h5>
               <div className="space-y-2 text-slate-300">
                 <a
-                  href="tel:+923135221200"
+                  href="tel:+923018543131"
                   className="flex items-center gap-2 text-white font-bold hover:text-[#48afff] transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#48afff] flex-shrink-0" />
-                  <span>+92 313 5221200</span>
+                  <span>+92 301 8543131</span>
                 </a>
                 <a
-                  href="https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry."
+                  href="https://wa.me/923018543131?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-emerald-400 font-bold hover:text-emerald-300 transition-colors"
                 >
                   <MessageSquare className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-                  <span>WhatsApp: +92 313 5221200</span>
+                  <span>WhatsApp: +92 301 8543131</span>
                 </a>
                 <div className="flex items-center gap-2 text-slate-400">
                   <Mail className="w-3.5 h-3.5 text-[#48afff] flex-shrink-0" />

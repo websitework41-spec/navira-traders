@@ -325,7 +325,7 @@ export default function OrdersHistoryPage() {
                         </div>
 
                         <a
-                          href={`https://wa.me/923135221200?text=${encodeURIComponent(
+                          href={`https://wa.me/923018543131?text=${encodeURIComponent(
                             `Hi Nawira Traders! I am inquiring about my order #${order.orderId}.`
                           )}`}
                           target="_blank"

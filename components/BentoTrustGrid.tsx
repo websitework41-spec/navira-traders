@@ -221,7 +221,7 @@ export function BentoTrustGrid({ onOpenPolicyModal }: BentoTrustGridProps) {
 
           <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto justify-end">
             <a
-              href="https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry%20regarding%20shipping%20and%20orders."
+              href="https://wa.me/923018543131?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry%20regarding%20shipping%20and%20orders."
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black shadow-md flex items-center justify-center gap-1.5 transition-all hover:scale-105"

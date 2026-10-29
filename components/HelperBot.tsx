@@ -248,7 +248,7 @@ Tap any question below or type your question to get instant guidance!`,
       const data = await res.json();
       const botReply =
         data?.reply ||
-        "I'm here to assist you! You can ask about smartphone specifications, live market prices, PTA approval, or connect with our customer team directly on WhatsApp at +92 313 5221200.";
+        "I'm here to assist you! You can ask about smartphone specifications, live market prices, PTA approval, or connect with our customer team directly on WhatsApp at +92 301 8543131.";
 
       const botMsg: ChatMessage = {
         id: `bot-${Date.now()}`,
@@ -264,7 +264,7 @@ Tap any question below or type your question to get instant guidance!`,
         const errorMsg: ChatMessage = {
           id: `bot-err-${Date.now()}`,
           sender: 'bot',
-          text: `⚠️ I'm here to assist you! If you need instant live help, you can also reach our mobile advisors on WhatsApp at [+92 313 5221200](https://wa.me/923135221200).`,
+          text: `⚠️ I'm here to assist you! If you need instant live help, you can also reach our mobile advisors on WhatsApp at [+92 301 8543131](https://wa.me/923018543131).`,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         };
         setMessages((prev) => [...prev, errorMsg]);
@@ -391,10 +391,10 @@ Tap any question below or type your question to get instant guidance!`,
           <div className="px-4 py-2 bg-sky-50 border-b border-sky-100 flex items-center justify-between text-[11px]">
             <span className="text-slate-700 font-semibold flex items-center gap-1.5">
               <Phone className="w-3 h-3 text-[#136ab5]" />
-              Direct Helpline: <strong className="font-bold text-[#0b3c68]">+92 313 5221200</strong>
+              Direct Helpline: <strong className="font-bold text-[#0b3c68]">+92 301 8543131</strong>
             </span>
             <a
-              href="https://wa.me/923135221200?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry%20regarding%20mobile%20phones."
+              href="https://wa.me/923018543131?text=Hi%20Nawira%20Traders!%20I%20have%20an%20inquiry%20regarding%20mobile%20phones."
               target="_blank"
               rel="noopener noreferrer"
               className="text-emerald-700 hover:text-emerald-800 font-extrabold flex items-center gap-1 bg-emerald-100/60 hover:bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-200 transition-colors"

@@ -789,7 +789,7 @@ export function QuickPurchaseModal({
                     <div className="p-2 rounded-xl bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] flex items-start gap-1.5 leading-snug">
                       <span className="text-xs shrink-0">📲</span>
                       <span>
-                        Transfer the exact payable amount and send screenshot to WhatsApp <strong>+92 313 5221200</strong> for instant consignment dispatch.
+                        Transfer the exact payable amount and send screenshot to WhatsApp <strong>+92 301 8543131</strong> for instant consignment dispatch.
                       </span>
                     </div>
                   </div>
@@ -1108,7 +1108,7 @@ export function QuickPurchaseModal({
             <div className="space-y-2 pt-1 max-w-md mx-auto">
               {/* 1-Click WhatsApp Button with full pre-filled order receipt */}
               <a
-                href={`https://wa.me/923135221200?text=${encodeURIComponent(
+                href={`https://wa.me/923018543131?text=${encodeURIComponent(
                   paymentMethod === 'bank'
                     ? `📦 *NAWIRA TRADERS — BANK TRANSFER PAYMENT RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${generatedOrderId}\n👤 *Customer:* ${fullName}\n📞 *Mobile:* ${phoneNumber}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${city}, Pakistan\n🏠 *Address:* ${deliveryAddress}\n📱 *Item:* ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\n🎨 *Color:* ${currentColor?.name || 'Default'}\n💰 *Amount Transferred:* ${formatPKR(finalPrice)}\n🏦 *Method:* Direct Bank Transfer / Raast (Meezan Bank)\n${bankTxRef ? `📝 *Sender Reference / TID:* ${bankTxRef}\n` : ''}──────────────────────\n_I have completed the bank transfer. Attaching payment receipt screenshot here for verification & immediate dispatch._`
                     : `📦 *NAWIRA TRADERS — ORDER CONFIRMATION RECEIPT*\n──────────────────────\n🔖 *Order ID:* ${generatedOrderId}\n👤 *Customer:* ${fullName}\n📞 *Mobile:* ${phoneNumber}\n${customerEmail ? `✉️ *Email:* ${customerEmail}\n` : ''}📍 *Destination:* ${city}, Pakistan\n🏠 *Address:* ${deliveryAddress}\n📱 *Item:* ${phone.name} (${currentVariant?.ram || ''}/${currentVariant?.storage || ''})\n🎨 *Color:* ${currentColor?.name || 'Default'}\n💰 *Total Payable:* ${formatPKR(finalPrice)} (Open-Parcel COD)\n🚚 *Courier:* TCS Express (24-48 Hours Delivery)\n🛡️ *PTA Status:* 100% Official PTA Approved\n──────────────────────\n_I just placed this order. Please confirm dispatch tracking details._`
@@ -1120,8 +1120,8 @@ export function QuickPurchaseModal({
                 <MessageSquare className="w-4 h-4 fill-white text-white" />
                 <span>
                   {paymentMethod === 'bank'
-                    ? 'Send Payment Screenshot on WhatsApp (+92 313 5221200)'
-                    : 'Send Order Receipt to WhatsApp (+92 313 5221200)'}
+                    ? 'Send Payment Screenshot on WhatsApp (+92 301 8543131)'
+                    : 'Send Order Receipt to WhatsApp (+92 301 8543131)'}
                 </span>
               </a>
 
