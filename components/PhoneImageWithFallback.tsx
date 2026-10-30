@@ -26,18 +26,13 @@ export const PhoneImageWithFallback = memo(function PhoneImageWithFallback({
   if (hasError || !src) {
     return (
       <div
-        className={`flex flex-col items-center justify-center bg-white rounded-2xl p-4 text-slate-400 ${className}`}
+        className={`w-full h-full flex flex-col items-center justify-center bg-slate-100 rounded-lg p-0.5 text-slate-400 overflow-hidden select-none ${className}`}
         aria-label={safeAlt}
+        title={safeAlt}
       >
-        <div className="relative w-20 h-32 border-2 border-slate-200 rounded-2xl flex flex-col items-center justify-between p-2 shadow-inner bg-slate-50">
-          <div className="w-6 h-1 bg-slate-300 rounded-full" />
-          <PhoneIcon className="w-7 h-7 text-slate-400 stroke-[1.5]" />
-          <span className="text-[9px] font-bold tracking-wider uppercase text-slate-400">
-            {safeBrand || 'PHONE'}
-          </span>
-        </div>
-        <span className="mt-2 text-[11px] font-medium text-slate-400 text-center line-clamp-1 max-w-[160px]">
-          {safeAlt}
+        <PhoneIcon className="w-4 h-4 max-w-[60%] max-h-[60%] text-slate-400 stroke-[1.8] shrink-0" />
+        <span className="text-[7px] font-black tracking-wider uppercase text-slate-500 truncate max-w-full leading-tight mt-0.5">
+          {safeBrand || 'PHONE'}
         </span>
       </div>
     );

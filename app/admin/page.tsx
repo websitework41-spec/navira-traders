@@ -2101,7 +2101,7 @@ export default function AdminPortalPage() {
                         className="bg-slate-50/80 hover:bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 flex items-center justify-between gap-3 transition-all hover:border-[#008060] group"
                       >
                         <div className="flex items-center gap-3 min-w-0">
-                          <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 p-1 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                          <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 p-1 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform overflow-hidden relative">
                             <PhoneImageWithFallback
                               src={p.image}
                               alt={p.name}
@@ -2268,7 +2268,7 @@ export default function AdminPortalPage() {
                           {topProduct && (
                             <div className="p-2 bg-white rounded-xl border border-slate-200/80 flex items-center justify-between gap-2">
                               <div className="flex items-center gap-2 min-w-0">
-                                <div className="w-9 h-9 rounded-lg bg-white border border-slate-200 p-0.5 flex items-center justify-center shrink-0">
+                                <div className="w-9 h-9 rounded-lg bg-slate-50 border border-slate-200 p-0.5 flex items-center justify-center shrink-0 overflow-hidden relative">
                                   <PhoneImageWithFallback
                                     src={topProduct.image}
                                     alt={topProduct.name}
@@ -2385,7 +2385,7 @@ export default function AdminPortalPage() {
                                 <div className="space-y-2">
                                   {visitor.viewedProducts.slice(0, 2).map((vp, vIdx) => (
                                     <div key={vIdx} className="flex items-center gap-2.5">
-                                      <div className="w-9 h-9 rounded-lg bg-white border border-slate-200 p-0.5 flex items-center justify-center shrink-0">
+                                      <div className="w-9 h-9 rounded-lg bg-slate-50 border border-slate-200 p-0.5 flex items-center justify-center shrink-0 overflow-hidden relative">
                                         <PhoneImageWithFallback
                                           src={vp.image}
                                           alt={vp.name}
