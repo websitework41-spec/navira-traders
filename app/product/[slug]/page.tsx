@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { SMARTPHONES, getPhoneBySlug, formatPKR } from '@/data/smartphones';
+import { SMARTPHONES, getPhoneBySlug, formatPKR, PAKISTAN_CITIES } from '@/data/smartphones';
 import { getActiveCatalog, getLocalDeletedIds } from '@/lib/catalog';
 import { Smartphone, SmartphoneColor, SmartphoneVariant, CartItem } from '@/types';
 import { PhoneImageWithFallback } from '@/components/PhoneImageWithFallback';
@@ -62,6 +62,7 @@ import {
   Shield,
   Eye,
   Lock,
+  X,
 } from 'lucide-react';
 
 export default function ProductDetailPage() {
@@ -122,6 +123,16 @@ export default function ProductDetailPage() {
   const [selectedTenure, setSelectedTenure] = useState<number>(6); // installment months
   const [isQuickBuyOpen, setIsQuickBuyOpen] = useState(false);
   const [isTradeInModalOpen, setIsTradeInModalOpen] = useState(false);
+
+  // Write a Review modal states
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewHoverRating, setReviewHoverRating] = useState(0);
+  const [reviewAuthor, setReviewAuthor] = useState('');
+  const [reviewCity, setReviewCity] = useState(PAKISTAN_CITIES[0] || 'Karachi');
+  const [reviewComment, setReviewComment] = useState('');
+  const [reviewSuccess, setReviewSuccess] = useState(false);
+  const [reviewError, setReviewError] = useState('');
 
   // Addons states (PriceOye features)
   const [addGiftWrap, setAddGiftWrap] = useState(false);
@@ -305,8 +316,8 @@ export default function ProductDetailPage() {
         Math.abs(p.basePricePKR - phone.basePricePKR) < 50000)
   ).slice(0, 4);
 
-  // Static customer reviews data for social proof
-  const customerReviews = [
+  // Base customer reviews for social proof
+  const defaultCustomerReviews = [
     {
       author: 'Muhammad Bilal',
       city: 'Lahore',
@@ -335,6 +346,63 @@ export default function ProductDetailPage() {
         'Best price in Pakistan, even cheaper than the local market. Clean packaging and responsive WhatsApp support team answered all my questions regarding 0% EMI.',
     },
   ];
+
+  const [reviewsList, setReviewsList] = useState(defaultCustomerReviews);
+
+  // Sync saved reviews from localStorage on load & route change
+  useEffect(() => {
+    if (!phone?.slug) return;
+    try {
+      const key = `naviratraders_reviews_${phone.slug}`;
+      const stored = localStorage.getItem(key);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setReviewsList([...parsed, ...defaultCustomerReviews]);
+        }
+      }
+    } catch {}
+  }, [phone?.slug]);
+
+  const handleReviewSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setReviewError('');
+    const cleanName = sanitizeText(reviewAuthor, 50).trim();
+    const cleanComment = sanitizeText(reviewComment, 500).trim();
+    if (!cleanName) {
+      setReviewError('Please enter your full name.');
+      return;
+    }
+    if (cleanComment.length < 8) {
+      setReviewError('Please write at least 8 characters for your review.');
+      return;
+    }
+
+    const newRev = {
+      author: cleanName,
+      city: reviewCity,
+      rating: reviewRating,
+      date: 'Just now',
+      verified: true,
+      comment: cleanComment,
+    };
+
+    setReviewsList((prev) => [newRev, ...prev]);
+
+    try {
+      const key = `naviratraders_reviews_${phone.slug}`;
+      const stored = localStorage.getItem(key);
+      const existing = stored ? JSON.parse(stored) : [];
+      localStorage.setItem(key, JSON.stringify([newRev, ...existing]));
+    } catch {}
+
+    setReviewSuccess(true);
+    setTimeout(() => {
+      setIsReviewModalOpen(false);
+      setReviewSuccess(false);
+      setReviewComment('');
+    }, 1600);
+  };
 
   const faqs = [
     {
@@ -1303,12 +1371,11 @@ export default function ProductDetailPage() {
               </p>
             </div>
             <button
-              onClick={() =>
-                alert('Thank you! Please submit your review on WhatsApp or after receiving your parcel.')
-              }
-              className="px-4 py-2 rounded-xl text-xs font-extrabold bg-[#0b3c68] text-white hover:bg-[#48afff] transition-colors self-start sm:self-auto cursor-pointer"
+              onClick={() => setIsReviewModalOpen(true)}
+              className="px-4 py-2 rounded-xl text-xs font-extrabold bg-[#0b3c68] text-white hover:bg-[#48afff] transition-colors self-start sm:self-auto cursor-pointer flex items-center gap-1.5"
             >
-              Write a Review
+              <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
+              <span>Write a Review</span>
             </button>
           </div>
 
@@ -1358,7 +1425,7 @@ export default function ProductDetailPage() {
 
           {/* Review Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {customerReviews.map((rev, idx) => (
+            {reviewsList.map((rev, idx) => (
               <div
                 key={idx}
                 className="p-4 rounded-2xl bg-white border border-slate-200/80 space-y-2 flex flex-col justify-between"
@@ -1663,6 +1730,192 @@ export default function ProductDetailPage() {
         targetPhone={phone}
         targetPricePKR={currentPrice}
       />
+
+      {/* Interactive Write a Review Modal */}
+      {isReviewModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="relative w-full max-w-lg bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-2xl space-y-4 animate-in zoom-in-95 duration-200 text-slate-900">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-500 border border-amber-200/60 flex items-center justify-center shrink-0">
+                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-slate-900 tracking-tight">
+                    Write a Customer Review
+                  </h3>
+                  <p className="text-xs text-slate-500 truncate max-w-[280px]">
+                    {phone.name} • Verified Feedback
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsReviewModalOpen(false);
+                  setReviewSuccess(false);
+                  setReviewError('');
+                }}
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center cursor-pointer transition-colors"
+                aria-label="Close review modal"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {reviewSuccess ? (
+              <div className="p-6 text-center space-y-3 bg-emerald-50 rounded-2xl border border-emerald-200 animate-in fade-in">
+                <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-xl font-bold">
+                  ✓
+                </div>
+                <div>
+                  <h4 className="text-sm font-black text-emerald-950">
+                    Review Published Successfully!
+                  </h4>
+                  <p className="text-xs text-emerald-700 mt-1">
+                    Thank you! Your verified review has been published on the {phone.name} page.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleReviewSubmit} className="space-y-4">
+                {reviewError && (
+                  <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold flex items-center gap-2">
+                    <span>⚠️</span>
+                    <span>{reviewError}</span>
+                  </div>
+                )}
+
+                {/* Rating Star Selection */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                    Your Rating <span className="text-rose-500">*</span>
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
+                      {[1, 2, 3, 4, 5].map((star) => {
+                        const isFilled = (reviewHoverRating || reviewRating) >= star;
+                        return (
+                          <button
+                            type="button"
+                            key={star}
+                            onClick={() => setReviewRating(star)}
+                            onMouseEnter={() => setReviewHoverRating(star)}
+                            onMouseLeave={() => setReviewHoverRating(0)}
+                            className="p-1 cursor-pointer transition-transform hover:scale-125 focus:outline-none"
+                            aria-label={`Rate ${star} star`}
+                          >
+                            <Star
+                              className={`w-6 h-6 transition-colors ${
+                                isFilled
+                                  ? 'fill-amber-400 text-amber-400 stroke-amber-400'
+                                  : 'text-slate-300 stroke-slate-300'
+                              }`}
+                            />
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <span className="text-xs font-extrabold text-[#0b3c68] ml-2">
+                      {reviewRating === 5
+                        ? '⭐⭐⭐⭐⭐ Excellent'
+                        : reviewRating === 4
+                        ? '⭐⭐⭐⭐ Very Good'
+                        : reviewRating === 3
+                        ? '⭐⭐⭐ Average'
+                        : reviewRating === 2
+                        ? '⭐⭐ Below Average'
+                        : '⭐ Poor'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* Full Name */}
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700">
+                      Your Full Name <span className="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={reviewAuthor}
+                      onChange={(e) => setReviewAuthor(e.target.value)}
+                      placeholder="e.g. Muhammad Bilal"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#48afff] text-slate-900 font-medium"
+                    />
+                  </div>
+
+                  {/* City */}
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700">
+                      City <span className="text-rose-500">*</span>
+                    </label>
+                    <select
+                      value={reviewCity}
+                      onChange={(e) => setReviewCity(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#48afff] text-slate-900 font-medium cursor-pointer"
+                    >
+                      {PAKISTAN_CITIES.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Review Textarea */}
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-bold text-slate-700">
+                      Your Review <span className="text-rose-500">*</span>
+                    </label>
+                    <span className="text-[10px] text-slate-400 font-medium">
+                      {reviewComment.length}/500
+                    </span>
+                  </div>
+                  <textarea
+                    required
+                    rows={3}
+                    maxLength={500}
+                    value={reviewComment}
+                    onChange={(e) => setReviewComment(e.target.value)}
+                    placeholder="Tell us what you liked: battery life, camera quality, packaging, delivery speed..."
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#48afff] text-slate-900 font-medium resize-none"
+                  />
+                </div>
+
+                {/* Verified Buyer Note */}
+                <div className="p-2.5 rounded-xl bg-sky-50 border border-sky-100 flex items-center gap-2 text-sky-900 text-xs">
+                  <ShieldCheck className="w-4 h-4 text-[#136ab5] shrink-0" />
+                  <span className="text-[11px] leading-tight">
+                    Your review will feature an official <strong>Verified Buyer</strong> badge.
+                  </span>
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center justify-end gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setIsReviewModalOpen(false)}
+                    className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-5 py-2.5 rounded-xl bg-[#0b3c68] hover:bg-[#072847] text-white text-xs font-black transition-all shadow-md shadow-[#0b3c68]/20 cursor-pointer btn-press"
+                  >
+                    Publish Review
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Enhanced Store Footer */}
       <Footer />
