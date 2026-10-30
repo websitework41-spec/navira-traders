@@ -115,16 +115,18 @@ export function QuickPurchaseModal({
     }
   }, [user, profile, isOpen]);
 
-  if (!isOpen || !phone) return null;
-
-  const currentVariant = selectedVariant || phone.variants.find((v) => v.inStock) || phone.variants[0];
-  const currentColor = selectedColor || phone.colors.find((c) => c.inStock) || phone.colors[0];
-  const price = currentVariant ? currentVariant.pricePKR : phone.basePricePKR;
+  const currentVariant = phone
+    ? (selectedVariant || phone.variants?.find((v) => v.inStock) || phone.variants?.[0] || null)
+    : null;
+  const currentColor = phone
+    ? (selectedColor || phone.colors?.find((c) => c.inStock) || phone.colors?.[0] || null)
+    : null;
+  const price = currentVariant ? currentVariant.pricePKR : (phone?.basePricePKR || 0);
   const finalPrice = Math.max(0, price - discountAmount);
 
   // Recalculate discount if device price changes
   useEffect(() => {
-    if (appliedCoupon) {
+    if (appliedCoupon && isOpen) {
       if (appliedCoupon.minOrderAmount && price < appliedCoupon.minOrderAmount) {
         setAppliedCoupon(null);
         setDiscountAmount(0);
@@ -141,7 +143,10 @@ export function QuickPurchaseModal({
         setDiscountAmount(Math.min(newDisc, price));
       }
     }
-  }, [price, appliedCoupon]);
+  }, [price, appliedCoupon, isOpen]);
+
+  // Guaranteed: All hooks are called unconditionally in identical order before this return
+  if (!isOpen || !phone || !currentColor) return null;
 
   const handleApplyCoupon = async (codeToApply?: string) => {
     const code = (codeToApply || couponCodeInput).trim();

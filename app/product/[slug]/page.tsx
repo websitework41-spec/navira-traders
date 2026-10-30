@@ -15,10 +15,7 @@ const CartDrawer = dynamic(
   () => import('@/components/CartDrawer').then((m) => m.CartDrawer),
   { ssr: false }
 );
-const QuickPurchaseModal = dynamic(
-  () => import('@/components/QuickPurchaseModal').then((m) => m.QuickPurchaseModal),
-  { ssr: false }
-);
+import { QuickPurchaseModal } from '@/components/QuickPurchaseModal';
 const TradeInEstimatorModal = dynamic(
   () => import('@/components/TradeInEstimatorModal').then((m) => m.TradeInEstimatorModal),
   { ssr: false }
@@ -90,6 +87,10 @@ export default function ProductDetailPage() {
           const found = active.find((p: Smartphone) => p.slug === slug || p.id === slug);
           if (found) {
             setPhone(found);
+            const inStockC = found.colors.find((c: any) => c.inStock !== false) || found.colors[0];
+            const inStockV = found.variants.find((v: any) => v.inStock !== false) || found.variants[0];
+            if (inStockC) setSelectedColor(inStockC);
+            if (inStockV) setSelectedVariant(inStockV);
           } else {
             router.push('/');
           }
@@ -869,14 +870,16 @@ export default function ProductDetailPage() {
                   <button
                     onClick={() => {
                       if (isSelectionInStock) {
-                        trackCheckoutStart({
-                          phoneId: phone.id,
-                          name: phone.name,
-                          brand: phone.brand,
-                          slug: phone.slug,
-                          image: selectedColor?.image || phone.colors[0]?.image,
-                          pricePKR: currentPrice,
-                        });
+                        try {
+                          trackCheckoutStart({
+                            phoneId: phone.id,
+                            name: phone.name,
+                            brand: phone.brand,
+                            slug: phone.slug,
+                            image: selectedColor?.image || phone.colors[0]?.image,
+                            pricePKR: currentPrice,
+                          });
+                        } catch {}
                         setIsQuickBuyOpen(true);
                       }
                     }}
@@ -1550,14 +1553,16 @@ export default function ProductDetailPage() {
           <button
             onClick={() => {
               if (isSelectionInStock) {
-                trackCheckoutStart({
-                  phoneId: phone.id,
-                  name: phone.name,
-                  brand: phone.brand,
-                  slug: phone.slug,
-                  image: selectedColor?.image || phone.colors[0]?.image,
-                  pricePKR: currentPrice,
-                });
+                try {
+                  trackCheckoutStart({
+                    phoneId: phone.id,
+                    name: phone.name,
+                    brand: phone.brand,
+                    slug: phone.slug,
+                    image: selectedColor?.image || phone.colors[0]?.image,
+                    pricePKR: currentPrice,
+                  });
+                } catch {}
                 setIsQuickBuyOpen(true);
               }
             }}
