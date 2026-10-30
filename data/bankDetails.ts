@@ -12,10 +12,10 @@ export interface BankAccountInfo {
 export const STORE_BANK_DETAILS = {
   accountTitle: 'Nawira Traders',
   raastId: '03018543131',
-  raastTitle: 'Nawira Traders / Hamza Latif',
+  raastTitle: 'Nawira Traders',
   primaryBank: {
     bankName: 'Meezan Bank Ltd',
-    branch: 'Abbottabad / Main Branch',
+    branch: 'Main Commercial Branch',
     accountTitle: 'Nawira Traders',
     accountNumber: '0201-0108920192',
     cleanAccountNumber: '02010108920192',

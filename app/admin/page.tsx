@@ -1368,10 +1368,10 @@ export default function AdminPortalPage() {
           <div className="flex items-center justify-between px-2 py-1.5 rounded-xl bg-[#1c1d1f]">
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-full bg-[#008060] text-white flex items-center justify-center text-[10px] font-bold">
-                HL
+                NT
               </div>
               <div className="text-left">
-                <div className="text-[11px] font-bold text-white">Hamza Latif</div>
+                <div className="text-[11px] font-bold text-white">Nawira Traders</div>
                 <div className="text-[9px] text-slate-400">Store Owner</div>
               </div>
             </div>
@@ -4785,7 +4785,7 @@ export default function AdminPortalPage() {
                         </button>
                         <a
                           href={`https://wa.me/${customer.cleanWhatsAppPhone}?text=${encodeURIComponent(
-                            `Assalam o Alaikum ${customer.name}! This is Hamza from Nawira Traders. Thank you for your orders with us! How is your smartphone performing? Let us know if you need any warranty claim or accessory upgrade.`
+                            `Assalam o Alaikum ${customer.name}! This is Nawira Traders Customer Support. Thank you for your orders with us! How is your smartphone performing? Let us know if you need any warranty claim or accessory upgrade.`
                           )}`}
                           target="_blank"
                           rel="noreferrer"
@@ -5336,7 +5336,7 @@ export default function AdminPortalPage() {
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
               <a
                 href={`https://wa.me/${viewingCustomerHistory.cleanWhatsAppPhone}?text=${encodeURIComponent(
-                  `Assalam o Alaikum ${viewingCustomerHistory.name}! This is Hamza from Nawira Traders.`
+                  `Assalam o Alaikum ${viewingCustomerHistory.name}! This is Nawira Traders Customer Support.`
                 )}`}
                 target="_blank"
                 rel="noreferrer"
