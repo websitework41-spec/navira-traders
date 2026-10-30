@@ -86,6 +86,25 @@ export function Navbar({
   const mobileSearchRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [notification, setNotification] = useState<{
+    title: string;
+    message: string;
+    type?: 'success' | 'info';
+  } | null>(null);
+
+  useEffect(() => {
+    const handleToast = (e: any) => {
+      if (e?.detail) {
+        setNotification(e.detail);
+        const timer = setTimeout(() => {
+          setNotification(null);
+        }, 5000);
+        return () => clearTimeout(timer);
+      }
+    };
+    window.addEventListener('nawira_notification', handleToast);
+    return () => window.removeEventListener('nawira_notification', handleToast);
+  }, []);
 
   const { user, profile, loading: authLoading, openAuthModal, logout } = useAuth();
 
@@ -268,7 +287,7 @@ export function Navbar({
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full transition-all shadow-md overflow-hidden">
+      <header className="sticky top-0 z-40 w-full transition-all shadow-md">
         {/* 1. PriceOye Signature Deep Blue Top Utility Bar */}
         <div className="bg-[#0b3c68] text-white text-[10px] sm:text-xs py-1.5 sm:py-2 px-2.5 sm:px-4 font-semibold border-b border-[#082e50] overflow-hidden">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-1.5 sm:gap-4">
@@ -322,7 +341,7 @@ export function Navbar({
         </div>
 
         {/* 2. PriceOye Signature Electric Sky Blue Navigation Bar */}
-        <div className="bg-[#48afff] text-white overflow-hidden">
+        <div className="bg-[#48afff] text-white relative z-20">
           <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-14 sm:h-20 gap-1.5 sm:gap-4">
               {/* Nawira Traders Brand Logo */}
@@ -545,54 +564,70 @@ export function Navbar({
                     </button>
 
                     {isUserMenuOpen && (
-                      <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150 text-slate-900">
-                        <div className="px-4 py-2 border-b border-slate-100">
-                          <p className="text-xs font-bold text-slate-900 truncate">
-                            {profile?.name || user.displayName || 'Customer'}
-                          </p>
-                          <p className="text-[11px] text-slate-500 truncate">
-                            {profile?.phone || (user.email ? user.email.replace(/@(naviratraders\.pk|hamzaphonestore\.pk|voltphone\.pk)/, '') : '')}
-                          </p>
+                      <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200/90 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 text-slate-900">
+                        {/* Profile Header Card */}
+                        <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 mb-1.5">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-9 h-9 rounded-full bg-[#0b3c68] text-white flex items-center justify-center text-xs font-black uppercase shrink-0 shadow-sm">
+                              {(profile?.name?.charAt(0) || user.displayName?.charAt(0) || 'U')}
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-xs font-black text-slate-900 truncate">
+                                {profile?.name || user.displayName || 'Customer'}
+                              </p>
+                              <p className="text-[11px] font-mono font-semibold text-slate-500 truncate">
+                                {profile?.phone || (user.email ? user.email.replace(/@(naviratraders\.pk|hamzaphonestore\.pk|voltphone\.pk|nawiratraders\.com)/, '') : '')}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="mt-2 pt-2 border-t border-slate-200/60 flex items-center justify-between text-[10px]">
+                            <span className="font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+                              <CheckCircle2 className="w-3 h-3 text-emerald-600" /> PTA Verified User
+                            </span>
+                            <span className="text-slate-400 font-semibold">Active</span>
+                          </div>
                         </div>
 
-                        <div className="py-1">
+                        {/* Navigation Links */}
+                        <div className="space-y-0.5">
                           <Link
                             href="/account"
                             onClick={() => setIsUserMenuOpen(false)}
-                            className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#0b3c68] transition-colors"
+                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-[#0b3c68] transition-colors"
                           >
                             <User className="w-4 h-4 text-[#48afff]" />
-                            <span>My Account</span>
+                            <span>My Account &amp; Addresses</span>
                           </Link>
                           <Link
                             href="/account/orders"
                             onClick={() => setIsUserMenuOpen(false)}
-                            className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#0b3c68] transition-colors"
+                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-[#0b3c68] transition-colors"
                           >
                             <ShoppingBag className="w-4 h-4 text-[#48afff]" />
-                            <span>My Orders</span>
+                            <span>My Orders &amp; Tracking</span>
                           </Link>
                           <Link
                             href="/admin"
                             onClick={() => setIsUserMenuOpen(false)}
-                            className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-[#0b3c68] bg-sky-50/60 hover:bg-sky-100 transition-colors"
+                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-[#0b3c68] bg-sky-50/70 hover:bg-sky-100 transition-colors"
                           >
                             <ShieldCheck className="w-4 h-4 text-[#48afff]" />
                             <span>Store Admin &amp; Stock</span>
                           </Link>
                         </div>
 
-                        <div className="border-t border-slate-100 pt-1">
+                        {/* Logout Button */}
+                        <div className="border-t border-slate-100 mt-1.5 pt-1">
                           <button
                             type="button"
                             onClick={async () => {
                               setIsUserMenuOpen(false);
                               await logout();
                             }}
-                            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left"
+                            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left"
                           >
                             <LogOut className="w-4 h-4" />
-                            <span>Logout</span>
+                            <span>Sign Out</span>
                           </button>
                         </div>
                       </div>
@@ -807,6 +842,30 @@ export function Navbar({
           </div>
         </div>
       </header>
+
+      {/* Floating Notification Toast */}
+      {notification && (
+        <aside
+          role="status"
+          aria-live="polite"
+          className="fixed top-20 right-4 sm:right-6 z-[60] max-w-sm w-[calc(100%-2rem)] bg-white rounded-2xl shadow-2xl border-2 border-emerald-400/80 p-4 flex items-start gap-3 animate-in slide-in-from-top-4 duration-300"
+        >
+          <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 shadow-xs">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h4 className="text-xs font-black text-slate-900 tracking-tight">{notification.title}</h4>
+            <p className="text-xs text-slate-600 mt-0.5 leading-snug">{notification.message}</p>
+          </div>
+          <button
+            onClick={() => setNotification(null)}
+            className="text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 cursor-pointer transition-colors"
+            aria-label="Dismiss notification"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </aside>
+      )}
 
       {/* Track Order Modal */}
       {isTrackOrderOpen && (

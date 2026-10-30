@@ -39,6 +39,8 @@ export function AuthModal() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [isSuccessView, setIsSuccessView] = useState(false);
+  const [createdUserName, setCreatedUserName] = useState('');
 
   // Handle phone input strictly limited to 11 digits (digits-only)
   const handlePhoneChange = (val: string) => {
@@ -55,6 +57,7 @@ export function AuthModal() {
     setSuccessMessage('');
     setPassword('');
     setConfirmPassword('');
+    setIsSuccessView(false);
   }, [authModalMode, isAuthModalOpen]);
 
   if (!isAuthModalOpen) return null;
@@ -80,6 +83,17 @@ export function AuthModal() {
       const res = await login(phoneCheck.cleanPhone, password);
       if (res.success) {
         setSuccessMessage('Signed in successfully! Welcome back.');
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(
+            new CustomEvent('nawira_notification', {
+              detail: {
+                title: 'Signed In Successfully! 👋',
+                message: 'Welcome back to your Nawira Traders account.',
+                type: 'success',
+              },
+            })
+          );
+        }
         setTimeout(() => {
           closeAuthModal();
         }, 600);
@@ -123,10 +137,19 @@ export function AuthModal() {
     try {
       const res = await signup(name.trim(), phoneCheck.cleanPhone, password);
       if (res.success) {
-        setSuccessMessage('Account created successfully! Welcome to Nawira Traders.');
-        setTimeout(() => {
-          closeAuthModal();
-        }, 800);
+        setCreatedUserName(name.trim());
+        setIsSuccessView(true);
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(
+            new CustomEvent('nawira_notification', {
+              detail: {
+                title: 'Account Created Successfully! 🎉',
+                message: `Welcome to Nawira Traders, ${name.trim()}! You are now logged in.`,
+                type: 'success',
+              },
+            })
+          );
+        }
       } else {
         setErrorMessage(res.error || 'Failed to create account.');
       }
@@ -155,22 +178,68 @@ export function AuthModal() {
           </div>
 
           <h2 className="text-xl sm:text-2xl font-black tracking-tight">
-            {authModalMode === 'login' && 'Welcome Back'}
-            {authModalMode === 'signup' && 'Create Nawira Traders Account'}
-            {authModalMode === 'forgot' && 'Account Recovery'}
+            {isSuccessView
+              ? 'Registration Complete'
+              : authModalMode === 'login'
+              ? 'Welcome Back'
+              : authModalMode === 'signup'
+              ? 'Create Nawira Traders Account'
+              : 'Account Recovery'}
           </h2>
           <p className="text-xs text-slate-400 mt-1 max-w-xs mx-auto">
-            {authModalMode === 'login' &&
-              'Sign in with your Pakistani mobile number to track orders and fast checkout.'}
-            {authModalMode === 'signup' &&
-              'Register in seconds with Open-Parcel delivery and saved shipping addresses.'}
-            {authModalMode === 'forgot' &&
-              'Instant account verification and password assistance.'}
+            {isSuccessView
+              ? 'Your account is verified and ready for instant checkout.'
+              : authModalMode === 'login'
+              ? 'Sign in with your Pakistani mobile number to track orders and fast checkout.'
+              : authModalMode === 'signup'
+              ? 'Register in seconds with Open-Parcel delivery and saved shipping addresses.'
+              : 'Instant account verification and password assistance.'}
           </p>
         </div>
 
         {/* Form Body */}
         <div className="p-6">
+          {isSuccessView ? (
+            <div className="py-3 text-center space-y-4 animate-in zoom-in-95 duration-200">
+              <div className="w-16 h-16 mx-auto rounded-full bg-emerald-50 border-2 border-emerald-500/30 text-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/15">
+                <CheckCircle2 className="w-9 h-9 text-emerald-600" />
+              </div>
+
+              <div className="space-y-1">
+                <h3 className="text-lg font-black text-slate-900">
+                  Account Created Successfully! 🎉
+                </h3>
+                <p className="text-xs text-slate-600 max-w-xs mx-auto">
+                  Welcome to Nawira Traders, <strong className="text-slate-900">{createdUserName}</strong>! You are now logged in with <span className="font-mono font-bold text-[#136ab5]">{phone}</span>.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 text-left space-y-2 text-xs text-slate-700">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>100% PTA Approved Handsets with 1-Year Warranty</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Open-Parcel Delivery (Check Karo, Pay Karo)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Fast 1-Click Checkout with Saved Addresses</span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={closeAuthModal}
+                className="w-full py-3.5 px-6 rounded-2xl bg-[#0b3c68] hover:bg-[#072847] active:scale-98 text-white font-bold text-xs tracking-wide transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Start Shopping Now</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <>
           {/* Error Banner */}
           {errorMessage && (
             <div className="mb-4 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-start gap-2.5 animate-in slide-in-from-top-1">
@@ -467,6 +536,8 @@ export function AuthModal() {
                 Back to Sign In
               </button>
             </div>
+          )}
+            </>
           )}
         </div>
       </div>
