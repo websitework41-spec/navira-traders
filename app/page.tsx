@@ -429,9 +429,16 @@ function HomeContent() {
 
   const handleSelectBrand = useCallback((brand: string) => {
     if (brand === 'All Brands') {
-      setFilters((prev) => ({ ...prev, selectedBrands: [] }));
+      setFilters((prev) => ({ ...prev, selectedBrands: [], searchQuery: '' }));
     } else {
-      setFilters((prev) => ({ ...prev, selectedBrands: [brand] }));
+      setFilters((prev) => {
+        const isCurrent = prev.selectedBrands.length === 1 && prev.selectedBrands[0] === brand;
+        return {
+          ...prev,
+          selectedBrands: isCurrent ? [] : [brand],
+          searchQuery: '',
+        };
+      });
     }
     const catalogEl = document.getElementById('catalog');
     if (catalogEl) {
