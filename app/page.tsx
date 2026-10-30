@@ -40,6 +40,7 @@ import {
   CatalogBannerOpenParcel,
 } from '@/components/PromotionalBanners';
 import {
+  SlidersHorizontal,
   ShieldCheck,
   PackageCheck,
   Award,
@@ -782,14 +783,19 @@ function HomeContent() {
               </p>
             </div>
 
-            {/* Controls: Mobile Filters Trigger & Sort By */}
-            <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+            {/* Controls: All Filters Drawer Trigger & Sort By */}
+            <div className="flex items-center gap-2.5 w-full sm:w-auto justify-between sm:justify-end">
               <button
-                onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
-                className="lg:hidden flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-bold bg-[#136ab5] text-white cursor-pointer shadow-sm"
+                onClick={() => setIsMobileFiltersOpen(true)}
+                className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-white border border-slate-200 hover:border-[#48afff] hover:bg-sky-50/50 text-slate-800 cursor-pointer shadow-xs transition-all btn-press"
               >
-                <Filter className="w-3.5 h-3.5 text-sky-200" />
-                <span>Filters ({filters.selectedBrands.length + (filters.ptaApprovedOnly ? 1 : 0)})</span>
+                <SlidersHorizontal className="w-3.5 h-3.5 text-[#136ab5]" />
+                <span>All Filters</span>
+                {(filters.selectedBrands.length > 0 || filters.selectedRam.length > 0 || filters.selectedStorage.length > 0 || filters.ptaApprovedOnly || filters.inStockOnly || filters.priceRange[0] > 0 || filters.priceRange[1] < 700000) && (
+                  <span className="w-5 h-5 rounded-full bg-[#136ab5] text-white text-[10px] font-black flex items-center justify-center ml-0.5">
+                    {filters.selectedBrands.length + (filters.ptaApprovedOnly ? 1 : 0) + (filters.inStockOnly ? 1 : 0) + filters.selectedRam.length + filters.selectedStorage.length + (filters.priceRange[0] > 0 || filters.priceRange[1] < 700000 ? 1 : 0)}
+                  </span>
+                )}
               </button>
 
               <div className="flex items-center gap-2">
@@ -814,6 +820,93 @@ function HomeContent() {
                 </select>
               </div>
             </div>
+          </div>
+
+
+          {/* Quick Filter One-Tap Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto py-3 scrollbar-none border-b border-slate-200/70">
+            <button
+              onClick={handleResetAllFilters}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer ${
+                !hasActiveFilters
+                  ? 'bg-[#0b3c68] text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              All Mobiles
+            </button>
+            <button
+              onClick={() => setFilters((p) => ({ ...p, inStockOnly: !p.inStockOnly }))}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 ${
+                filters.inStockOnly
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${filters.inStockOnly ? 'bg-white' : 'bg-emerald-500'}`} />
+              <span>In Stock Only</span>
+            </button>
+            <button
+              onClick={() => setFilters((p) => ({ ...p, ptaApprovedOnly: !p.ptaApprovedOnly }))}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 ${
+                filters.ptaApprovedOnly
+                  ? 'bg-sky-600 text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>100% PTA Approved</span>
+            </button>
+            <button
+              onClick={() => setFilters((p) => ({ ...p, priceRange: p.priceRange[1] === 25000 ? [0, 700000] : [0, 25000] }))}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer ${
+                filters.priceRange[1] === 25000 && filters.priceRange[0] === 0
+                  ? 'bg-[#136ab5] text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              Under 25K
+            </button>
+            <button
+              onClick={() => setFilters((p) => ({ ...p, priceRange: p.priceRange[0] === 25000 && p.priceRange[1] === 50000 ? [0, 700000] : [25000, 50000] }))}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer ${
+                filters.priceRange[0] === 25000 && filters.priceRange[1] === 50000
+                  ? 'bg-[#136ab5] text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              25K – 50K
+            </button>
+            <button
+              onClick={() => setFilters((p) => ({ ...p, priceRange: p.priceRange[0] === 50000 && p.priceRange[1] === 100000 ? [0, 700000] : [50000, 100000] }))}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer ${
+                filters.priceRange[0] === 50000 && filters.priceRange[1] === 100000
+                  ? 'bg-[#136ab5] text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              50K – 100K
+            </button>
+            <button
+              onClick={() => setFilters((p) => ({ ...p, priceRange: p.priceRange[0] === 200000 ? [0, 700000] : [200000, 700000] }))}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer ${
+                filters.priceRange[0] === 200000
+                  ? 'bg-purple-700 text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              200K+ Flagships
+            </button>
+            <button
+              onClick={handleFilterKeypad}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer ${
+                filters.selectedBrands.includes('Nokia') && filters.selectedBrands.includes('Itel')
+                  ? 'bg-amber-600 text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              Keypad Button Phones
+            </button>
           </div>
 
           {/* Active Filter Chips Bar */}
@@ -906,23 +999,11 @@ function HomeContent() {
             </div>
           )}
 
-          {/* Catalog Layout: Sidebar + Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mt-6">
-            {/* Filter Sidebar Desktop */}
-            <div className="lg:col-span-3 hidden lg:block">
-              <FilterSidebar
-                filters={filters}
-                setFilters={setFilters}
-                totalCount={catalog.length}
-                filteredCount={filteredPhones.length}
-              />
-            </div>
-
-            {/* Products Grid */}
-            <div className="lg:col-span-9">
-              {filteredPhones.length > 0 ? (
-                <>
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5">
+          {/* Full-Width Catalog Products Grid (No Left Void) */}
+          <div className="w-full mt-6">
+            {filteredPhones.length > 0 ? (
+              <>
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
                     {displayedPhones.map((phone, index) => (
                       <React.Fragment key={phone.id}>
                         {/* Section Divider when list transitions to out-of-stock items */}
@@ -1044,7 +1125,6 @@ function HomeContent() {
                   </button>
                 </div>
               )}
-            </div>
           </div>
         </section>
 
@@ -1211,8 +1291,8 @@ function HomeContent() {
 
       {/* Mobile Filter Slide-over Drawer */}
       {isMobileFiltersOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex justify-end animate-in fade-in duration-200">
-          <div className="w-full max-w-sm bg-white h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-200">
+        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex justify-end animate-in fade-in duration-200">
+          <div className="w-full max-w-md bg-white h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-200">
             {/* Header */}
             <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/70 shrink-0">
               <div className="flex items-center gap-2">
