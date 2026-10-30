@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { SMARTPHONES, formatPKR, BRANDS } from '@/data/smartphones';
@@ -24,6 +24,7 @@ import {
   Sparkles,
   Zap,
   CreditCard,
+  ChevronLeft,
   ChevronRight,
   Clock,
   ExternalLink,
@@ -111,6 +112,48 @@ export function Navbar({
     });
     return counts;
   }, [activeCatalog]);
+
+  const brandScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollIndicators = useCallback(() => {
+    if (!brandScrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = brandScrollRef.current;
+    setCanScrollLeft(scrollLeft > 6);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 6);
+  }, []);
+
+  useEffect(() => {
+    updateScrollIndicators();
+    window.addEventListener('resize', updateScrollIndicators);
+    return () => window.removeEventListener('resize', updateScrollIndicators);
+  }, [updateScrollIndicators, activeCatalog]);
+
+  useEffect(() => {
+    if (!brandScrollRef.current) return;
+    const activeBtn = brandScrollRef.current.querySelector<HTMLElement>('[data-active="true"]');
+    if (activeBtn) {
+      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+    const timer = setTimeout(updateScrollIndicators, 350);
+    return () => clearTimeout(timer);
+  }, [activeBrand, updateScrollIndicators]);
+
+  const handleScrollBrands = (direction: 'left' | 'right') => {
+    if (!brandScrollRef.current) return;
+    const distance = direction === 'left' ? -280 : 280;
+    brandScrollRef.current.scrollBy({ left: distance, behavior: 'smooth' });
+    setTimeout(updateScrollIndicators, 300);
+  };
+
+  const handleBrandBarWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (!brandScrollRef.current) return;
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      brandScrollRef.current.scrollLeft += e.deltaY;
+      updateScrollIndicators();
+    }
+  };
 
   // Search filtering on active catalog using smart multi-token engine
   const searchResults = useMemo(() => {
@@ -691,18 +734,39 @@ export function Navbar({
           </div>
         </div>
 
-        {/* 3. PriceOye Clean White Brand & Quick-Category Navigation Bar */}
-        <div className="bg-white border-b border-slate-200/90 shadow-xs overflow-hidden w-full max-w-full">
-          <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-2 py-2 sm:py-2.5 overflow-x-auto scrollbar-none">
+        {/* 3. PriceOye Clean White Brand & Quick-Category Navigation Bar with Smooth Scroll Controls */}
+        <div className="bg-white border-b border-slate-200/90 shadow-xs relative w-full max-w-full group/brandbar">
+          <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 relative">
+            {/* Left Scroll Arrow with Fade Mask */}
+            {canScrollLeft && (
+              <div className="absolute left-0 top-0 bottom-0 z-20 flex items-center pl-1 sm:pl-3 bg-gradient-to-r from-white via-white/95 to-transparent pr-8 pointer-events-none">
+                <button
+                  type="button"
+                  onClick={() => handleScrollBrands('left')}
+                  aria-label="Scroll left to see previous brands"
+                  className="pointer-events-auto w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-950 border border-slate-200/90 shadow-md flex items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95"
+                >
+                  <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
+                </button>
+              </div>
+            )}
+
+            {/* Scrollable Brands Pill Container */}
+            <div
+              ref={brandScrollRef}
+              onScroll={updateScrollIndicators}
+              onWheel={handleBrandBarWheel}
+              className="flex items-center gap-2 py-2 sm:py-2.5 overflow-x-auto scrollbar-none scroll-smooth px-1 sm:px-2"
+            >
               {BRANDS.map((brand) => {
                 const isActive = activeBrand === brand;
                 const count = brandCounts[brand] || 0;
                 return (
                   <button
                     key={brand}
+                    data-active={isActive ? 'true' : 'false'}
                     onClick={() => handleBrandClick(brand)}
-                    className={`btn-press px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
+                    className={`btn-press px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 shrink-0 ${
                       isActive
                         ? 'bg-[#0b3c68] text-white shadow-sm ring-2 ring-[#0b3c68]/30 scale-102'
                         : 'bg-[#f1f3f6] hover:bg-[#e4e7eb] text-slate-800 hover:text-slate-950 border border-slate-200/80'
@@ -721,7 +785,23 @@ export function Navbar({
                   </button>
                 );
               })}
+              {/* Extra spacing block at the end so last brand is never flush or cut off */}
+              <div className="w-6 shrink-0" aria-hidden="true" />
             </div>
+
+            {/* Right Scroll Arrow with Fade Mask */}
+            {canScrollRight && (
+              <div className="absolute right-0 top-0 bottom-0 z-20 flex items-center pr-1 sm:pr-3 bg-gradient-to-l from-white via-white/95 to-transparent pl-8 pointer-events-none">
+                <button
+                  type="button"
+                  onClick={() => handleScrollBrands('right')}
+                  aria-label="Scroll right to see more brands"
+                  className="pointer-events-auto w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-950 border border-slate-200/90 shadow-md flex items-center justify-center cursor-pointer transition-all hover:scale-105 active:scale-95"
+                >
+                  <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </header>
