@@ -76,13 +76,20 @@ export function AuthModal() {
     }
 
     setIsLoading(true);
-    const res = await login(phoneCheck.cleanPhone, password);
-    setIsLoading(false);
-
-    if (res.success) {
-      closeAuthModal();
-    } else {
-      setErrorMessage(res.error || 'Login failed.');
+    try {
+      const res = await login(phoneCheck.cleanPhone, password);
+      if (res.success) {
+        setSuccessMessage('Signed in successfully! Welcome back.');
+        setTimeout(() => {
+          closeAuthModal();
+        }, 600);
+      } else {
+        setErrorMessage(res.error || 'Login failed.');
+      }
+    } catch (err: any) {
+      setErrorMessage(err?.message || 'Login failed. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -113,16 +120,20 @@ export function AuthModal() {
     }
 
     setIsLoading(true);
-    const res = await signup(name.trim(), phoneCheck.cleanPhone, password);
-    setIsLoading(false);
-
-    if (res.success) {
-      setSuccessMessage('Account created successfully! Welcome to Nawira Traders.');
-      setTimeout(() => {
-        closeAuthModal();
-      }, 1000);
-    } else {
-      setErrorMessage(res.error || 'Failed to create account.');
+    try {
+      const res = await signup(name.trim(), phoneCheck.cleanPhone, password);
+      if (res.success) {
+        setSuccessMessage('Account created successfully! Welcome to Nawira Traders.');
+        setTimeout(() => {
+          closeAuthModal();
+        }, 800);
+      } else {
+        setErrorMessage(res.error || 'Failed to create account.');
+      }
+    } catch (err: any) {
+      setErrorMessage(err?.message || 'Failed to create account. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 

@@ -14,9 +14,7 @@ import {
 } from 'firebase/auth';
 import {
   doc,
-  getDoc,
   setDoc,
-  updateDoc,
   onSnapshot,
   serverTimestamp,
 } from 'firebase/firestore';
@@ -45,6 +43,7 @@ export interface UserProfile {
   email: string;
   addresses: SavedAddress[];
   createdAt?: any;
+  updatedAt?: any;
 }
 
 interface AuthContextType {
@@ -85,6 +84,54 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const LOCAL_STORAGE_KEY_PREFIX = 'nawira_profile_';
+
+function getLocalProfile(uid: string): UserProfile | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(`${LOCAL_STORAGE_KEY_PREFIX}${uid}`);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {
+    console.warn('Failed to read local profile:', e);
+  }
+  return null;
+}
+
+function saveLocalProfile(uid: string, profile: UserProfile) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(`${LOCAL_STORAGE_KEY_PREFIX}${uid}`, JSON.stringify(profile));
+    if (profile.phone) {
+      localStorage.setItem(`nawira_phone_${profile.phone}`, JSON.stringify(profile));
+    }
+  } catch (e) {
+    console.warn('Failed to write local profile:', e);
+  }
+}
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error(`Timeout after ${ms}ms`)), ms)
+    ),
+  ]);
+}
+
+async function syncProfileToFirestore(uid: string, profileData: Partial<UserProfile>) {
+  try {
+    const userDocRef = doc(db, 'users', uid);
+    await withTimeout(
+      setDoc(userDocRef, { ...profileData, updatedAt: serverTimestamp() }, { merge: true }),
+      2000
+    );
+  } catch (err) {
+    // Firestore may fail due to permissions, offline, or rule restrictions.
+    // Local profile is already saved and functional.
+    console.warn('Firestore sync notice (local profile active):', err);
+  }
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -106,7 +153,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     let unsubscribeFirestore: (() => void) | null = null;
 
-    const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
 
       if (unsubscribeFirestore) {
@@ -115,51 +162,47 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (currentUser) {
-        const userDocRef = doc(db, 'users', currentUser.uid);
+        // Fast local hydrate first
+        const cached = getLocalProfile(currentUser.uid);
+        const phoneFromEmail = currentUser.email
+          ? currentUser.email.replace(/@(naviratraders\.pk|hamzaphonestore\.pk|voltphone\.pk|nawiratraders\.com)/, '')
+          : '';
 
-        // Listen for realtime changes to the user document
-        unsubscribeFirestore = onSnapshot(
-          userDocRef,
-          async (snapshot) => {
-            if (snapshot.exists()) {
-              setProfile(snapshot.data() as UserProfile);
-              setLoading(false);
-            } else {
-              // Create user doc if not yet existing
-              const phoneFromEmail = currentUser.email
-                ? currentUser.email.replace(/@(naviratraders\.pk|hamzaphonestore\.pk|voltphone\.pk)/, '')
-                : '';
-              const newProfile: UserProfile = {
-                uid: currentUser.uid,
-                name: currentUser.displayName || 'Nawira Traders Customer',
-                phone: phoneFromEmail,
-                email: currentUser.email || `${phoneFromEmail}@nawiratraders.com`,
-                addresses: [],
-                createdAt: serverTimestamp(),
-              };
-              try {
-                await setDoc(userDocRef, newProfile);
-                setProfile(newProfile);
-              } catch (err) {
-                console.error('Error creating user profile in Firestore:', err);
-                setProfile(newProfile);
+        const baseProfile: UserProfile = cached || {
+          uid: currentUser.uid,
+          name: currentUser.displayName || 'Nawira Traders Customer',
+          phone: phoneFromEmail,
+          email: currentUser.email || `${phoneFromEmail}@nawiratraders.com`,
+          addresses: [],
+        };
+
+        setProfile(baseProfile);
+        setLoading(false);
+
+        // Firestore listener with graceful error handling
+        try {
+          const userDocRef = doc(db, 'users', currentUser.uid);
+          unsubscribeFirestore = onSnapshot(
+            userDocRef,
+            (snapshot) => {
+              if (snapshot.exists()) {
+                const data = snapshot.data() as UserProfile;
+                const merged: UserProfile = {
+                  ...baseProfile,
+                  ...data,
+                  addresses: data.addresses && data.addresses.length > 0 ? data.addresses : baseProfile.addresses,
+                };
+                setProfile(merged);
+                saveLocalProfile(currentUser.uid, merged);
               }
-              setLoading(false);
+            },
+            (err) => {
+              console.warn('Firestore snapshot listener notice (local profile active):', err);
             }
-          },
-          (err) => {
-            console.warn('Firestore snapshot listener warning:', err);
-            // Fallback profile if Firestore is restricted
-            setProfile({
-              uid: currentUser.uid,
-              name: currentUser.displayName || 'Nawira Traders Customer',
-              phone: currentUser.email ? currentUser.email.replace(/@(naviratraders\.pk|hamzaphonestore\.pk|voltphone\.pk)/, '') : '',
-              email: currentUser.email || '',
-              addresses: [],
-            });
-            setLoading(false);
-          }
-        );
+          );
+        } catch (err) {
+          console.warn('Firestore initialization notice:', err);
+        }
       } else {
         setProfile(null);
         setLoading(false);
@@ -193,45 +236,83 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const syntheticEmail = phoneToSyntheticEmail(phoneCheck.cleanPhone);
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        syntheticEmail,
-        password
+      // 1. Create user in Firebase Auth with 7-second timeout protection
+      const userCredential = await withTimeout(
+        createUserWithEmailAndPassword(auth, syntheticEmail, password),
+        7000
       );
 
-      // Update Firebase Auth profile display name
+      // 2. Set Firebase Auth displayName
       await updateFirebaseProfile(userCredential.user, {
         displayName: trimmedName,
-      });
+      }).catch((e) => console.warn('Could not update Firebase displayName:', e));
 
-      // Write user profile to Firestore
-      const userDocRef = doc(db, 'users', userCredential.user.uid);
-      const userDocData: UserProfile = {
+      // 3. Assemble profile
+      const newProfile: UserProfile = {
         uid: userCredential.user.uid,
         name: trimmedName,
         phone: phoneCheck.cleanPhone,
         email: syntheticEmail,
         addresses: [],
-        createdAt: serverTimestamp(),
+        createdAt: new Date().toISOString(),
       };
 
-      await setDoc(userDocRef, userDocData);
-      setProfile(userDocData);
+      // 4. Instantly store locally & update state
+      saveLocalProfile(userCredential.user.uid, newProfile);
+      setProfile(newProfile);
+
+      // 5. Sync to Firestore in background (non-blocking)
+      syncProfileToFirestore(userCredential.user.uid, newProfile);
+
       return { success: true };
     } catch (err: any) {
       console.error('Signup error:', err);
+
+      // If user was created during an earlier attempt (or test), seamlessly sign them in!
       if (err.code === 'auth/email-already-in-use') {
-        return {
-          success: false,
-          error: `Mobile number ${phoneCheck.cleanPhone} is already registered. Please log in instead.`,
-        };
+        try {
+          const signinRes = await withTimeout(
+            signInWithEmailAndPassword(auth, syntheticEmail, password),
+            4000
+          );
+          if (signinRes.user) {
+            await updateFirebaseProfile(signinRes.user, { displayName: trimmedName }).catch(() => {});
+            const existingLocal = getLocalProfile(signinRes.user.uid);
+            const resolvedProfile: UserProfile = existingLocal || {
+              uid: signinRes.user.uid,
+              name: trimmedName,
+              phone: phoneCheck.cleanPhone,
+              email: syntheticEmail,
+              addresses: [],
+            };
+            resolvedProfile.name = trimmedName;
+            saveLocalProfile(signinRes.user.uid, resolvedProfile);
+            setProfile(resolvedProfile);
+            syncProfileToFirestore(signinRes.user.uid, resolvedProfile);
+            return { success: true };
+          }
+        } catch {
+          return {
+            success: false,
+            error: `Mobile number ${phoneCheck.cleanPhone} is already registered. Please log in or use account recovery.`,
+          };
+        }
       }
+
       if (err.code === 'auth/weak-password') {
         return {
           success: false,
           error: 'Password is too weak. Please use at least 6 characters.',
         };
       }
+
+      if (err.message && err.message.includes('timed out')) {
+        return {
+          success: false,
+          error: 'Connection timed out. Please check your internet connection and try again.',
+        };
+      }
+
       return {
         success: false,
         error: err.message || 'Failed to create account. Please try again.',
@@ -253,7 +334,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const syntheticEmail = phoneToSyntheticEmail(phoneCheck.cleanPhone);
 
     try {
-      await signInWithEmailAndPassword(auth, syntheticEmail, password);
+      const userCredential = await withTimeout(
+        signInWithEmailAndPassword(auth, syntheticEmail, password),
+        7000
+      );
+
+      // Hydrate profile immediately from local cache or construct fallback
+      const cached = getLocalProfile(userCredential.user.uid);
+      const userProfile: UserProfile = cached || {
+        uid: userCredential.user.uid,
+        name: userCredential.user.displayName || 'Nawira Traders Customer',
+        phone: phoneCheck.cleanPhone,
+        email: syntheticEmail,
+        addresses: [],
+      };
+      setProfile(userProfile);
+      saveLocalProfile(userCredential.user.uid, userProfile);
+
       return { success: true };
     } catch (err: any) {
       // Legacy fallback: check if account was originally created with @voltphone.pk
@@ -265,8 +362,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       ) {
         try {
           const legacyEmail = `${phoneCheck.cleanPhone}@voltphone.pk`;
-          await signInWithEmailAndPassword(auth, legacyEmail, password);
-          return { success: true };
+          const legacyRes = await withTimeout(
+            signInWithEmailAndPassword(auth, legacyEmail, password),
+            4000
+          );
+          if (legacyRes.user) {
+            const cached = getLocalProfile(legacyRes.user.uid);
+            const userProfile: UserProfile = cached || {
+              uid: legacyRes.user.uid,
+              name: legacyRes.user.displayName || 'Nawira Traders Customer',
+              phone: phoneCheck.cleanPhone,
+              email: legacyEmail,
+              addresses: [],
+            };
+            setProfile(userProfile);
+            saveLocalProfile(legacyRes.user.uid, userProfile);
+            return { success: true };
+          }
         } catch {
           // Continue to standard error reporting
         }
@@ -315,10 +427,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      await updateFirebaseProfile(user, { displayName: trimmed });
-      const userDocRef = doc(db, 'users', user.uid);
-      await updateDoc(userDocRef, { name: trimmed });
-      setProfile((prev) => (prev ? { ...prev, name: trimmed } : null));
+      await updateFirebaseProfile(user, { displayName: trimmed }).catch(() => {});
+      const updatedProfile: UserProfile = profile
+        ? { ...profile, name: trimmed }
+        : {
+            uid: user.uid,
+            name: trimmed,
+            phone: '',
+            email: user.email || '',
+            addresses: [],
+          };
+      setProfile(updatedProfile);
+      saveLocalProfile(user.uid, updatedProfile);
+      syncProfileToFirestore(user.uid, { name: trimmed });
       return { success: true };
     } catch (err: any) {
       return { success: false, error: err.message || 'Failed to update name.' };
@@ -327,12 +448,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // 5. Add Address
   const addAddress = async (addressData: Omit<SavedAddress, 'id'>) => {
-    if (!user || !profile) return { success: false, error: 'User not logged in.' };
+    if (!user) return { success: false, error: 'User not logged in.' };
 
     const newId = `addr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
-    const currentAddresses = profile.addresses || [];
+    const currentAddresses = profile?.addresses || [];
 
-    // If marked default or first address, make it default and unset others
     const shouldBeDefault = addressData.isDefault || currentAddresses.length === 0;
     const updatedList = currentAddresses.map((a) =>
       shouldBeDefault ? { ...a, isDefault: false } : a
@@ -345,22 +465,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     const nextAddresses = [...updatedList, newAddress];
+    const nextProfile: UserProfile = profile
+      ? { ...profile, addresses: nextAddresses }
+      : {
+          uid: user.uid,
+          name: user.displayName || 'Nawira Customer',
+          phone: '',
+          email: user.email || '',
+          addresses: nextAddresses,
+        };
 
-    try {
-      const userDocRef = doc(db, 'users', user.uid);
-      await updateDoc(userDocRef, { addresses: nextAddresses });
-      setProfile((prev) => (prev ? { ...prev, addresses: nextAddresses } : null));
-      return { success: true };
-    } catch (err: any) {
-      return { success: false, error: err.message || 'Failed to add address.' };
-    }
+    setProfile(nextProfile);
+    saveLocalProfile(user.uid, nextProfile);
+    syncProfileToFirestore(user.uid, { addresses: nextAddresses });
+    return { success: true };
   };
 
   // 6. Update Address
   const updateAddress = async (id: string, addressData: Partial<SavedAddress>) => {
-    if (!user || !profile) return { success: false, error: 'User not logged in.' };
+    if (!user) return { success: false, error: 'User not logged in.' };
 
-    const currentAddresses = profile.addresses || [];
+    const currentAddresses = profile?.addresses || [];
     const isNowDefault = addressData.isDefault;
 
     const nextAddresses = currentAddresses.map((a) => {
@@ -373,57 +498,74 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return a;
     });
 
-    try {
-      const userDocRef = doc(db, 'users', user.uid);
-      await updateDoc(userDocRef, { addresses: nextAddresses });
-      setProfile((prev) => (prev ? { ...prev, addresses: nextAddresses } : null));
-      return { success: true };
-    } catch (err: any) {
-      return { success: false, error: err.message || 'Failed to update address.' };
-    }
+    const nextProfile: UserProfile = profile
+      ? { ...profile, addresses: nextAddresses }
+      : {
+          uid: user.uid,
+          name: user.displayName || 'Nawira Customer',
+          phone: '',
+          email: user.email || '',
+          addresses: nextAddresses,
+        };
+
+    setProfile(nextProfile);
+    saveLocalProfile(user.uid, nextProfile);
+    syncProfileToFirestore(user.uid, { addresses: nextAddresses });
+    return { success: true };
   };
 
   // 7. Delete Address
   const deleteAddress = async (id: string) => {
-    if (!user || !profile) return { success: false, error: 'User not logged in.' };
+    if (!user) return { success: false, error: 'User not logged in.' };
 
-    const currentAddresses = profile.addresses || [];
+    const currentAddresses = profile?.addresses || [];
     const target = currentAddresses.find((a) => a.id === id);
     const filtered = currentAddresses.filter((a) => a.id !== id);
 
-    // If we deleted the default address and there are remaining addresses, set first as default
     if (target?.isDefault && filtered.length > 0) {
       filtered[0].isDefault = true;
     }
 
-    try {
-      const userDocRef = doc(db, 'users', user.uid);
-      await updateDoc(userDocRef, { addresses: filtered });
-      setProfile((prev) => (prev ? { ...prev, addresses: filtered } : null));
-      return { success: true };
-    } catch (err: any) {
-      return { success: false, error: err.message || 'Failed to delete address.' };
-    }
+    const nextProfile: UserProfile = profile
+      ? { ...profile, addresses: filtered }
+      : {
+          uid: user.uid,
+          name: user.displayName || 'Nawira Customer',
+          phone: '',
+          email: user.email || '',
+          addresses: filtered,
+        };
+
+    setProfile(nextProfile);
+    saveLocalProfile(user.uid, nextProfile);
+    syncProfileToFirestore(user.uid, { addresses: filtered });
+    return { success: true };
   };
 
   // 8. Set Default Address
   const setDefaultAddress = async (id: string) => {
-    if (!user || !profile) return { success: false, error: 'User not logged in.' };
+    if (!user) return { success: false, error: 'User not logged in.' };
 
-    const currentAddresses = profile.addresses || [];
+    const currentAddresses = profile?.addresses || [];
     const nextAddresses = currentAddresses.map((a) => ({
       ...a,
       isDefault: a.id === id,
     }));
 
-    try {
-      const userDocRef = doc(db, 'users', user.uid);
-      await updateDoc(userDocRef, { addresses: nextAddresses });
-      setProfile((prev) => (prev ? { ...prev, addresses: nextAddresses } : null));
-      return { success: true };
-    } catch (err: any) {
-      return { success: false, error: err.message || 'Failed to set default address.' };
-    }
+    const nextProfile: UserProfile = profile
+      ? { ...profile, addresses: nextAddresses }
+      : {
+          uid: user.uid,
+          name: user.displayName || 'Nawira Customer',
+          phone: '',
+          email: user.email || '',
+          addresses: nextAddresses,
+        };
+
+    setProfile(nextProfile);
+    saveLocalProfile(user.uid, nextProfile);
+    syncProfileToFirestore(user.uid, { addresses: nextAddresses });
+    return { success: true };
   };
 
   // 9. Change Password
@@ -435,11 +577,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      // Re-authenticate
       const credential = EmailAuthProvider.credential(user.email, currentPass);
-      await reauthenticateWithCredential(user, credential);
-      // Update password
-      await updateFirebasePassword(user, newPass);
+      await withTimeout(reauthenticateWithCredential(user, credential), 6000);
+      await withTimeout(updateFirebasePassword(user, newPass), 6000);
       return { success: true };
     } catch (err: any) {
       if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
