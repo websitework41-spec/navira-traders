@@ -90,6 +90,7 @@ export function QuickPurchaseModal({
   const [couponError, setCouponError] = useState('');
   const [couponSuccess, setCouponSuccess] = useState('');
   const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
+  const [isPromoExpanded, setIsPromoExpanded] = useState(false);
 
   // Auto-prefill customer info when logged in
   useEffect(() => {
@@ -809,20 +810,8 @@ export function QuickPurchaseModal({
                 </p>
               </div>
 
-              {/* Promo Code Widget */}
-              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
-                    <Tag className="w-3.5 h-3.5 text-[#0b3c68]" />
-                    Have a Promo / Coupon Code?
-                  </span>
-                  {appliedCoupon && (
-                    <span className="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-                      Applied
-                    </span>
-                  )}
-                </div>
-
+              {/* Collapsible Promo Code Widget */}
+              <div className="bg-slate-50 p-2.5 sm:p-3 rounded-xl border border-slate-200 space-y-2">
                 {appliedCoupon ? (
                   <div className="flex items-center justify-between p-2 rounded-lg bg-emerald-50 border border-emerald-200 text-xs">
                     <div className="flex items-center gap-2">
@@ -831,7 +820,7 @@ export function QuickPurchaseModal({
                         <span className="font-extrabold text-emerald-800 tracking-wider">
                           {appliedCoupon.code}
                         </span>
-                        <span className="text-[11px] text-emerald-700 ml-1.5">
+                        <span className="text-[11px] text-emerald-700 ml-1.5 font-bold">
                           (-{formatPKR(discountAmount)})
                         </span>
                       </div>
@@ -844,14 +833,45 @@ export function QuickPurchaseModal({
                       Remove
                     </button>
                   </div>
+                ) : !isPromoExpanded ? (
+                  <button
+                    type="button"
+                    onClick={() => setIsPromoExpanded(true)}
+                    className="w-full py-0.5 text-xs font-semibold text-slate-600 hover:text-[#0b3c68] flex items-center justify-between transition-colors cursor-pointer"
+                  >
+                    <span className="flex items-center gap-1.5">
+                      <Tag className="w-3.5 h-3.5 text-[#0b3c68]" />
+                      <span>Have a promo code?</span>
+                    </span>
+                    <span className="text-[11px] font-bold text-[#136ab5] hover:underline">
+                      Apply
+                    </span>
+                  </button>
                 ) : (
-                  <div className="space-y-1.5">
+                  <div className="space-y-2 animate-in fade-in duration-150">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                        <Tag className="w-3.5 h-3.5 text-[#0b3c68]" />
+                        <span>Enter Promo Code</span>
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsPromoExpanded(false);
+                          setCouponError('');
+                        }}
+                        className="text-[10px] text-slate-400 hover:text-slate-600 cursor-pointer"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+
                     <div className="flex gap-1.5">
                       <input
                         type="text"
                         value={couponCodeInput}
                         onChange={(e) => setCouponCodeInput(e.target.value.toUpperCase())}
-                        placeholder="Enter Promo Code (e.g. WELCOME1000)"
+                        placeholder="Enter Code"
                         className="flex-1 px-3 py-1.5 text-xs font-mono font-bold uppercase rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#48afff] text-slate-900"
                       />
                       <button
@@ -861,24 +881,6 @@ export function QuickPurchaseModal({
                         className="px-3.5 py-1.5 bg-[#0b3c68] hover:bg-[#072847] disabled:bg-slate-200 text-white disabled:text-slate-400 text-xs font-black rounded-lg transition-all cursor-pointer disabled:cursor-not-allowed"
                       >
                         {isApplyingCoupon ? '...' : 'Apply'}
-                      </button>
-                    </div>
-
-                    <div className="flex items-center gap-1.5 pt-0.5">
-                      <span className="text-[10px] text-slate-400 font-medium">Try:</span>
-                      <button
-                        type="button"
-                        onClick={() => handleApplyCoupon('WELCOME1000')}
-                        className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-sky-50 text-[#0b3c68] border border-sky-100 hover:bg-sky-100 transition-colors cursor-pointer"
-                      >
-                        WELCOME1000
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleApplyCoupon('NAWIRA500')}
-                        className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-sky-50 text-[#0b3c68] border border-sky-100 hover:bg-sky-100 transition-colors cursor-pointer"
-                      >
-                        NAWIRA500
                       </button>
                     </div>
                   </div>
