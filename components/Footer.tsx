@@ -375,7 +375,7 @@ export function Footer() {
           {/* Column 5: Support & Contact */}
           <div className="space-y-3">
             <h5 className="font-extrabold text-white uppercase tracking-wider text-[11px] font-sans">
-              Helpline &amp; Hubs
+              Customer Helpline
             </h5>
               <div className="space-y-2 text-slate-300">
                 <a
@@ -404,10 +404,8 @@ export function Footer() {
                 <span>Mon - Sat: 9:00 AM - 10:00 PM</span>
               </div>
               <div className="pt-2 text-[11px] leading-relaxed">
-                <div className="font-semibold text-slate-300">Fulfillment Hubs:</div>
-                <div>• Gulberg III, Lahore</div>
-                <div>• Shahrah-e-Faisal, Karachi</div>
-                <div>• Blue Area, Islamabad</div>
+                <div className="font-semibold text-slate-300">Nationwide Shipping:</div>
+                <div className="text-slate-400">Express delivery to 150+ cities across Pakistan with Open-Parcel inspection on COD.</div>
               </div>
             </div>
           </div>

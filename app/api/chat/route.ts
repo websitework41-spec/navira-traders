@@ -171,7 +171,7 @@ Your Nawira Traders tax invoice serves as valid official proof of purchase.`;
     return `🔄 **7-Day Replacement Guarantee**:
 If your device arrives with an out-of-the-box hardware defect:
 1. Contact our WhatsApp helpline at **+92 301 8543131** within 7 days.
-2. Provide your order tracking code (e.g. HPS-XXXXXX or VPK-XXXXXX).
+2. Provide your order tracking code (e.g. NWT-XXXXXX).
 3. Handset must be in original condition with box and accessories.
 4. An immediate replacement handset will be dispatched at zero additional charge!`;
   }
@@ -189,7 +189,7 @@ We are available Mon-Sat (9:00 AM - 10:00 PM PKT):
 - **Phone Helpline**: [+92 301 8543131](tel:+923018543131)
 - **Direct WhatsApp**: [Chat on WhatsApp (+92 301 8543131)](https://wa.me/923018543131)
 - **Email**: support@nawiratraders.com
-- **Fulfillment Hubs**: Lahore (Gulberg III), Karachi (Shahrah-e-Faisal), Islamabad (Blue Area).`;
+- **Nationwide Coverage**: Express delivery across 150+ Pakistani cities with Open-Parcel inspection!`;
   }
 
   if (q.includes('track') || q.includes('order status') || q.includes('where is my order')) {
