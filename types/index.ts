@@ -149,3 +149,29 @@ export interface AnalyticsStats {
     addedToCartCount: number;
   }>;
 }
+
+
+export interface HeroBannerItem {
+  id: string;
+  badge: string;
+  badgeColor?: string;
+  title: string;
+  highlight: string;
+  subtitle: string;
+  phoneName?: string;
+  brand?: string;
+  specs?: string;
+  pricePKR?: number;
+  originalPricePKR?: number;
+  discountPercent?: number;
+  image: string;
+  link: string;
+  ctaText: string;
+  gradient?: string;
+  bannerType?: 'product' | 'graphic';
+  aspectRatio?: string;
+  isActive: boolean;
+  order: number;
+  createdAt?: string;
+  updatedAt?: string;
+}

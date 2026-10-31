@@ -11,6 +11,7 @@ import {
   saveProductLocally,
 } from '@/lib/catalog';
 import { PhoneImageWithFallback } from '@/components/PhoneImageWithFallback';
+import { BannerManager } from '@/components/admin/BannerManager';
 import {
   LayoutDashboard,
   Package,
@@ -73,7 +74,7 @@ import {
   Award,
 } from 'lucide-react';
 
-type AdminTab = 'dashboard' | 'analytics' | 'products' | 'inventory' | 'orders' | 'coupons' | 'customers' | 'settings';
+type AdminTab = 'dashboard' | 'analytics' | 'products' | 'inventory' | 'banners' | 'orders' | 'coupons' | 'customers' | 'settings';
 
 export default function AdminPortalPage() {
   const [activeTab, setActiveTab] = useState<AdminTab>('dashboard');
@@ -1251,6 +1252,26 @@ export default function AdminPortalPage() {
 
           <button
             onClick={() => {
+              setActiveTab('banners');
+              setIsMobileSidebarOpen(false);
+            }}
+            className={`w-full flex items-center justify-between px-3 py-2 rounded-xl font-medium transition-all ${
+              activeTab === 'banners'
+                ? 'bg-[#202123] text-white font-bold'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-[#1a1b1c]'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <Sparkles className="w-4 h-4 shrink-0 text-amber-400" />
+              <span>Hero Banners</span>
+            </div>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">
+              Live
+            </span>
+          </button>
+
+          <button
+            onClick={() => {
               setActiveTab('coupons');
               setIsMobileSidebarOpen(false);
             }}
@@ -1404,6 +1425,7 @@ export default function AdminPortalPage() {
               {activeTab === 'products' && 'Products'}
               {activeTab === 'inventory' && 'Inventory Matrix'}
               {activeTab === 'orders' && 'Orders'}
+              {activeTab === 'banners' && 'Hero Banners & Spotlight'}
               {activeTab === 'coupons' && 'Promo Coupons'}
               {activeTab === 'customers' && 'Customers'}
               {activeTab === 'settings' && 'Store Settings'}
@@ -4146,6 +4168,11 @@ export default function AdminPortalPage() {
                 </div>
               </div>
             </div>
+          )}
+
+          {/* TAB: HERO BANNERS & SPOTLIGHT DEALS */}
+          {activeTab === 'banners' && (
+            <BannerManager products={products} showToast={showToast} />
           )}
 
           {/* TAB: PROMO COUPONS & DISCOUNT ENGINE */}

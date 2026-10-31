@@ -21,6 +21,8 @@ import {
 } from 'lucide-react';
 import { PhoneImageWithFallback } from './PhoneImageWithFallback';
 import { formatPKR } from '@/data/smartphones';
+import { HeroBannerItem } from '@/types';
+import { DEFAULT_HERO_BANNERS } from '@/lib/banners';
 
 interface HeroBannerProps {
   onQuickFilter?: (brand: string) => void;
@@ -29,100 +31,82 @@ interface HeroBannerProps {
   onOpenEMIModal?: () => void;
 }
 
-interface SlideItem {
-  id: string;
-  badge: string;
-  badgeColor: string;
-  title: string;
-  highlight: string;
-  subtitle: string;
-  phoneName: string;
-  brand: string;
-  specs: string;
-  pricePKR: number;
-  originalPricePKR: number;
-  discountPercent: number;
-  image: string;
-  link: string;
-  ctaText: string;
-  gradient: string;
-}
-
-const HERO_SLIDES: SlideItem[] = [
-  {
-    id: 's24-ultra',
-    badge: 'Flagship Launch Offer',
-    badgeColor: 'bg-[#48afff]/25 text-sky-200 border-[#48afff]/40',
-    title: 'Samsung Galaxy S24 Ultra',
-    highlight: 'Galaxy AI is Here',
-    subtitle: 'Titanium frame, 200MP Quad-Telephoto zoom, Snapdragon 8 Gen 3, and 7 years of Android OS updates. 100% PTA Approved with Open-Parcel delivery.',
-    phoneName: 'Galaxy S24 Ultra Titanium',
-    brand: 'Samsung',
-    specs: '12GB RAM • 256GB Storage • S-Pen',
-    pricePKR: 316999,
-    originalPricePKR: 469999,
-    discountPercent: 33,
-    image: 'https://images.priceoye.pk/samsung-galaxy-s24-ultra-pakistan-priceoye-d4s6b-500x500.webp',
-    link: '/product/samsung-galaxy-s24-ultra',
-    ctaText: 'Shop S24 Ultra Deal',
-    gradient: 'from-[#0b2b4a] via-[#0f497a] to-[#136ab5]',
-  },
-  {
-    id: 'iphone-flagships',
-    badge: '100% Official PTA Approved',
-    badgeColor: 'bg-emerald-500/25 text-emerald-200 border-emerald-400/40',
-    title: 'Apple iPhone 17 Pro Series',
-    highlight: 'Zero Customs Hassle',
-    subtitle: 'Official Mercantile & Airlink warranty backed by PTA DIRBS registration. 0% EMI Installments available with major Pakistani bank credit cards.',
-    phoneName: 'Apple iPhone 17 Pro',
-    brand: 'Apple',
-    specs: 'A19 Pro Bionic • Titanium • 48MP Triple Fusion',
-    pricePKR: 434999,
-    originalPricePKR: 491100,
-    discountPercent: 11,
-    image: 'https://images.priceoye.pk/apple-iphone-17-pro-pakistan-priceoye-wflsi-500x500.webp',
-    link: '/product/apple-iphone-17-pro',
-    ctaText: 'View iPhone 17 Pro',
-    gradient: 'from-[#08182b] via-[#103254] to-[#1c5d99]',
-  },
-  {
-    id: 'redmi-15c',
-    badge: 'Pakistan’s Best Budget King',
-    badgeColor: 'bg-amber-500/25 text-amber-200 border-amber-400/40',
-    title: 'Xiaomi Redmi 15C Series',
-    highlight: 'Starting Rs. 42,999',
-    subtitle: 'Smooth 120Hz display, 50MP AI Dual Camera, massive 6000mAh battery with Fast Charging. In-stock with official 1-year warranty.',
-    phoneName: 'Xiaomi Redmi 15C',
-    brand: 'Xiaomi',
-    specs: '4GB/6GB RAM • 128GB • Helio G81-Ultra',
-    pricePKR: 42999,
-    originalPricePKR: 46999,
-    discountPercent: 9,
-    image: 'https://images.priceoye.pk/xiaomi-redmi-15c-pakistan-priceoye-92xh3-500x500.webp',
-    link: '/product/xiaomi-redmi-15c',
-    ctaText: 'Grab Redmi Deal',
-    gradient: 'from-[#0c2e4e] via-[#145388] to-[#1a6bb0]',
-  },
-];
-
 export function HeroBanner({
   onQuickFilter,
   onFilterBudget,
   onFilterKeypad,
   onOpenEMIModal,
 }: HeroBannerProps) {
+  const [slides, setSlides] = useState<HeroBannerItem[]>(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('naviratraders_banners');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed.filter((b: any) => b.isActive !== false);
+          }
+        }
+      }
+    } catch {}
+    return DEFAULT_HERO_BANNERS;
+  });
+
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+  // Sync banners from API and listen for Admin updates
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const res = await fetch(`/api/banners?_t=${Date.now()}`, { cache: 'no-store' });
+        const data = await res.json();
+        if (data.success && Array.isArray(data.banners) && data.banners.length > 0) {
+          setSlides(data.banners);
+          try {
+            localStorage.setItem('naviratraders_banners', JSON.stringify(data.banners));
+          } catch {}
+        }
+      } catch (err) {
+        // Fall back gracefully to cache / default
+      }
+    };
+
+    fetchBanners();
+
+    const handleUpdate = () => {
+      try {
+        const saved = localStorage.getItem('naviratraders_banners');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setSlides(parsed.filter((b: any) => b.isActive !== false));
+            return;
+          }
+        }
+      } catch {}
+      fetchBanners();
+    };
+
+    window.addEventListener('naviratraders_banners_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('naviratraders_banners_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, []);
 
+  const totalSlides = slides.length > 0 ? slides.length : DEFAULT_HERO_BANNERS.length;
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlideIndex((prev) => (prev + 1) % totalSlides);
+  }, [totalSlides]);
+
   const prevSlide = useCallback(() => {
-    setCurrentSlideIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-  }, []);
+    setCurrentSlideIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+  }, [totalSlides]);
 
   const minSwipeDistance = 45;
 
@@ -151,7 +135,8 @@ export function HeroBanner({
     return () => clearInterval(interval);
   }, [nextSlide, isPaused]);
 
-  const slide = HERO_SLIDES[currentSlideIndex];
+  const slide = slides[currentSlideIndex] || slides[0] || DEFAULT_HERO_BANNERS[0];
+  const isGraphic = slide.bannerType === 'graphic';
 
   return (
     <section className="relative w-full pb-6">
@@ -164,100 +149,154 @@ export function HeroBanner({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className={`lg:col-span-8 relative overflow-hidden rounded-3xl bg-gradient-to-r ${slide.gradient} text-white border border-slate-800 shadow-2xl transition-all duration-700 min-h-[380px] sm:min-h-[440px] flex flex-col justify-between group touch-pan-y`}
+          className={`lg:col-span-8 relative overflow-hidden rounded-3xl bg-gradient-to-r ${slide.gradient || 'from-[#0b2b4a] via-[#0f497a] to-[#136ab5]'} text-white border border-slate-800 shadow-2xl transition-all duration-700 min-h-[380px] sm:min-h-[440px] flex flex-col justify-between group touch-pan-y`}
         >
           {/* Subtle Ambient Backdrops */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none group-hover:scale-120 transition-transform duration-700" />
           <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Slide Content */}
-          <div className="relative z-10 p-4 sm:p-10 flex-1 grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-center">
-            {/* Left Copy & Actions */}
-            <div className="sm:col-span-7 space-y-3.5 sm:space-y-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <span
-                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider border backdrop-blur-md shadow-xs ${slide.badgeColor}`}
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  {slide.badge}
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  PTA Tax Paid
-                </span>
-              </div>
-
-              <div>
-                <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white font-sans">
-                  {slide.title}
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#48afff] to-[#99d5ff] text-xl sm:text-2xl font-bold mt-1">
-                    {slide.highlight}
-                  </span>
-                </h1>
-                <p className="text-xs sm:text-sm text-slate-200 mt-2 leading-relaxed max-w-md line-clamp-3">
-                  {slide.subtitle}
-                </p>
-              </div>
-
-              {/* Pricing Display */}
-              <div className="flex flex-wrap items-baseline gap-3 pt-1">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-sm font-bold text-sky-200">Rs</span>
-                  <span className="text-2xl sm:text-3xl font-black text-white">
-                    {slide.pricePKR.toLocaleString()}
-                  </span>
-                </div>
-                <div className="text-sm line-through text-slate-300">
-                  Rs {slide.originalPricePKR.toLocaleString()}
-                </div>
-                <div className="text-xs font-black px-2.5 py-0.5 rounded-full bg-[#f88b2a] text-white shadow-sm">
-                  {slide.discountPercent}% OFF
-                </div>
-              </div>
-
-              {/* CTAs with Tactile Hover Animations */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <Link
-                  href={slide.link}
-                  className="btn-shimmer btn-press inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#48afff] hover:bg-[#229eff] text-white text-xs sm:text-sm font-black transition-all shadow-lg shadow-[#48afff]/30 hover:shadow-[#48afff]/50 cursor-pointer"
-                >
-                  <span>{slide.ctaText}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                {onOpenEMIModal && (
-                  <button
-                    onClick={onOpenEMIModal}
-                    className="btn-press inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold border border-white/25 hover:border-white/40 transition-all cursor-pointer shadow-md backdrop-blur-sm"
-                  >
-                    <CreditCard className="w-4 h-4 text-sky-300" />
-                    <span>0% EMI Calculator</span>
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Right Visual Image with Gentle Floating Animation & Zoom */}
-            <div className="sm:col-span-5 flex items-center justify-center relative">
-              <div className="relative w-40 h-40 sm:w-60 sm:h-60 group/img my-1 sm:my-0">
-                <Link href={slide.link} className="relative block w-full h-full animate-float">
-                  <div className="w-full h-full bg-white rounded-3xl p-3 sm:p-5 shadow-2xl border border-white/30 flex items-center justify-center overflow-hidden">
-                    <PhoneImageWithFallback
-                      src={slide.image}
-                      alt={slide.phoneName}
-                      brand={slide.brand}
-                      className="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-500"
-                      priority={currentSlideIndex === 0}
-                    />
+          {/* Slide Content: Either Full 16:9 Graphic Banner OR Signature 3D Product Showcase */}
+          {isGraphic ? (
+            <Link
+              href={slide.link || '/#catalog'}
+              className="relative w-full h-full min-h-[340px] sm:min-h-[380px] flex-1 flex items-center justify-center overflow-hidden rounded-t-3xl group/graphic"
+            >
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover sm:object-contain transition-transform duration-700 group-hover/graphic:scale-105"
+              />
+              {(slide.title || slide.badge) && (
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent p-5 sm:p-10 flex flex-col justify-end">
+                  {slide.badge && (
+                    <span className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-amber-400 text-slate-950 mb-2 shadow-md">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      {slide.badge}
+                    </span>
+                  )}
+                  <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight drop-shadow-md">
+                    {slide.title}
+                  </h2>
+                  {slide.highlight && (
+                    <p className="text-sm sm:text-base text-sky-200 font-bold mt-1 drop-shadow-sm">
+                      {slide.highlight}
+                    </p>
+                  )}
+                  {slide.subtitle && (
+                    <p className="text-xs sm:text-sm text-slate-200 mt-1 max-w-xl line-clamp-2 drop-shadow-sm">
+                      {slide.subtitle}
+                    </p>
+                  )}
+                  <div className="pt-3">
+                    <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#48afff] hover:bg-[#229eff] text-white text-xs sm:text-sm font-black shadow-lg">
+                      <span>{slide.ctaText || 'Shop Deal'}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
                   </div>
-                </Link>
+                </div>
+              )}
+            </Link>
+          ) : (
+            <div className="relative z-10 p-4 sm:p-10 flex-1 grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-center">
+              {/* Left Copy & Actions */}
+              <div className="sm:col-span-7 space-y-3.5 sm:space-y-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider border backdrop-blur-md shadow-xs ${
+                      slide.badgeColor || 'bg-[#48afff]/25 text-sky-200 border-[#48afff]/40'
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    {slide.badge}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    100% PTA Approved
+                  </span>
+                </div>
+
+                <div>
+                  <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white font-sans">
+                    {slide.title}
+                    {slide.highlight && (
+                      <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#48afff] to-[#99d5ff] text-xl sm:text-2xl font-bold mt-1">
+                        {slide.highlight}
+                      </span>
+                    )}
+                  </h1>
+                  {slide.subtitle && (
+                    <p className="text-xs sm:text-sm text-slate-200 mt-2 leading-relaxed max-w-md line-clamp-3">
+                      {slide.subtitle}
+                    </p>
+                  )}
+                </div>
+
+                {/* Pricing Display */}
+                {slide.pricePKR !== undefined && slide.pricePKR > 0 && (
+                  <div className="flex flex-wrap items-baseline gap-3 pt-1">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-sm font-bold text-sky-200">Rs</span>
+                      <span className="text-2xl sm:text-3xl font-black text-white">
+                        {slide.pricePKR.toLocaleString()}
+                      </span>
+                    </div>
+                    {slide.originalPricePKR !== undefined && slide.originalPricePKR > slide.pricePKR && (
+                      <div className="text-sm line-through text-slate-300">
+                        Rs {slide.originalPricePKR.toLocaleString()}
+                      </div>
+                    )}
+                    {slide.discountPercent !== undefined && slide.discountPercent > 0 && (
+                      <div className="text-xs font-black px-2.5 py-0.5 rounded-full bg-[#f88b2a] text-white shadow-sm">
+                        {slide.discountPercent}% OFF
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* CTAs with Tactile Hover Animations */}
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <Link
+                    href={slide.link || '/#catalog'}
+                    className="btn-shimmer btn-press inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#48afff] hover:bg-[#229eff] text-white text-xs sm:text-sm font-black transition-all shadow-lg shadow-[#48afff]/30 hover:shadow-[#48afff]/50 cursor-pointer"
+                  >
+                    <span>{slide.ctaText || 'Shop Deal'}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  {onOpenEMIModal && (
+                    <button
+                      onClick={onOpenEMIModal}
+                      className="btn-press inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold border border-white/25 hover:border-white/40 transition-all cursor-pointer shadow-md backdrop-blur-sm"
+                    >
+                      <CreditCard className="w-4 h-4 text-sky-300" />
+                      <span>0% EMI Calculator</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Visual Image with Gentle Floating Animation & Zoom */}
+              <div className="sm:col-span-5 flex items-center justify-center relative">
+                <div className="relative w-40 h-40 sm:w-60 sm:h-60 group/img my-1 sm:my-0">
+                  <Link href={slide.link || '/#catalog'} className="relative block w-full h-full animate-float">
+                    <div className="w-full h-full bg-white rounded-3xl p-3 sm:p-5 shadow-2xl border border-white/30 flex items-center justify-center overflow-hidden">
+                      <PhoneImageWithFallback
+                        src={slide.image}
+                        alt={slide.phoneName || slide.title}
+                        brand={slide.brand || 'Navira'}
+                        className="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-500"
+                        priority={currentSlideIndex === 0}
+                      />
+                    </div>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Slider Pagination Controls */}
           <div className="relative z-10 px-6 sm:px-10 py-3 bg-slate-950/60 backdrop-blur-md border-t border-slate-800/80 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              {HERO_SLIDES.map((s, idx) => (
+              {slides.map((s, idx) => (
                 <button
                   key={s.id}
                   onClick={() => setCurrentSlideIndex(idx)}
