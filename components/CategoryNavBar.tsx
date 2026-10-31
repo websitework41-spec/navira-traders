@@ -174,14 +174,14 @@ export function CategoryNavBar({
       aria-label="Product Categories Navigation"
       className={`bg-white border-t-2 border-[#48afff] border-b border-slate-200/90 shadow-2xs relative w-full select-none ${className}`}
     >
-      <div className="max-w-7xl mx-auto px-1 sm:px-4 relative flex items-center">
+      <div className="max-w-7xl mx-auto px-1 sm:px-3 relative flex items-center min-h-[78px] sm:min-h-[86px]">
         {/* Left Scroll Navigation Paddle */}
         <button
           type="button"
           onClick={() => handleScroll('left')}
           disabled={!canScrollLeft}
           aria-label="Scroll categories backward"
-          className={`shrink-0 w-7 sm:w-8 h-12 sm:h-14 rounded-md flex items-center justify-center transition-all cursor-pointer z-10 mx-0.5 ${
+          className={`shrink-0 w-7 sm:w-8 h-12 sm:h-14 rounded-md flex items-center justify-center transition-all cursor-pointer z-10 mx-0.5 self-center ${
             canScrollLeft
               ? 'bg-slate-300/80 hover:bg-slate-400 text-slate-800 shadow-xs hover:scale-105 active:scale-95'
               : 'bg-slate-100 text-slate-300 opacity-40 cursor-not-allowed'
@@ -195,7 +195,7 @@ export function CategoryNavBar({
           ref={scrollContainerRef}
           onScroll={checkScroll}
           onWheel={handleWheel}
-          className="flex items-center gap-1 sm:gap-2 overflow-x-auto scrollbar-none scroll-smooth flex-1 py-1"
+          className="flex items-stretch gap-1 sm:gap-2 overflow-x-auto scrollbar-none scroll-smooth flex-1 py-1 sm:py-1.5"
         >
           {CATEGORY_NAV_ITEMS.map((cat) => {
             const isActive = activeCategory === cat.id;
@@ -206,21 +206,21 @@ export function CategoryNavBar({
                 key={cat.id}
                 type="button"
                 onClick={() => handleItemClick(cat)}
-                className={`group shrink-0 flex flex-col items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 min-w-[96px] sm:min-w-[124px] h-[66px] sm:h-[72px] transition-all cursor-pointer relative ${
+                className={`group shrink-0 flex flex-col items-center justify-center px-3.5 sm:px-4.5 pt-2 sm:pt-2.5 pb-2.5 sm:pb-3 min-w-[100px] sm:min-w-[126px] min-h-[72px] sm:min-h-[80px] transition-all cursor-pointer relative select-none rounded-t-sm ${
                   isActive
-                    ? 'bg-[#f1f3f5] text-slate-950 font-extrabold border-b-[3px] border-[#48afff]'
-                    : 'bg-transparent hover:bg-slate-50 text-slate-800 font-bold border-b-[3px] border-transparent hover:text-slate-950'
+                    ? 'bg-[#f1f3f5] text-slate-950 font-extrabold shadow-2xs'
+                    : 'bg-transparent hover:bg-slate-50 text-slate-800 font-bold hover:text-slate-950'
                 }`}
               >
                 {/* Category Graphic / Icon */}
-                <div className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center relative mb-1">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center relative mb-1.5 shrink-0">
                   <img
                     src={cat.image}
                     alt={cat.name}
-                    width={40}
-                    height={40}
+                    width={42}
+                    height={42}
                     loading="lazy"
-                    className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-200"
+                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-150"
                     onError={(e) => {
                       // Graceful fallback to Lucide icon if CDN image fails
                       (e.currentTarget as HTMLElement).style.display = 'none';
@@ -234,9 +234,17 @@ export function CategoryNavBar({
                 </div>
 
                 {/* Category Name Label */}
-                <span className="text-[11px] sm:text-xs leading-none text-center tracking-tight truncate max-w-[110px]">
+                <span className="text-[11px] sm:text-xs font-bold leading-normal text-center tracking-tight whitespace-nowrap block px-1">
                   {cat.name}
                 </span>
+
+                {/* Bottom Active Indicator Bar */}
+                {isActive && (
+                  <span
+                    className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#48afff] rounded-t-sm"
+                    aria-hidden="true"
+                  />
+                )}
               </button>
             );
           })}
@@ -248,7 +256,7 @@ export function CategoryNavBar({
           onClick={() => handleScroll('right')}
           disabled={!canScrollRight}
           aria-label="Scroll categories forward"
-          className={`shrink-0 w-7 sm:w-8 h-12 sm:h-14 rounded-md flex items-center justify-center transition-all cursor-pointer z-10 mx-0.5 ${
+          className={`shrink-0 w-7 sm:w-8 h-12 sm:h-14 rounded-md flex items-center justify-center transition-all cursor-pointer z-10 mx-0.5 self-center ${
             canScrollRight
               ? 'bg-[#5f6368] hover:bg-[#484b4f] text-white shadow-xs hover:scale-105 active:scale-95'
               : 'bg-slate-100 text-slate-300 opacity-40 cursor-not-allowed'
