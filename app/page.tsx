@@ -14,6 +14,7 @@ import { BentoTrustGrid } from '@/components/BentoTrustGrid';
 import { FlagshipSpotlight } from '@/components/FlagshipSpotlight';
 import { FilterSidebar } from '@/components/FilterSidebar';
 import { PhoneCard } from '@/components/PhoneCard';
+import { InstallmentManualModal } from '@/components/InstallmentManualModal';
 import dynamic from 'next/dynamic';
 
 // Performance Optimization: Defer loading interactive checkout/compare drawers to reduce initial main-thread JS
@@ -92,6 +93,19 @@ function HomeContent() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const [activePolicyModal, setActivePolicyModal] = useState<string | null>(null);
+  const [isInstallmentManualOpen, setIsInstallmentManualOpen] = useState(false);
+  const [installmentPhone, setInstallmentPhone] = useState<Smartphone | null>(null);
+
+  useEffect(() => {
+    const handleOpen = (e: any) => {
+      if (e?.detail?.phone) {
+        setInstallmentPhone(e.detail.phone);
+      }
+      setIsInstallmentManualOpen(true);
+    };
+    window.addEventListener('open_installment_manual', handleOpen);
+    return () => window.removeEventListener('open_installment_manual', handleOpen);
+  }, []);
 
   // Quick Purchase Form Modal state
   const [quickBuyPhone, setQuickBuyPhone] = useState<Smartphone | null>(null);
@@ -617,7 +631,7 @@ function HomeContent() {
           onQuickFilter={handleSelectBrand}
           onFilterBudget={handleFilterBudget}
           onFilterKeypad={handleFilterKeypad}
-          onOpenEMIModal={() => setActivePolicyModal('installments')}
+          onOpenEMIModal={() => setIsInstallmentManualOpen(true)}
         />
         {/* Interactive Infinite Brand Marquee */}
         <BrandMarquee
@@ -692,7 +706,7 @@ function HomeContent() {
         </section>
 
         {/* Cinematic Flagship Deal of the Day Spotlight */}
-        <FlagshipSpotlight onOpenEMIModal={() => setActivePolicyModal('installments')} />
+        <FlagshipSpotlight onOpenEMIModal={() => setIsInstallmentManualOpen(true)} />
 
 
         {/* PriceOye Inspired: Shop by Budget Rail */}
@@ -1202,7 +1216,7 @@ function HomeContent() {
                         {/* Banner 3: 0% Markup Bank EMI Installments */}
                         {index === 17 && (
                           <CatalogBannerBankEMI
-                            onOpenEMIModal={() => setActivePolicyModal('installments')}
+                            onOpenEMIModal={() => setIsInstallmentManualOpen(true)}
                           />
                         )}
                         {/* Banner 4: Open-Parcel Cash on Delivery Guarantee */}
@@ -1333,6 +1347,16 @@ function HomeContent() {
       />
 
       {/* Footer */}
+      {/* Comprehensive 0% Markup Monthly Installment Guide & Manual Modal */}
+      <InstallmentManualModal
+        isOpen={isInstallmentManualOpen}
+        onClose={() => {
+          setIsInstallmentManualOpen(false);
+          setInstallmentPhone(null);
+        }}
+        phone={installmentPhone}
+      />
+
       <Footer />
 
       {/* Interactive Trust & Policies Informational Modal */}

@@ -174,8 +174,12 @@ export default function PoliciesPage() {
               <p className="text-slate-500 text-xs">Up to 12 months installment tenure with promotional zero interest rate.</p>
             </div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
-            <strong>How to order on Installments:</strong> During checkout, select <em>&quot;Credit Card 0% EMI&quot;</em> as your payment method, select your bank and tenure, and our support team will help you execute the transaction.
+          <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-2">
+            <p className="font-bold text-amber-950">How to Apply &amp; Order on Installments:</p>
+            <p className="leading-relaxed">Direct online checkout is disabled for installments. All installment plans are processed safely via WhatsApp consultation with official partner bank coordination.</p>
+            <div className="pt-1">
+              <a href="https://wa.me/923135221200?text=Assalam-o-Alaikum%20Nawira%20Traders!%20I%20want%20to%20apply%20for%20a%200%25%20Monthly%20Installment%20Plan.%20Please%20guide%20me%20with%20the%20procedure." target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-sm transition-all"><span>Apply for Installments on WhatsApp (+92 313 5221200)</span></a>
+            </div>
           </div>
         </div>
       ),

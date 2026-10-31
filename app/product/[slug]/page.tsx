@@ -7,6 +7,7 @@ import { SMARTPHONES, getPhoneBySlug, formatPKR, PAKISTAN_CITIES } from '@/data/
 import { getActiveCatalog, getLocalDeletedIds } from '@/lib/catalog';
 import { Smartphone, SmartphoneColor, SmartphoneVariant, CartItem } from '@/types';
 import { PhoneImageWithFallback } from '@/components/PhoneImageWithFallback';
+import { InstallmentManualModal } from '@/components/InstallmentManualModal';
 import { Navbar } from '@/components/Navbar';
 import dynamic from 'next/dynamic';
 
@@ -42,6 +43,7 @@ import {
   ArrowLeft,
   ArrowRight,
   CreditCard,
+  FileText,
   Cpu,
   Battery,
   Camera,
@@ -123,6 +125,7 @@ export default function ProductDetailPage() {
   const [selectedTenure, setSelectedTenure] = useState<number>(6); // installment months
   const [isQuickBuyOpen, setIsQuickBuyOpen] = useState(false);
   const [isTradeInModalOpen, setIsTradeInModalOpen] = useState(false);
+  const [isInstallmentModalOpen, setIsInstallmentModalOpen] = useState(false);
 
   // Write a Review modal states
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
@@ -422,7 +425,7 @@ export default function ProductDetailPage() {
     },
     {
       q: 'How does the 0% Markup Monthly Installment work?',
-      a: 'We offer zero-markup installment plans for 3, 6, and 12 months with leading Pakistani bank credit cards, including Bank Alfalah, Meezan Bank, Faysal Bank, and Silkbank.',
+      a: "We offer zero-markup installment plans for 3, 6, and 12 months with leading Pakistani bank credit cards (Bank Alfalah, Meezan Bank, Faysal Bank, Silkbank, MCB). Direct online checkout for installments is disabled for customer security—simply tap 'View Plan Manual & Procedure' or contact our WhatsApp helpline at +92 313 5221200 to apply.",
     },
   ];
 
@@ -867,9 +870,37 @@ export default function ProductDetailPage() {
                 <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
                   <span>Supported Credit Cards:</span>
                   <span className="font-bold text-slate-700">
-                    Bank Alfalah • Meezan • Faysal • Silkbank
+                    Bank Alfalah • Meezan • Faysal • Silkbank • MCB
                   </span>
                 </div>
+
+                {/* Manual & WhatsApp Apply Action Buttons */}
+                <div className="pt-2 border-t border-blue-200/70 flex flex-col sm:flex-row items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsInstallmentModalOpen(true)}
+                    className="w-full sm:flex-1 py-2 px-3 rounded-xl bg-white hover:bg-slate-50 text-[#0b3c68] border border-blue-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-[#0b3c68]" />
+                    <span>View Plan Manual &amp; Procedure</span>
+                  </button>
+
+                  <a
+                    href={`https://wa.me/923135221200?text=${encodeURIComponent(
+                      `Assalam-o-Alaikum! I want to purchase ${phone.name} on the ${selectedTenure}-Month 0% Installment Plan (Approx Rs. ${monthlyInstallment.toLocaleString()}/month). Please guide me with the bank approval procedure.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:flex-1 py-2 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-black text-xs flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5 fill-white" />
+                    <span>Apply via WhatsApp</span>
+                  </a>
+                </div>
+
+                <p className="text-[10px] text-slate-500 italic text-center sm:text-left">
+                  *Direct online checkout is disabled for installments. All plans are approved securely on WhatsApp.
+                </p>
               </div>
 
               {/* Dynamic Estimated Delivery & Cutoff Countdown */}
@@ -1715,6 +1746,14 @@ export default function ProductDetailPage() {
           setCartItems((prev) => prev.filter((_, i) => i !== idx))
         }
         onClearCart={() => setCartItems([])}
+      />
+
+      {/* 0% Markup Monthly Installment Guide & Manual Modal */}
+      <InstallmentManualModal
+        isOpen={isInstallmentModalOpen}
+        onClose={() => setIsInstallmentModalOpen(false)}
+        phone={phone}
+        onSwitchToCOD={() => setIsQuickBuyOpen(true)}
       />
 
       {/* Quick Purchase Modal */}

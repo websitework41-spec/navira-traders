@@ -152,7 +152,7 @@ Your status will confirm: *"IMEI is Compliant (PTA Approved)"*. Never worry abou
 Enjoy 0% interest installments through partner credit cards:
 - **Eligible Banks**: Meezan Bank (Islamic 0%), Bank Alfalah (3, 6, 12 mos), Faysal Bank, and Silkbank.
 - **Tenures**: 3, 6, or 12 months.
-- **Process**: Select "Credit Card 0% EMI" during checkout, select your bank and tenure, and our support team activates your zero-markup plan.`;
+- **Process**: Direct online checkout is disabled for installments. Open our Installment Manual popup or contact our WhatsApp helpline at +92 313 5221200 to verify and apply.`;
   }
 
   if (q.includes('warranty') || q.includes('repair') || q.includes('service center') || q.includes('claim')) {

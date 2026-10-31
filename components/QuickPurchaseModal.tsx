@@ -62,7 +62,7 @@ export function QuickPurchaseModal({
   const [customerEmail, setCustomerEmail] = useState('');
   const [city, setCity] = useState(PAKISTAN_CITIES[0] || 'Karachi');
   const [deliveryAddress, setDeliveryAddress] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<'cod' | 'bank' | 'emi'>('cod');
+  const [paymentMethod, setPaymentMethod] = useState<'cod' | 'bank'>('cod');
   const [deliveryNotes, setDeliveryNotes] = useState('');
   const [honeypot, setHoneypot] = useState(''); // Anti-bot honeypot trap
   const [validationError, setValidationError] = useState('');
@@ -255,8 +255,6 @@ export function QuickPurchaseModal({
     const paymentLabel =
       paymentMethod === 'bank'
         ? `Bank Transfer / Raast (Meezan Bank)${bankTxRef ? ` — Ref: ${sanitizeText(bankTxRef, 50)}` : ''}`
-        : paymentMethod === 'emi'
-        ? '0% Installment Plan (Credit Card)'
         : 'Cash on Delivery (Open-Parcel)';
 
     // Save to Firestore if customer is logged in (non-blocking)
@@ -647,30 +645,30 @@ export function QuickPurchaseModal({
                     </div>
                   </label>
 
-                  {/* 0% Installments */}
-                  <label
-                    onClick={() => setPaymentMethod('emi')}
-                    className={`flex items-center gap-2.5 p-3 rounded-xl border cursor-pointer transition-all ${
-                      paymentMethod === 'emi'
-                        ? 'bg-blue-50/70 border-[#0b3c68] ring-2 ring-[#48afff]/40 shadow-xs'
-                        : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="quick_payment"
-                      checked={paymentMethod === 'emi'}
-                      onChange={() => setPaymentMethod('emi')}
-                      className="accent-[#0b3c68]"
-                    />
-                    <div className="min-w-0">
-                      <div className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
-                        <Percent className="w-3.5 h-3.5 text-[#f47708]" />
-                        <span>0% Installments</span>
-                      </div>
-                      <p className="text-[10px] text-slate-500 font-medium">3-12 mo Credit Card</p>
+                  
+                </div>
+
+                {/* Installment Notice Box */}
+                <div className="p-3 rounded-2xl bg-purple-50/70 border border-purple-200/80 flex items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                      <Percent className="w-4 h-4" />
                     </div>
-                  </label>
+                    <div className="min-w-0">
+                      <p className="font-extrabold text-purple-950 truncate">Want to buy on Monthly Installments?</p>
+                      <p className="text-[10px] text-purple-700 font-medium">3, 6 &amp; 12-month plans processed safely via WhatsApp.</p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose();
+                      window.dispatchEvent(new CustomEvent('open_installment_manual', { detail: { phone } }));
+                    }}
+                    className="shrink-0 px-3 py-1.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-[11px] transition-colors cursor-pointer shadow-xs"
+                  >
+                    View Manual
+                  </button>
                 </div>
 
                 {/* Bank & Raast Details Card (Shown when Bank Transfer is selected) */}
@@ -947,11 +945,6 @@ export function QuickPurchaseModal({
                       <span>Confirm Order (Bank Transfer) — {formatPKR(finalPrice)}</span>
                       <ArrowRight className="w-4 h-4" />
                     </>
-                  ) : paymentMethod === 'emi' ? (
-                    <>
-                      <span>Confirm Order (0% Installments) — {formatPKR(finalPrice)}</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </>
                   ) : (
                     <>
                       <span>Confirm Order with Open Parcel ({formatPKR(finalPrice)})</span>
@@ -1090,7 +1083,7 @@ export function QuickPurchaseModal({
               <div className="flex justify-between">
                 <span className="text-slate-500">Payment:</span>
                 <span className={`font-bold uppercase ${paymentMethod === 'bank' ? 'text-blue-700' : 'text-emerald-700'}`}>
-                  {paymentMethod === 'bank' ? 'Direct Bank Transfer / Raast' : paymentMethod === 'emi' ? '0% Installment Plan' : 'Cash on Delivery (Open Parcel)'}
+                  {paymentMethod === 'bank' ? 'Direct Bank Transfer / Raast' : 'Cash on Delivery (Open Parcel)'}
                 </span>
               </div>
               {bankTxRef && paymentMethod === 'bank' && (
