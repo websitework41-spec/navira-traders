@@ -96,6 +96,7 @@ export async function GET(request: Request) {
     const search = (searchParams.get('q') || searchParams.get('search') || '').toLowerCase().trim();
     const brand = searchParams.get('brand') || '';
     const stockStatus = searchParams.get('status') || '';
+    const category = searchParams.get('category') || '';
 
     let filtered = phones;
 
@@ -117,6 +118,14 @@ export async function GET(request: Request) {
       filtered = filtered.filter((p) => (p.stockQty ?? 0) > 0 && (p.stockQty ?? 0) <= 5);
     } else if (stockStatus === 'outOfStock') {
       filtered = filtered.filter((p) => !p.inStock || (p.stockQty ?? 0) === 0);
+    }
+
+    if (category) {
+      if (category.toLowerCase() === 'accessories') {
+        filtered = filtered.filter((p) => p.category === 'Accessories');
+      } else if (category.toLowerCase() === 'mobiles' || category.toLowerCase() === 'smartphones') {
+        filtered = filtered.filter((p) => p.category !== 'Accessories');
+      }
     }
 
     return NextResponse.json(

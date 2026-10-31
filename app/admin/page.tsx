@@ -12,8 +12,10 @@ import {
 } from '@/lib/catalog';
 import { PhoneImageWithFallback } from '@/components/PhoneImageWithFallback';
 import { BannerManager } from '@/components/admin/BannerManager';
+import { AccessoryManager } from '@/components/admin/AccessoryManager';
 import {
   LayoutDashboard,
+  Headphones,
   Package,
   Boxes,
   ShoppingBag,
@@ -74,7 +76,7 @@ import {
   Award,
 } from 'lucide-react';
 
-type AdminTab = 'dashboard' | 'analytics' | 'products' | 'inventory' | 'banners' | 'orders' | 'coupons' | 'customers' | 'settings';
+type AdminTab = 'dashboard' | 'analytics' | 'products' | 'accessories' | 'inventory' | 'banners' | 'orders' | 'coupons' | 'customers' | 'settings';
 
 export default function AdminPortalPage() {
   const [activeTab, setActiveTab] = useState<AdminTab>('dashboard');
@@ -434,6 +436,8 @@ export default function AdminPortalPage() {
       return true;
     });
   }, [analyticsStats, analyticsFilter, analyticsSearch]);
+
+  const accessoriesCount = useMemo(() => products.filter((p) => p.category === 'Accessories').length, [products]);
 
   // Key Dashboard Statistics & Financial Margins
   const stats = useMemo(() => {
@@ -1312,6 +1316,26 @@ export default function AdminPortalPage() {
 
           <button
             onClick={() => {
+              setActiveTab('accessories');
+              setIsMobileSidebarOpen(false);
+            }}
+            className={`w-full flex items-center justify-between px-3 py-2 rounded-xl font-medium transition-all ${
+              activeTab === 'accessories'
+                ? 'bg-[#202123] text-white font-bold'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-[#1a1b1c]'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <Headphones className="w-4 h-4 shrink-0 text-amber-400" />
+              <span>Accessories</span>
+            </div>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-300 font-bold">
+              {accessoriesCount}
+            </span>
+          </button>
+
+          <button
+            onClick={() => {
               setActiveTab('inventory');
               setIsMobileSidebarOpen(false);
             }}
@@ -1423,6 +1447,7 @@ export default function AdminPortalPage() {
               {activeTab === 'dashboard' && 'Store Overview'}
               {activeTab === 'analytics' && 'Live Traffic & Leads'}
               {activeTab === 'products' && 'Products'}
+              {activeTab === 'accessories' && 'Accessories'}
               {activeTab === 'inventory' && 'Inventory Matrix'}
               {activeTab === 'orders' && 'Orders'}
               {activeTab === 'banners' && 'Hero Banners & Spotlight'}
@@ -4170,6 +4195,15 @@ export default function AdminPortalPage() {
             </div>
           )}
 
+          {/* TAB: ACCESSORIES & SMART GADGETS */}
+          {activeTab === 'accessories' && (
+            <AccessoryManager
+              products={products}
+              onRefresh={fetchData}
+              showToast={showToast}
+            />
+          )}
+
           {/* TAB: HERO BANNERS & SPOTLIGHT DEALS */}
           {activeTab === 'banners' && (
             <BannerManager products={products} showToast={showToast} />
@@ -5822,6 +5856,8 @@ function ProductFormModal({ product, onClose, onSaved }: ProductFormModalProps) 
         name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
       name,
       brand,
+      category: product?.category,
+      accessoryType: product?.accessoryType,
       tagline,
       basePricePKR: Number(basePricePKR),
       costPricePKR: Number(costPricePKR),
