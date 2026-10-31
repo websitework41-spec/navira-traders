@@ -7,6 +7,7 @@ import { SMARTPHONES, formatPKR, BRANDS } from '@/data/smartphones';
 import { getActiveCatalog } from '@/lib/catalog';
 import { Smartphone } from '@/types';
 import { PhoneImageWithFallback } from './PhoneImageWithFallback';
+import { CategoryNavBar } from './CategoryNavBar';
 import {
   Smartphone as SmartphoneIcon,
   Search,
@@ -46,6 +47,8 @@ interface NavbarProps {
   activeBrand?: string;
   onSearch?: (query: string) => void;
   initialSearchQuery?: string;
+  activeCategory?: string;
+  onSelectCategory?: (category: string) => void;
 }
 
 export function Navbar({
@@ -57,6 +60,8 @@ export function Navbar({
   activeBrand = 'All Brands',
   onSearch,
   initialSearchQuery,
+  activeCategory = 'mobiles',
+  onSelectCategory,
 }: NavbarProps) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery || '');
@@ -770,6 +775,12 @@ export function Navbar({
             )}
           </div>
         </div>
+
+        {/* PriceOye Iconic Category Navigation Bar (Mobiles, Wireless Earbuds, Smart Watches, etc.) */}
+        <CategoryNavBar
+          activeCategory={activeCategory}
+          onSelectCategory={onSelectCategory}
+        />
 
         {/* 3. PriceOye Clean White Brand & Quick-Category Navigation Bar with Smooth Scroll Controls */}
         <div className="bg-white border-b border-slate-200/90 shadow-xs relative w-full max-w-full group/brandbar">

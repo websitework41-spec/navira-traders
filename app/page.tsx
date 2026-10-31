@@ -118,8 +118,72 @@ function HomeContent() {
   const [catalog, setCatalog] = useState<Smartphone[]>(() => getActiveCatalog(SMARTPHONES));
 
   // Category & Accessories Showcase states
+  const [activeNavCategory, setActiveNavCategory] = useState<string>('mobiles');
   const [catalogCategory, setCatalogCategory] = useState<'all' | 'mobiles' | 'accessories'>('all');
   const [accessoryTab, setAccessoryTab] = useState<'All' | 'Smartwatch' | 'Earbuds' | 'Cable'>('All');
+
+  // Handle Category selection from top category navigation bar
+  const handleSelectNavCategory = useCallback((categoryId: string) => {
+    setActiveNavCategory(categoryId);
+
+    if (categoryId === 'mobiles') {
+      setCatalogCategory('mobiles');
+      const el = document.getElementById('catalog-products') || document.getElementById('catalog-heading');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (categoryId === 'wireless-earbuds') {
+      setCatalogCategory('accessories');
+      setAccessoryTab('Earbuds');
+      const el = document.getElementById('accessories');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (categoryId === 'smart-watches') {
+      setCatalogCategory('accessories');
+      setAccessoryTab('Smartwatch');
+      const el = document.getElementById('accessories');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (categoryId === 'mobile-cables') {
+      setCatalogCategory('accessories');
+      setAccessoryTab('Cable');
+      const el = document.getElementById('accessories');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      setCatalogCategory('accessories');
+      setAccessoryTab('All');
+      const el = document.getElementById('accessories');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, []);
+
+  // Listen to custom event from decoupled navigation triggers
+  useEffect(() => {
+    const handleCategoryEvent = (e: any) => {
+      if (e?.detail?.categoryId) {
+        handleSelectNavCategory(e.detail.categoryId);
+      }
+    };
+    window.addEventListener('navira_category_select', handleCategoryEvent);
+    return () => window.removeEventListener('navira_category_select', handleCategoryEvent);
+  }, [handleSelectNavCategory]);
+
+  // Sync category from URL parameter on initial load
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('category');
+      if (cat) {
+        handleSelectNavCategory(cat);
+      }
+    }
+  }, [handleSelectNavCategory]);
 
   const allAccessories = useMemo(() => {
     return catalog.filter((p) => p.category === 'Accessories');
@@ -618,11 +682,13 @@ function HomeContent() {
         onSelectBrand={handleSelectBrand}
         onSearch={handleSearch}
         initialSearchQuery={filters.searchQuery}
-        activeBrand={
+                activeBrand={
           filters.selectedBrands.length === 1
             ? filters.selectedBrands[0]
             : 'All Brands'
         }
+        activeCategory={activeNavCategory}
+        onSelectCategory={handleSelectNavCategory}
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-5">
