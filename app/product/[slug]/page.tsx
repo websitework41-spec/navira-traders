@@ -17,10 +17,6 @@ const CartDrawer = dynamic(
   { ssr: false }
 );
 import { QuickPurchaseModal } from '@/components/QuickPurchaseModal';
-const TradeInEstimatorModal = dynamic(
-  () => import('@/components/TradeInEstimatorModal').then((m) => m.TradeInEstimatorModal),
-  { ssr: false }
-);
 const ComparisonDock = dynamic(
   () => import('@/components/ComparisonDock').then((m) => m.ComparisonDock),
   { ssr: false }
@@ -124,7 +120,6 @@ export default function ProductDetailPage() {
   const [comparingPhones, setComparingPhones] = useState<Smartphone[]>([]);
   const [selectedTenure, setSelectedTenure] = useState<number>(6); // installment months
   const [isQuickBuyOpen, setIsQuickBuyOpen] = useState(false);
-  const [isTradeInModalOpen, setIsTradeInModalOpen] = useState(false);
   const [isInstallmentModalOpen, setIsInstallmentModalOpen] = useState(false);
 
   // Write a Review modal states
@@ -906,33 +901,7 @@ export default function ProductDetailPage() {
               {/* Dynamic Estimated Delivery & Cutoff Countdown */}
               <DeliveryEstimatorCountdown className="mt-2" />
 
-              {/* Old Phone Trade-In & Exchange Banner Button */}
-              <button
-                type="button"
-                onClick={() => setIsTradeInModalOpen(true)}
-                className="w-full p-3.5 rounded-2xl bg-gradient-to-r from-emerald-50/90 via-teal-50/60 to-sky-50/80 border border-emerald-200/90 hover:border-emerald-300 transition-all flex items-center justify-between group cursor-pointer text-left shadow-2xs mt-2"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
-                    <RefreshCw className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-black text-slate-900 flex items-center gap-1.5">
-                      <span>Exchange &amp; Upgrade Program</span>
-                      <span className="text-[10px] font-black uppercase px-1.5 py-0.2 rounded-md bg-emerald-200 text-emerald-900">
-                        Doorstep Swap
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-slate-500 font-medium">
-                      Trade in your old handset for instant cash credit towards {phone.name}.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1 text-emerald-700 text-xs font-bold shrink-0">
-                  <span>Estimate</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </button>
+              
 
               {/* Stock Warning Notice */}
               {!isSelectionInStock && (
@@ -1765,13 +1734,7 @@ export default function ProductDetailPage() {
         onClose={() => setIsQuickBuyOpen(false)}
       />
 
-      {/* Old Phone Trade-In & Exchange Estimator Modal */}
-      <TradeInEstimatorModal
-        isOpen={isTradeInModalOpen}
-        onClose={() => setIsTradeInModalOpen(false)}
-        targetPhone={phone}
-        targetPricePKR={currentPrice}
-      />
+      
 
       {/* Interactive Write a Review Modal */}
       {isReviewModalOpen && (
