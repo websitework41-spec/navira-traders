@@ -61,6 +61,9 @@ import {
   Flame,
   Zap,
   Sparkles,
+  Headphones,
+  Watch,
+  Cable,
   Smartphone as PhoneIcon,
   Clock,
   MessageSquare,
@@ -99,6 +102,19 @@ function HomeContent() {
   // Pagination state
   const [visibleCount, setVisibleCount] = useState<number>(24);
   const [catalog, setCatalog] = useState<Smartphone[]>(() => getActiveCatalog(SMARTPHONES));
+
+  // Category & Accessories Showcase states
+  const [catalogCategory, setCatalogCategory] = useState<'all' | 'mobiles' | 'accessories'>('all');
+  const [accessoryTab, setAccessoryTab] = useState<'All' | 'Smartwatch' | 'Earbuds' | 'Cable'>('All');
+
+  const allAccessories = useMemo(() => {
+    return catalog.filter((p) => p.category === 'Accessories');
+  }, [catalog]);
+
+  const displayedAccessories = useMemo(() => {
+    if (accessoryTab === 'All') return allAccessories;
+    return allAccessories.filter((p) => p.accessoryType === accessoryTab);
+  }, [allAccessories, accessoryTab]);
 
   // Sync catalog with dynamic database / disk updates & local deletions from admin
   useEffect(() => {
@@ -255,6 +271,7 @@ function HomeContent() {
     filters.inStockOnly,
     filters.sortBy,
     filters.specFilter,
+    catalogCategory,
   ]);
 
   // Flash deals calculation (top 4 discount items)
@@ -268,6 +285,9 @@ function HomeContent() {
   // Filter & Sort Logic
   const filteredPhones = useMemo(() => {
     return catalog.filter((phone) => {
+      // Category Filter (All vs Mobiles vs Accessories)
+      if (catalogCategory === 'mobiles' && phone.category === 'Accessories') return false;
+      if (catalogCategory === 'accessories' && phone.category !== 'Accessories') return false;
       // Spec Filter
       if (filters.specFilter === '120hz-amoled') {
         const is120Hz =
@@ -765,6 +785,119 @@ function HomeContent() {
           </div>
         </section>
 
+        {/* Dedicated Accessories Showcase Section */}
+        <section id="accessories" className="mt-8 p-5 sm:p-7 rounded-3xl bg-gradient-to-br from-slate-900 via-[#0b3c68] to-slate-950 text-white shadow-xl relative overflow-hidden border border-slate-800">
+          {/* Background Ambient Glows */}
+          <div className="absolute -right-20 -top-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Section Header */}
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
+            <div>
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 shadow-sm">
+                  <Sparkles className="w-3 h-3 fill-slate-950" />
+                  New Collection
+                </span>
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-white border border-white/20">
+                  <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                  100% Original Brand Warranty
+                </span>
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-white border border-white/20">
+                  <PackageCheck className="w-3 h-3 text-sky-400" />
+                  Open-Parcel Delivery
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white font-sans">
+                Genuine Mobile Accessories &amp; Smart Gadgets
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
+                Official Oraimo Smartwatches, Heavy-Duty Fast Charging Cables, and Open-Ear Bluetooth Earphones with genuine distributor warranty.
+              </p>
+            </div>
+
+            {/* Quick Category Filter Pills */}
+            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+              {[
+                { id: 'All', label: 'All Accessories', count: allAccessories.length, icon: Sparkles },
+                { id: 'Smartwatch', label: 'Smart Watches', count: allAccessories.filter(a => a.accessoryType === 'Smartwatch').length, icon: Watch },
+                { id: 'Earbuds', label: 'Wireless Earbuds', count: allAccessories.filter(a => a.accessoryType === 'Earbuds').length, icon: Headphones },
+                { id: 'Cable', label: 'Charging Cables', count: allAccessories.filter(a => a.accessoryType === 'Cable').length, icon: Cable },
+              ].map((tab) => {
+                const isSelected = accessoryTab === tab.id;
+                const TabIcon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setAccessoryTab(tab.id as any)}
+                    className={`btn-press whitespace-nowrap text-xs font-bold px-3 sm:px-4 py-2 rounded-full transition-all cursor-pointer flex items-center gap-1.5 ${
+                      isSelected
+                        ? 'bg-amber-400 text-slate-950 font-black shadow-lg shadow-amber-400/20 scale-105'
+                        : 'bg-white/10 hover:bg-white/20 text-white border border-white/15'
+                    }`}
+                  >
+                    <TabIcon className="w-3.5 h-3.5" />
+                    <span>{tab.label}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                        isSelected ? 'bg-slate-950 text-white' : 'bg-white/20 text-white'
+                      }`}
+                    >
+                      {tab.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Accessories Cards Grid */}
+          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 pt-6 text-slate-900">
+            {displayedAccessories.map((item) => (
+              <PhoneCard
+                key={item.id}
+                phone={item}
+                isComparing={comparingPhones.some((p) => p.id === item.id)}
+                onToggleCompare={handleToggleCompare}
+                onAddToCart={handleAddToCart}
+                onQuickBuy={handleQuickBuy}
+              />
+            ))}
+          </div>
+
+          {/* Section Trust Guarantees Bar */}
+          <div className="relative z-10 mt-6 pt-5 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center sm:text-left">
+            <div className="flex items-center gap-2.5 bg-white/5 rounded-xl p-2.5 border border-white/10">
+              <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+              <div>
+                <p className="text-[11px] font-bold text-white">100% Genuine Box-Pack</p>
+                <p className="text-[9px] text-slate-400">Official Oraimo Pakistan Warranty</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2.5 bg-white/5 rounded-xl p-2.5 border border-white/10">
+              <PackageCheck className="w-5 h-5 text-sky-400 shrink-0" />
+              <div>
+                <p className="text-[11px] font-bold text-white">Open-Parcel Delivery</p>
+                <p className="text-[9px] text-slate-400">Inspect before paying COD rider</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2.5 bg-white/5 rounded-xl p-2.5 border border-white/10">
+              <Truck className="w-5 h-5 text-amber-400 shrink-0" />
+              <div>
+                <p className="text-[11px] font-bold text-white">TCS Express Shipping</p>
+                <p className="text-[9px] text-slate-400">24-48 hr fast dispatch</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2.5 bg-white/5 rounded-xl p-2.5 border border-white/10">
+              <Zap className="w-5 h-5 text-rose-400 shrink-0" />
+              <div>
+                <p className="text-[11px] font-bold text-white">Extra Instant Discounts</p>
+                <p className="text-[9px] text-slate-400">Coupon codes apply at checkout</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Main Catalog Section */}
         <section id="catalog" className="pt-10">
           {/* Section Header & Sort */}
@@ -841,6 +974,18 @@ function HomeContent() {
               }`}
             >
               All Mobiles
+            </button>
+            <button
+              onClick={() => {
+                setCatalogCategory(catalogCategory === 'accessories' ? 'all' : 'accessories');
+              }}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 ${
+                catalogCategory === 'accessories'
+                  ? 'bg-amber-500 text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              <span>🎧 Accessories (${allAccessories.length})</span>
             </button>
             <button
               onClick={() => setFilters((p) => ({ ...p, inStockOnly: !p.inStockOnly }))}

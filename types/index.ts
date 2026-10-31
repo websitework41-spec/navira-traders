@@ -56,6 +56,8 @@ export interface Smartphone {
   slug: string;
   name: string;
   brand: string;
+  category?: string;
+  accessoryType?: string;
   tagline: string;
   basePricePKR: number;
   originalPricePKR: number;

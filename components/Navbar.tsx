@@ -366,7 +366,7 @@ export function Navbar({
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-80" />
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-emerald-400" />
                     </span>
-                    <span>222 Verified Mobiles In-Stock</span>
+                    <span>{activeCatalog.length} Verified Mobiles & Accessories</span>
                   </div>
                 </div>
               </Link>
@@ -383,7 +383,7 @@ export function Navbar({
                       setIsSearchOpen(true);
                     }}
                     onFocus={() => setIsSearchOpen(true)}
-                    placeholder="Search 222 mobiles (e.g. S24 Ultra, iPhone 16, Nokia 105, 0% EMI)..."
+                    placeholder={`Search ${activeCatalog.length}+ mobiles & accessories (e.g. Earbuds, Watch, iPhone 16)...`}
                     className="w-full pl-11 pr-20 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm bg-white text-slate-900 placeholder:text-slate-500 font-medium focus:outline-none focus:ring-4 focus:ring-white/40 transition-all shadow-md"
                   />
                   {searchQuery && (
@@ -693,7 +693,7 @@ export function Navbar({
                       setSearchQuery(e.target.value);
                       setIsSearchOpen(true);
                     }}
-                    placeholder="Search 222 phones (e.g. S24, iPhone, under 40k)..."
+                    placeholder={`Search ${activeCatalog.length}+ mobiles & accessories...`}
                     className="w-full pl-10 pr-18 py-2.5 rounded-full text-base sm:text-xs bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-white/40 shadow-sm font-medium"
                   />
                   {searchQuery && (
@@ -795,6 +795,16 @@ export function Navbar({
               onWheel={handleBrandBarWheel}
               className="flex items-center gap-2 py-2 sm:py-2.5 overflow-x-auto scrollbar-none scroll-smooth px-1 sm:px-2"
             >
+              {/* Highlighted Accessories Category Link Pill */}
+              <Link
+                href="/#accessories"
+                className="shrink-0 flex-shrink-0 min-w-max whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 select-none bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-xs hover:shadow-md hover:scale-105"
+              >
+                <span>🎧 Accessories</span>
+                <span className="shrink-0 whitespace-nowrap text-[10px] px-2 py-0.5 rounded-full font-black bg-white/25 text-white">
+                  5 New
+                </span>
+              </Link>
               {BRANDS.map((brand) => {
                 const isActive = activeBrand === brand;
                 const count = brandCounts[brand] || 0;

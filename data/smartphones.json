@@ -21288,5 +21288,387 @@
       "warranty": "1 Year Official Itel Pakistan Warranty"
     },
     "costPricePKR": 2400
+  },
+  {
+    "id": "oraimo-watch-6-osw-807-smartwatch",
+    "slug": "oraimo-watch-6-osw-807-smartwatch",
+    "name": "Oraimo Watch 6 OSW-807 SmartWatch",
+    "brand": "Oraimo",
+    "category": "Accessories",
+    "accessoryType": "Smartwatch",
+    "tagline": "Official Oraimo Bluetooth Calling Smartwatch with 1.83\" HD Display & 1-Year Brand Warranty",
+    "basePricePKR": 5149,
+    "originalPricePKR": 8000,
+    "costPricePKR": 4500,
+    "discountPercent": 36,
+    "rating": 4.9,
+    "reviewCount": 48,
+    "inStock": true,
+    "stockQty": 25,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": true,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#1c1c1e",
+        "image": "https://images.priceoye.pk/oraimo-osw-807-bluetooth-calling-smartwatch-pakistan-priceoye-2fa0i-500x500.webp",
+        "inStock": true,
+        "stockQty": 25
+      }
+    ],
+    "variants": [
+      {
+        "id": "oraimo-watch-6-standard",
+        "storage": "Smartwatch",
+        "ram": "Standard",
+        "pricePKR": 5149,
+        "originalPricePKR": 8000,
+        "costPricePKR": 4500,
+        "inStock": true,
+        "stockQty": 25
+      }
+    ],
+    "colorStockMap": {
+      "Black": {
+        "inStock": true,
+        "stockQty": 25
+      }
+    },
+    "keyHighlights": {
+      "display": "1.83 inches HD TFT Touchscreen (240x284 pixels)",
+      "processor": "Realtek Low-Power Bluetooth 5.3 SoC",
+      "camera": "Built-in HD Speaker & Microphone for Calling",
+      "battery": "250 mAh (Up to 7 Days Battery Life)",
+      "charging": "Magnetic Quick Charging (Full in 2 Hours)"
+    },
+    "specs": {
+      "screen": "1.83 inches HD TFT 2.5D Curved Glass Display (240 x 284 pixels)",
+      "refreshRate": "60Hz Touch Sampling",
+      "displayType": "HD High-Brightness Color TFT Screen",
+      "processor": "Low-Power Realtek Bluetooth Calling Chipset",
+      "chipsetBrand": "Oraimo Fit OS",
+      "mainCamera": "Optical Heart Rate & SpO2 Blood Oxygen Sensor",
+      "selfieCamera": "HD Microphone & Crystal-Clear Speaker",
+      "battery": "250 mAh Lithium Polymer (7 Days Standby)",
+      "charging": "Magnetic Dock Charging (100% in 2h)",
+      "os": "Oraimo Health App (Android & iOS Compatible)",
+      "network": "Bluetooth 5.3 (BLE + Classic Calling)",
+      "security": "Screen Lock & Security PIN Protection",
+      "weight": "42 g (Ergonomic Silicone Sweatband)",
+      "waterResistance": "IP68 Dust & Water Resistant",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Oraimo Pakistan Warranty"
+    }
+  },
+  {
+    "id": "oraimo-opn-672-open-ear-bluetooth-earphone",
+    "slug": "oraimo-opn-672-open-ear-bluetooth-earphone",
+    "name": "Oraimo OPN-672 Open Ear Bluetooth Earphone",
+    "brand": "Oraimo",
+    "category": "Accessories",
+    "accessoryType": "Earbuds",
+    "tagline": "Premium Open-Ear Air-Conduction Wireless Earphones with Dual-Mic ENC & 40H Playtime",
+    "basePricePKR": 6999,
+    "originalPricePKR": 9999,
+    "costPricePKR": 5900,
+    "discountPercent": 30,
+    "rating": 5,
+    "reviewCount": 34,
+    "inStock": true,
+    "stockQty": 20,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": true,
+    "colors": [
+      {
+        "name": "Grey",
+        "hex": "#a7adba",
+        "image": "https://images.priceoye.pk/oraimo-opn-672-open-ear-bluetooth-earphone-pakistan-priceoye-p9aad-500x500.webp",
+        "inStock": true,
+        "stockQty": 20
+      }
+    ],
+    "variants": [
+      {
+        "id": "oraimo-opn-672-standard",
+        "storage": "Wireless Earbuds",
+        "ram": "Standard",
+        "pricePKR": 6999,
+        "originalPricePKR": 9999,
+        "costPricePKR": 5900,
+        "inStock": true,
+        "stockQty": 20
+      }
+    ],
+    "colorStockMap": {
+      "Grey": {
+        "inStock": true,
+        "stockQty": 20
+      }
+    },
+    "keyHighlights": {
+      "display": "Smart Touch Controls & LED Battery Indicator",
+      "processor": "Low-Latency Gaming Mode BT 5.3 Chipset",
+      "camera": "Dual Environmental Noise Cancellation (ENC) Mics",
+      "battery": "40-Hour Total Playtime with Charging Case",
+      "charging": "Type-C Fast Charge (10 mins = 2 Hours Playback)"
+    },
+    "specs": {
+      "screen": "Smart Touch Sensor Multi-Function Controls",
+      "refreshRate": "Ultra-Low Latency 60ms Gaming Mode",
+      "displayType": "Open-Ear Comfort Air Conduction Design",
+      "processor": "Advanced Audio DSP (AAC / SBC HD Codecs)",
+      "chipsetBrand": "Oraimo HavyBass Audio",
+      "mainCamera": "16mm Dynamic Bio-Diaphragm Boosted Drivers",
+      "selfieCamera": "Dual-Mic Environmental Noise Cancellation (ENC)",
+      "battery": "500 mAh Case + 70 mAh per Earphone (40H Total)",
+      "charging": "Type-C Fast Charge Port",
+      "os": "Universal Bluetooth (Android / iOS / Windows)",
+      "network": "Bluetooth v5.3 (10m Ultra-Stable Wireless Range)",
+      "security": "Anti-Drop Ergonomic Liquid Silicone Ear-Hooks",
+      "weight": "18.5 g (Ultra-Lightweight Comfort)",
+      "waterResistance": "IPX4 Sweat & Water Proof",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Oraimo Pakistan Warranty"
+    }
+  },
+  {
+    "id": "oraimo-ocd-114lj-2a-1m-charging-cable",
+    "slug": "oraimo-ocd-114lj-2a-1m-charging-cable",
+    "name": "Oraimo OCD-114LJ 2A 1M Charging Cable",
+    "brand": "Oraimo",
+    "category": "Accessories",
+    "accessoryType": "Cable",
+    "tagline": "Heavy Duty 2A Fast Charging & High-Speed Data Sync Lightning Cable (1 Meter)",
+    "basePricePKR": 521,
+    "originalPricePKR": 1000,
+    "costPricePKR": 380,
+    "discountPercent": 48,
+    "rating": 4.9,
+    "reviewCount": 62,
+    "inStock": true,
+    "stockQty": 50,
+    "isNew": true,
+    "isTrending": false,
+    "isBestSeller": true,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#1c1c1e",
+        "image": "https://images.priceoye.pk/oraimo-ocd-114lj-2a-1m-charging-cable-pakistan-priceoye-krao2-500x500.webp",
+        "inStock": true,
+        "stockQty": 30
+      },
+      {
+        "name": "White",
+        "hex": "#f5f5f7",
+        "image": "https://images.priceoye.pk/oraimo-ocd-114lj-2a-1m-charging-cable-pakistan-priceoye-krao2-500x500.webp",
+        "inStock": true,
+        "stockQty": 20
+      }
+    ],
+    "variants": [
+      {
+        "id": "oraimo-ocd-114lj-1m",
+        "storage": "1 Meter",
+        "ram": "2A Fast Charge",
+        "pricePKR": 521,
+        "originalPricePKR": 1000,
+        "costPricePKR": 380,
+        "inStock": true,
+        "stockQty": 50
+      }
+    ],
+    "colorStockMap": {
+      "Black": {
+        "inStock": true,
+        "stockQty": 30
+      },
+      "White": {
+        "inStock": true,
+        "stockQty": 20
+      }
+    },
+    "keyHighlights": {
+      "display": "1 Meter Anti-Tangle Reinforced TPE Cable",
+      "processor": "Pure Copper Core with Smart Current Regulation",
+      "camera": "480 Mbps High-Speed Data Sync Support",
+      "battery": "Over-Voltage & Surge Protection Circuit",
+      "charging": "2.0A High-Speed Fast Charging Output"
+    },
+    "specs": {
+      "screen": "10,000+ Bend Tested Durable Heavy-Duty Exterior",
+      "refreshRate": "480 Mbps USB 2.0 Data Transfer Rate",
+      "displayType": "Reinforced Strain-Relief Connector Collar",
+      "processor": "Smart IC Intelligent Power Regulation",
+      "chipsetBrand": "Oraimo DuraLine Core",
+      "mainCamera": "Nickel-Plated Rust-Resistant Contacts",
+      "selfieCamera": "Lightning to USB-A Male Connector",
+      "battery": "Heat-Resistant Overheat Battery Protection",
+      "charging": "2.0A Maximum Safe Current Output",
+      "os": "iOS & Apple Lightning Standard Compliant",
+      "network": "Simultaneous High Speed Data Sync & Charge",
+      "security": "Short-Circuit & Voltage Spike Guard",
+      "weight": "28 g",
+      "waterResistance": "Wear & Pulling Resistant",
+      "ptaStatus": "PTA Approved",
+      "warranty": "6 Months Official Oraimo Replacement Warranty"
+    }
+  },
+  {
+    "id": "oraimo-ocd-114mj-2a-1m-charging-cable",
+    "slug": "oraimo-ocd-114mj-2a-1m-charging-cable",
+    "name": "Oraimo OCD-114MJ 2A 1M Charging Cable",
+    "brand": "Oraimo",
+    "category": "Accessories",
+    "accessoryType": "Cable",
+    "tagline": "Durable 2A Micro-USB Fast Charging & Sync Cable with Reinforced Joints (1 Meter)",
+    "basePricePKR": 649,
+    "originalPricePKR": 799,
+    "costPricePKR": 450,
+    "discountPercent": 19,
+    "rating": 4.9,
+    "reviewCount": 41,
+    "inStock": true,
+    "stockQty": 45,
+    "isNew": true,
+    "isTrending": false,
+    "isBestSeller": false,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#1c1c1e",
+        "image": "https://images.priceoye.pk/oraimo-ocd-114mj-2a-1m-charging-cable-pakistan-priceoye-mm94t-500x500.webp",
+        "inStock": true,
+        "stockQty": 25
+      },
+      {
+        "name": "White",
+        "hex": "#f5f5f7",
+        "image": "https://images.priceoye.pk/oraimo-ocd-114mj-2a-1m-charging-cable-pakistan-priceoye-ywblb-500x500.webp",
+        "inStock": true,
+        "stockQty": 20
+      }
+    ],
+    "variants": [
+      {
+        "id": "oraimo-ocd-114mj-1m",
+        "storage": "1 Meter",
+        "ram": "2A Fast Charge",
+        "pricePKR": 649,
+        "originalPricePKR": 799,
+        "costPricePKR": 450,
+        "inStock": true,
+        "stockQty": 45
+      }
+    ],
+    "colorStockMap": {
+      "Black": {
+        "inStock": true,
+        "stockQty": 25
+      },
+      "White": {
+        "inStock": true,
+        "stockQty": 20
+      }
+    },
+    "keyHighlights": {
+      "display": "1 Meter Reinforced Micro-USB High Durability Cable",
+      "processor": "Low-Resistance Tinned Copper Wire Core",
+      "camera": "Simultaneous High Speed Charging & Data Sync",
+      "battery": "Safe Stable Current without Battery Degradation",
+      "charging": "2.0A Rapid Speed Charging"
+    },
+    "specs": {
+      "screen": "Flexible Strain-Relief Connector Collar",
+      "refreshRate": "480 Mbps Data Transfer Speed",
+      "displayType": "Reinforced Heavy Duty Micro-USB Cable",
+      "processor": "Multi-Protection Smart Current Regulation",
+      "chipsetBrand": "Oraimo FastCharge",
+      "mainCamera": "Corrosion-Resistant Gold-Plated Pins",
+      "selfieCamera": "Micro-USB to USB-A Port",
+      "battery": "Device Battery Safety Protection",
+      "charging": "2.0A Maximum Safe Current",
+      "os": "Universal Micro-USB (Smartphones, Keypad Phones, Power Banks)",
+      "network": "High Speed USB 2.0 Data & Power",
+      "security": "Flame-Retardant TPE Outer Jacket",
+      "weight": "30 g",
+      "waterResistance": "Bending & Pulling Resistant",
+      "ptaStatus": "PTA Approved",
+      "warranty": "6 Months Official Oraimo Replacement Warranty"
+    }
+  },
+  {
+    "id": "oraimo-ocd-114l2-2-4a-2m-charging-cable",
+    "slug": "oraimo-ocd-114l2-2-4a-2m-charging-cable",
+    "name": "Oraimo OCD-114L2 2.4A 2M Charging Cable",
+    "brand": "Oraimo",
+    "category": "Accessories",
+    "accessoryType": "Cable",
+    "tagline": "Extended 2-Meter 2.4A Ultra-Fast Charging Cable for Long Distance Bed & Desk Use",
+    "basePricePKR": 499,
+    "originalPricePKR": 999,
+    "costPricePKR": 350,
+    "discountPercent": 50,
+    "rating": 5,
+    "reviewCount": 56,
+    "inStock": true,
+    "stockQty": 40,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": true,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#1c1c1e",
+        "image": "https://images.priceoye.pk/oraimo-ocd-114l2-2-4a-2m-charging-cable-pakistan-priceoye-ey1dc-500x500.webp",
+        "inStock": true,
+        "stockQty": 40
+      }
+    ],
+    "variants": [
+      {
+        "id": "oraimo-ocd-114l2-2m",
+        "storage": "2 Meter (Extra Long)",
+        "ram": "2.4A Turbo",
+        "pricePKR": 499,
+        "originalPricePKR": 999,
+        "costPricePKR": 350,
+        "inStock": true,
+        "stockQty": 40
+      }
+    ],
+    "colorStockMap": {
+      "Black": {
+        "inStock": true,
+        "stockQty": 40
+      }
+    },
+    "keyHighlights": {
+      "display": "Extra Long 2-Meter (6.6ft) Heavy Duty Reach",
+      "processor": "Thickened Oxygen-Free Pure Copper Core",
+      "camera": "Dual Function: Rapid Power & High Speed Sync",
+      "battery": "Extended Cable without Any Voltage Drop",
+      "charging": "2.4A Turbo Rapid Charging Speed"
+    },
+    "specs": {
+      "screen": "2.0 Meter Heavy-Duty Tangle-Free Long Reach",
+      "refreshRate": "480 Mbps High Speed USB 2.0",
+      "displayType": "Heavy-Duty Extra Long Cord",
+      "processor": "Intelligent Current Distribution IC",
+      "chipsetBrand": "Oraimo PowerTurbo",
+      "mainCamera": "Heavy Duty Molded Joint Protection",
+      "selfieCamera": "Precision Molded Lightning & USB Connectors",
+      "battery": "Overload & Heat Protection",
+      "charging": "2.4A Turbo Fast Charge Output",
+      "os": "Universal iOS & Lightning Devices",
+      "network": "High Speed Stable Current Delivery",
+      "security": "Anti-Interference Inner Shielding",
+      "weight": "45 g",
+      "waterResistance": "Durable Bend-Resistant Coating",
+      "ptaStatus": "PTA Approved",
+      "warranty": "6 Months Official Oraimo Replacement Warranty"
+    }
   }
 ]

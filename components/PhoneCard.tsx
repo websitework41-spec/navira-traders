@@ -78,6 +78,11 @@ export const PhoneCard = React.memo(function PhoneCard({
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
                 Out of Stock
               </span>
+            ) : phone.category === 'Accessories' ? (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-xs">
+                <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 stroke-[2.2]" />
+                100% Genuine
+              </span>
             ) : (
               phone.specs.ptaStatus === 'PTA Approved' && (
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-xs">
@@ -189,51 +194,74 @@ export const PhoneCard = React.memo(function PhoneCard({
 
         {/* Key Specs Micro-Chips */}
         <div className="grid grid-cols-2 gap-1 sm:gap-1.5 mt-2 sm:mt-2.5 pt-2 sm:pt-2.5 border-t border-slate-100 text-[10px] sm:text-[11px] text-slate-600">
-          <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
-            <Cpu className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 flex-shrink-0" />
-            <span className="truncate">
-              {phone.specs.chipsetBrand || phone.keyHighlights?.processor?.split(' ')[0] || 'Octa-Core'}
-            </span>
-          </div>
-          <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
-            <Battery className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 flex-shrink-0" />
-            <span className="truncate">
-              {(() => {
-                const raw = phone.keyHighlights?.battery || phone.specs.battery || '';
-                const match = raw.match(/(\d{3,5})\s*mAh/i);
-                if (match) return `${match[1]} mAh`;
-                const numMatch = raw.match(/\d{3,5}/);
-                if (numMatch) return `${numMatch[0]} mAh`;
-                return '5000 mAh';
-              })()}
-            </span>
-          </div>
-          <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
-            <Camera className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 flex-shrink-0" />
-            <span className="truncate">
-              {(() => {
-                const raw = phone.specs.mainCamera || phone.keyHighlights?.camera || '';
-                const lower = raw.toLowerCase().trim();
-                if (!lower || lower === 'no' || lower === 'no camera' || lower === 'none') return 'No Camera';
-                if (lower.includes('digital camera')) return 'Digital Camera';
-                if (lower === 'vga' || lower === 'qvga') return lower.toUpperCase();
-                if (lower === 'yes') return 'Digital Camera';
-                const clean = raw.replace(/(\d+)\.0+\s*MP/gi, '$1 MP');
-                const mpMatch = clean.match(/(\d+(?:\.\d+)?)\s*MP/i);
-                if (mpMatch && parseFloat(mpMatch[1]) > 0) return `${mpMatch[1]} MP`;
-                const numMatch = clean.match(/^\d+$/);
-                if (numMatch) return `${numMatch[0]} MP`;
-                const firstPart = clean.split('+')[0].trim();
-                return firstPart || '50 MP';
-              })()}
-            </span>
-          </div>
-          <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
-            <Layers className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 flex-shrink-0" />
-            <span className="truncate">
-              {`${primaryVariant.ram} / ${primaryVariant.storage}`}
-            </span>
-          </div>
+          {phone.category === 'Accessories' ? (
+            <>
+              <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500 flex-shrink-0" />
+                <span className="truncate">{phone.accessoryType || 'Accessory'}</span>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
+                <Zap className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-sky-500 flex-shrink-0" />
+                <span className="truncate">{phone.specs.charging || phone.specs.battery || 'Fast Charge'}</span>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
+                <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-500 flex-shrink-0" />
+                <span className="truncate">{phone.specs.warranty || 'Official Warranty'}</span>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
+                <Layers className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-indigo-500 flex-shrink-0" />
+                <span className="truncate">{primaryVariant.storage || primaryVariant.ram || 'Genuine'}</span>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
+                <Cpu className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 flex-shrink-0" />
+                <span className="truncate">
+                  {phone.specs.chipsetBrand || phone.keyHighlights?.processor?.split(' ')[0] || 'Octa-Core'}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
+                <Battery className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 flex-shrink-0" />
+                <span className="truncate">
+                  {(() => {
+                    const raw = phone.keyHighlights?.battery || phone.specs.battery || '';
+                    const match = raw.match(/(\d{3,5})\s*mAh/i);
+                    if (match) return `${match[1]} mAh`;
+                    const numMatch = raw.match(/\d{3,5}/);
+                    if (numMatch) return `${numMatch[0]} mAh`;
+                    return '5000 mAh';
+                  })()}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
+                <Camera className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 flex-shrink-0" />
+                <span className="truncate">
+                  {(() => {
+                    const raw = phone.specs.mainCamera || phone.keyHighlights?.camera || '';
+                    const lower = raw.toLowerCase().trim();
+                    if (!lower || lower === 'no' || lower === 'no camera' || lower === 'none') return 'No Camera';
+                    if (lower.includes('digital camera')) return 'Digital Camera';
+                    if (lower === 'vga' || lower === 'qvga') return lower.toUpperCase();
+                    if (lower === 'yes') return 'Digital Camera';
+                    const clean = raw.replace(/(\d+)\.0+\s*MP/gi, '$1 MP');
+                    const mpMatch = clean.match(/(\d+(?:\.\d+)?)\s*MP/i);
+                    if (mpMatch && parseFloat(mpMatch[1]) > 0) return `${mpMatch[1]} MP`;
+                    const numMatch = clean.match(/^\d+$/);
+                    if (numMatch) return `${numMatch[0]} MP`;
+                    const firstPart = clean.split('+')[0].trim();
+                    return firstPart || '50 MP';
+                  })()}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 group-hover:text-slate-800 transition-colors">
+                <Layers className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 flex-shrink-0" />
+                <span className="truncate">
+                  {`${primaryVariant.ram} / ${primaryVariant.storage}`}
+                </span>
+              </div>
+            </>
+          )}
         </div>
       </div>
 

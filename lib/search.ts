@@ -36,7 +36,13 @@ export function buildPhoneSearchIndex(p: Smartphone): { fullText: string; normal
     p.keyHighlights?.battery,
     p.keyHighlights?.processor,
     p.keyHighlights?.charging,
+    p.category,
+    p.accessoryType,
   ];
+
+  if (p.brand === 'Oraimo' || p.category === 'Accessories') {
+    parts.push('accessory accessories oraimo smartwatch smart watch earbuds earphones charging cable charger cord');
+  }
 
   if (p.variants) {
     p.variants.forEach((v) => {

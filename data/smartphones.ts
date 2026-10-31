@@ -16,12 +16,20 @@ export const BRANDS = [
   'Tecno',
   'Realme',
   'Honor',
+  'Oraimo',
   'OnePlus',
   'Google',
   'Motorola',
   'Nothing',
   'Huawei',
   'Sony',
+];
+
+export const ACCESSORY_CATEGORIES = [
+  'All Accessories',
+  'Smart Watches',
+  'Wireless Earbuds',
+  'Charging Cables',
 ];
 
 export const RAM_OPTIONS = ['3GB', '4GB', '6GB', '8GB', '12GB', '16GB'];

@@ -312,8 +312,11 @@ export default function ProductDetailPage() {
   const similarPhones = SMARTPHONES.filter(
     (p) =>
       p.id !== phone.id &&
-      (p.brand.toLowerCase() === phone.brand.toLowerCase() ||
-        Math.abs(p.basePricePKR - phone.basePricePKR) < 50000)
+      (phone.category === 'Accessories'
+        ? p.category === 'Accessories'
+        : p.category !== 'Accessories' &&
+          (p.brand.toLowerCase() === phone.brand.toLowerCase() ||
+            Math.abs(p.basePricePKR - phone.basePricePKR) < 50000))
   ).slice(0, 4);
 
   // Base customer reviews for social proof
@@ -630,7 +633,7 @@ export default function ProductDetailPage() {
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-black bg-emerald-50 text-emerald-700 border border-emerald-200">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  100% PTA Approved (DIRBS Verified)
+                  {phone.category === 'Accessories' ? '100% Genuine Accessory (Official)' : '100% PTA Approved (DIRBS Verified)'}
                 </span>
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-extrabold bg-sky-50 text-[#0b3c68] border border-sky-100">
                   <Award className="w-3.5 h-3.5 text-[#48afff]" />
@@ -729,10 +732,10 @@ export default function ProductDetailPage() {
               <div className="space-y-2 pt-2 border-t border-slate-100">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-extrabold uppercase tracking-wider text-slate-500">
-                    Select Storage &amp; RAM:
+                    {phone.category === 'Accessories' ? 'Select Edition / Length:' : 'Select Storage & RAM:'}
                   </span>
                   <span className="font-black text-[#0b3c68]">
-                    {selectedVariant.ram} - {selectedVariant.storage}
+                    {phone.category === 'Accessories' && selectedVariant.ram === 'Standard' ? selectedVariant.storage : `${selectedVariant.ram} - ${selectedVariant.storage}`}
                   </span>
                 </div>
 
@@ -752,7 +755,7 @@ export default function ProductDetailPage() {
                       >
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-black text-slate-900">
-                            {variant.ram} - {variant.storage}
+                            {phone.category === 'Accessories' && variant.ram === 'Standard' ? variant.storage : `${variant.ram} - ${variant.storage}`}
                           </span>
                           {isSelected && (
                             <span className="w-4 h-4 rounded-full bg-[#0b3c68] text-white flex items-center justify-center text-[10px]">
@@ -1506,7 +1509,7 @@ export default function ProductDetailPage() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                  Similar Smartphones in Pakistan
+                  {phone.category === 'Accessories' ? 'Similar Genuine Accessories in Pakistan' : 'Similar Smartphones in Pakistan'}
                 </h2>
                 <p className="text-xs text-slate-500 mt-0.5">
                   Top alternative models in the same price and brand category
