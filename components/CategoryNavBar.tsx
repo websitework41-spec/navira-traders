@@ -11,8 +11,6 @@ import {
   Volume2,
   Cable,
   Tablet,
-  Laptop,
-  Sparkles,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -48,13 +46,6 @@ export const CATEGORY_NAV_ITEMS: CategoryNavItem[] = [
     targetTab: 'Smartwatch',
   },
   {
-    id: 'trimmers-shaver',
-    name: 'Trimmers Shaver',
-    image: 'https://static.priceoye.pk/images/home/trimmers-shaver.webp',
-    fallbackIcon: Sparkles,
-    targetTab: 'Other',
-  },
-  {
     id: 'power-banks',
     name: 'Power Banks',
     image: 'https://static.priceoye.pk/images/home/power-banks.webp',
@@ -87,13 +78,6 @@ export const CATEGORY_NAV_ITEMS: CategoryNavItem[] = [
     name: 'Tablets',
     image: 'https://static.priceoye.pk/images/home/tablets.webp',
     fallbackIcon: Tablet,
-    targetTab: 'Other',
-  },
-  {
-    id: 'laptops',
-    name: 'Laptops',
-    image: 'https://static.priceoye.pk/images/home/laptops.webp',
-    fallbackIcon: Laptop,
     targetTab: 'Other',
   },
 ];
