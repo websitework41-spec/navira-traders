@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import {
   ShieldCheck,
@@ -11,16 +11,10 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  Flame,
-  Truck,
-  Percent,
   CreditCard,
-  CheckCircle2,
-  PhoneCall,
   Smartphone,
 } from 'lucide-react';
 import { PhoneImageWithFallback } from './PhoneImageWithFallback';
-import { formatPKR } from '@/data/smartphones';
 import { HeroBannerItem } from '@/types';
 import { DEFAULT_HERO_BANNERS } from '@/lib/banners';
 
@@ -52,7 +46,15 @@ export function HeroBanner({
     return DEFAULT_HERO_BANNERS;
   });
 
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const baseSlides = slides.length > 0 ? slides : DEFAULT_HERO_BANNERS;
+  const totalSlides = baseSlides.length;
+
+  // Infinite looping track: prepend clone of last slide, append clone of first slide
+  const extendedSlides = [baseSlides[totalSlides - 1], ...baseSlides, baseSlides[0]];
+
+  // Index 1 corresponds to baseSlides[0]
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
@@ -98,19 +100,47 @@ export function HeroBanner({
     };
   }, []);
 
-  const totalSlides = slides.length > 0 ? slides.length : DEFAULT_HERO_BANNERS.length;
-
+  // Slide navigation with smooth sliding animation
   const nextSlide = useCallback(() => {
-    setCurrentSlideIndex((prev) => (prev + 1) % totalSlides);
-  }, [totalSlides]);
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
+  }, []);
 
   const prevSlide = useCallback(() => {
-    setCurrentSlideIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
-  }, [totalSlides]);
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev - 1);
+  }, []);
 
+  const goToSlide = (slideIdx: number) => {
+    setIsTransitioning(true);
+    setCurrentIndex(slideIdx + 1);
+  };
+
+  // Seamless jump without animation at ends of clone track
+  const handleTransitionEnd = () => {
+    if (currentIndex >= totalSlides + 1) {
+      setIsTransitioning(false);
+      setCurrentIndex(1);
+    } else if (currentIndex <= 0) {
+      setIsTransitioning(false);
+      setCurrentIndex(totalSlides);
+    }
+  };
+
+  // Automatic slider: moves every 3.5 seconds (in the 3-4s range requested)
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [nextSlide, isPaused]);
+
+  // Touch Swipe Handlers
   const minSwipeDistance = 45;
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true);
     setTouchEndX(null);
     setTouchStartX(e.targetTouches[0].clientX);
   };
@@ -120,6 +150,7 @@ export function HeroBanner({
   };
 
   const handleTouchEnd = () => {
+    setIsPaused(false);
     if (!touchStartX || !touchEndX) return;
     const distance = touchStartX - touchEndX;
     if (distance > minSwipeDistance) {
@@ -129,89 +160,106 @@ export function HeroBanner({
     }
   };
 
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(nextSlide, 6500);
-    return () => clearInterval(interval);
-  }, [nextSlide, isPaused]);
-
-  const slide = slides[currentSlideIndex] || slides[0] || DEFAULT_HERO_BANNERS[0];
-  const isGraphic = slide.bannerType === 'graphic' || Boolean(slide.image && slide.image.includes('panoramic'));
+  // Active dot index (0 to totalSlides - 1)
+  const activeDotIndex = (currentIndex - 1 + totalSlides) % totalSlides;
 
   return (
     <section className="relative w-full pb-6 space-y-4 sm:space-y-5">
-      {/* 1. Full-Width Panoramic Hero Slider matching PriceOye clean aesthetic */}
+      {/* 1. Full-Width Panoramic Hero Slider matching PriceOye clean aesthetic with 3.5s smooth slide animation */}
       <div
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl transition-all duration-700 aspect-[16/6] sm:aspect-[33/10] min-h-[190px] sm:min-h-[260px] md:min-h-[340px] lg:min-h-[400px] max-h-[580px] group touch-pan-y bg-slate-950 border border-slate-200/80"
+        className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl aspect-[16/6] sm:aspect-[33/10] min-h-[190px] sm:min-h-[260px] md:min-h-[340px] lg:min-h-[400px] max-h-[580px] group touch-pan-y bg-slate-100 border border-slate-200/80 select-none"
       >
-        {/* Slide Content: Clean Panoramic Graphic Banner OR Product Showcase */}
-        {isGraphic ? (
-          <Link
-            href={slide.link || '/#catalog'}
-            className="relative w-full h-full block overflow-hidden group/graphic"
-          >
-            <img
-              src={slide.image}
-              alt={slide.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover/graphic:scale-[1.015]"
-            />
+        {/* Animated Carousel Track: Translates horizontally with smooth transition */}
+        <div
+          className={`flex w-full h-full ${
+            isTransitioning
+              ? 'transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]'
+              : 'transition-none'
+          }`}
+          style={{ transform: `translate3d(-${currentIndex * 100}%, 0, 0)` }}
+          onTransitionEnd={handleTransitionEnd}
+        >
+          {extendedSlides.map((slide, sIdx) => {
+            const isGraphic = slide.bannerType === 'graphic' || Boolean(slide.image && slide.image.includes('panoramic'));
 
-            {/* Optional Floating CTAs if overlay is explicitly desired */}
-            {!slide.hideOverlay && (slide.title || slide.badge) && (
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent p-5 sm:p-10 flex flex-col justify-end">
-                {slide.badge && (
-                  <span className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-amber-400 text-slate-950 mb-2 shadow-md">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    {slide.badge}
-                  </span>
-                )}
-                <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight drop-shadow-md">
-                  {slide.title}
-                </h2>
-                {slide.highlight && (
-                  <p className="text-sm sm:text-base text-sky-200 font-bold mt-1 drop-shadow-sm">
-                    {slide.highlight}
-                  </p>
+            return (
+              <div
+                key={`${slide.id}-${sIdx}`}
+                className="w-full h-full flex-shrink-0 relative overflow-hidden"
+                style={{ width: '100%' }}
+              >
+                {isGraphic ? (
+                  <Link
+                    href={slide.link || '/#catalog'}
+                    className="relative w-full h-full block overflow-hidden group/graphic"
+                  >
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      loading={sIdx <= 2 ? 'eager' : 'lazy'}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover/graphic:scale-[1.015]"
+                    />
+
+                    {/* Optional Floating CTAs if overlay is explicitly desired */}
+                    {!slide.hideOverlay && (slide.title || slide.badge) && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent p-5 sm:p-10 flex flex-col justify-end">
+                        {slide.badge && (
+                          <span className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-amber-400 text-slate-950 mb-2 shadow-md">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            {slide.badge}
+                          </span>
+                        )}
+                        <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight drop-shadow-md">
+                          {slide.title}
+                        </h2>
+                        {slide.highlight && (
+                          <p className="text-sm sm:text-base text-sky-200 font-bold mt-1 drop-shadow-sm">
+                            {slide.highlight}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </Link>
+                ) : (
+                  <div className="relative z-10 w-full h-full p-6 sm:p-12 flex items-center justify-between">
+                    <div className="max-w-xl space-y-3">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-[#48afff]/25 text-sky-200 border border-[#48afff]/40">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        {slide.badge}
+                      </span>
+                      <h1 className="text-2xl sm:text-4xl font-extrabold text-white">
+                        {slide.title}
+                      </h1>
+                      <p className="text-sm text-slate-200">{slide.subtitle}</p>
+                      <Link
+                        href={slide.link || '/#catalog'}
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#48afff] hover:bg-[#229eff] text-white text-xs font-bold"
+                      >
+                        <span>{slide.ctaText || 'Shop Deal'}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                    <div className="w-64 h-64 relative hidden sm:block">
+                      <PhoneImageWithFallback
+                        src={slide.image}
+                        alt={slide.title}
+                        brand={slide.brand || 'Navira'}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
                 )}
               </div>
-            )}
-          </Link>
-        ) : (
-          <div className="relative z-10 w-full h-full p-6 sm:p-12 flex items-center justify-between">
-            <div className="max-w-xl space-y-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-[#48afff]/25 text-sky-200 border border-[#48afff]/40">
-                <Sparkles className="w-3.5 h-3.5" />
-                {slide.badge}
-              </span>
-              <h1 className="text-2xl sm:text-4xl font-extrabold text-white">
-                {slide.title}
-              </h1>
-              <p className="text-sm text-slate-200">{slide.subtitle}</p>
-              <Link
-                href={slide.link || '/#catalog'}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#48afff] hover:bg-[#229eff] text-white text-xs font-bold"
-              >
-                <span>{slide.ctaText || 'Shop Deal'}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-            <div className="w-64 h-64 relative hidden sm:block">
-              <PhoneImageWithFallback
-                src={slide.image}
-                alt={slide.title}
-                brand={slide.brand || 'Navira'}
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
-        )}
+            );
+          })}
+        </div>
 
-        {/* Floating Left / Right Panoramic Navigation Arrows matching PriceOye */}
+        {/* Floating Left / Right Panoramic Navigation Arrows */}
         <button
           onClick={prevSlide}
           className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-12 sm:w-10 sm:h-16 rounded-xl bg-slate-950/45 hover:bg-slate-950/80 text-white/90 hover:text-white backdrop-blur-md flex items-center justify-center transition-all cursor-pointer border border-white/10 shadow-xl active:scale-95 group/arrow"
@@ -228,14 +276,14 @@ export function HeroBanner({
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover/arrow:translate-x-0.5 transition-transform" />
         </button>
 
-        {/* Floating Minimal Pagination Dots */}
+        {/* Floating Minimal Pagination Dots with Smooth Pill Expansion */}
         <div className="absolute bottom-2.5 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 bg-slate-950/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 shadow-lg">
-          {slides.map((s, idx) => (
+          {baseSlides.map((s, idx) => (
             <button
-              key={s.id}
-              onClick={() => setCurrentSlideIndex(idx)}
-              className={`transition-all cursor-pointer rounded-full ${
-                currentSlideIndex === idx
+              key={s.id || idx}
+              onClick={() => goToSlide(idx)}
+              className={`transition-all duration-300 cursor-pointer rounded-full ${
+                activeDotIndex === idx
                   ? 'w-7 sm:w-8 h-1.5 sm:h-2 bg-white shadow-sm'
                   : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/40 hover:bg-white/80'
               }`}
