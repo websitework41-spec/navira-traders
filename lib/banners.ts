@@ -28,10 +28,10 @@ export const DEFAULT_HERO_BANNERS: HeroBannerItem[] = [
   },
   {
     "id": "apple-iphone-18-pro-max",
-    "badge": "Next-Gen Apple Flagship",
-    "badgeColor": "bg-slate-500/15 text-slate-800 border-slate-400/40",
+    "badge": "Signature Burgundy Titanium",
+    "badgeColor": "bg-rose-500/15 text-rose-900 border-rose-400/40",
     "title": "Apple iPhone 18 Pro Max",
-    "highlight": "All-New A19 Pro • Liquid Titanium",
+    "highlight": "Signature Burgundy Titanium • A19 Pro",
     "subtitle": "Apple Intelligence enhanced, triple 48MP studio fusion camera with 10x periscope optical zoom, and 35h all-day battery. 100% PTA Approved.",
     "phoneName": "Apple iPhone 18 Pro Max",
     "brand": "Apple",
@@ -42,14 +42,14 @@ export const DEFAULT_HERO_BANNERS: HeroBannerItem[] = [
     "image": "/banners/apple-iphone-18-pro-panoramic.webp",
     "link": "/product/apple-iphone-18-pro-max",
     "ctaText": "View iPhone 18 Pro",
-    "gradient": "from-[#f5f5f7] via-[#eceef2] to-[#e1e4eb]",
+    "gradient": "from-[#fbf7f8] via-[#f1ebed] to-[#e9e1e4]",
     "bannerType": "graphic",
     "aspectRatio": "16:5",
     "hideOverlay": true,
     "isActive": true,
     "order": 2,
     "createdAt": "2026-11-03T14:00:00.000Z",
-    "updatedAt": "2026-11-03T15:30:00.000Z"
+    "updatedAt": "2026-11-03T16:15:00.000Z"
   },
   {
     "id": "oppo-reno-13",

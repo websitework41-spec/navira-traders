@@ -4,7 +4,7 @@
     "slug": "apple-iphone-18-pro-max",
     "name": "Apple iPhone 18 Pro Max",
     "brand": "Apple",
-    "tagline": "Official Apple Next-Gen Flagship with A19 Pro Chip, Titanium Ceramic Body & 1-Year Warranty",
+    "tagline": "Official Apple Flagship in Signature Burgundy Titanium with A19 Pro Chip & 1-Year Warranty",
     "basePricePKR": 549999,
     "originalPricePKR": 589999,
     "discountPercent": 7,
@@ -18,25 +18,25 @@
     "category": "Mobiles",
     "colors": [
       {
-        "name": "Cosmic Titanium",
-        "hex": "#2f3136",
-        "image": "https://images.priceoye.pk/apple-iphone-16-pro-max-pakistan-priceoye-64jdr-500x500.webp",
+        "name": "Burgundy Titanium",
+        "hex": "#49292f",
+        "image": "https://images.priceoye.pk/apple-iphone-18-pro-max-pakistan-priceoye-u4k78-500x500.webp",
         "inStock": true,
-        "stockQty": 5
+        "stockQty": 6
       },
       {
-        "name": "Desert Titanium",
-        "hex": "#c5b59e",
-        "image": "https://images.priceoye.pk/apple-iphone-16-pro-max-pakistan-priceoye-64jdr-500x500.webp",
+        "name": "Ice Blue Titanium",
+        "hex": "#a5b0c2",
+        "image": "https://images.priceoye.pk/apple-iphone-18-pro-max-pakistan-priceoye-bc6sl-500x500.webp",
         "inStock": true,
         "stockQty": 5
       },
       {
         "name": "Natural Titanium",
-        "hex": "#9c9689",
-        "image": "https://images.priceoye.pk/apple-iphone-16-pro-max-pakistan-priceoye-64jdr-500x500.webp",
+        "hex": "#c9c9c8",
+        "image": "https://images.priceoye.pk/apple-iphone-18-pro-max-pakistan-priceoye-3jb06-500x500.webp",
         "inStock": true,
-        "stockQty": 5
+        "stockQty": 4
       }
     ],
     "variants": [
@@ -72,17 +72,17 @@
       }
     ],
     "colorStockMap": {
-      "Cosmic Titanium": {
+      "Burgundy Titanium": {
         "inStock": true,
-        "stockQty": 5
+        "stockQty": 6
       },
-      "Desert Titanium": {
+      "Ice Blue Titanium": {
         "inStock": true,
         "stockQty": 5
       },
       "Natural Titanium": {
         "inStock": true,
-        "stockQty": 5
+        "stockQty": 4
       }
     },
     "keyHighlights": {
@@ -7464,25 +7464,25 @@
     "discountPercent": 20,
     "rating": 5,
     "reviewCount": 55,
-    "inStock": true,
-    "stockQty": 12,
-    "isNew": true,
+    "inStock": false,
+    "stockQty": 0,
+    "isNew": false,
     "isTrending": true,
     "isBestSeller": true,
     "colors": [
       {
+        "name": "Luminous Blue",
+        "hex": "#2c5282",
+        "image": "https://images.priceoye.pk/oppo-reno-13-pakistan-priceoye-l2ny5-500x500.webp",
+        "inStock": false,
+        "stockQty": 0
+      },
+      {
         "name": "Plume White",
         "hex": "#f5f5f7",
         "image": "https://images.priceoye.pk/oppo-reno-13-pakistan-priceoye-7tov3-500x500.webp",
-        "inStock": true,
-        "stockQty": 6
-      },
-      {
-        "name": "Midnight Purple",
-        "hex": "#372847",
-        "image": "https://images.priceoye.pk/oppo-reno-13-pakistan-priceoye-l2ny5-500x500.webp",
-        "inStock": true,
-        "stockQty": 6
+        "inStock": false,
+        "stockQty": 0
       }
     ],
     "variants": [
@@ -7492,19 +7492,19 @@
         "ram": "12GB",
         "pricePKR": 119999,
         "originalPricePKR": 149999,
-        "inStock": true,
-        "stockQty": 12,
+        "inStock": false,
+        "stockQty": 0,
         "costPricePKR": 103200
       }
     ],
     "colorStockMap": {
-      "Plume White": {
-        "inStock": true,
-        "stockQty": 6
+      "Luminous Blue": {
+        "inStock": false,
+        "stockQty": 0
       },
-      "Midnight Purple": {
-        "inStock": true,
-        "stockQty": 6
+      "Plume White": {
+        "inStock": false,
+        "stockQty": 0
       }
     },
     "keyHighlights": {
