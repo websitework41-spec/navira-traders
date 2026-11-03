@@ -1,5 +1,118 @@
 [
   {
+    "id": "apple-iphone-18-pro-max",
+    "slug": "apple-iphone-18-pro-max",
+    "name": "Apple iPhone 18 Pro Max",
+    "brand": "Apple",
+    "tagline": "Official Apple Next-Gen Flagship with A19 Pro Chip, Titanium Ceramic Body & 1-Year Warranty",
+    "basePricePKR": 549999,
+    "originalPricePKR": 589999,
+    "discountPercent": 7,
+    "rating": 5,
+    "reviewCount": 38,
+    "inStock": true,
+    "stockQty": 15,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": true,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Cosmic Titanium",
+        "hex": "#2f3136",
+        "image": "https://images.priceoye.pk/apple-iphone-16-pro-max-pakistan-priceoye-64jdr-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      },
+      {
+        "name": "Desert Titanium",
+        "hex": "#c5b59e",
+        "image": "https://images.priceoye.pk/apple-iphone-16-pro-max-pakistan-priceoye-64jdr-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      },
+      {
+        "name": "Natural Titanium",
+        "hex": "#9c9689",
+        "image": "https://images.priceoye.pk/apple-iphone-16-pro-max-pakistan-priceoye-64jdr-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      }
+    ],
+    "variants": [
+      {
+        "id": "apple-iphone-18-pro-max-256gb",
+        "storage": "256GB",
+        "ram": "12GB",
+        "pricePKR": 549999,
+        "originalPricePKR": 589999,
+        "inStock": true,
+        "stockQty": 5,
+        "costPricePKR": 495000
+      },
+      {
+        "id": "apple-iphone-18-pro-max-512gb",
+        "storage": "512GB",
+        "ram": "12GB",
+        "pricePKR": 599999,
+        "originalPricePKR": 639999,
+        "inStock": true,
+        "stockQty": 5,
+        "costPricePKR": 540000
+      },
+      {
+        "id": "apple-iphone-18-pro-max-1tb",
+        "storage": "1TB",
+        "ram": "12GB",
+        "pricePKR": 679999,
+        "originalPricePKR": 729999,
+        "inStock": true,
+        "stockQty": 5,
+        "costPricePKR": 615000
+      }
+    ],
+    "colorStockMap": {
+      "Cosmic Titanium": {
+        "inStock": true,
+        "stockQty": 5
+      },
+      "Desert Titanium": {
+        "inStock": true,
+        "stockQty": 5
+      },
+      "Natural Titanium": {
+        "inStock": true,
+        "stockQty": 5
+      }
+    },
+    "keyHighlights": {
+      "display": "6.9\" Super Retina XDR OLED 120Hz ProMotion (3000 nits)",
+      "processor": "Apple A19 Pro Bionic (Next-Gen Neural Accelerator)",
+      "camera": "Triple 48MP Studio Fusion Camera with 10x Optical Telephoto",
+      "battery": "5100 mAh High-Density Cell with 35+ Hours Video Playback",
+      "charging": "45W Wired Ultra-Fast Charging & 25W MagSafe"
+    },
+    "specs": {
+      "screen": "6.9 inches Super Retina XDR OLED, 120Hz ProMotion, 1320 x 2868 pixels",
+      "refreshRate": "120Hz",
+      "displayType": "Super Retina XDR OLED",
+      "processor": "Apple A19 Pro (6-core CPU, 6-core GPU, 16-core Neural Engine)",
+      "chipsetBrand": "Apple",
+      "mainCamera": "48 MP (wide, OIS) + 48 MP (periscope telephoto 10x) + 48 MP (ultrawide)",
+      "selfieCamera": "24 MP TrueDepth with Center Stage Autofocus",
+      "battery": "5100 mAh Li-Ion",
+      "charging": "45W Fast Charging (50% in 20 min) + 25W Qi2/MagSafe",
+      "os": "iOS 19 (Apple Intelligence Enhanced)",
+      "network": "5G Ultra Wideband / Sub-6GHz / 4G LTE",
+      "security": "Face ID Facial Recognition",
+      "weight": "228g",
+      "waterResistance": "IP68 Water/Dust Resistant (6m for up to 30 mins)",
+      "ptaStatus": "Official PTA Approved",
+      "warranty": "1 Year Official Apple International + Navira Traders Replacement Warranty"
+    },
+    "costPricePKR": 495000
+  },
+  {
     "id": "samsung-galaxy-s22-ultra",
     "slug": "samsung-galaxy-s22-ultra",
     "name": "Samsung Galaxy S22 Ultra",

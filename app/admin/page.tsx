@@ -74,6 +74,7 @@ import {
   ShieldAlert,
   Percent,
   Award,
+  Download,
 } from 'lucide-react';
 
 type AdminTab = 'dashboard' | 'analytics' | 'products' | 'accessories' | 'inventory' | 'banners' | 'orders' | 'coupons' | 'customers' | 'settings';
@@ -1490,6 +1491,15 @@ export default function AdminPortalPage() {
               </button>
             )}
 
+            <a
+              href="/api/admin/products?action=export"
+              download="smartphones.json"
+              className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold shadow-xs transition-all cursor-pointer"
+              title="Download full smartphones.json catalog backup"
+            >
+              <Download className="w-3.5 h-3.5 text-blue-600" />
+              <span className="hidden md:inline">Export Catalog</span>
+            </a>
             <Link
               href="/"
               target="_blank"
@@ -5429,9 +5439,25 @@ export default function AdminPortalPage() {
             setIsProductModalOpen(false);
             setEditingProduct(null);
           }}
-          onSaved={() => {
+          onSaved={(savedProduct?: Smartphone) => {
             setIsProductModalOpen(false);
             setEditingProduct(null);
+            if (savedProduct) {
+              setProducts((prev) => {
+                const idLower = savedProduct.id?.toLowerCase();
+                const slugLower = savedProduct.slug?.toLowerCase();
+                const exists = prev.some(
+                  (p) => p.id?.toLowerCase() === idLower || p.slug?.toLowerCase() === slugLower
+                );
+                if (exists) {
+                  return prev.map((p) =>
+                    p.id?.toLowerCase() === idLower || p.slug?.toLowerCase() === slugLower ? savedProduct : p
+                  );
+                } else {
+                  return [savedProduct, ...prev];
+                }
+              });
+            }
             showToast(
               editingProduct ? 'Product updated successfully!' : 'New product published to store!'
             );
@@ -5696,7 +5722,7 @@ export default function AdminPortalPage() {
 interface ProductFormModalProps {
   product: Smartphone | null;
   onClose: () => void;
-  onSaved: () => void;
+  onSaved: (savedProduct?: Smartphone) => void;
 }
 
 function ProductFormModal({ product, onClose, onSaved }: ProductFormModalProps) {
@@ -5914,12 +5940,11 @@ function ProductFormModal({ product, onClose, onSaved }: ProductFormModalProps) 
       });
 
       const data = await res.json();
-      if (data.success && data.product) {
-        saveProductLocally(data.product);
-      }
-      onSaved();
+      const finalProduct = (data.success && data.product) ? data.product : payload;
+      saveProductLocally(finalProduct);
+      onSaved(finalProduct);
     } catch {
-      onSaved();
+      onSaved(payload);
     } finally {
       setIsSubmitting(false);
     }

@@ -47,19 +47,25 @@ export function getActiveCatalog(baseList: Smartphone[] = SMARTPHONES): Smartpho
   // Create a map of custom/updated phones
   const customMap = new Map<string, Smartphone>();
   custom.forEach((p) => {
-    if (p.id) customMap.set(p.id, p);
-    if (p.slug) customMap.set(p.slug, p);
+    if (p.id) customMap.set(p.id.toLowerCase(), p);
+    if (p.slug) customMap.set(p.slug.toLowerCase(), p);
   });
 
   // Apply updates to existing base list
   let result = baseList.map((p) => {
-    const updated = customMap.get(p.id) || (p.slug ? customMap.get(p.slug) : undefined);
+    const updated =
+      (p.id ? customMap.get(p.id.toLowerCase()) : undefined) ||
+      (p.slug ? customMap.get(p.slug.toLowerCase()) : undefined);
     return updated ? updated : p;
   });
 
   // Prepend any newly added custom phones that are not yet in the base list
   custom.forEach((p) => {
-    const exists = result.some((item) => item.id === p.id || (p.slug && item.slug === p.slug));
+    const exists = result.some(
+      (item) =>
+        (p.id && item.id?.toLowerCase() === p.id.toLowerCase()) ||
+        (p.slug && item.slug?.toLowerCase() === p.slug.toLowerCase())
+    );
     if (!exists) {
       result.unshift(p);
     }
@@ -67,9 +73,9 @@ export function getActiveCatalog(baseList: Smartphone[] = SMARTPHONES): Smartpho
 
   // Filter out any deleted products
   if (deleted.length > 0) {
-    const deletedSet = new Set(deleted.map((d) => d.toLowerCase()));
+    const deletedSet = new Set(deleted.map((d) => d.toLowerCase().trim()));
     result = result.filter(
-      (p) => !deletedSet.has(p.id?.toLowerCase()) && !deletedSet.has(p.slug?.toLowerCase())
+      (p) => !deletedSet.has(p.id?.toLowerCase().trim()) && !deletedSet.has(p.slug?.toLowerCase().trim())
     );
   }
 
@@ -83,14 +89,24 @@ export function markProductDeletedLocally(phoneId: string, slug?: string) {
   if (typeof window === 'undefined') return;
 
   const deleted = getLocalDeletedIds();
-  if (phoneId && !deleted.includes(phoneId)) deleted.push(phoneId);
-  if (slug && !deleted.includes(slug)) deleted.push(slug);
+  const idLower = phoneId?.toLowerCase().trim();
+  const slugLower = slug?.toLowerCase().trim();
+
+  if (idLower && !deleted.map((d) => d.toLowerCase().trim()).includes(idLower)) {
+    deleted.push(idLower);
+  }
+  if (slugLower && !deleted.map((d) => d.toLowerCase().trim()).includes(slugLower)) {
+    deleted.push(slugLower);
+  }
 
   localStorage.setItem(DELETED_KEY, JSON.stringify(deleted));
 
   // Also remove from custom products
   const custom = getLocalCustomProducts().filter(
-    (p) => p.id !== phoneId && (!slug || p.slug !== slug)
+    (p) =>
+      p.id?.toLowerCase().trim() !== idLower &&
+      p.slug?.toLowerCase().trim() !== idLower &&
+      (!slugLower || (p.id?.toLowerCase().trim() !== slugLower && p.slug?.toLowerCase().trim() !== slugLower))
   );
   localStorage.setItem(CUSTOM_KEY, JSON.stringify(custom));
 
@@ -106,15 +122,22 @@ export function markProductDeletedLocally(phoneId: string, slug?: string) {
 export function saveProductLocally(product: Smartphone) {
   if (typeof window === 'undefined') return;
 
+  const idLower = product.id?.toLowerCase().trim();
+  const slugLower = product.slug?.toLowerCase().trim();
+
   // Ensure it's not marked as deleted
   const deleted = getLocalDeletedIds().filter(
-    (id) => id.toLowerCase() !== product.id?.toLowerCase() && id.toLowerCase() !== product.slug?.toLowerCase()
+    (id) => id.toLowerCase().trim() !== idLower && id.toLowerCase().trim() !== slugLower
   );
   localStorage.setItem(DELETED_KEY, JSON.stringify(deleted));
 
   // Upsert in custom products
   const custom = getLocalCustomProducts().filter(
-    (p) => p.id !== product.id && p.slug !== product.slug
+    (p) =>
+      p.id?.toLowerCase().trim() !== idLower &&
+      p.slug?.toLowerCase().trim() !== slugLower &&
+      (!idLower || p.slug?.toLowerCase().trim() !== idLower) &&
+      (!slugLower || p.id?.toLowerCase().trim() !== slugLower)
   );
   custom.unshift(product);
   localStorage.setItem(CUSTOM_KEY, JSON.stringify(custom));

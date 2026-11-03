@@ -194,10 +194,12 @@ function HomeContent() {
     return allAccessories.filter((p) => p.accessoryType === accessoryTab);
   }, [allAccessories, accessoryTab]);
 
+  const serverCatalogRef = useRef<Smartphone[] | null>(null);
+
   // Sync catalog with dynamic database / disk updates & local deletions from admin
   useEffect(() => {
     const syncCatalog = () => {
-      setCatalog(getActiveCatalog());
+      setCatalog(getActiveCatalog(serverCatalogRef.current || SMARTPHONES));
     };
 
     const fetchCatalog = () => {
@@ -205,6 +207,7 @@ function HomeContent() {
         .then((res) => res.json())
         .then((data) => {
           if (data.success && Array.isArray(data.products)) {
+            serverCatalogRef.current = data.products;
             setCatalog(getActiveCatalog(data.products));
           } else {
             syncCatalog();

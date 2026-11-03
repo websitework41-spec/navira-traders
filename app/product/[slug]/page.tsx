@@ -68,7 +68,14 @@ export default function ProductDetailPage() {
   const params = useParams();
   const rawSlug = (params?.slug as string) || '';
   const slug = sanitizeText(rawSlug, 100);
-  const [phone, setPhone] = useState<Smartphone>(() => getPhoneBySlug(slug) || SMARTPHONES[0]);
+  const [phone, setPhone] = useState<Smartphone>(() => {
+    const active = typeof window !== 'undefined' ? getActiveCatalog() : SMARTPHONES;
+    return (
+      active.find((p) => p.slug?.toLowerCase() === slug.toLowerCase() || p.id?.toLowerCase() === slug.toLowerCase()) ||
+      getPhoneBySlug(slug) ||
+      SMARTPHONES[0]
+    );
+  });
 
   useEffect(() => {
     // Check if product is marked deleted
@@ -83,7 +90,8 @@ export default function ProductDetailPage() {
       .then((data) => {
         if (data.success && Array.isArray(data.products)) {
           const active = getActiveCatalog(data.products);
-          const found = active.find((p: Smartphone) => p.slug === slug || p.id === slug);
+          const slugLower = slug.toLowerCase();
+          const found = active.find((p: Smartphone) => p.slug?.toLowerCase() === slugLower || p.id?.toLowerCase() === slugLower);
           if (found) {
             setPhone(found);
             const inStockC = found.colors.find((c: any) => c.inStock !== false) || found.colors[0];

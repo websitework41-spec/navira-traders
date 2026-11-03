@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import { Smartphone } from '@/types';
 
 export const dynamic = 'force-dynamic';
@@ -8,6 +9,13 @@ export const revalidate = 0;
 
 const dataFilePath = path.join(process.cwd(), 'data', 'smartphones.json');
 const deletedFilePath = path.join(process.cwd(), 'data', 'deleted_products.json');
+const tmpDataFilePath = path.join(os.tmpdir(), 'navira_smartphones.json');
+const tmpDeletedFilePath = path.join(os.tmpdir(), 'navira_deleted_products.json');
+
+declare global {
+  var __naviraSmartphonesCache: Smartphone[] | undefined;
+  var __naviraDeletedIdsCache: string[] | undefined;
+}
 
 const NO_CACHE_HEADERS = {
   'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
@@ -15,32 +23,56 @@ const NO_CACHE_HEADERS = {
   Expires: '0',
 };
 
-// Helper to read deleted IDs from disk
+// Helper to read deleted IDs from memory, tmp, or project disk
 function getDeletedIdsFromDisk(): string[] {
+  if (Array.isArray(globalThis.__naviraDeletedIdsCache)) {
+    return globalThis.__naviraDeletedIdsCache;
+  }
+  try {
+    if (fs.existsSync(tmpDeletedFilePath)) {
+      const data = fs.readFileSync(tmpDeletedFilePath, 'utf-8');
+      const list = JSON.parse(data) as string[];
+      globalThis.__naviraDeletedIdsCache = list;
+      return list;
+    }
+  } catch {}
   try {
     if (fs.existsSync(deletedFilePath)) {
       const data = fs.readFileSync(deletedFilePath, 'utf-8');
-      return JSON.parse(data) as string[];
+      const list = JSON.parse(data) as string[];
+      globalThis.__naviraDeletedIdsCache = list;
+      return list;
     }
   } catch (err) {
     console.error('Error reading deleted_products.json:', err);
   }
+  globalThis.__naviraDeletedIdsCache = [];
   return [];
 }
 
-// Helper to write deleted IDs to disk
+// Helper to write deleted IDs to memory, project disk and tmp disk
 function saveDeletedIdToDisk(id: string, slug?: string) {
   try {
-    const list = getDeletedIdsFromDisk();
+    const list = [...getDeletedIdsFromDisk()];
     const idLower = id.toLowerCase();
     if (!list.includes(idLower)) list.push(idLower);
     if (slug) {
       const slugLower = slug.toLowerCase();
       if (!list.includes(slugLower)) list.push(slugLower);
     }
-    fs.writeFileSync(deletedFilePath, JSON.stringify(list, null, 2), 'utf-8');
+    globalThis.__naviraDeletedIdsCache = list;
+
+    // Try saving to project disk (works in local dev / repo)
+    try {
+      fs.writeFileSync(deletedFilePath, JSON.stringify(list, null, 2), 'utf-8');
+    } catch {}
+
+    // Fallback/parallel write to tmp (works in serverless environments)
+    try {
+      fs.writeFileSync(tmpDeletedFilePath, JSON.stringify(list, null, 2), 'utf-8');
+    } catch {}
   } catch (err) {
-    console.error('Error writing deleted_products.json:', err);
+    console.error('Error saving deleted id:', err);
   }
 }
 
@@ -48,40 +80,81 @@ function saveDeletedIdToDisk(id: string, slug?: string) {
 function removeDeletedIdFromDisk(id: string, slug?: string) {
   try {
     const list = getDeletedIdsFromDisk();
-    const idLower = id.toLowerCase();
+    const idLower = id?.toLowerCase();
     const slugLower = slug?.toLowerCase();
     const filtered = list.filter((item) => item !== idLower && item !== slugLower);
-    fs.writeFileSync(deletedFilePath, JSON.stringify(filtered, null, 2), 'utf-8');
+    globalThis.__naviraDeletedIdsCache = filtered;
+
+    try {
+      fs.writeFileSync(deletedFilePath, JSON.stringify(filtered, null, 2), 'utf-8');
+    } catch {}
+    try {
+      fs.writeFileSync(tmpDeletedFilePath, JSON.stringify(filtered, null, 2), 'utf-8');
+    } catch {}
   } catch {}
 }
 
-// Helper to read current smartphones
+// Helper to read current smartphones from memory, tmp, or project disk
 function getSmartphonesFromDisk(): Smartphone[] {
-  try {
-    if (fs.existsSync(dataFilePath)) {
-      const fileData = fs.readFileSync(dataFilePath, 'utf-8');
-      const phones = JSON.parse(fileData) as Smartphone[];
-      const deletedIds = getDeletedIdsFromDisk();
+  let phones: Smartphone[] = [];
 
-      if (deletedIds.length > 0) {
-        const deletedSet = new Set(deletedIds);
-        return phones.filter(
-          (p) => !deletedSet.has(p.id?.toLowerCase()) && !deletedSet.has(p.slug?.toLowerCase())
-        );
+  if (Array.isArray(globalThis.__naviraSmartphonesCache) && globalThis.__naviraSmartphonesCache.length > 0) {
+    phones = globalThis.__naviraSmartphonesCache;
+  } else {
+    try {
+      if (fs.existsSync(tmpDataFilePath)) {
+        const fileData = fs.readFileSync(tmpDataFilePath, 'utf-8');
+        phones = JSON.parse(fileData) as Smartphone[];
       }
-      return phones;
+    } catch {}
+
+    if (!phones || phones.length === 0) {
+      try {
+        if (fs.existsSync(dataFilePath)) {
+          const fileData = fs.readFileSync(dataFilePath, 'utf-8');
+          phones = JSON.parse(fileData) as Smartphone[];
+        }
+      } catch (err) {
+        console.error('Error reading smartphones.json:', err);
+      }
     }
-  } catch (err) {
-    console.error('Error reading smartphones.json:', err);
   }
+
+  if (Array.isArray(phones) && phones.length > 0) {
+    globalThis.__naviraSmartphonesCache = phones;
+    const deletedIds = getDeletedIdsFromDisk();
+
+    if (deletedIds.length > 0) {
+      const deletedSet = new Set(deletedIds.map((d) => d.toLowerCase()));
+      return phones.filter(
+        (p) => !deletedSet.has(p.id?.toLowerCase()) && !deletedSet.has(p.slug?.toLowerCase())
+      );
+    }
+    return phones;
+  }
+
   return [];
 }
 
-// Helper to write smartphones to disk
+// Helper to write smartphones to memory, project disk and tmp disk
 function saveSmartphonesToDisk(phones: Smartphone[]): boolean {
   try {
-    fs.writeFileSync(dataFilePath, JSON.stringify(phones, null, 2), 'utf-8');
-    return true;
+    globalThis.__naviraSmartphonesCache = phones;
+    let written = false;
+
+    // 1. Try writing directly to project directory
+    try {
+      fs.writeFileSync(dataFilePath, JSON.stringify(phones, null, 2), 'utf-8');
+      written = true;
+    } catch {}
+
+    // 2. Also write to os.tmpdir() for serverless / container execution
+    try {
+      fs.writeFileSync(tmpDataFilePath, JSON.stringify(phones, null, 2), 'utf-8');
+      written = true;
+    } catch {}
+
+    return written;
   } catch (err) {
     console.error('Error writing to smartphones.json:', err);
     return false;
@@ -93,6 +166,18 @@ export async function GET(request: Request) {
   try {
     const phones = getSmartphonesFromDisk();
     const { searchParams } = new URL(request.url);
+
+    if (searchParams.get('action') === 'export') {
+      return new NextResponse(JSON.stringify(phones, null, 2), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Disposition': 'attachment; filename="smartphones.json"',
+          ...NO_CACHE_HEADERS,
+        },
+      });
+    }
+
     const search = (searchParams.get('q') || searchParams.get('search') || '').toLowerCase().trim();
     const brand = searchParams.get('brand') || '';
     const stockStatus = searchParams.get('status') || '';
@@ -328,28 +413,40 @@ export async function DELETE(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     let id = searchParams.get('id') || searchParams.get('slug');
+    let slug = searchParams.get('slug') || searchParams.get('id');
 
-    if (!id) {
+    if (!id && !slug) {
       try {
         const body = await request.json();
         id = body.id || body.slug;
+        slug = body.slug || body.id;
       } catch {}
     }
 
-    if (!id) {
+    if (!id && !slug) {
       return NextResponse.json(
         { success: false, error: 'Product ID or Slug is required to delete.' },
         { status: 400, headers: NO_CACHE_HEADERS }
       );
     }
 
-    // 1. Record ID in deleted_products.json so it never resurrects
-    saveDeletedIdToDisk(id);
+    const idStr = String(id || slug).trim();
+    const slugStr = String(slug || id).trim();
 
-    // 2. Also remove from smartphones.json
+    // 1. Record ID and slug in deleted list so it never resurrects
+    saveDeletedIdToDisk(idStr, slugStr);
+
+    // 2. Also remove from smartphones list in memory and disk
     const phones = getSmartphonesFromDisk();
+    const idLower = idStr.toLowerCase();
+    const slugLower = slugStr.toLowerCase();
+
     const remaining = phones.filter(
-      (p) => p.id?.toLowerCase() !== id?.toLowerCase() && p.slug?.toLowerCase() !== id?.toLowerCase()
+      (p) =>
+        p.id?.toLowerCase() !== idLower &&
+        p.slug?.toLowerCase() !== idLower &&
+        p.id?.toLowerCase() !== slugLower &&
+        p.slug?.toLowerCase() !== slugLower
     );
 
     saveSmartphonesToDisk(remaining);
@@ -358,7 +455,8 @@ export async function DELETE(request: Request) {
       {
         success: true,
         message: 'Product deleted successfully!',
-        deletedId: id,
+        deletedId: idStr,
+        remainingCount: remaining.length,
       },
       { headers: NO_CACHE_HEADERS }
     );
