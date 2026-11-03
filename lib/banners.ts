@@ -4,7 +4,7 @@ export const DEFAULT_HERO_BANNERS: HeroBannerItem[] = [
   {
     "id": "samsung-galaxy-s26-ultra",
     "badge": "Official Galaxy AI Flagship",
-    "badgeColor": "bg-blue-500/25 text-blue-200 border-blue-400/40",
+    "badgeColor": "bg-blue-500/15 text-blue-800 border-blue-400/40",
     "title": "Samsung Galaxy S26 Ultra",
     "highlight": "The Next Era of Galaxy AI",
     "subtitle": "Snapdragon 8 Elite (3nm), 200MP Quad-Telephoto zoom, built-in S-Pen, and 7 years of Android OS updates. 100% PTA Approved.",
@@ -17,19 +17,19 @@ export const DEFAULT_HERO_BANNERS: HeroBannerItem[] = [
     "image": "/banners/samsung-s26-ultra-panoramic.webp",
     "link": "/product/samsung-galaxy-s26-ultra",
     "ctaText": "Shop S26 Ultra",
-    "gradient": "from-[#040a16] via-[#091b33] to-[#10315c]",
+    "gradient": "from-[#f0f4fa] via-[#e4ecf7] to-[#d6e3f5]",
     "bannerType": "graphic",
     "aspectRatio": "16:5",
     "hideOverlay": true,
     "isActive": true,
     "order": 1,
     "createdAt": "2026-11-03T14:00:00.000Z",
-    "updatedAt": "2026-11-03T14:00:00.000Z"
+    "updatedAt": "2026-11-03T15:30:00.000Z"
   },
   {
     "id": "apple-iphone-18-pro-max",
     "badge": "Next-Gen Apple Flagship",
-    "badgeColor": "bg-purple-500/25 text-purple-200 border-purple-400/40",
+    "badgeColor": "bg-slate-500/15 text-slate-800 border-slate-400/40",
     "title": "Apple iPhone 18 Pro Max",
     "highlight": "All-New A19 Pro • Liquid Titanium",
     "subtitle": "Apple Intelligence enhanced, triple 48MP studio fusion camera with 10x periscope optical zoom, and 35h all-day battery. 100% PTA Approved.",
@@ -42,19 +42,19 @@ export const DEFAULT_HERO_BANNERS: HeroBannerItem[] = [
     "image": "/banners/apple-iphone-18-pro-panoramic.webp",
     "link": "/product/apple-iphone-18-pro-max",
     "ctaText": "View iPhone 18 Pro",
-    "gradient": "from-[#06080d] via-[#101420] to-[#1a2030]",
+    "gradient": "from-[#f5f5f7] via-[#eceef2] to-[#e1e4eb]",
     "bannerType": "graphic",
     "aspectRatio": "16:5",
     "hideOverlay": true,
     "isActive": true,
     "order": 2,
     "createdAt": "2026-11-03T14:00:00.000Z",
-    "updatedAt": "2026-11-03T14:00:00.000Z"
+    "updatedAt": "2026-11-03T15:30:00.000Z"
   },
   {
     "id": "oppo-reno-13",
     "badge": "Brand New Launch",
-    "badgeColor": "bg-purple-500/25 text-purple-200 border-purple-400/40",
+    "badgeColor": "bg-purple-500/15 text-purple-800 border-purple-400/40",
     "title": "Oppo Reno 13 Series",
     "highlight": "Starlight Cold Sculpted Glass",
     "subtitle": "Butterfly Shadow design, 50MP Ultra-Clear Sony Camera with AI Livephoto, aerospace metal frame & IP69 all-scenario waterproof. 100% PTA Approved.",
@@ -67,19 +67,19 @@ export const DEFAULT_HERO_BANNERS: HeroBannerItem[] = [
     "image": "/banners/oppo-reno-13-panoramic.webp",
     "link": "/product/oppo-reno-13",
     "ctaText": "Explore Reno 13",
-    "gradient": "from-[#1d152c] via-[#2f2048] to-[#48316e]",
+    "gradient": "from-[#f4f3f8] via-[#e6e3f2] to-[#dad6ee]",
     "bannerType": "graphic",
     "aspectRatio": "16:5",
     "hideOverlay": true,
     "isActive": true,
     "order": 3,
     "createdAt": "2026-11-03T14:00:00.000Z",
-    "updatedAt": "2026-11-03T14:00:00.000Z"
+    "updatedAt": "2026-11-03T15:30:00.000Z"
   },
   {
     "id": "xiaomi-17t-pro",
     "badge": "Leica Camera Master",
-    "badgeColor": "bg-rose-500/25 text-rose-200 border-rose-400/40",
+    "badgeColor": "bg-rose-500/15 text-rose-800 border-rose-400/40",
     "title": "Xiaomi 17T Pro Series",
     "highlight": "Authentic Leica Optics • Master The Light",
     "subtitle": "Dimensity 9400+ processor, 144Hz CrystalRes AMOLED display, 120W HyperCharge, and 50MP Leica Summicron optics. 100% PTA Approved.",
@@ -92,13 +92,13 @@ export const DEFAULT_HERO_BANNERS: HeroBannerItem[] = [
     "image": "/banners/xiaomi-17t-pro-panoramic.webp",
     "link": "/product/xiaomi-17t-pro",
     "ctaText": "Discover 17T Pro",
-    "gradient": "from-[#14070a] via-[#250d14] to-[#3d1622]",
+    "gradient": "from-[#f9f7f6] via-[#eee8e5] to-[#e4dad6]",
     "bannerType": "graphic",
     "aspectRatio": "16:5",
     "hideOverlay": true,
     "isActive": true,
     "order": 4,
     "createdAt": "2026-11-03T14:00:00.000Z",
-    "updatedAt": "2026-11-03T14:00:00.000Z"
+    "updatedAt": "2026-11-03T15:30:00.000Z"
   }
 ];
