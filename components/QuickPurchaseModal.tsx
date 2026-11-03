@@ -689,7 +689,7 @@ export function QuickPurchaseModal({
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
                           <Sparkles className="w-3 h-3 text-[#48afff]" />
-                          Raast Instant ID (Any Banking App):
+                          EasyPaisa & Raast Instant ID:
                         </span>
                         <button
                           type="button"
@@ -704,7 +704,7 @@ export function QuickPurchaseModal({
                           ) : (
                             <>
                               <Copy className="w-3 h-3 text-slate-500" />
-                              <span>Copy Raast</span>
+                              <span>Copy EasyPaisa/Raast</span>
                             </>
                           )}
                         </button>
@@ -999,7 +999,7 @@ export function QuickPurchaseModal({
                   {/* Raast */}
                   <div className="p-2 rounded-xl bg-white border border-blue-100 space-y-0.5">
                     <div className="flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase">
-                      <span>Raast ID:</span>
+                      <span>EasyPaisa & Raast:</span>
                       <button
                         type="button"
                         onClick={() => copyToClipboard(STORE_BANK_DETAILS.raastId, 'raast_q_succ')}
