@@ -170,6 +170,7 @@ export interface HeroBannerItem {
   gradient?: string;
   bannerType?: 'product' | 'graphic';
   aspectRatio?: string;
+  hideOverlay?: boolean;
   isActive: boolean;
   order: number;
   createdAt?: string;

@@ -35,6 +35,7 @@ import { Footer } from '@/components/Footer';
 import { FlashSaleCountdown } from '@/components/FlashSaleCountdown';
 import { sanitizeText } from '@/lib/security';
 import {
+  CatalogBannerOppoReno,
   CatalogBannerS24Ultra,
   CatalogBannerDualCards,
   CatalogBannerBankEMI,
@@ -1274,8 +1275,12 @@ function HomeContent() {
                         {index === 5 && (
                           <CatalogBannerS24Ultra onSelectBrand={handleSelectBrand} />
                         )}
-                        {/* Banner 2: Dual Split Promo Cards (Budget Kings & Keypad Classics) */}
+                        {/* Banner 1.5: Oppo Reno 13 Spotlight Poster */}
                         {index === 11 && (
+                          <CatalogBannerOppoReno onSelectBrand={handleSelectBrand} />
+                        )}
+                        {/* Banner 2: Dual Split Promo Cards (Budget Kings & Keypad Classics) */}
+                        {index === 23 && (
                           <CatalogBannerDualCards
                             onSelectBrand={handleSelectBrand}
                             onFilterBudget={handleFilterBudget}

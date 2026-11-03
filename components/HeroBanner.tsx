@@ -166,7 +166,25 @@ export function HeroBanner({
                 alt={slide.title}
                 className="w-full h-full object-cover sm:object-contain transition-transform duration-700 group-hover/graphic:scale-105"
               />
-              {(slide.title || slide.badge) && (
+              {slide.hideOverlay ? (
+                <>
+                  {slide.badge && (
+                    <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-slate-950/80 text-purple-200 border border-purple-400/40 backdrop-blur-md shadow-lg">
+                        <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+                        {slide.badge}
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20">
+                    <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-950/85 hover:bg-slate-900 text-white text-xs sm:text-sm font-extrabold shadow-xl backdrop-blur-md border border-white/20 transition-all group-hover/graphic:scale-105 group-hover/graphic:bg-[#71459a]">
+                      <span>{slide.ctaText || 'Explore Deals'}</span>
+                      <ArrowRight className="w-4 h-4 text-purple-300" />
+                    </span>
+                  </div>
+                </>
+              ) : (
+                (slide.title || slide.badge) && (
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent p-5 sm:p-10 flex flex-col justify-end">
                   {slide.badge && (
                     <span className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-amber-400 text-slate-950 mb-2 shadow-md">
@@ -194,6 +212,7 @@ export function HeroBanner({
                     </span>
                   </div>
                 </div>
+                )
               )}
             </Link>
           ) : (

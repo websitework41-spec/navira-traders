@@ -7464,25 +7464,25 @@
     "discountPercent": 20,
     "rating": 5,
     "reviewCount": 55,
-    "inStock": false,
-    "stockQty": 0,
-    "isNew": false,
+    "inStock": true,
+    "stockQty": 12,
+    "isNew": true,
     "isTrending": true,
     "isBestSeller": true,
     "colors": [
       {
-        "name": "Luminous Blue",
-        "hex": "#2c5282",
-        "image": "https://images.priceoye.pk/oppo-reno-13-pakistan-priceoye-l2ny5-500x500.webp",
-        "inStock": false,
-        "stockQty": 0
-      },
-      {
         "name": "Plume White",
         "hex": "#f5f5f7",
         "image": "https://images.priceoye.pk/oppo-reno-13-pakistan-priceoye-7tov3-500x500.webp",
-        "inStock": false,
-        "stockQty": 0
+        "inStock": true,
+        "stockQty": 6
+      },
+      {
+        "name": "Midnight Purple",
+        "hex": "#372847",
+        "image": "https://images.priceoye.pk/oppo-reno-13-pakistan-priceoye-l2ny5-500x500.webp",
+        "inStock": true,
+        "stockQty": 6
       }
     ],
     "variants": [
@@ -7492,19 +7492,19 @@
         "ram": "12GB",
         "pricePKR": 119999,
         "originalPricePKR": 149999,
-        "inStock": false,
-        "stockQty": 0,
+        "inStock": true,
+        "stockQty": 12,
         "costPricePKR": 103200
       }
     ],
     "colorStockMap": {
-      "Luminous Blue": {
-        "inStock": false,
-        "stockQty": 0
-      },
       "Plume White": {
-        "inStock": false,
-        "stockQty": 0
+        "inStock": true,
+        "stockQty": 6
+      },
+      "Midnight Purple": {
+        "inStock": true,
+        "stockQty": 6
       }
     },
     "keyHighlights": {

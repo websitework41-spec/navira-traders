@@ -1,5 +1,30 @@
 [
   {
+    "id": "oppo-reno-13",
+    "badge": "Brand New Launch",
+    "badgeColor": "bg-purple-500/25 text-purple-200 border-purple-400/40",
+    "title": "Oppo Reno 13 Series",
+    "highlight": "Starlight Cold Sculpted Glass",
+    "subtitle": "Butterfly Shadow texture, 50MP Ultra-Clear Sony Camera with AI Livephoto, aerospace metal frame & IP69 all-scenario waterproof. 100% PTA Approved.",
+    "phoneName": "Oppo Reno 13",
+    "brand": "Oppo",
+    "specs": "12GB RAM • 256GB • Dimensity 8350",
+    "pricePKR": 119999,
+    "originalPricePKR": 149999,
+    "discountPercent": 20,
+    "image": "/banners/oppo-reno-13-banner.webp",
+    "link": "/product/oppo-reno-13",
+    "ctaText": "Shop Reno 13 Deal",
+    "gradient": "from-[#1d152c] via-[#2f2048] to-[#48316e]",
+    "bannerType": "graphic",
+    "aspectRatio": "16:9",
+    "hideOverlay": true,
+    "isActive": true,
+    "order": 1,
+    "createdAt": "2026-11-03T12:00:00.000Z",
+    "updatedAt": "2026-11-03T12:00:00.000Z"
+  },
+  {
     "id": "s24-ultra",
     "badge": "Flagship Launch Offer",
     "badgeColor": "bg-[#48afff]/25 text-sky-200 border-[#48afff]/40",
@@ -19,7 +44,7 @@
     "bannerType": "product",
     "aspectRatio": "16:9",
     "isActive": true,
-    "order": 1,
+    "order": 2,
     "createdAt": "2026-10-31T12:00:00.000Z",
     "updatedAt": "2026-10-31T12:00:00.000Z"
   },
@@ -43,7 +68,7 @@
     "bannerType": "product",
     "aspectRatio": "16:9",
     "isActive": true,
-    "order": 2,
+    "order": 3,
     "createdAt": "2026-10-31T12:00:00.000Z",
     "updatedAt": "2026-10-31T12:00:00.000Z"
   },
@@ -67,7 +92,7 @@
     "bannerType": "product",
     "aspectRatio": "16:9",
     "isActive": true,
-    "order": 3,
+    "order": 4,
     "createdAt": "2026-10-31T12:00:00.000Z",
     "updatedAt": "2026-10-31T12:00:00.000Z"
   }
