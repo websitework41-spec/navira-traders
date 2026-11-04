@@ -25,6 +25,7 @@ import {
   Building,
   CreditCard,
   Smartphone as PhoneIcon,
+  Tablet,
 } from 'lucide-react';
 
 import { sanitizeText, validateEmailOrPhone } from '@/lib/security';
@@ -72,6 +73,9 @@ export function FilterSidebar({
     activeCatalog.forEach((p) => {
       if (p.inStock) {
         counts[p.brand] = (counts[p.brand] || 0) + 1;
+        if (p.category === 'Tablets') {
+          counts['Tablets'] = (counts['Tablets'] || 0) + 1;
+        }
       }
     });
     return counts;
@@ -171,6 +175,9 @@ export function FilterSidebar({
     filters.selectedBrands.includes('Nokia') &&
     filters.selectedBrands.includes('Itel');
 
+  const isTabletSelected =
+    filters.selectedBrands.length === 1 && filters.selectedBrands.includes('Tablets');
+
   return (
     <aside className="w-full bg-white rounded-2xl p-5 border border-slate-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.04)] space-y-6">
       {/* 1. Header & Active Counter */}
@@ -199,12 +206,12 @@ export function FilterSidebar({
         </button>
       </div>
 
-      {/* 2. Phone Category Quick Select Chips (Smartphones vs Keypad Phones) */}
+      {/* 2. Category Quick Select Chips (Smartphones vs Tablets vs Keypad Phones) */}
       <div className="space-y-2">
         <label className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 block">
-          Mobile Category
+          Category
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-3 gap-1.5">
           <button
             type="button"
             onClick={() => {
@@ -213,13 +220,30 @@ export function FilterSidebar({
                 selectedBrands: [],
               }));
             }}
-            className={`btn-press py-2.5 px-3 rounded-xl text-xs font-bold transition-all text-center cursor-pointer ${
+            className={`btn-press py-2 px-1 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer ${
               filters.selectedBrands.length === 0
                 ? 'bg-[#136ab5] text-white shadow-md ring-2 ring-[#48afff]/50'
                 : 'bg-slate-100 hover:bg-slate-200/80 text-slate-700 hover:text-slate-950'
             }`}
           >
-            All Mobiles
+            All
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setFilters((prev) => ({
+                ...prev,
+                selectedBrands: ['Tablets'],
+              }));
+            }}
+            className={`btn-press py-2 px-1 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer flex items-center justify-center gap-1 ${
+              isTabletSelected
+                ? 'bg-[#136ab5] text-white shadow-md ring-2 ring-[#48afff]'
+                : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 hover:shadow-xs'
+            }`}
+          >
+            <Tablet className="w-3 h-3" />
+            <span>Tabs ({brandModelCounts['Tablets'] || 0})</span>
           </button>
           <button
             type="button"
@@ -229,14 +253,14 @@ export function FilterSidebar({
                 selectedBrands: ['Nokia', 'Itel'],
               }));
             }}
-            className={`btn-press py-2.5 px-3 rounded-xl text-xs font-bold transition-all text-center cursor-pointer flex items-center justify-center gap-1.5 ${
+            className={`btn-press py-2 px-1 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer flex items-center justify-center gap-1 ${
               isKeypadSelected
                 ? 'bg-[#136ab5] text-white shadow-md ring-2 ring-[#48afff]'
                 : 'bg-sky-50 hover:bg-sky-100 text-[#136ab5] border border-sky-200 hover:shadow-xs'
             }`}
           >
-            <PhoneIcon className="w-3.5 h-3.5" />
-            <span>Keypad (22)</span>
+            <PhoneIcon className="w-3 h-3" />
+            <span>Keypad ({(brandModelCounts['Nokia'] || 0) + (brandModelCounts['Itel'] || 0)})</span>
           </button>
         </div>
       </div>

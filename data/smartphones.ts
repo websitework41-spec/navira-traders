@@ -8,6 +8,11 @@ export const BRANDS = [
   'Samsung',
   'Apple',
   'Xiaomi',
+  'Zte/Nubia',
+  'VgoTel',
+  'Villaon',
+  'Sego',
+  'Tablets',
   'Nokia',
   'Itel',
   'Vivo',
@@ -23,6 +28,13 @@ export const BRANDS = [
   'Nothing',
   'Huawei',
   'Sony',
+];
+
+export const CATEGORIES = [
+  'All',
+  'Mobiles',
+  'Tablets',
+  'Accessories',
 ];
 
 export const ACCESSORY_CATEGORIES = [
@@ -74,4 +86,3 @@ export function getPhonePrice(phone: Smartphone): number {
   }
   return phone.basePricePKR;
 }
-

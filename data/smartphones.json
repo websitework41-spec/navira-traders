@@ -21783,5 +21783,1399 @@
       "ptaStatus": "PTA Approved",
       "warranty": "6 Months Official Oraimo Replacement Warranty"
     }
+  },
+  {
+    "id": "zte-nubia-neo-5-pro",
+    "slug": "zte-nubia-neo-5-pro",
+    "name": "ZTE Nubia Neo 5 Pro 5G",
+    "brand": "Zte/Nubia",
+    "tagline": "Official ZTE Nubia Gaming Phone with 120Hz Display, 50MP AI Dual Camera & 33W Fast Charging",
+    "basePricePKR": 49999,
+    "originalPricePKR": 54999,
+    "discountPercent": 9,
+    "rating": 4.9,
+    "reviewCount": 24,
+    "inStock": true,
+    "stockQty": 12,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Silver Cyber",
+        "hex": "#b5b8bd",
+        "image": "https://images.priceoye.pk/zte-nubia-neo-5-pro-pakistan-priceoye-289y0-500x500.webp",
+        "inStock": true,
+        "stockQty": 6
+      },
+      {
+        "name": "Phantom Black",
+        "hex": "#1f2124",
+        "image": "https://images.priceoye.pk/zte-nubia-neo-5-pro-pakistan-priceoye-289y0-500x500.webp",
+        "inStock": true,
+        "stockQty": 6
+      }
+    ],
+    "variants": [
+      {
+        "id": "zte-nubia-neo-5-pro-256gb",
+        "storage": "256GB",
+        "ram": "8GB",
+        "pricePKR": 49999,
+        "originalPricePKR": 54999,
+        "inStock": true,
+        "stockQty": 12,
+        "costPricePKR": 44000
+      }
+    ],
+    "colorStockMap": {
+      "Silver Cyber": {
+        "inStock": true,
+        "stockQty": 6
+      },
+      "Phantom Black": {
+        "inStock": true,
+        "stockQty": 6
+      }
+    },
+    "keyHighlights": {
+      "display": "6.72\" FHD+ 120Hz Ultra-Smooth Gaming Display",
+      "processor": "Unisoc T820 6nm 5G Gaming Processor",
+      "camera": "50MP Ultra-Clear Dual Camera with Super Night Mode",
+      "battery": "6000 mAh Massive Battery with 33W Fast Charge",
+      "charging": "33W Type-C Fast Charger Included"
+    },
+    "specs": {
+      "screen": "6.72 inches IPS LCD, 120Hz, 1080 x 2400 pixels",
+      "refreshRate": "120Hz",
+      "displayType": "IPS LCD",
+      "processor": "Unisoc T820 (6nm Octa-Core up to 2.7GHz)",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "50 MP (wide, AF) + 2 MP (depth)",
+      "selfieCamera": "16 MP Wide Angle",
+      "battery": "6000 mAh Li-Po",
+      "charging": "33W Fast Charging Type-C",
+      "os": "Android 14 (MyOS Gaming Edition)",
+      "network": "5G / 4G LTE / Dual SIM",
+      "security": "Side-Mounted Fingerprint + Face Unlock",
+      "weight": "208g",
+      "waterResistance": "Splash Resistant",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official ZTE Pakistan Warranty"
+    },
+    "costPricePKR": 44000
+  },
+  {
+    "id": "zte-nubia-neo-5-max",
+    "slug": "zte-nubia-neo-5-max",
+    "name": "ZTE Nubia Neo 5 Max",
+    "brand": "Zte/Nubia",
+    "tagline": "Premium Big Screen Gaming Powerhouse with 120Hz Display, 108MP Camera & 6000mAh Battery",
+    "basePricePKR": 69999,
+    "originalPricePKR": 76999,
+    "discountPercent": 9,
+    "rating": 5.0,
+    "reviewCount": 18,
+    "inStock": true,
+    "stockQty": 8,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Titanium Gold",
+        "hex": "#d4af37",
+        "image": "https://images.priceoye.pk/zte-nubia-neo-5-max-pakistan-priceoye-rhd04-500x500.webp",
+        "inStock": true,
+        "stockQty": 4
+      },
+      {
+        "name": "Shadow Black",
+        "hex": "#1a1a1a",
+        "image": "https://images.priceoye.pk/zte-nubia-neo-5-max-pakistan-priceoye-rhd04-500x500.webp",
+        "inStock": true,
+        "stockQty": 4
+      }
+    ],
+    "variants": [
+      {
+        "id": "zte-nubia-neo-5-max-256gb",
+        "storage": "256GB",
+        "ram": "12GB",
+        "pricePKR": 69999,
+        "originalPricePKR": 76999,
+        "inStock": true,
+        "stockQty": 8,
+        "costPricePKR": 62000
+      }
+    ],
+    "colorStockMap": {
+      "Titanium Gold": {
+        "inStock": true,
+        "stockQty": 4
+      },
+      "Shadow Black": {
+        "inStock": true,
+        "stockQty": 4
+      }
+    },
+    "keyHighlights": {
+      "display": "6.8\" 120Hz FHD+ AMOLED Display",
+      "processor": "Unisoc T820 Octa-Core High-Power Gaming",
+      "camera": "108MP Triple Studio Camera with Ultra Night Mode",
+      "battery": "6000 mAh Dual-Cell with 45W Turbo Charge",
+      "charging": "45W Fast Charger in Box"
+    },
+    "specs": {
+      "screen": "6.8 inches AMOLED, 120Hz, 1080 x 2460 pixels",
+      "refreshRate": "120Hz",
+      "displayType": "AMOLED",
+      "processor": "Unisoc T820 Octa-Core 2.7GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "108 MP + 8 MP + 2 MP",
+      "selfieCamera": "20 MP Front Camera",
+      "battery": "6000 mAh",
+      "charging": "45W Fast Charging",
+      "os": "Android 14",
+      "network": "5G / 4G LTE",
+      "security": "In-Display Fingerprint",
+      "weight": "214g",
+      "waterResistance": "IP54 Dust & Splash Resistant",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Brand Warranty"
+    },
+    "costPricePKR": 62000
+  },
+  {
+    "id": "zte-nubia-v80-max",
+    "slug": "zte-nubia-v80-max",
+    "name": "ZTE Nubia V80 Max",
+    "brand": "Zte/Nubia",
+    "tagline": "Budget Powerhouse with 50MP Camera, 6.75\" Large Display & 5000mAh Battery",
+    "basePricePKR": 34999,
+    "originalPricePKR": 38999,
+    "discountPercent": 10,
+    "rating": 4.8,
+    "reviewCount": 15,
+    "inStock": true,
+    "stockQty": 10,
+    "isNew": true,
+    "isTrending": false,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "image": "https://images.priceoye.pk/zte-nubia-v80-max-pakistan-priceoye-7yunr-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#111827",
+        "image": "https://images.priceoye.pk/zte-nubia-v80-max-pakistan-priceoye-7yunr-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      }
+    ],
+    "variants": [
+      {
+        "id": "zte-nubia-v80-max-128gb",
+        "storage": "128GB",
+        "ram": "6GB",
+        "pricePKR": 34999,
+        "originalPricePKR": 38999,
+        "inStock": true,
+        "stockQty": 10,
+        "costPricePKR": 30500
+      }
+    ],
+    "colorStockMap": {
+      "Sky Blue": {
+        "inStock": true,
+        "stockQty": 5
+      },
+      "Midnight Black": {
+        "inStock": true,
+        "stockQty": 5
+      }
+    },
+    "keyHighlights": {
+      "display": "6.75\" 90Hz Smooth Notch Display",
+      "processor": "Unisoc Octa-Core 4G Gaming Processor",
+      "camera": "50MP AI Dual Camera with Portrait Lens",
+      "battery": "5000 mAh High-Density Long Life Battery",
+      "charging": "22.5W Fast Charging Type-C"
+    },
+    "specs": {
+      "screen": "6.75 inches IPS LCD, 90Hz, 720 x 1600 pixels",
+      "refreshRate": "90Hz",
+      "displayType": "IPS LCD",
+      "processor": "Unisoc T606 Octa-Core 1.6GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "50 MP + 2 MP Depth",
+      "selfieCamera": "8 MP Wide",
+      "battery": "5000 mAh",
+      "charging": "22.5W Type-C",
+      "os": "Android 13 / 14",
+      "network": "4G LTE / Dual SIM",
+      "security": "Fingerprint (Side-mounted)",
+      "weight": "196g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official ZTE Warranty"
+    },
+    "costPricePKR": 30500
+  },
+  {
+    "id": "sego-zero-60",
+    "slug": "sego-zero-60",
+    "name": "Sego Zero 60",
+    "brand": "Sego",
+    "tagline": "Budget Friendly 4G Smartphone with 6.6\" HD+ Display, 5000mAh Battery & Dual SIM PTA Approved",
+    "basePricePKR": 18999,
+    "originalPricePKR": 21999,
+    "discountPercent": 14,
+    "rating": 4.7,
+    "reviewCount": 19,
+    "inStock": true,
+    "stockQty": 15,
+    "isNew": true,
+    "isTrending": false,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Carbon Black",
+        "hex": "#1f2937",
+        "image": "https://images.priceoye.pk/sego-zero-60-pakistan-priceoye-ejqxg-500x500.webp",
+        "inStock": true,
+        "stockQty": 8
+      },
+      {
+        "name": "Aqua Blue",
+        "hex": "#0284c7",
+        "image": "https://images.priceoye.pk/sego-zero-60-pakistan-priceoye-ejqxg-500x500.webp",
+        "inStock": true,
+        "stockQty": 7
+      }
+    ],
+    "variants": [
+      {
+        "id": "sego-zero-60-64gb",
+        "storage": "64GB",
+        "ram": "4GB",
+        "pricePKR": 18999,
+        "originalPricePKR": 21999,
+        "inStock": true,
+        "stockQty": 15,
+        "costPricePKR": 16000
+      }
+    ],
+    "colorStockMap": {
+      "Carbon Black": {
+        "inStock": true,
+        "stockQty": 8
+      },
+      "Aqua Blue": {
+        "inStock": true,
+        "stockQty": 7
+      }
+    },
+    "keyHighlights": {
+      "display": "6.6\" HD+ Sunlight Waterdrop Screen",
+      "processor": "Quad-Core 1.6GHz 4G Processor",
+      "camera": "13MP AI Dual Camera with LED Flash",
+      "battery": "5000 mAh All-Day Endurance Battery",
+      "charging": "10W Type-C Charging"
+    },
+    "specs": {
+      "screen": "6.6 inches HD+ IPS, 720 x 1612 pixels",
+      "refreshRate": "60Hz",
+      "displayType": "IPS LCD",
+      "processor": "Quad-Core 1.6GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "13 MP + AI Lens",
+      "selfieCamera": "5 MP Front",
+      "battery": "5000 mAh Li-Ion",
+      "charging": "10W Charging",
+      "os": "Android 13 (Go Edition)",
+      "network": "4G LTE / Dual SIM",
+      "security": "Face Unlock + Fingerprint",
+      "weight": "190g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Sego Pakistan Warranty"
+    },
+    "costPricePKR": 16000
+  },
+  {
+    "id": "sego-epicx",
+    "slug": "sego-epicx",
+    "name": "Sego EPICx 4G",
+    "brand": "Sego",
+    "tagline": "Stylish 4G Smartphone with 4GB RAM, 64GB ROM, Fingerprint Sensor & 5000mAh Battery",
+    "basePricePKR": 17499,
+    "originalPricePKR": 19999,
+    "discountPercent": 13,
+    "rating": 4.6,
+    "reviewCount": 12,
+    "inStock": true,
+    "stockQty": 14,
+    "isNew": true,
+    "isTrending": false,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Navy Blue",
+        "hex": "#1e3a8a",
+        "image": "https://images.priceoye.pk/sego-epicx-pakistan-priceoye-cp81e-500x500.webp",
+        "inStock": true,
+        "stockQty": 7
+      },
+      {
+        "name": "Space Gray",
+        "hex": "#374151",
+        "image": "https://images.priceoye.pk/sego-epicx-pakistan-priceoye-cp81e-500x500.webp",
+        "inStock": true,
+        "stockQty": 7
+      }
+    ],
+    "variants": [
+      {
+        "id": "sego-epicx-64gb",
+        "storage": "64GB",
+        "ram": "4GB",
+        "pricePKR": 17499,
+        "originalPricePKR": 19999,
+        "inStock": true,
+        "stockQty": 14,
+        "costPricePKR": 15000
+      }
+    ],
+    "colorStockMap": {
+      "Navy Blue": {
+        "inStock": true,
+        "stockQty": 7
+      },
+      "Space Gray": {
+        "inStock": true,
+        "stockQty": 7
+      }
+    },
+    "keyHighlights": {
+      "display": "6.52\" HD+ Clear Glass Screen",
+      "processor": "High-Efficiency 1.6GHz Octa-Core",
+      "camera": "13MP Rear Camera with Night Mode",
+      "battery": "5000 mAh Reliable Battery",
+      "charging": "10W Charging with Type-C"
+    },
+    "specs": {
+      "screen": "6.52 inches HD+ IPS, 720 x 1600 pixels",
+      "refreshRate": "60Hz",
+      "displayType": "IPS LCD",
+      "processor": "Octa-Core 1.6GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "13 MP Main",
+      "selfieCamera": "5 MP Selfie",
+      "battery": "5000 mAh",
+      "charging": "10W Type-C",
+      "os": "Android 13 Go",
+      "network": "4G LTE / Dual SIM",
+      "security": "Fingerprint Sensor",
+      "weight": "192g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Sego Warranty"
+    },
+    "costPricePKR": 15000
+  },
+  {
+    "id": "sego-hot-100",
+    "slug": "sego-hot-100",
+    "name": "Sego Hot 100",
+    "brand": "Sego",
+    "tagline": "Unbeatable Budget 4G Phone with Punch-Hole Screen, 128GB Storage & 5000mAh Battery",
+    "basePricePKR": 21999,
+    "originalPricePKR": 24999,
+    "discountPercent": 12,
+    "rating": 4.8,
+    "reviewCount": 16,
+    "inStock": true,
+    "stockQty": 10,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Forest Green",
+        "hex": "#065f46",
+        "image": "https://images.priceoye.pk/sego-hot-100-pakistan-priceoye-6az2a-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      },
+      {
+        "name": "Starry Black",
+        "hex": "#0f172a",
+        "image": "https://images.priceoye.pk/sego-hot-100-pakistan-priceoye-6az2a-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      }
+    ],
+    "variants": [
+      {
+        "id": "sego-hot-100-128gb",
+        "storage": "128GB",
+        "ram": "4GB",
+        "pricePKR": 21999,
+        "originalPricePKR": 24999,
+        "inStock": true,
+        "stockQty": 10,
+        "costPricePKR": 19000
+      }
+    ],
+    "colorStockMap": {
+      "Forest Green": {
+        "inStock": true,
+        "stockQty": 5
+      },
+      "Starry Black": {
+        "inStock": true,
+        "stockQty": 5
+      }
+    },
+    "keyHighlights": {
+      "display": "6.6\" 90Hz Smooth Punch-Hole Display",
+      "processor": "Unisoc T606 Octa-Core Processor",
+      "camera": "50MP Ultra Clear Dual Camera",
+      "battery": "5000 mAh Long-Life Battery",
+      "charging": "18W Fast Charging Type-C"
+    },
+    "specs": {
+      "screen": "6.6 inches IPS LCD, 90Hz, 720 x 1612 pixels",
+      "refreshRate": "90Hz",
+      "displayType": "IPS LCD",
+      "processor": "Unisoc T606 Octa-Core 1.6GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "50 MP + Depth",
+      "selfieCamera": "8 MP Front",
+      "battery": "5000 mAh",
+      "charging": "18W Fast Charging",
+      "os": "Android 13",
+      "network": "4G LTE / Dual SIM",
+      "security": "Side-Mounted Fingerprint",
+      "weight": "194g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Sego Pakistan Warranty"
+    },
+    "costPricePKR": 19000
+  },
+  {
+    "id": "villaon-v50s",
+    "slug": "villaon-v50s",
+    "name": "Villaon V50s",
+    "brand": "Villaon",
+    "tagline": "Best Seller Budget Smartphone with 4GB RAM, 64GB Storage, 5000mAh Battery & Dual 4G SIM",
+    "basePricePKR": 18499,
+    "originalPricePKR": 21499,
+    "discountPercent": 14,
+    "rating": 4.7,
+    "reviewCount": 21,
+    "inStock": true,
+    "stockQty": 14,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Titanium Blue",
+        "hex": "#1d4ed8",
+        "image": "https://images.priceoye.pk/villaon-v50s-pakistan-priceoye-vr214-500x500.webp",
+        "inStock": true,
+        "stockQty": 7
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#18181b",
+        "image": "https://images.priceoye.pk/villaon-v50s-pakistan-priceoye-vr214-500x500.webp",
+        "inStock": true,
+        "stockQty": 7
+      }
+    ],
+    "variants": [
+      {
+        "id": "villaon-v50s-64gb",
+        "storage": "64GB",
+        "ram": "4GB",
+        "pricePKR": 18499,
+        "originalPricePKR": 21499,
+        "inStock": true,
+        "stockQty": 14,
+        "costPricePKR": 15800
+      }
+    ],
+    "colorStockMap": {
+      "Titanium Blue": {
+        "inStock": true,
+        "stockQty": 7
+      },
+      "Midnight Black": {
+        "inStock": true,
+        "stockQty": 7
+      }
+    },
+    "keyHighlights": {
+      "display": "6.56\" HD+ Waterdrop Display with Eye Protection",
+      "processor": "Octa-Core 1.6GHz 4G High-Efficiency Chip",
+      "camera": "13MP AI Dual Camera with HDR Mode",
+      "battery": "5000 mAh Battery (2-Day Backup)",
+      "charging": "10W Type-C Safe Charging"
+    },
+    "specs": {
+      "screen": "6.56 inches HD+ IPS, 720 x 1612 pixels",
+      "refreshRate": "60Hz",
+      "displayType": "IPS LCD",
+      "processor": "Octa-Core 1.6GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "13 MP + AI Lens",
+      "selfieCamera": "5 MP Front with Screen Flash",
+      "battery": "5000 mAh Li-Po",
+      "charging": "10W Type-C",
+      "os": "Android 13 Go",
+      "network": "4G LTE / Dual SIM",
+      "security": "Fingerprint + Face Unlock",
+      "weight": "191g",
+      "waterResistance": "Splash Proof",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Villaon Pakistan Warranty"
+    },
+    "costPricePKR": 15800
+  },
+  {
+    "id": "villaon-v200s",
+    "slug": "villaon-v200s",
+    "name": "Villaon V200s",
+    "brand": "Villaon",
+    "tagline": "Modern 4G Smartphone with 6.6\" Punch-Hole Screen, 128GB ROM & 5000mAh Battery",
+    "basePricePKR": 23999,
+    "originalPricePKR": 27499,
+    "discountPercent": 13,
+    "rating": 4.8,
+    "reviewCount": 17,
+    "inStock": true,
+    "stockQty": 10,
+    "isNew": true,
+    "isTrending": false,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Aurora Green",
+        "hex": "#047857",
+        "image": "https://images.priceoye.pk/villaon-v200s-pakistan-priceoye-1yci5-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      },
+      {
+        "name": "Obsidian Black",
+        "hex": "#09090b",
+        "image": "https://images.priceoye.pk/villaon-v200s-pakistan-priceoye-1yci5-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      }
+    ],
+    "variants": [
+      {
+        "id": "villaon-v200s-128gb",
+        "storage": "128GB",
+        "ram": "4GB",
+        "pricePKR": 23999,
+        "originalPricePKR": 27499,
+        "inStock": true,
+        "stockQty": 10,
+        "costPricePKR": 20500
+      }
+    ],
+    "colorStockMap": {
+      "Aurora Green": {
+        "inStock": true,
+        "stockQty": 5
+      },
+      "Obsidian Black": {
+        "inStock": true,
+        "stockQty": 5
+      }
+    },
+    "keyHighlights": {
+      "display": "6.6\" 90Hz Smooth HD+ Punch-Hole Screen",
+      "processor": "Unisoc T606 Octa-Core High Speed Chip",
+      "camera": "50MP Ultra Clear AI Dual Camera",
+      "battery": "5000 mAh Battery with Type-C",
+      "charging": "18W Fast Charging Adapter"
+    },
+    "specs": {
+      "screen": "6.6 inches IPS LCD, 90Hz, 720 x 1612 pixels",
+      "refreshRate": "90Hz",
+      "displayType": "IPS LCD",
+      "processor": "Unisoc T606 Octa-Core 1.6GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "50 MP + Depth Lens",
+      "selfieCamera": "8 MP AI Selfie",
+      "battery": "5000 mAh",
+      "charging": "18W Fast Charging Type-C",
+      "os": "Android 13",
+      "network": "4G LTE / Dual SIM",
+      "security": "Side-Mounted Fingerprint",
+      "weight": "195g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Villaon Warranty"
+    },
+    "costPricePKR": 20500
+  },
+  {
+    "id": "villaon-v105",
+    "slug": "villaon-v105",
+    "name": "Villaon V105 Bar Phone",
+    "brand": "Villaon",
+    "tagline": "Durable Keypad Mobile with 2500mAh Battery, Wireless FM, Digital Camera & Super Loud Speaker",
+    "basePricePKR": 3199,
+    "originalPricePKR": 3699,
+    "discountPercent": 14,
+    "rating": 4.5,
+    "reviewCount": 28,
+    "inStock": true,
+    "stockQty": 25,
+    "isNew": false,
+    "isTrending": false,
+    "isBestSeller": true,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Classic Black",
+        "hex": "#1c1917",
+        "image": "https://images.priceoye.pk/villaon-v105-pakistan-priceoye-22h65-500x500.webp",
+        "inStock": true,
+        "stockQty": 15
+      },
+      {
+        "name": "Ocean Blue",
+        "hex": "#0369a1",
+        "image": "https://images.priceoye.pk/villaon-v105-pakistan-priceoye-22h65-500x500.webp",
+        "inStock": true,
+        "stockQty": 10
+      }
+    ],
+    "variants": [
+      {
+        "id": "villaon-v105-standard",
+        "storage": "32MB",
+        "ram": "32MB",
+        "pricePKR": 3199,
+        "originalPricePKR": 3699,
+        "inStock": true,
+        "stockQty": 25,
+        "costPricePKR": 2600
+      }
+    ],
+    "colorStockMap": {
+      "Classic Black": {
+        "inStock": true,
+        "stockQty": 15
+      },
+      "Ocean Blue": {
+        "inStock": true,
+        "stockQty": 10
+      }
+    },
+    "keyHighlights": {
+      "display": "2.4\" Bright QVGA Color Display",
+      "battery": "2500 mAh Long-Life Battery (7-Day Backup)",
+      "features": "Wireless FM Radio & Super Bright LED Torch",
+      "audio": "Big Box 3D Loudspeaker for Clear Calls",
+      "sim": "Dual SIM Dual Standby PTA Approved"
+    },
+    "specs": {
+      "screen": "2.4 inches QVGA, 240 x 320 pixels",
+      "refreshRate": "60Hz",
+      "displayType": "TFT Display",
+      "processor": "Single-Core High Efficiency",
+      "chipsetBrand": "MediaTek",
+      "mainCamera": "Digital Camera with Flash",
+      "selfieCamera": "None",
+      "battery": "2500 mAh Removable",
+      "charging": "Standard Micro-USB Charging",
+      "os": "Feature Phone OS",
+      "network": "2G GSM / Dual SIM",
+      "security": "Keypad Lock / Privacy Protection",
+      "weight": "110g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Villaon Pakistan Warranty"
+    },
+    "costPricePKR": 2600
+  },
+  {
+    "id": "vgo-tel-smart-8-go",
+    "slug": "vgo-tel-smart-8-go",
+    "name": "VgoTel Smart 8 Go",
+    "brand": "VgoTel",
+    "tagline": "Best Value 4G Smartphone with 4GB RAM (8GB Extended), 64GB ROM, 5000mAh Battery & Type-C",
+    "basePricePKR": 17999,
+    "originalPricePKR": 20999,
+    "discountPercent": 14,
+    "rating": 4.9,
+    "reviewCount": 35,
+    "inStock": true,
+    "stockQty": 20,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": true,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Pacific Blue",
+        "hex": "#0284c7",
+        "image": "https://images.priceoye.pk/vgo-tel-smart-8-go-pakistan-priceoye-hsz6q-500x500.webp",
+        "inStock": true,
+        "stockQty": 10
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#18181b",
+        "image": "https://images.priceoye.pk/vgo-tel-smart-8-go-pakistan-priceoye-hsz6q-500x500.webp",
+        "inStock": true,
+        "stockQty": 10
+      }
+    ],
+    "variants": [
+      {
+        "id": "vgo-tel-smart-8-go-64gb",
+        "storage": "64GB",
+        "ram": "4GB",
+        "pricePKR": 17999,
+        "originalPricePKR": 20999,
+        "inStock": true,
+        "stockQty": 20,
+        "costPricePKR": 15400
+      }
+    ],
+    "colorStockMap": {
+      "Pacific Blue": {
+        "inStock": true,
+        "stockQty": 10
+      },
+      "Midnight Black": {
+        "inStock": true,
+        "stockQty": 10
+      }
+    },
+    "keyHighlights": {
+      "display": "6.6\" HD+ 90Hz Fluid Punch-Hole Display",
+      "processor": "Unisoc T606 Octa-Core High-Performance Processor",
+      "camera": "13MP AI Dual Camera with Quad Flash",
+      "battery": "5000 mAh Li-Po Battery with Type-C",
+      "charging": "10W Type-C Safe Fast Charging"
+    },
+    "specs": {
+      "screen": "6.6 inches IPS LCD, 90Hz, 720 x 1612 pixels",
+      "refreshRate": "90Hz",
+      "displayType": "IPS LCD",
+      "processor": "Unisoc T606 Octa-Core 1.6GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "13 MP + AI Auxiliary Lens",
+      "selfieCamera": "8 MP AI Front Camera",
+      "battery": "5000 mAh",
+      "charging": "10W Type-C",
+      "os": "Android 13 Go Edition",
+      "network": "4G LTE / Dual SIM",
+      "security": "Side-Mounted Fingerprint + Face Unlock",
+      "weight": "189g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official VGO TEL Pakistan Warranty"
+    },
+    "costPricePKR": 15400
+  },
+  {
+    "id": "vgo-tel-onyx-3",
+    "slug": "vgo-tel-onyx-3",
+    "name": "VgoTel Onyx 3",
+    "brand": "VgoTel",
+    "tagline": "Upgraded Onyx Series with 6.56\" 90Hz Screen, 50MP Camera, 128GB ROM & 5000mAh Battery",
+    "basePricePKR": 22999,
+    "originalPricePKR": 26999,
+    "discountPercent": 15,
+    "rating": 4.8,
+    "reviewCount": 22,
+    "inStock": true,
+    "stockQty": 12,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Emerald Green",
+        "hex": "#047857",
+        "image": "https://images.priceoye.pk/vgo-tel-onyx-3-pakistan-priceoye-nluzv-500x500.webp",
+        "inStock": true,
+        "stockQty": 6
+      },
+      {
+        "name": "Starlight Black",
+        "hex": "#09090b",
+        "image": "https://images.priceoye.pk/vgo-tel-onyx-3-pakistan-priceoye-nluzv-500x500.webp",
+        "inStock": true,
+        "stockQty": 6
+      }
+    ],
+    "variants": [
+      {
+        "id": "vgo-tel-onyx-3-128gb",
+        "storage": "128GB",
+        "ram": "4GB",
+        "pricePKR": 22999,
+        "originalPricePKR": 26999,
+        "inStock": true,
+        "stockQty": 12,
+        "costPricePKR": 19500
+      }
+    ],
+    "colorStockMap": {
+      "Emerald Green": {
+        "inStock": true,
+        "stockQty": 6
+      },
+      "Starlight Black": {
+        "inStock": true,
+        "stockQty": 6
+      }
+    },
+    "keyHighlights": {
+      "display": "6.56\" 90Hz HD+ Dynamic Bar Display",
+      "processor": "Unisoc T606 Octa-Core Gaming Processor",
+      "camera": "50MP Ultra HD AI Dual Rear Camera",
+      "battery": "5000 mAh Long-Life Endurance Battery",
+      "charging": "18W Fast Charging Type-C"
+    },
+    "specs": {
+      "screen": "6.56 inches IPS LCD, 90Hz, 720 x 1612 pixels",
+      "refreshRate": "90Hz",
+      "displayType": "IPS LCD",
+      "processor": "Unisoc T606 Octa-Core 1.6GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "50 MP + Depth Lens",
+      "selfieCamera": "8 MP Front Camera",
+      "battery": "5000 mAh",
+      "charging": "18W Fast Charging",
+      "os": "Android 13",
+      "network": "4G LTE / Dual SIM",
+      "security": "Fingerprint (Side-Mounted)",
+      "weight": "192g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official VGO TEL Warranty"
+    },
+    "costPricePKR": 19500
+  },
+  {
+    "id": "vgo-tel-flex-3",
+    "slug": "vgo-tel-flex-3",
+    "name": "VgoTel Flex 3",
+    "brand": "VgoTel",
+    "tagline": "Slim & Trendy 4G Mobile with 6.5\" HD+ Display, 5000mAh Battery & Dual SIM",
+    "basePricePKR": 16499,
+    "originalPricePKR": 18999,
+    "discountPercent": 13,
+    "rating": 4.6,
+    "reviewCount": 16,
+    "inStock": true,
+    "stockQty": 15,
+    "isNew": false,
+    "isTrending": false,
+    "isBestSeller": false,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Sky Blue",
+        "hex": "#38bdf8",
+        "image": "https://images.priceoye.pk/vgo-tel-flex-3-pakistan-priceoye-xpeji-500x500.webp",
+        "inStock": true,
+        "stockQty": 8
+      },
+      {
+        "name": "Dark Shadow",
+        "hex": "#27272a",
+        "image": "https://images.priceoye.pk/vgo-tel-flex-3-pakistan-priceoye-xpeji-500x500.webp",
+        "inStock": true,
+        "stockQty": 7
+      }
+    ],
+    "variants": [
+      {
+        "id": "vgo-tel-flex-3-64gb",
+        "storage": "64GB",
+        "ram": "3GB",
+        "pricePKR": 16499,
+        "originalPricePKR": 18999,
+        "inStock": true,
+        "stockQty": 15,
+        "costPricePKR": 14200
+      }
+    ],
+    "colorStockMap": {
+      "Sky Blue": {
+        "inStock": true,
+        "stockQty": 8
+      },
+      "Dark Shadow": {
+        "inStock": true,
+        "stockQty": 7
+      }
+    },
+    "keyHighlights": {
+      "display": "6.5\" HD+ Waterdrop Screen",
+      "processor": "Quad-Core 1.6GHz High Speed Processor",
+      "camera": "13MP AI Dual Camera with Portrait Mode",
+      "battery": "5000 mAh Reliable Battery",
+      "charging": "10W Charging Type-C"
+    },
+    "specs": {
+      "screen": "6.5 inches IPS LCD, 720 x 1600 pixels",
+      "refreshRate": "60Hz",
+      "displayType": "IPS LCD",
+      "processor": "Quad-Core 1.6GHz",
+      "chipsetBrand": "Unisoc",
+      "mainCamera": "13 MP + AI Lens",
+      "selfieCamera": "5 MP Selfie",
+      "battery": "5000 mAh",
+      "charging": "10W Type-C",
+      "os": "Android 13 Go",
+      "network": "4G LTE / Dual SIM",
+      "security": "Face Unlock",
+      "weight": "188g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official VGO TEL Warranty"
+    },
+    "costPricePKR": 14200
+  },
+  {
+    "id": "vgo-tel-imusic-ultra",
+    "slug": "vgo-tel-imusic-ultra",
+    "name": "VgoTel iMusic Ultra Keypad",
+    "brand": "VgoTel",
+    "tagline": "Music Master Keypad Mobile with Dedicated Audio Keys, 3000mAh Battery, Wireless FM & Big Torch",
+    "basePricePKR": 3499,
+    "originalPricePKR": 3999,
+    "discountPercent": 13,
+    "rating": 4.8,
+    "reviewCount": 42,
+    "inStock": true,
+    "stockQty": 30,
+    "isNew": false,
+    "isTrending": false,
+    "isBestSeller": true,
+    "category": "Mobiles",
+    "colors": [
+      {
+        "name": "Red & Black",
+        "hex": "#dc2626",
+        "image": "https://images.priceoye.pk/vgo-tel-imusic-ultra-pakistan-priceoye-3klxx-500x500.webp",
+        "inStock": true,
+        "stockQty": 15
+      },
+      {
+        "name": "Classic Blue",
+        "hex": "#2563eb",
+        "image": "https://images.priceoye.pk/vgo-tel-imusic-ultra-pakistan-priceoye-3klxx-500x500.webp",
+        "inStock": true,
+        "stockQty": 15
+      }
+    ],
+    "variants": [
+      {
+        "id": "vgo-tel-imusic-ultra-standard",
+        "storage": "32MB",
+        "ram": "32MB",
+        "pricePKR": 3499,
+        "originalPricePKR": 3999,
+        "inStock": true,
+        "stockQty": 30,
+        "costPricePKR": 2800
+      }
+    ],
+    "colorStockMap": {
+      "Red & Black": {
+        "inStock": true,
+        "stockQty": 15
+      },
+      "Classic Blue": {
+        "inStock": true,
+        "stockQty": 15
+      }
+    },
+    "keyHighlights": {
+      "display": "2.4\" Bright Color QVGA Display",
+      "battery": "3000 mAh Marathon Battery (10-Day Standby)",
+      "music": "Dedicated Music Control Keys & Boom Speaker",
+      "torch": "Four-LED Powerful Torch Light",
+      "sim": "Dual SIM Dual Standby PTA Approved"
+    },
+    "specs": {
+      "screen": "2.4 inches QVGA, 240 x 320 pixels",
+      "refreshRate": "60Hz",
+      "displayType": "TFT Screen",
+      "processor": "Single-Core MediaTek MTK",
+      "chipsetBrand": "MediaTek",
+      "mainCamera": "Digital Camera with Flash",
+      "selfieCamera": "None",
+      "battery": "3000 mAh Removable",
+      "charging": "Micro-USB Standard",
+      "os": "Feature OS",
+      "network": "2G GSM / Dual SIM",
+      "security": "Keypad Lock / Auto Call Recorder",
+      "weight": "115g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official VGO TEL Pakistan Warranty"
+    },
+    "costPricePKR": 2800
+  },
+  {
+    "id": "apple-ipad-11-a16",
+    "slug": "apple-ipad-11-a16",
+    "name": "Apple iPad 11\" (A16 Bionic)",
+    "brand": "Apple",
+    "tagline": "Next-Gen Apple iPad with 11-inch Liquid Retina Display, A16 Bionic Chip & USB-C",
+    "basePricePKR": 129999,
+    "originalPricePKR": 144999,
+    "discountPercent": 10,
+    "rating": 5.0,
+    "reviewCount": 31,
+    "inStock": true,
+    "stockQty": 8,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": true,
+    "category": "Tablets",
+    "colors": [
+      {
+        "name": "Silver",
+        "hex": "#e2e8f0",
+        "image": "https://images.priceoye.pk/apple-ipad-11-a16-pakistan-priceoye-h9c34-500x500.webp",
+        "inStock": true,
+        "stockQty": 4
+      },
+      {
+        "name": "Space Gray",
+        "hex": "#475569",
+        "image": "https://images.priceoye.pk/apple-ipad-11-a16-pakistan-priceoye-h9c34-500x500.webp",
+        "inStock": true,
+        "stockQty": 4
+      }
+    ],
+    "variants": [
+      {
+        "id": "apple-ipad-11-a16-128gb",
+        "storage": "128GB",
+        "ram": "6GB",
+        "pricePKR": 129999,
+        "originalPricePKR": 144999,
+        "inStock": true,
+        "stockQty": 8,
+        "costPricePKR": 118000
+      }
+    ],
+    "colorStockMap": {
+      "Silver": {
+        "inStock": true,
+        "stockQty": 4
+      },
+      "Space Gray": {
+        "inStock": true,
+        "stockQty": 4
+      }
+    },
+    "keyHighlights": {
+      "display": "11.0\" Liquid Retina Display with True Tone (2360 x 1640)",
+      "processor": "Apple A16 Bionic Chip with 16-Core Neural Engine",
+      "camera": "12MP Wide Back Camera + 12MP Ultra-Wide Center Stage Front",
+      "battery": "28.6Wh All-Day Battery (Up to 10 Hours Surfing/Video)",
+      "audio": "Landscape Stereo Speakers with High Quality Microphones"
+    },
+    "specs": {
+      "screen": "11.0 inches Liquid Retina IPS LCD, 2360 x 1640 pixels (264 ppi)",
+      "refreshRate": "60Hz ProMotion",
+      "displayType": "Liquid Retina IPS",
+      "processor": "Apple A16 Bionic (6-Core CPU, 5-Core GPU)",
+      "chipsetBrand": "Apple",
+      "mainCamera": "12 MP (f/1.8, wide, 4K at 60fps)",
+      "selfieCamera": "12 MP (Ultra Wide with Center Stage)",
+      "battery": "28.6Wh Li-Ion (approx 7600 mAh)",
+      "charging": "20W USB-C Fast Charging",
+      "os": "iPadOS 18 (Apple Intelligence Support)",
+      "network": "Wi-Fi 6 (802.11ax) / Bluetooth 5.3",
+      "security": "Touch ID Integrated in Top Button",
+      "weight": "477g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Apple International Warranty"
+    },
+    "costPricePKR": 118000
+  },
+  {
+    "id": "samsung-galaxy-a11-wifi-tab",
+    "slug": "samsung-galaxy-a11-wifi-tab",
+    "name": "Samsung Galaxy Tab A11 11.0\" Wi-Fi",
+    "brand": "Samsung",
+    "tagline": "Sleek 11-inch Entertainment Tablet with 90Hz Display, Quad Dolby Atmos Speakers & 7040mAh Battery",
+    "basePricePKR": 64999,
+    "originalPricePKR": 74999,
+    "discountPercent": 13,
+    "rating": 4.9,
+    "reviewCount": 26,
+    "inStock": true,
+    "stockQty": 10,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": false,
+    "category": "Tablets",
+    "colors": [
+      {
+        "name": "Graphite",
+        "hex": "#334155",
+        "image": "https://images.priceoye.pk/samsung-galaxy-a11-wifi-tab-pakistan-priceoye-lczk6-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      },
+      {
+        "name": "Silver",
+        "hex": "#cbd5e1",
+        "image": "https://images.priceoye.pk/samsung-galaxy-a11-wifi-tab-pakistan-priceoye-lczk6-500x500.webp",
+        "inStock": true,
+        "stockQty": 5
+      }
+    ],
+    "variants": [
+      {
+        "id": "samsung-galaxy-a11-wifi-tab-128gb",
+        "storage": "128GB",
+        "ram": "8GB",
+        "pricePKR": 64999,
+        "originalPricePKR": 74999,
+        "inStock": true,
+        "stockQty": 10,
+        "costPricePKR": 57000
+      }
+    ],
+    "colorStockMap": {
+      "Graphite": {
+        "inStock": true,
+        "stockQty": 5
+      },
+      "Silver": {
+        "inStock": true,
+        "stockQty": 5
+      }
+    },
+    "keyHighlights": {
+      "display": "11.0\" WQXGA 90Hz Fluid Screen for Multi-Tasking",
+      "processor": "Qualcomm Snapdragon 695 Octa-Core Processor",
+      "camera": "8MP AF Main Camera + 5MP Crisp Video Call Front",
+      "battery": "7040 mAh High-Capacity Battery with 15W Charging",
+      "audio": "Quad Speakers Tuned by AKG with Dolby Atmos"
+    },
+    "specs": {
+      "screen": "11.0 inches TFT LCD, 90Hz, 1920 x 1200 pixels",
+      "refreshRate": "90Hz",
+      "displayType": "TFT LCD",
+      "processor": "Qualcomm Snapdragon 695 (6nm Octa-Core up to 2.2GHz)",
+      "chipsetBrand": "Qualcomm",
+      "mainCamera": "8 MP Autofocus (FHD 1080p video)",
+      "selfieCamera": "5 MP Front Camera",
+      "battery": "7040 mAh Li-Po",
+      "charging": "15W Fast Charging Type-C",
+      "os": "Android 14 (One UI 6.1 with Samsung DeX)",
+      "network": "Wi-Fi 802.11 a/b/g/n/ac / Bluetooth 5.1",
+      "security": "Face Recognition",
+      "weight": "480g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Samsung Pakistan Warranty"
+    },
+    "costPricePKR": 57000
+  },
+  {
+    "id": "xiaomi-pad-7",
+    "slug": "xiaomi-pad-7",
+    "name": "Xiaomi Pad 7 (with Smart Cover)",
+    "brand": "Xiaomi",
+    "tagline": "Flagship 3.2K 144Hz Screen, Snapdragon 8s Gen 3, Quad Stereo Speakers & 8850mAh HyperCharge Battery",
+    "basePricePKR": 89999,
+    "originalPricePKR": 99999,
+    "discountPercent": 10,
+    "rating": 5.0,
+    "reviewCount": 15,
+    "inStock": true,
+    "stockQty": 6,
+    "isNew": true,
+    "isTrending": true,
+    "isBestSeller": false,
+    "category": "Tablets",
+    "colors": [
+      {
+        "name": "Titanium Grey",
+        "hex": "#374151",
+        "image": "https://images.priceoye.pk/xiaomi-pad-7-with-pad-cover-pakistan-priceoye-ced9f-500x500.webp",
+        "inStock": true,
+        "stockQty": 3
+      },
+      {
+        "name": "Ceramic Blue",
+        "hex": "#3b82f6",
+        "image": "https://images.priceoye.pk/xiaomi-pad-7-with-pad-cover-pakistan-priceoye-ced9f-500x500.webp",
+        "inStock": true,
+        "stockQty": 3
+      }
+    ],
+    "variants": [
+      {
+        "id": "xiaomi-pad-7-256gb",
+        "storage": "256GB",
+        "ram": "8GB",
+        "pricePKR": 89999,
+        "originalPricePKR": 99999,
+        "inStock": true,
+        "stockQty": 6,
+        "costPricePKR": 80000
+      }
+    ],
+    "colorStockMap": {
+      "Titanium Grey": {
+        "inStock": true,
+        "stockQty": 3
+      },
+      "Ceramic Blue": {
+        "inStock": true,
+        "stockQty": 3
+      }
+    },
+    "keyHighlights": {
+      "display": "11.2\" 3.2K 144Hz CrystalClear Ultra-Fluid Display",
+      "processor": "Qualcomm Snapdragon 8s Gen 3 Flagship Chipset",
+      "camera": "13MP Clear Rear Camera + 8MP Wide Meeting Camera",
+      "battery": "8850 mAh Long-Life Cell with 45W TurboCharge",
+      "cover": "Free Magnetic Smart Folding Cover Included in Box"
+    },
+    "specs": {
+      "screen": "11.2 inches IPS LCD, 144Hz, 3200 x 2136 pixels (345 ppi)",
+      "refreshRate": "144Hz",
+      "displayType": "IPS LCD 3.2K",
+      "processor": "Qualcomm Snapdragon 8s Gen 3 (4nm Octa-Core up to 3.0GHz)",
+      "chipsetBrand": "Qualcomm",
+      "mainCamera": "13 MP (wide, 4K video recording)",
+      "selfieCamera": "8 MP Front Camera",
+      "battery": "8850 mAh Li-Po",
+      "charging": "45W Fast TurboCharge Type-C",
+      "os": "Xiaomi HyperOS (Android 15)",
+      "network": "Wi-Fi 6E / Bluetooth 5.4",
+      "security": "Face Unlock",
+      "weight": "500g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Airlink / Xiaomi Warranty"
+    },
+    "costPricePKR": 80000
+  },
+  {
+    "id": "xiaomi-redmi-pad-2",
+    "slug": "xiaomi-redmi-pad-2",
+    "name": "Xiaomi Redmi Pad 2 (8GB / 256GB)",
+    "brand": "Xiaomi",
+    "tagline": "Budget Favorite 11-inch 90Hz Tablet with 8000mAh Battery, Quad Dolby Atmos Speakers & Metal Body",
+    "basePricePKR": 48999,
+    "originalPricePKR": 54999,
+    "discountPercent": 11,
+    "rating": 4.8,
+    "reviewCount": 27,
+    "inStock": true,
+    "stockQty": 12,
+    "isNew": false,
+    "isTrending": false,
+    "isBestSeller": true,
+    "category": "Tablets",
+    "colors": [
+      {
+        "name": "Mint Green",
+        "hex": "#86efac",
+        "image": "https://images.priceoye.pk/xiaomi-redmi-pad-2-8-256-wifi-1-year-warranty-pakistan-priceoye-82efz-500x500.webp",
+        "inStock": true,
+        "stockQty": 6
+      },
+      {
+        "name": "Graphite Gray",
+        "hex": "#4b5563",
+        "image": "https://images.priceoye.pk/xiaomi-redmi-pad-2-8-256-wifi-1-year-warranty-pakistan-priceoye-82efz-500x500.webp",
+        "inStock": true,
+        "stockQty": 6
+      }
+    ],
+    "variants": [
+      {
+        "id": "xiaomi-redmi-pad-2-256gb",
+        "storage": "256GB",
+        "ram": "8GB",
+        "pricePKR": 48999,
+        "originalPricePKR": 54999,
+        "inStock": true,
+        "stockQty": 12,
+        "costPricePKR": 42500
+      }
+    ],
+    "colorStockMap": {
+      "Mint Green": {
+        "inStock": true,
+        "stockQty": 6
+      },
+      "Graphite Gray": {
+        "inStock": true,
+        "stockQty": 6
+      }
+    },
+    "keyHighlights": {
+      "display": "11.0\" 90Hz FHD+ Eye-Care AdaptiveSync Display",
+      "processor": "Qualcomm Snapdragon 680 6nm Octa-Core Chip",
+      "camera": "8MP Rear Camera + 5MP Wide Front Video Call Lens",
+      "battery": "8000 mAh Massive Battery (Up to 43 Days Standby)",
+      "audio": "Quad Stereo Speakers with Dolby Atmos & Hi-Res"
+    },
+    "specs": {
+      "screen": "11.0 inches IPS LCD, 90Hz, 1920 x 1200 pixels",
+      "refreshRate": "90Hz",
+      "displayType": "IPS LCD",
+      "processor": "Qualcomm Snapdragon 680 (6nm Octa-Core)",
+      "chipsetBrand": "Qualcomm",
+      "mainCamera": "8 MP (1080p at 30fps)",
+      "selfieCamera": "5 MP Wide",
+      "battery": "8000 mAh",
+      "charging": "10W Type-C Charging",
+      "os": "Xiaomi HyperOS (Android 14)",
+      "network": "Wi-Fi 802.11 a/b/g/n/ac / Bluetooth 5.0",
+      "security": "Face Unlock",
+      "weight": "478g",
+      "waterResistance": "Standard",
+      "ptaStatus": "PTA Approved",
+      "warranty": "1 Year Official Airlink Pakistan Warranty"
+    },
+    "costPricePKR": 42500
   }
 ]

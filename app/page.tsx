@@ -120,7 +120,7 @@ function HomeContent() {
 
   // Category & Accessories Showcase states
   const [activeNavCategory, setActiveNavCategory] = useState<string>('mobiles');
-  const [catalogCategory, setCatalogCategory] = useState<'all' | 'mobiles' | 'accessories'>('all');
+  const [catalogCategory, setCatalogCategory] = useState<'all' | 'mobiles' | 'tablets' | 'accessories'>('all');
   const [accessoryTab, setAccessoryTab] = useState<'All' | 'Smartwatch' | 'Earbuds' | 'Cable'>('All');
 
   // Handle Category selection from top category navigation bar
@@ -129,6 +129,14 @@ function HomeContent() {
 
     if (categoryId === 'mobiles') {
       setCatalogCategory('mobiles');
+      setFilters((prev) => ({ ...prev, selectedBrands: [] }));
+      const el = document.getElementById('catalog-products') || document.getElementById('catalog-heading');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (categoryId === 'tablets') {
+      setCatalogCategory('tablets');
+      setFilters((prev) => ({ ...prev, selectedBrands: [] }));
       const el = document.getElementById('catalog-products') || document.getElementById('catalog-heading');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -188,6 +196,10 @@ function HomeContent() {
 
   const allAccessories = useMemo(() => {
     return catalog.filter((p) => p.category === 'Accessories');
+  }, [catalog]);
+
+  const allTablets = useMemo(() => {
+    return catalog.filter((p) => p.category === 'Tablets');
   }, [catalog]);
 
   const displayedAccessories = useMemo(() => {
@@ -367,8 +379,9 @@ function HomeContent() {
   // Filter & Sort Logic
   const filteredPhones = useMemo(() => {
     return catalog.filter((phone) => {
-      // Category Filter (All vs Mobiles vs Accessories)
-      if (catalogCategory === 'mobiles' && phone.category === 'Accessories') return false;
+      // Category Filter (All vs Mobiles vs Tablets vs Accessories)
+      if (catalogCategory === 'mobiles' && (phone.category === 'Accessories' || phone.category === 'Tablets')) return false;
+      if (catalogCategory === 'tablets' && phone.category !== 'Tablets') return false;
       if (catalogCategory === 'accessories' && phone.category !== 'Accessories') return false;
       // Spec Filter
       if (filters.specFilter === '120hz-amoled') {
@@ -393,9 +406,18 @@ function HomeContent() {
         }
       }
 
-      // Brand
+      // Brand (with Tablets alias and flexible brand normalization)
       if (filters.selectedBrands.length > 0) {
-        if (!filters.selectedBrands.includes(phone.brand)) return false;
+        const matchesBrand = filters.selectedBrands.some((selectedBrand) => {
+          if (selectedBrand === 'Tablets') {
+            return phone.category === 'Tablets' || phone.brand.toLowerCase() === 'tablets';
+          }
+          if (phone.brand === selectedBrand) return true;
+          const normSelected = selectedBrand.toLowerCase().replace(/[^a-z0-9]/g, '');
+          const normBrand = phone.brand.toLowerCase().replace(/[^a-z0-9]/g, '');
+          return normBrand.includes(normSelected) || normSelected.includes(normBrand);
+        });
+        if (!matchesBrand) return false;
       }
 
       // Price Range (Strictly enforced against actual purchasable phone price)
@@ -610,6 +632,8 @@ function HomeContent() {
   }, []);
 
   const handleResetAllFilters = useCallback(() => {
+    setCatalogCategory('all');
+    setActiveNavCategory('mobiles');
     setFilters({
       searchQuery: '',
       selectedBrands: [],
@@ -665,6 +689,7 @@ function HomeContent() {
   };
 
   const hasActiveFilters =
+    catalogCategory !== 'all' ||
     filters.searchQuery.trim() !== '' ||
     filters.selectedBrands.length > 0 ||
     filters.selectedRam.length > 0 ||
@@ -1061,6 +1086,18 @@ function HomeContent() {
             </button>
             <button
               onClick={() => {
+                setCatalogCategory(catalogCategory === 'tablets' ? 'all' : 'tablets');
+              }}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 ${
+                catalogCategory === 'tablets'
+                  ? 'bg-[#136ab5] text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              <span>📱 Tablets ({allTablets.length})</span>
+            </button>
+            <button
+              onClick={() => {
                 setCatalogCategory(catalogCategory === 'accessories' ? 'all' : 'accessories');
               }}
               className={`px-3 py-1.5 rounded-full text-xs font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 ${
@@ -1069,7 +1106,7 @@ function HomeContent() {
                   : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
               }`}
             >
-              <span>🎧 Accessories (${allAccessories.length})</span>
+              <span>🎧 Accessories ({allAccessories.length})</span>
             </button>
             <button
               onClick={() => setFilters((p) => ({ ...p, inStockOnly: !p.inStockOnly }))}
