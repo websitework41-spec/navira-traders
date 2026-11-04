@@ -94,30 +94,48 @@ function removeDeletedIdFromDisk(id: string, slug?: string) {
   } catch {}
 }
 
-// Helper to read current smartphones from memory, tmp, or project disk
+// Helper to read current smartphones from canonical project disk, tmp, or memory
 function getSmartphonesFromDisk(): Smartphone[] {
   let phones: Smartphone[] = [];
 
-  if (Array.isArray(globalThis.__naviraSmartphonesCache) && globalThis.__naviraSmartphonesCache.length > 0) {
-    phones = globalThis.__naviraSmartphonesCache;
-  } else {
-    try {
-      if (fs.existsSync(tmpDataFilePath)) {
-        const fileData = fs.readFileSync(tmpDataFilePath, 'utf-8');
-        phones = JSON.parse(fileData) as Smartphone[];
-      }
-    } catch {}
+  // 1. Always load canonical smartphones from project directory (data/smartphones.json)
+  try {
+    if (fs.existsSync(dataFilePath)) {
+      const fileData = fs.readFileSync(dataFilePath, 'utf-8');
+      phones = JSON.parse(fileData) as Smartphone[];
+    }
+  } catch (err) {
+    console.error('Error reading smartphones.json:', err);
+  }
 
-    if (!phones || phones.length === 0) {
-      try {
-        if (fs.existsSync(dataFilePath)) {
-          const fileData = fs.readFileSync(dataFilePath, 'utf-8');
-          phones = JSON.parse(fileData) as Smartphone[];
+  // 2. Check tmpDataFilePath for any serverless custom/newly added admin products or updates
+  try {
+    if (fs.existsSync(tmpDataFilePath)) {
+      const fileData = fs.readFileSync(tmpDataFilePath, 'utf-8');
+      const tmpPhones = JSON.parse(fileData) as Smartphone[];
+      if (Array.isArray(tmpPhones) && tmpPhones.length > 0) {
+        if (!phones || phones.length === 0) {
+          phones = tmpPhones;
+        } else {
+          const canonicalMap = new Map<string, Smartphone>();
+          phones.forEach((p) => {
+            if (p.id) canonicalMap.set(p.id.toLowerCase(), p);
+          });
+          // Merge custom created products from tmp that are not in base json
+          tmpPhones.forEach((tp) => {
+            if (tp.id && !canonicalMap.has(tp.id.toLowerCase())) {
+              phones.unshift(tp);
+              canonicalMap.set(tp.id.toLowerCase(), tp);
+            }
+          });
         }
-      } catch (err) {
-        console.error('Error reading smartphones.json:', err);
       }
     }
+  } catch {}
+
+  // 3. Fallback to in-memory cache if file reading failed
+  if ((!phones || phones.length === 0) && Array.isArray(globalThis.__naviraSmartphonesCache) && globalThis.__naviraSmartphonesCache.length > 0) {
+    phones = globalThis.__naviraSmartphonesCache;
   }
 
   if (Array.isArray(phones) && phones.length > 0) {
@@ -126,7 +144,7 @@ function getSmartphonesFromDisk(): Smartphone[] {
 
     if (deletedIds.length > 0) {
       const deletedSet = new Set(deletedIds.map((d) => d.toLowerCase()));
-      return phones.filter(
+      phones = phones.filter(
         (p) => !deletedSet.has(p.id?.toLowerCase()) && !deletedSet.has(p.slug?.toLowerCase())
       );
     }

@@ -220,8 +220,16 @@ function HomeContent() {
         .then((res) => res.json())
         .then((data) => {
           if (data.success && Array.isArray(data.products)) {
-            serverCatalogRef.current = data.products;
-            setCatalog(getActiveCatalog(data.products));
+            // Guarantee canonical SMARTPHONES products (ZTE, VgoTel, Tablets, Sego, Villaon) are always merged
+            const existingIds = new Set(data.products.map((p: any) => p.id?.toLowerCase()));
+            const merged = [...data.products];
+            SMARTPHONES.forEach((basePhone) => {
+              if (basePhone.id && !existingIds.has(basePhone.id.toLowerCase())) {
+                merged.push(basePhone);
+              }
+            });
+            serverCatalogRef.current = merged;
+            setCatalog(getActiveCatalog(merged));
           } else {
             syncCatalog();
           }
@@ -704,6 +712,7 @@ function HomeContent() {
     <div className="min-h-screen bg-[#f1f3f6] text-slate-900 flex flex-col font-sans w-full max-w-full overflow-x-hidden">
       {/* PriceOye Inspired Navbar */}
       <Navbar
+        catalog={catalog}
         compareCount={comparingPhones.length}
         cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
         onOpenCompare={() => setIsCompareModalOpen(true)}

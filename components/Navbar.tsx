@@ -39,6 +39,7 @@ import { useAuth } from '@/context/AuthContext';
 import { searchSmartphones } from '@/lib/search';
 
 interface NavbarProps {
+  catalog?: Smartphone[];
   compareCount?: number;
   cartCount?: number;
   onOpenCompare?: () => void;
@@ -52,6 +53,7 @@ interface NavbarProps {
 }
 
 export function Navbar({
+  catalog,
   compareCount = 0,
   cartCount = 0,
   onOpenCompare,
@@ -114,10 +116,11 @@ export function Navbar({
   const { user, profile, loading: authLoading, openAuthModal, logout } = useAuth();
 
   // Active synced catalog for Navbar
-  const [activeCatalog, setActiveCatalog] = useState<Smartphone[]>(() => getActiveCatalog(SMARTPHONES));
+  const [internalCatalog, setInternalCatalog] = useState<Smartphone[]>(() => getActiveCatalog(SMARTPHONES));
+  const activeCatalog = catalog && catalog.length > 0 ? catalog : internalCatalog;
 
   useEffect(() => {
-    const handleSync = () => setActiveCatalog(getActiveCatalog());
+    const handleSync = () => setInternalCatalog(getActiveCatalog());
     window.addEventListener('naviratraders_products_updated', handleSync);
     window.addEventListener('voltphone_products_updated', handleSync);
     window.addEventListener('storage', handleSync);
