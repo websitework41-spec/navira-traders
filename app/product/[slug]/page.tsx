@@ -57,7 +57,6 @@ import {
   Smartphone as PhoneIcon,
   Gift,
   Flame,
-  Shield,
   Eye,
   Lock,
   X,
@@ -142,7 +141,6 @@ export default function ProductDetailPage() {
 
   // Addons states (PriceOye features)
   const [addGiftWrap, setAddGiftWrap] = useState(false);
-  const [addScreenProtection, setAddScreenProtection] = useState(false);
 
   // Accordion active tab
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -236,7 +234,7 @@ export default function ProductDetailPage() {
   const currentStockQty = selectedColor?.stockQty || selectedVariant?.stockQty || phone.stockQty || 0;
 
   const basePrice = selectedVariant?.pricePKR || phone.basePricePKR;
-  const addonCost = (addGiftWrap ? 199 : 0) + (addScreenProtection ? 999 : 0);
+  const addonCost = addGiftWrap ? 249 : 0;
   const currentPrice = basePrice + addonCost;
 
   const currentOriginalPrice =
@@ -783,13 +781,13 @@ export default function ProductDetailPage() {
                 </div>
               </div>
 
-              {/* PriceOye Style Add-Ons (Gift Wrap & Warranty Protection) */}
+              {/* Value Add-Ons (Gift Wrap) */}
               <div className="space-y-2.5 pt-2 border-t border-slate-100">
                 <div className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
                   Value Add-Ons:
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 gap-2.5">
                   {/* Gift Wrap Addon */}
                   <label
                     className={`flex items-start gap-3 p-3 rounded-2xl border cursor-pointer transition-all ${
@@ -810,35 +808,12 @@ export default function ProductDetailPage() {
                         <span>Premium Gift Wrapping</span>
                       </div>
                       <div className="text-[11px] text-slate-500 mt-0.5">
-                        Cost: <strong className="text-slate-900">Rs 199</strong> (Includes customized card)
+                        Cost: <strong className="text-slate-900">Rs 249</strong> (Includes customized card)
                       </div>
                     </div>
                   </label>
 
-                  {/* Screen Protection Addon */}
-                  <label
-                    className={`flex items-start gap-3 p-3 rounded-2xl border cursor-pointer transition-all ${
-                      addScreenProtection
-                        ? 'border-[#0b3c68] bg-[#0b3c68]/5 ring-1 ring-[#0b3c68]'
-                        : 'border-slate-200 hover:border-slate-300 bg-white'
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={addScreenProtection}
-                      onChange={(e) => setAddScreenProtection(e.target.checked)}
-                      className="mt-0.5 h-4 w-4 rounded text-[#0b3c68] focus:ring-[#48afff] border-slate-300"
-                    />
-                    <div className="text-xs">
-                      <div className="font-black text-slate-900 flex items-center gap-1.5">
-                        <Shield className="w-3.5 h-3.5 text-[#0b3c68]" />
-                        <span>1-Year Screen Protection</span>
-                      </div>
-                      <div className="text-[11px] text-slate-500 mt-0.5">
-                        Cost: <strong className="text-slate-900">Rs 999</strong> (50% crack coverage)
-                      </div>
-                    </div>
-                  </label>
+
                 </div>
               </div>
 

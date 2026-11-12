@@ -22,8 +22,6 @@ const BRANDS_LIST = [
   { name: 'Tecno', tag: 'Camon Cam', logoText: 'TECNO', badge: 'Popular', accent: 'bg-[#0033a0] text-white hover:border-blue-800' },
   { name: 'Realme', tag: 'FastCharge', logoText: 'realme', badge: 'Trending', accent: 'bg-[#f7c000] text-black hover:border-yellow-600' },
   { name: 'Oppo', tag: 'VOOC 80W', logoText: 'OPPO', badge: 'SuperVOOC', accent: 'bg-[#008544] text-white hover:border-green-700' },
-  { name: 'Google', tag: 'Pixel AI', logoText: 'Google', badge: 'Pure Android', accent: 'bg-slate-900 text-white hover:border-slate-700' },
-  { name: 'OnePlus', tag: 'OxygenOS', logoText: '1+', badge: 'Never Settle', accent: 'bg-[#eb0028] text-white hover:border-red-600' },
 ];
 
 export function BrandMarquee({ onSelectBrand, activeBrand, brandCounts = {} }: BrandMarqueeProps) {

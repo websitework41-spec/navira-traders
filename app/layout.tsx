@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { WhatsAppFloatingButton } from "@/components/WhatsAppFloatingButton";
+import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { AuthProvider } from "@/context/AuthContext";
 import { ButtonRipple } from "@/components/ButtonRipple";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
@@ -49,6 +50,7 @@ export default function RootLayout({
           {children}
           <DeferredModals />
           <WhatsAppFloatingButton />
+          <ScrollToTopButton />
         </AuthProvider>
       </body>
     </html>

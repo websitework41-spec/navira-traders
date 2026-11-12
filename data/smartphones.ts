@@ -22,12 +22,16 @@ export const BRANDS = [
   'Realme',
   'Honor',
   'Oraimo',
-  'OnePlus',
-  'Google',
   'Motorola',
-  'Nothing',
-  'Huawei',
-  'Sony',
+  'Romoss',
+  'Urpin',
+  'Ugreen',
+  'Airox',
+  'Login',
+  'Bluks',
+  'Audionic',
+  'Zentality',
+  'EasyTech',
 ];
 
 export const CATEGORIES = [
@@ -42,6 +46,10 @@ export const ACCESSORY_CATEGORIES = [
   'Smart Watches',
   'Wireless Earbuds',
   'Charging Cables',
+  'Power Banks',
+  'Wall Chargers',
+  'Bluetooth Speakers',
+  'Others',
 ];
 
 export const RAM_OPTIONS = ['3GB', '4GB', '6GB', '8GB', '12GB', '16GB'];

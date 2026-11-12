@@ -33,6 +33,7 @@ import {
   Star,
   RefreshCw,
   Battery,
+  Volume2,
   SlidersHorizontal,
 } from 'lucide-react';
 
@@ -45,20 +46,7 @@ interface AccessoryManagerProps {
 const POPULAR_ACCESSORY_BRANDS = [
   'All Brands',
   'Oraimo',
-  'Anker',
-  'Apple',
-  'Samsung',
-  'Xiaomi',
-  'Joyroom',
-  'Baseus',
-  'Ronin',
-  'Audionic',
-  'Faster',
-  'Dany',
-  'Zero Lifestyle',
-  'Huawei',
-  'Realme',
-  'Other',
+  'Others',
 ];
 
 const ACCESSORY_TYPES = [
@@ -68,7 +56,8 @@ const ACCESSORY_TYPES = [
   { id: 'Cable', label: 'Charging Cables', icon: Cable },
   { id: 'Power Bank', label: 'Power Banks', icon: Battery },
   { id: 'Charger', label: 'Wall Chargers', icon: Zap },
-  { id: 'Other', label: 'Other Gadgets', icon: Package },
+  { id: 'Speaker', label: 'Bluetooth Speakers', icon: Volume2 },
+  { id: 'Other', label: 'Others', icon: Package },
 ];
 
 export function AccessoryManager({ products, onRefresh, showToast }: AccessoryManagerProps) {
@@ -111,8 +100,12 @@ export function AccessoryManager({ products, onRefresh, showToast }: AccessoryMa
         return false;
       }
       // Brand Filter
-      if (selectedBrand !== 'All Brands' && item.brand.toLowerCase() !== selectedBrand.toLowerCase()) {
-        return false;
+      if (selectedBrand !== 'All Brands') {
+        if (selectedBrand === 'Others' || selectedBrand === 'Other') {
+          if (item.brand.toLowerCase() === 'oraimo') return false;
+        } else if (item.brand.toLowerCase() !== selectedBrand.toLowerCase()) {
+          return false;
+        }
       }
       // Stock Status Filter
       if (stockFilter === 'inStock' && (!item.inStock || (item.stockQty ?? 0) <= 0)) {
@@ -590,6 +583,10 @@ export function AccessoryManager({ products, onRefresh, showToast }: AccessoryMa
                               <Headphones className="w-3 h-3" />
                             ) : item.accessoryType === 'Cable' ? (
                               <Cable className="w-3 h-3" />
+                            ) : item.accessoryType === 'Power Bank' ? (
+                              <Battery className="w-3 h-3" />
+                            ) : item.accessoryType === 'Speaker' || item.accessoryType === 'Audio' ? (
+                              <Volume2 className="w-3 h-3" />
                             ) : (
                               <Package className="w-3 h-3" />
                             )}
@@ -1184,9 +1181,9 @@ function AccessoryFormModal({ accessory, onClose, onSaved }: AccessoryFormModalP
                   <option value="Cable">Charging Cable</option>
                   <option value="Power Bank">Power Bank</option>
                   <option value="Charger">Wall Charger</option>
+                  <option value="Speaker">Bluetooth Speaker</option>
                   <option value="Case">Protective Case</option>
-                  <option value="Audio">Audio &amp; Speaker</option>
-                  <option value="Other">Other Gadget</option>
+                  <option value="Other">Others</option>
                 </select>
               </div>
 

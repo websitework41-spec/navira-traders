@@ -64,7 +64,7 @@ export const CATEGORY_NAV_ITEMS: CategoryNavItem[] = [
     name: 'Bluetooth Speakers',
     image: 'https://static.priceoye.pk/images/home/bluetooth-speakers.webp',
     fallbackIcon: Volume2,
-    targetTab: 'Audio',
+    targetTab: 'Speaker',
   },
   {
     id: 'mobile-cables',
@@ -78,7 +78,7 @@ export const CATEGORY_NAV_ITEMS: CategoryNavItem[] = [
     name: 'Tablets',
     image: 'https://static.priceoye.pk/images/home/tablets.webp',
     fallbackIcon: Tablet,
-    targetTab: 'Other',
+    targetTab: 'Tablets',
   },
 ];
 
@@ -142,11 +142,18 @@ export function CategoryNavBar({
       // If we are not on the homepage, navigate to homepage with category parameter
       if (pathname !== '/') {
         if (cat.id === 'mobiles') {
-          router.push('/?category=mobiles');
+          router.push('/?category=mobiles#catalog');
+        } else if (cat.id === 'tablets') {
+          router.push('/?category=tablets#catalog');
         } else {
           router.push(`/?category=${cat.id}#accessories`);
         }
       } else {
+        if (cat.id === 'mobiles' || cat.id === 'tablets') {
+          if (window.location.hash) {
+            window.history.replaceState(null, '', window.location.pathname + `?category=${cat.id}`);
+          }
+        }
         // Broadcast custom event for decoupled components
         window.dispatchEvent(new CustomEvent('navira_category_select', { detail: { categoryId: cat.id } }));
       }

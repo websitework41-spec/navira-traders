@@ -46,63 +46,63 @@ function getSmartAssistantResponse(query: string): string {
   // 2. Budget brackets
   if (q.includes('25') || q.includes('25k') || q.includes('under 25000') || q.includes('under 25,000') || q.includes('under 25')) {
     return `💰 **Best Phones Under Rs. 25,000**:
-1. [**OnePlus Nord N100**](/product/oneplus-nord-n100): Rs. 23,999 (90Hz display, 5000mAh, 18W fast charging)
-2. [**Huawei Y6s**](/product/huawei-y6s-2019): Rs. 18,699
-3. [**Google Pixel**](/product/google-pixel): Rs. 17,499
+1. [**Xiaomi Redmi 10C**](/product/xiaomi-redmi-10c): Rs. 23,999 (Snapdragon 680, 50MP camera)
+2. [**Samsung Galaxy A06**](/product/samsung-galaxy-a06): Rs. 22,499 (6.7" Display, 5000mAh)
+3. [**Villaon V50s**](/product/villaon-v50s): Rs. 19,749
+4. [**VgoTel Onyx 3**](/product/vgo-tel-onyx-3): Rs. 19,499
 All models are 100% PTA Approved with Open-Parcel Delivery!`;
   }
 
   if (q.includes('30') || q.includes('30k') || q.includes('under 30000') || q.includes('under 30,000')) {
     return `💰 **Best Phones Under Rs. 30,000**:
 1. [**Xiaomi Redmi 14C**](/product/xiaomi-redmi-14c): Rs. 29,999 (6.88" 120Hz display, 50MP AI camera)
-2. [**Huawei Y7p**](/product/huawei-y7p): Rs. 25,799
-3. [**Huawei Y8p**](/product/huawei-y8p): Rs. 28,000`;
+2. [**Xiaomi Redmi 9C**](/product/xiaomi-redmi-9c): Rs. 29,999 (Triple Camera, 5000mAh)
+3. [**VgoTel Smart 8 Go**](/product/vgo-tel-smart-8-go): Rs. 25,399 (Big Screen, Long Battery)`;
   }
 
   if (q.includes('35') || q.includes('35k') || q.includes('under 35000') || q.includes('under 35,000')) {
     return `💰 **Best Phones Under Rs. 35,000**:
 1. [**Xiaomi Redmi 14C**](/product/xiaomi-redmi-14c): Rs. 29,999 (120Hz screen, 50MP camera)
-2. [**Infinix Hot 60i**](/product/infinix-hot-60i): Rs. 31,999
-3. [**Infinix Hot 50**](/product/infinix-hot-50): Rs. 33,999 (Helio G100)
-4. [**Samsung Galaxy A07**](/product/samsung-galaxy-a07): Rs. 34,999 (5000mAh battery)`;
+2. [**Xiaomi Redmi A5**](/product/xiaomi-redmi-a5): Rs. 33,995
+3. [**Tecno Spark Go 3**](/product/tecno-spark-go-3): Rs. 34,995 (90Hz Display, 5000mAh)
+4. [**Samsung Galaxy A07**](/product/samsung-galaxy-a07): Rs. 36,295 (5000mAh battery)`;
   }
 
   if (q.includes('40') || q.includes('40k') || q.includes('under 40000') || q.includes('under 40,000')) {
     return `💰 **Best Phones Under Rs. 40,000**:
-1. [**Samsung Galaxy A07**](/product/samsung-galaxy-a07): Rs. 34,999 (5000mAh, 50MP Dual Camera, 6.7" Display)
-2. [**Infinix Hot 50**](/product/infinix-hot-50): Rs. 33,999 (120Hz FHD+, Helio G100, 5000mAh)
-3. [**Infinix Hot 60i**](/product/infinix-hot-60i): Rs. 31,999 (Smooth display, long battery life)
+1. [**Samsung Galaxy A07**](/product/samsung-galaxy-a07): Rs. 36,295 (5000mAh, 50MP Dual Camera, 6.7" Display)
+2. [**Infinix Smart 20**](/product/infinix-smart-20): Rs. 35,995 (Smooth display, long battery life)
+3. [**Tecno Spark Go 3**](/product/tecno-spark-go-3): Rs. 34,995
 4. [**Xiaomi Redmi 14C**](/product/xiaomi-redmi-14c): Rs. 29,999 (6.88" 120Hz display, 50MP AI camera)
-5. [**Oppo A54s**](/product/oppo-a54s): Rs. 35,999 (5000mAh, AI Triple Camera)
-6. [**Sony Xperia L4**](/product/sony-xperia-l4): Rs. 36,999 (Triple Camera, 21:9 CinemaWide)
+5. [**Realme Note 60x**](/product/realme-note-60x): Rs. 30,995
 All models include 1-Year Official Brand Warranty and Open-Parcel Doorstep Inspection!`;
   }
 
   if (q.includes('50') || q.includes('50k') || q.includes('under 50000') || q.includes('under 50,000')) {
     return `💰 **Best Phones Under Rs. 50,000**:
-1. [**Tecno Spark 40**](/product/tecno-spark-40): Rs. 49,999 (50MP AI Camera, 5000mAh)
-2. [**Xiaomi Redmi 10C**](/product/xiaomi-redmi-10c): Rs. 47,499 (Snapdragon 680, 50MP camera)
-3. [**Xiaomi Redmi 15C**](/product/xiaomi-redmi-15c): Rs. 42,999 (120Hz, 50MP AI Dual Camera)
-4. [**Sony Xperia L4**](/product/sony-xperia-l4): Rs. 36,999
-5. [**Samsung Galaxy A07**](/product/samsung-galaxy-a07): Rs. 34,999`;
+1. [**Xiaomi Redmi 15C**](/product/xiaomi-redmi-15c): Rs. 43,995 (120Hz, 50MP AI Dual Camera)
+2. [**Honor X6c**](/product/honor-x6c): Rs. 43,995 (Reliable battery, smooth performance)
+3. [**Oppo A6C**](/product/oppo-a6c): Rs. 42,995 (OPPO Glow Design, 5000mAh)
+4. [**Realme Note 70**](/product/realme-note-70): Rs. 45,999
+5. [**Samsung Galaxy A07**](/product/samsung-galaxy-a07): Rs. 36,295`;
   }
 
   if (q.includes('60') || q.includes('60k') || q.includes('under 60000') || q.includes('under 60,000')) {
     return `💰 **Best Mid-Range Phones Under Rs. 60,000**:
 1. [**Infinix Note 40**](/product/infinix-note-40): Rs. 57,999 (120Hz AMOLED, 45W Multi-Speed FastCharge)
-2. [**Realme C75x**](/product/realme-c75x): Rs. 54,499 (Helio G81 Ultra, 6000mAh battery)
-3. [**OnePlus Nord CE 2 Lite 5G**](/product/oneplus-nord-ce-2-lite-5g): Rs. 56,000 (Snapdragon 695 5G)
-4. [**Tecno Spark 40**](/product/tecno-spark-40): Rs. 49,999
-5. [**Honor X6c**](/product/honor-x6c): Rs. 44,999`;
+2. [**Tecno Spark 50**](/product/tecno-spark-50): Rs. 55,995 (120Hz Punch-Hole, 50MP AI)
+3. [**Realme C75x**](/product/realme-c75x): Rs. 53,995 (Helio G81 Ultra, 6000mAh battery)
+4. [**Oppo A6K**](/product/oppo-a6k): Rs. 53,995
+5. [**Infinix Hot 60i**](/product/infinix-hot-60i): Rs. 53,495`;
   }
 
   if (q.includes('100') || q.includes('100k') || q.includes('under 100000') || q.includes('under 100,000') || q.includes('1 lac') || q.includes('1 lakh')) {
     return `💰 **Best Phones Under Rs. 100,000**:
-1. [**Samsung Galaxy A17 5G**](/product/samsung-galaxy-a17-5g): Rs. 96,299 (5G, Super AMOLED, Knox Security)
-2. [**Tecno Camon 30 Pro 5G**](/product/tecno-camon-50-ultra-5g): Rs. 93,499 (Dimensity 8200, 50MP Sony IMX890 OIS)
-3. [**Motorola Moto One 5G Ace**](/product/motorola-moto-one-5g-ace): Rs. 91,999
-4. [**Huawei Nova 9**](/product/huawei-nova-9): Rs. 98,999 (120Hz curved OLED, 66W SuperCharge)
-5. [**OnePlus 9RT**](/product/oneplus-9rt): Rs. 98,999`;
+1. [**Tecno Camon 30 Pro 5G**](/product/tecno-camon-50-ultra-5g): Rs. 93,499 (Dimensity 8200, 50MP OIS Camera)
+2. [**Infinix Note 60 Edge 5G**](/product/infinix-note-60-edge-5g): Rs. 92,995 (Curved AMOLED, 5G)
+3. [**Tecno Camon 50**](/product/tecno-camon-50): Rs. 89,995 (120Hz AMOLED, 50MP Portrait)
+4. [**Xiaomi Redmi Note 15 Pro**](/product/xiaomi-redmi-note-15-pro): Rs. 88,995
+5. [**Honor X8d**](/product/honor-x8d): Rs. 78,995`;
   }
 
   if (q.includes('flagship') || q.includes('150k') || q.includes('150000') || q.includes('high end')) {
@@ -202,8 +202,8 @@ You can also message our WhatsApp helpline at **+92 301 8543131** with your name
     return `🚀 **Best 5G & Gaming Smartphones**:
 1. **Samsung Galaxy S24 Ultra**: Snapdragon 8 Gen 3, Vapor Chamber cooling
 2. **Tecno Camon 30 Pro 5G**: Rs. 93,499 (Dimensity 8200 Ultimate 5G)
-3. **OnePlus Nord CE 2 5G**: Rs. 109,999 (90Hz fluid AMOLED, 65W charging)
-4. **Samsung Galaxy A56 / A57 5G**: Rs. 130,999 - Rs. 147,999 (Super AMOLED 120Hz)
+3. **Infinix GT 50 Pro**: Rs. 158,995 (Dedicated gaming chip & cooling)
+4. **Samsung Galaxy A56 5G**: Rs. 145,999 (Super AMOLED 120Hz)
 All devices feature high-speed 5G cellular antennas with 100% PTA clearance.`;
   }
 
@@ -213,7 +213,7 @@ Over 100 models in our catalog feature ultra-smooth 120Hz AMOLED screens:
 - **Samsung Galaxy S24 Ultra / S23 Ultra** (Dynamic AMOLED 2X 120Hz)
 - **Infinix Note 40** (120Hz AMOLED at just Rs. 57,999!)
 - **Xiaomi Redmi Note 15 Pro Plus** (1.5K CrystalRes AMOLED 120Hz)
-- **Huawei Nova 9** (Curved 120Hz OLED)
+- **Vivo V70** (Curved 120Hz AMOLED)
 Use our catalog display filter to explore all 120Hz AMOLED models!`;
   }
 

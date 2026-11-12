@@ -61,7 +61,7 @@ export function CatalogBannerOppoReno({ onSelectBrand }: BannerProps) {
               </span>
             </h3>
             <p className="text-xs sm:text-sm text-slate-200 mt-1 max-w-xl leading-relaxed">
-              Starlight Butterfly pattern, aerospace-grade metal frame, 50MP Sony Ultra-Clear camera with AI Livephoto & IP69 all-scenario waterproofing.
+              Starlight Butterfly pattern, aerospace-grade metal frame, 50MP Ultra-Clear camera with AI Livephoto & IP69 all-scenario waterproofing.
             </p>
           </div>
 

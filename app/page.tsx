@@ -45,6 +45,7 @@ import {
   SlidersHorizontal,
   ShieldCheck,
   PackageCheck,
+  Package,
   Award,
   Filter,
   CheckCircle,
@@ -66,6 +67,8 @@ import {
   Headphones,
   Watch,
   Cable,
+  Battery,
+  Volume2,
   Smartphone as PhoneIcon,
   Clock,
   MessageSquare,
@@ -121,7 +124,7 @@ function HomeContent() {
   // Category & Accessories Showcase states
   const [activeNavCategory, setActiveNavCategory] = useState<string>('mobiles');
   const [catalogCategory, setCatalogCategory] = useState<'all' | 'mobiles' | 'tablets' | 'accessories'>('all');
-  const [accessoryTab, setAccessoryTab] = useState<'All' | 'Smartwatch' | 'Earbuds' | 'Cable'>('All');
+  const [accessoryTab, setAccessoryTab] = useState<'All' | 'Smartwatch' | 'Earbuds' | 'Cable' | 'Power Bank' | 'Charger' | 'Speaker' | 'Other'>('All');
 
   // Handle Category selection from top category navigation bar
   const handleSelectNavCategory = useCallback((categoryId: string) => {
@@ -130,14 +133,20 @@ function HomeContent() {
     if (categoryId === 'mobiles') {
       setCatalogCategory('mobiles');
       setFilters((prev) => ({ ...prev, selectedBrands: [] }));
-      const el = document.getElementById('catalog-products') || document.getElementById('catalog-heading');
+      if (typeof window !== 'undefined' && window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname + '?category=mobiles');
+      }
+      const el = document.getElementById('catalog') || document.getElementById('catalog-products') || document.getElementById('catalog-heading');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     } else if (categoryId === 'tablets') {
       setCatalogCategory('tablets');
       setFilters((prev) => ({ ...prev, selectedBrands: [] }));
-      const el = document.getElementById('catalog-products') || document.getElementById('catalog-heading');
+      if (typeof window !== 'undefined' && window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname + '?category=tablets');
+      }
+      const el = document.getElementById('catalog') || document.getElementById('catalog-products') || document.getElementById('catalog-heading');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
@@ -158,6 +167,27 @@ function HomeContent() {
     } else if (categoryId === 'mobile-cables') {
       setCatalogCategory('accessories');
       setAccessoryTab('Cable');
+      const el = document.getElementById('accessories');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (categoryId === 'power-banks') {
+      setCatalogCategory('accessories');
+      setAccessoryTab('Power Bank');
+      const el = document.getElementById('accessories');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (categoryId === 'mobile-chargers') {
+      setCatalogCategory('accessories');
+      setAccessoryTab('Charger');
+      const el = document.getElementById('accessories');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (categoryId === 'bluetooth-speakers') {
+      setCatalogCategory('accessories');
+      setAccessoryTab('Speaker');
       const el = document.getElementById('accessories');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -204,6 +234,14 @@ function HomeContent() {
 
   const displayedAccessories = useMemo(() => {
     if (accessoryTab === 'All') return allAccessories;
+    if (accessoryTab === 'Other') {
+      return allAccessories.filter(
+        (p) =>
+          p.accessoryType === 'Other' ||
+          p.accessoryType === 'Others' ||
+          !['Smartwatch', 'Earbuds', 'Cable', 'Power Bank', 'Charger', 'Speaker'].includes(p.accessoryType || '')
+      );
+    }
     return allAccessories.filter((p) => p.accessoryType === accessoryTab);
   }, [allAccessories, accessoryTab]);
 
@@ -930,7 +968,7 @@ function HomeContent() {
                 Genuine Mobile Accessories &amp; Smart Gadgets
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
-                Official Oraimo Smartwatches, Heavy-Duty Fast Charging Cables, and Open-Ear Bluetooth Earphones with genuine distributor warranty.
+                Official Smartwatches, Bluetooth Speakers, Power Banks, Fast Wall Chargers, Earbuds, and Cables with genuine distributor warranty.
               </p>
             </div>
 
@@ -938,9 +976,13 @@ function HomeContent() {
             <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
               {[
                 { id: 'All', label: 'All Accessories', count: allAccessories.length, icon: Sparkles },
+                { id: 'Speaker', label: 'Bluetooth Speakers', count: allAccessories.filter(a => a.accessoryType === 'Speaker').length, icon: Volume2 },
+                { id: 'Charger', label: 'Wall Chargers', count: allAccessories.filter(a => a.accessoryType === 'Charger').length, icon: Zap },
+                { id: 'Power Bank', label: 'Power Banks', count: allAccessories.filter(a => a.accessoryType === 'Power Bank').length, icon: Battery },
                 { id: 'Smartwatch', label: 'Smart Watches', count: allAccessories.filter(a => a.accessoryType === 'Smartwatch').length, icon: Watch },
                 { id: 'Earbuds', label: 'Wireless Earbuds', count: allAccessories.filter(a => a.accessoryType === 'Earbuds').length, icon: Headphones },
                 { id: 'Cable', label: 'Charging Cables', count: allAccessories.filter(a => a.accessoryType === 'Cable').length, icon: Cable },
+                { id: 'Other', label: 'Others', count: allAccessories.filter(a => a.accessoryType === 'Other' || a.accessoryType === 'Others' || !['Smartwatch', 'Earbuds', 'Cable', 'Power Bank', 'Charger', 'Speaker'].includes(a.accessoryType || '')).length, icon: Package },
               ].map((tab) => {
                 const isSelected = accessoryTab === tab.id;
                 const TabIcon = tab.icon;
@@ -1017,16 +1059,20 @@ function HomeContent() {
         </section>
 
         {/* Main Catalog Section */}
-        <section id="catalog" className="pt-10">
+        <section id="catalog" className="pt-10 scroll-mt-6">
           {/* Section Header & Sort */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 gap-4 border-b border-slate-200">
             <div>
               <div className="flex flex-wrap items-center gap-2.5">
                 <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-950 font-sans">
-                  Mobile Phones Catalog
+                  {catalogCategory === 'tablets'
+                    ? 'Tablets & iPads Catalog'
+                    : catalogCategory === 'accessories'
+                    ? 'Accessories Catalog'
+                    : 'Mobile Phones Catalog'}
                 </h2>
                 <span className="px-3 py-1 rounded-full text-xs font-black bg-sky-100 text-[#136ab5] border border-sky-200">
-                  {filteredPhones.length} Verified Mobiles
+                  {filteredPhones.length} {catalogCategory === 'tablets' ? 'Tablets Available' : 'Verified Mobiles'}
                 </span>
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1.5 shadow-xs">
                   <span className="relative flex h-2 w-2">
@@ -1037,7 +1083,9 @@ function HomeContent() {
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-1">
-                PTA DIRBS approved phones with brand warranties, 0% EMI installments, and Open-Parcel COD.
+                {catalogCategory === 'tablets'
+                  ? 'Official PTA approved tablets, iPads, and accessories with official warranties, 0% EMI installments, and Open-Parcel delivery.'
+                  : 'PTA DIRBS approved phones with brand warranties, 0% EMI installments, and Open-Parcel COD.'}
               </p>
             </div>
 
