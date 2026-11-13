@@ -18,6 +18,7 @@ import {
   Zap,
   Smartphone,
   MessageSquare,
+  MapPin,
 } from 'lucide-react';
 import {
   sanitizeText,
@@ -339,11 +340,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/policies#installments" className="hover:text-[#48afff] transition-colors">
-                  0% Markup EMI Installments
-                </Link>
-              </li>
-              <li>
                 <Link href="/policies#warranty" className="hover:text-[#48afff] transition-colors">
                   1-Year Official Brand Warranty
                 </Link>
@@ -397,6 +393,10 @@ export function Footer() {
                 <div className="flex items-center gap-2 text-slate-400">
                   <Mail className="w-3.5 h-3.5 text-[#48afff] flex-shrink-0" />
                   <span>support@nawiratraders.com</span>
+                </div>
+                <div className="flex items-start gap-2 text-slate-400 pt-1">
+                  <MapPin className="w-3.5 h-3.5 text-[#48afff] flex-shrink-0 mt-0.5" />
+                  <span className="text-[11px] leading-snug">Shop Number 4, Oppo Outlet, Lower Ground Floor, Rania Mall, Saddar, Rawalpindi</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">

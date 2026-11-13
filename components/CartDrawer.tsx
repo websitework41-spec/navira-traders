@@ -999,7 +999,7 @@ export function CartDrawer({
                     Your cart is empty
                   </p>
                   <p className="text-xs text-slate-400 mt-1 max-w-xs">
-                    Explore 222+ PTA-approved smartphones with 0% EMI and Open-Parcel delivery.
+                    Explore 222+ PTA-approved smartphones with Open-Parcel delivery and official brand warranties.
                   </p>
                   <button
                     onClick={onClose}

@@ -29,7 +29,6 @@ interface ChatMessage {
 const FAQ_SUGGESTIONS = [
   { label: '📦 Open-Parcel COD', prompt: 'How does Open-Parcel Delivery (Check Karo, Pay Karo) work?' },
   { label: '🛡️ Verify PTA DIRBS', prompt: 'How do I verify 100% PTA Approval for my phone?' },
-  { label: '💳 0% EMI Banks', prompt: 'Which Pakistani banks offer 0% markup installments?' },
   { label: '⚡ Mobiles Under 50k', prompt: 'What are the best budget smartphones under 50,000 PKR?' },
   { label: '🔥 S24 & iPhone Deals', prompt: 'Show me the latest flagship deals on Samsung Galaxy and Apple iPhone.' },
   { label: '💬 WhatsApp Support', prompt: 'How can I connect directly with a live representative on WhatsApp?' },
@@ -166,12 +165,11 @@ export function HelperBot() {
       sender: 'bot',
       text: `👋 **Hello! Welcome to Nawira Traders.**
 
-I'm your **Personal Mobile Advisor**. Whether you're comparing smartphones, verifying PTA approval, checking 0% EMI bank installments, or inquiring about Open-Parcel delivery, I'm here to assist you.
+I'm your **Personal Mobile Advisor**. Whether you're comparing smartphones, verifying PTA approval, or inquiring about Open-Parcel delivery, I'm here to assist you.
 
 **Key Customer Guarantees:**
 • 📦 **Open-Parcel Delivery**: Inspect and verify your parcel before paying
 • 🛡️ **100% PTA Approved**: Official DIRBS-registered authentic smartphones
-• 💳 **0% Markup EMI**: Up to 12 months installment plans on credit cards
 • ⚡ **Official Brand Warranty**: 1-year brand warranty on all devices
 
 Tap any question below or type your question to get instant guidance!`,
@@ -483,7 +481,7 @@ Tap any question below or type your question to get instant guidance!`,
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={isLoading}
-              placeholder="Ask about phones, PTA, EMI, Open-Parcel..."
+              placeholder="Ask about phones, PTA, Open-Parcel..."
               className="flex-1 px-4 py-2.5 text-base sm:text-xs bg-slate-50 focus:bg-white text-slate-900 rounded-full border border-slate-200 focus:border-[#48afff] focus:outline-none focus:ring-2 focus:ring-[#48afff]/20 transition-all placeholder:text-slate-400 font-medium"
             />
             <button

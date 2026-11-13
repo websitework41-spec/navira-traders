@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {
   PackageCheck,
   ShieldCheck,
-  CreditCard,
+  RefreshCw,
   Wrench,
   Truck,
   ArrowRight,
@@ -134,36 +134,33 @@ export function BentoTrustGrid({ onOpenPolicyModal }: BentoTrustGridProps) {
           </div>
         </div>
 
-        {/* BENTO CARD 3: 0% Markup EMI Installments */}
+        {/* BENTO CARD 3: 7-Day Replacement Guarantee */}
         <div
-          onClick={() => onOpenPolicyModal('installments')}
+          onClick={() => onOpenPolicyModal('warranty')}
           className="relative overflow-hidden rounded-3xl bg-white p-6 sm:p-7 flex flex-col justify-between shadow-sm border border-slate-200/90 hover:border-blue-500 hover:shadow-xl transition-all duration-300 group cursor-pointer"
         >
           <div>
             <div className="flex items-center justify-between mb-4">
               <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <CreditCard className="w-6 h-6 stroke-[2.2]" />
+                <RefreshCw className="w-6 h-6 stroke-[2.2]" />
               </div>
               <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 uppercase tracking-wider">
-                0% Markup
+                Replacement
               </span>
             </div>
 
             <h3 className="text-base sm:text-lg font-black text-slate-900 group-hover:text-blue-700 transition-colors">
-              0% EMI Monthly Installments
+              7-Day Replacement Guarantee
             </h3>
             <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-              Own your dream smartphone in convenient 3, 6, or 12-month installments on credit cards with zero hidden markup fees.
+              Receive a brand-new factory-sealed replacement in case of any verified hardware defect or transit issue.
             </p>
           </div>
 
-          {/* Supported Bank Pills */}
-          <div className="mt-5 pt-4 border-t border-slate-100">
-            <div className="flex flex-wrap gap-1.5">
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">Meezan Bank</span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">Bank Alfalah</span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">Faysal Bank</span>
-            </div>
+          {/* Guarantee Footer */}
+          <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-700">
+            <span>Hassle-Free Process</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
 

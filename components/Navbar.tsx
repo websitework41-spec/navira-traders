@@ -290,7 +290,7 @@ export function Navbar({
     'Nokia 105',
     'Redmi 14C',
     'Infinix Hot 50',
-    '0% EMI Deals',
+    'PTA Approved Phones',
   ];
 
   return (
@@ -311,7 +311,7 @@ export function Navbar({
               </span>
               <span className="text-white/40 hidden md:inline">•</span>
               <span className="hidden lg:inline text-white/95 font-medium flex items-center gap-1">
-                <button type="button" onClick={() => window.dispatchEvent(new CustomEvent('open_installment_manual'))} className="hover:text-amber-300 transition-colors cursor-pointer flex items-center gap-1" title="View 0% Markup Installment Manual"><span className="text-amber-300 font-bold">⚡ 0% Markup</span> EMI Installments (Guide)</button>
+                <span className="text-amber-300 font-bold">⭐ 100% Genuine</span> Official Brand Care
               </span>
             </div>
 

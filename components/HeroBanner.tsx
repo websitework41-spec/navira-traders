@@ -11,7 +11,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  CreditCard,
+  Truck,
   Smartphone,
 } from 'lucide-react';
 import { PhoneImageWithFallback } from './PhoneImageWithFallback';
@@ -76,7 +76,12 @@ export function HeroBanner({
       }
     };
 
-    fetchBanners();
+    // Defer network sync to idle time so it doesn't compete with initial hero render
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(fetchBanners, { timeout: 2000 });
+    } else {
+      setTimeout(fetchBanners, 800);
+    }
 
     const handleUpdate = () => {
       try {
@@ -89,7 +94,12 @@ export function HeroBanner({
           }
         }
       } catch {}
-      fetchBanners();
+      // Defer network sync to idle time so it doesn't compete with initial hero render
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(fetchBanners, { timeout: 2000 });
+    } else {
+      setTimeout(fetchBanners, 800);
+    }
     };
 
     window.addEventListener('naviratraders_banners_updated', handleUpdate);
@@ -328,17 +338,14 @@ export function HeroBanner({
           </div>
         </div>
 
-        {/* Pillar 4: 0% Markup EMI */}
-        <div
-          onClick={onOpenEMIModal}
-          className="group flex items-center gap-3 p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:border-purple-400 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
-        >
-          <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100 text-purple-700 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
-            <CreditCard className="w-5 h-5 stroke-[2.2]" />
+        {/* Pillar 4: Fast Nationwide Delivery */}
+        <div className="group flex items-center gap-3 p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:border-indigo-400 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 cursor-default">
+          <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-700 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+            <Truck className="w-5 h-5 stroke-[2.2]" />
           </div>
           <div>
-            <h4 className="text-xs sm:text-sm font-bold text-slate-950 group-hover:text-purple-700 transition-colors">Bank Installments</h4>
-            <p className="text-[11px] text-slate-500 mt-0.5">3 to 36 months plans</p>
+            <h4 className="text-xs sm:text-sm font-bold text-slate-950 group-hover:text-indigo-700 transition-colors">Fast Nationwide Delivery</h4>
+            <p className="text-[11px] text-slate-500 mt-0.5">Express safe courier delivery</p>
           </div>
         </div>
       </div>

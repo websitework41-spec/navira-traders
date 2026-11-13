@@ -7,7 +7,6 @@ import { SMARTPHONES, getPhoneBySlug, formatPKR, PAKISTAN_CITIES } from '@/data/
 import { getActiveCatalog, getLocalDeletedIds } from '@/lib/catalog';
 import { Smartphone, SmartphoneColor, SmartphoneVariant, CartItem } from '@/types';
 import { PhoneImageWithFallback } from '@/components/PhoneImageWithFallback';
-import { InstallmentManualModal } from '@/components/InstallmentManualModal';
 import { Navbar } from '@/components/Navbar';
 import dynamic from 'next/dynamic';
 
@@ -38,8 +37,6 @@ import {
   Zap,
   ArrowLeft,
   ArrowRight,
-  CreditCard,
-  FileText,
   Cpu,
   Battery,
   Camera,
@@ -125,9 +122,7 @@ export default function ProductDetailPage() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
   const [comparingPhones, setComparingPhones] = useState<Smartphone[]>([]);
-  const [selectedTenure, setSelectedTenure] = useState<number>(6); // installment months
   const [isQuickBuyOpen, setIsQuickBuyOpen] = useState(false);
-  const [isInstallmentModalOpen, setIsInstallmentModalOpen] = useState(false);
 
   // Write a Review modal states
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
@@ -240,7 +235,6 @@ export default function ProductDetailPage() {
   const currentOriginalPrice =
     (selectedVariant?.originalPricePKR || phone.originalPricePKR) + addonCost;
   const savings = currentOriginalPrice - currentPrice;
-  const monthlyInstallment = Math.round(currentPrice / selectedTenure);
 
   // Track product view in real-time analytics
   useEffect(() => {
@@ -425,8 +419,8 @@ export default function ProductDetailPage() {
       a: 'Your smartphone comes with an official brand warranty valid at all authorized service centers nationwide across Pakistan. Simply present the invoice from Nawira Traders and the stamped warranty card inside the box.',
     },
     {
-      q: 'How does the 0% Markup Monthly Installment work?',
-      a: "We offer zero-markup installment plans for 3, 6, and 12 months with leading Pakistani bank credit cards (Bank Alfalah, Meezan Bank, Faysal Bank, Silkbank, MCB). Direct online checkout for installments is disabled for customer security—simply tap 'View Plan Manual & Procedure' or contact our WhatsApp helpline at +92 313 5221200 to apply.",
+      q: 'What payment methods do you accept?',
+      a: 'We accept Cash on Delivery (COD) with Open-Parcel inspection across Pakistan, direct Bank Transfer (IBFT / Raast), and secure digital payment options.',
     },
   ];
 
@@ -817,70 +811,6 @@ export default function ProductDetailPage() {
                 </div>
               </div>
 
-              {/* PriceOye 0% Markup Monthly Installment (EMI) Box */}
-              <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50/40 border border-slate-200 space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs font-black text-slate-900">
-                    <CreditCard className="w-4 h-4 text-[#0b3c68]" />
-                    <span>0% Markup Monthly Installments</span>
-                  </div>
-                  <span className="text-xs font-black text-[#0b3c68]">
-                    {formatPKR(monthlyInstallment)} / mo
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {[3, 6, 12].map((tenure) => (
-                    <button
-                      key={tenure}
-                      onClick={() => setSelectedTenure(tenure)}
-                      className={`flex-1 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
-                        selectedTenure === tenure
-                          ? 'bg-[#0b3c68] text-white shadow-sm ring-2 ring-[#48afff]'
-                          : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-                      }`}
-                    >
-                      {tenure} Months
-                    </button>
-                  ))}
-                </div>
-
-                <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
-                  <span>Supported Credit Cards:</span>
-                  <span className="font-bold text-slate-700">
-                    Bank Alfalah • Meezan • Faysal • Silkbank • MCB
-                  </span>
-                </div>
-
-                {/* Manual & WhatsApp Apply Action Buttons */}
-                <div className="pt-2 border-t border-blue-200/70 flex flex-col sm:flex-row items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setIsInstallmentModalOpen(true)}
-                    className="w-full sm:flex-1 py-2 px-3 rounded-xl bg-white hover:bg-slate-50 text-[#0b3c68] border border-blue-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
-                  >
-                    <FileText className="w-3.5 h-3.5 text-[#0b3c68]" />
-                    <span>View Plan Manual &amp; Procedure</span>
-                  </button>
-
-                  <a
-                    href={`https://wa.me/923135221200?text=${encodeURIComponent(
-                      `Assalam-o-Alaikum! I want to purchase ${phone.name} on the ${selectedTenure}-Month 0% Installment Plan (Approx Rs. ${monthlyInstallment.toLocaleString()}/month). Please guide me with the bank approval procedure.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:flex-1 py-2 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-black text-xs flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer"
-                  >
-                    <MessageSquare className="w-3.5 h-3.5 fill-white" />
-                    <span>Apply via WhatsApp</span>
-                  </a>
-                </div>
-
-                <p className="text-[10px] text-slate-500 italic text-center sm:text-left">
-                  *Direct online checkout is disabled for installments. All plans are approved securely on WhatsApp.
-                </p>
-              </div>
-
               {/* Dynamic Estimated Delivery & Cutoff Countdown */}
               <DeliveryEstimatorCountdown className="mt-2" />
 
@@ -1014,8 +944,8 @@ export default function ProductDetailPage() {
                 <div className="text-[10px] text-sky-200">Brand Warranty</div>
               </div>
               <div className="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/15 text-center">
-                <div className="text-sm font-black text-white">0% Markup</div>
-                <div className="text-[10px] text-sky-200">Easy Installments</div>
+                <div className="text-sm font-black text-white">Express Delivery</div>
+                <div className="text-[10px] text-sky-200">Across Pakistan</div>
               </div>
             </div>
           </div>
@@ -1698,14 +1628,6 @@ export default function ProductDetailPage() {
           setCartItems((prev) => prev.filter((_, i) => i !== idx))
         }
         onClearCart={() => setCartItems([])}
-      />
-
-      {/* 0% Markup Monthly Installment Guide & Manual Modal */}
-      <InstallmentManualModal
-        isOpen={isInstallmentModalOpen}
-        onClose={() => setIsInstallmentModalOpen(false)}
-        phone={phone}
-        onSwitchToCOD={() => setIsQuickBuyOpen(true)}
       />
 
       {/* Quick Purchase Modal */}

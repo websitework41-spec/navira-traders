@@ -6,22 +6,18 @@ import {
   Sparkles,
   Flame,
   ShieldCheck,
-  PackageCheck,
-  CreditCard,
   ArrowRight,
   Zap,
   Clock,
-  CheckCircle2,
   PhoneCall
 } from 'lucide-react';
 import { PhoneImageWithFallback } from './PhoneImageWithFallback';
-import { formatPKR } from '@/data/smartphones';
 
 interface FlagshipSpotlightProps {
-  onOpenEMIModal?: () => void;
+  [key: string]: any;
 }
 
-export function FlagshipSpotlight({ onOpenEMIModal }: FlagshipSpotlightProps) {
+export function FlagshipSpotlight(_props: FlagshipSpotlightProps = {}) {
   // Live Countdown Timer (Simulated Flash Sale ending midnight)
   const [timeLeft, setTimeLeft] = useState({ hours: 7, minutes: 24, seconds: 48 });
 
@@ -136,12 +132,6 @@ export function FlagshipSpotlight({ onOpenEMIModal }: FlagshipSpotlightProps) {
               <div className="text-xs font-black px-2.5 py-1 rounded-full bg-emerald-500 text-white shadow-md">
                 SAVE RS. 153,000 (33% OFF)
               </div>
-            </div>
-
-            {/* 0% Installment tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-sky-200">
-              <CreditCard className="w-3.5 h-3.5 text-sky-400" />
-              <span>Or pay <strong>Rs. 26,416 / month</strong> with 0% EMI Installments</span>
             </div>
 
             {/* CTAs */}

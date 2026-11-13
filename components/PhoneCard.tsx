@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Smartphone, SmartphoneColor, SmartphoneVariant } from '@/types';
-import { formatPKR } from '@/data/smartphones';
 import { PhoneImageWithFallback } from './PhoneImageWithFallback';
 import {
   ShieldCheck,
@@ -16,7 +15,6 @@ import {
   ArrowRight,
   ShoppingCart,
   Zap,
-  CreditCard,
   Sparkles,
 } from 'lucide-react';
 
@@ -62,7 +60,6 @@ export const PhoneCard = React.memo(function PhoneCard({
   const cardPrice = primaryVariant?.pricePKR || phone.basePricePKR;
   const cardOriginalPrice = primaryVariant?.originalPricePKR || phone.originalPricePKR;
   const savingsPKR = Math.max(0, cardOriginalPrice - cardPrice);
-  const emiPerMonth = Math.round(cardPrice / 12);
 
   return (
     <div
@@ -291,17 +288,6 @@ export const PhoneCard = React.memo(function PhoneCard({
             <span>{phone.rating}</span>
             <span className="hidden sm:inline text-[10px] text-slate-400 font-normal">({phone.reviewCount})</span>
           </div>
-        </div>
-
-        {/* 0% EMI Installment Badge */}
-        <div className="mt-1.5 sm:mt-2 py-0.5 sm:py-1 px-2 sm:px-2.5 rounded-xl bg-slate-50 hover:bg-sky-50/60 border border-slate-200/80 transition-colors flex items-center justify-between text-[10px] sm:text-[11px] text-slate-600">
-          <span className="flex items-center gap-1 font-medium truncate">
-            <CreditCard className="w-3 h-3 text-[#136ab5] shrink-0" />
-            <span className="truncate">0% EMI:</span>
-          </span>
-          <span className="font-extrabold text-[#136ab5] shrink-0 ml-1">
-            {formatPKR(emiPerMonth)}/mo
-          </span>
         </div>
 
         {/* Live Stock Status Indicator */}

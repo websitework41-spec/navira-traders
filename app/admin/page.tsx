@@ -91,6 +91,7 @@ export default function AdminPortalPage() {
   // Security Gate
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [authChecking, setAuthChecking] = useState<boolean>(true);
+  const [adminId, setAdminId] = useState('');
   const [passcode, setPasscode] = useState('');
   const [authError, setAuthError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -254,19 +255,22 @@ export default function AdminPortalPage() {
       typeof window !== 'undefined'
         ? localStorage.getItem('naviratraders_admin_pin') ||
           localStorage.getItem('voltphone_admin_pin') ||
-          'admin786'
-        : 'admin786';
+          'Nawira#Trending2026!'
+        : 'Nawira#Trending2026!';
 
+    const normalizedId = adminId.trim().toLowerCase();
     const normalizedPasscode = passcode.trim();
-    if (
+
+    const isValidId =
+      normalizedId === 'admin' ||
+      normalizedId === 'nawira_admin' ||
+      normalizedId === 'admin@nawiratraders.com';
+
+    const isValidPass =
       normalizedPasscode === savedPin ||
-      normalizedPasscode === 'admin786' ||
-      normalizedPasscode === 'nawira2026' ||
-      normalizedPasscode === 'nawira786' ||
-      normalizedPasscode === 'hamza2026' ||
-      normalizedPasscode === 'hamza786' ||
-      normalizedPasscode === 'voltphone2026'
-    ) {
+      normalizedPasscode === 'Nawira#Trending2026!';
+
+    if (isValidId && isValidPass) {
       setIsAuthenticated(true);
       sessionStorage.setItem('naviratraders_admin_auth', 'granted');
       sessionStorage.setItem('voltphone_admin_auth', 'granted');
@@ -274,7 +278,7 @@ export default function AdminPortalPage() {
       localStorage.setItem('voltphone_admin_auth', 'granted');
       showToast('Welcome back, Admin! Access granted.');
     } else {
-      setAuthError('Incorrect passcode. Default master passcode is: admin786');
+      setAuthError('Invalid Admin ID or Password. Please try again.');
     }
   };
 
@@ -1045,34 +1049,45 @@ export default function AdminPortalPage() {
 
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
-                Store Master Passcode
+                Admin ID / Username
+              </label>
+              <input
+                type="text"
+                required
+                autoFocus
+                value={adminId}
+                onChange={(e) => setAdminId(e.target.value)}
+                placeholder="Enter Admin ID"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#008060] focus:border-transparent font-medium transition-all"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                Admin Password
               </label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
-                  autoFocus
                   value={passcode}
                   onChange={(e) => setPasscode(e.target.value)}
-                  placeholder="Enter passcode"
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 text-center tracking-widest focus:outline-none focus:ring-2 focus:ring-[#008060] focus:border-transparent font-mono transition-all"
+                  placeholder="Enter admin password"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#008060] focus:border-transparent font-mono transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400 hover:text-slate-600"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400 hover:text-slate-600 cursor-pointer"
                 >
                   {showPassword ? 'Hide' : 'Show'}
                 </button>
               </div>
-              <p className="text-[11px] text-slate-500 text-center mt-2">
-                Default Master Passcode: <span className="text-[#008060] font-mono font-bold bg-[#008060]/10 px-1.5 py-0.5 rounded">admin786</span>
-              </p>
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-[#008060] hover:bg-[#006e52] active:scale-[0.98] text-white font-bold text-sm shadow-md shadow-[#008060]/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 rounded-xl bg-[#008060] hover:bg-[#006e52] active:scale-[0.98] text-white font-bold text-sm shadow-md shadow-[#008060]/20 transition-all flex items-center justify-center gap-2 cursor-pointer mt-2"
             >
               <Lock className="w-4 h-4" />
               <span>Log in to Admin Console</span>
@@ -4899,12 +4914,12 @@ export default function AdminPortalPage() {
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Change Admin Passcode (Default: admin786)
+                      Change Admin Password
                     </label>
                     <div className="flex gap-2">
                       <input
                         type="password"
-                        placeholder="New passcode (min 4 chars)"
+                        placeholder="New password (min 6 chars)"
                         value={newAdminPin}
                         onChange={(e) => setNewAdminPin(e.target.value)}
                         className="w-full bg-[#f9fafb] border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#008060] font-mono"
@@ -4914,7 +4929,7 @@ export default function AdminPortalPage() {
                         onClick={handleUpdateAdminPin}
                         className="px-4 py-2 rounded-xl bg-[#008060] hover:bg-[#006e52] text-white text-xs font-bold shrink-0 transition-all cursor-pointer"
                       >
-                        Update Passcode
+                        Update Password
                       </button>
                     </div>
                   </div>
@@ -5564,7 +5579,7 @@ export default function AdminPortalPage() {
       {/* MODAL 4: PACKING SLIP / INVOICE VIEW */}
       {viewingOrderReceipt && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-xl bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl space-y-4 sm:space-y-6 relative print:p-0 max-h-[92vh] overflow-y-auto">
+          <div className="w-full max-w-2xl bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl space-y-4 sm:space-y-6 relative print:p-0 max-h-[92vh] overflow-y-auto">
             <button
               onClick={() => setViewingOrderReceipt(null)}
               className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-800 print:hidden"
@@ -5575,8 +5590,15 @@ export default function AdminPortalPage() {
             <div className="border-b border-slate-200 pb-5 flex items-start justify-between">
               <div>
                 <h2 className="text-2xl font-black text-slate-900">Nawira Traders</h2>
-                <p className="text-xs text-slate-500">Official Mobile Marketplace &amp; Logistics</p>
-                <p className="text-xs text-slate-500">PTA-Approved Direct Dispatch Delivery Note</p>
+                <p className="text-xs text-slate-700 font-semibold mt-0.5">
+                  Shop Number 4, Oppo Outlet, Lower Ground Floor, Rania Mall, Saddar, Rawalpindi
+                </p>
+                <p className="text-[11px] text-slate-500 mt-0.5">
+                  Official Mobile Marketplace &amp; Logistics • Helpline: +92 301 8543131
+                </p>
+                <p className="text-[11px] text-emerald-700 font-bold mt-1">
+                  PTA-Approved Direct Dispatch Delivery Note
+                </p>
               </div>
               <div className="text-right">
                 <div className="text-lg font-mono font-bold text-[#008060]">
@@ -5591,30 +5613,58 @@ export default function AdminPortalPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 text-xs">
-              <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200">
-                <div className="font-bold text-slate-700 uppercase text-[10px] mb-1">
-                  Deliver To Customer:
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 print:grid-cols-3 text-xs">
+              <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                <div>
+                  <div className="font-bold text-slate-700 uppercase text-[10px] mb-1 flex items-center justify-between">
+                    <span>Shipper / From:</span>
+                    <span className="text-[9px] bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-bold">STORE</span>
+                  </div>
+                  <div className="font-bold text-slate-900 text-sm">
+                    Nawira Traders
+                  </div>
+                  <div className="text-slate-600 mt-1 leading-snug">
+                    Shop Number 4, Oppo Outlet, Lower Ground Floor, Rania Mall, Saddar, Rawalpindi
+                  </div>
                 </div>
-                <div className="font-bold text-slate-900 text-sm">
-                  {viewingOrderReceipt.customerName}
-                </div>
-                <div className="text-slate-600">{viewingOrderReceipt.phone}</div>
-                <div className="text-slate-600 mt-1">
-                  {viewingOrderReceipt.address}, {viewingOrderReceipt.city}
+                <div className="text-slate-500 font-mono text-[10px] mt-2 pt-1.5 border-t border-slate-200/70">
+                  Ph: +92 301 8543131
                 </div>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200">
-                <div className="font-bold text-slate-700 uppercase text-[10px] mb-1">
-                  Shipping &amp; Courier:
+              <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                <div>
+                  <div className="font-bold text-slate-700 uppercase text-[10px] mb-1">
+                    Deliver To Customer:
+                  </div>
+                  <div className="font-bold text-slate-900 text-sm">
+                    {viewingOrderReceipt.customerName}
+                  </div>
+                  <div className="text-slate-600 font-medium">{viewingOrderReceipt.phone}</div>
+                  <div className="text-slate-600 mt-1 leading-snug">
+                    {viewingOrderReceipt.address}, {viewingOrderReceipt.city}
+                  </div>
                 </div>
-                <div className="font-bold text-slate-900">
-                  {viewingOrderReceipt.courier || 'TCS Express'}
+                <div className="text-emerald-700 font-bold text-[10px] mt-2 pt-1.5 border-t border-slate-200/70">
+                  Open-Parcel Permitted
                 </div>
-                <div className="text-slate-600">Payment: {viewingOrderReceipt.paymentMethod}</div>
-                <div className="text-slate-900 font-bold mt-1">
-                  COD Amount to Collect: {formatPKR(viewingOrderReceipt.totalPKR)}
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                <div>
+                  <div className="font-bold text-slate-700 uppercase text-[10px] mb-1">
+                    Shipping &amp; Courier:
+                  </div>
+                  <div className="font-bold text-slate-900">
+                    {viewingOrderReceipt.courier || 'TCS Express'}
+                  </div>
+                  <div className="text-slate-600 mt-0.5">Payment: {viewingOrderReceipt.paymentMethod}</div>
+                </div>
+                <div className="mt-2 pt-1.5 border-t border-slate-200/70">
+                  <div className="text-slate-500 text-[10px]">COD Amount to Collect:</div>
+                  <div className="text-slate-950 font-black text-sm">
+                    {formatPKR(viewingOrderReceipt.totalPKR)}
+                  </div>
                 </div>
               </div>
             </div>

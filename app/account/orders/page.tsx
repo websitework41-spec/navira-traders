@@ -350,7 +350,7 @@ export default function OrdersHistoryPage() {
             <div className="space-y-1">
               <h3 className="text-base font-bold text-slate-950">No orders placed yet</h3>
               <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                Explore our catalog of 222+ PTA-approved smartphones with 0% EMI installments and Open-Parcel delivery.
+                Explore our catalog of 222+ PTA-approved smartphones with Open-Parcel delivery and official brand warranties.
               </p>
             </div>
             <Link

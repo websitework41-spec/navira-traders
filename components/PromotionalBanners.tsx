@@ -8,7 +8,7 @@ import {
   Sparkles,
   Zap,
   ArrowRight,
-  CreditCard,
+  Truck,
   CheckCircle2,
   Clock,
   ExternalLink,
@@ -320,49 +320,51 @@ export function CatalogBannerDualCards({
 }
 
 /**
- * Banner 3: 0% Markup Bank EMI Installments
+ * Banner 3: Official PTA Approved & Fast Nationwide Delivery
  */
-export function CatalogBannerBankEMI({ onOpenEMIModal }: BannerProps) {
+export function CatalogBannerBankEMI({}: BannerProps) {
   return (
     <div className="group col-span-full my-6 rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-[#0b2b4a] via-[#104d7d] to-[#136ab5] text-white border border-sky-800 shadow-xl hover:shadow-2xl hover:border-[#48afff] hover:-translate-y-1.5 transition-all duration-500 relative overflow-hidden">
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
         <div className="md:col-span-8 space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#48afff]/25 border border-[#48afff]/40 text-sky-200 text-[11px] font-extrabold uppercase tracking-wider">
-            <CreditCard className="w-3.5 h-3.5" /> 0% Markup Financing
+            <Truck className="w-3.5 h-3.5" /> Express Dispatch &amp; Delivery
           </div>
 
           <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-sans">
-            Buy Any Flagship Smartphone on Easy Monthly Installments
+            Official PTA Approved &amp; Fast Nationwide Delivery
           </h3>
 
           <p className="text-xs sm:text-sm text-slate-200 max-w-xl leading-relaxed">
-            Zero markup (interest-free) plans up to 12 months with Meezan Bank, Bank Alfalah, HBL, Standard Chartered, and Silk Bank credit cards.
+            Order authentic smartphones with complete peace of mind. Every phone is 100% PTA tax-paid with official brand warranty and open-parcel doorstep verification.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <div className="flex items-center gap-2 text-xs font-bold text-sky-100 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/20">
               <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-              <span>No Hidden Charges</span>
+              <span>Open-Parcel COD</span>
             </div>
             <div className="flex items-center gap-2 text-xs font-bold text-sky-100 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/20">
               <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-              <span>Instant Bank Approval</span>
+              <span>100% DIRBS Approved</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-bold text-sky-100 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/20">
+              <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+              <span>24–48hr Dispatch</span>
             </div>
           </div>
         </div>
 
         <div className="md:col-span-4 flex flex-col items-start md:items-end justify-center space-y-3">
-          {onOpenEMIModal && (
-            <button
-              onClick={onOpenEMIModal}
-              className="btn-shimmer btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#48afff] hover:bg-[#229eff] text-white text-xs sm:text-sm font-black transition-all shadow-lg shadow-[#48afff]/30 hover:shadow-[#48afff]/50 cursor-pointer"
-            >
-              <span>Calculate Your Monthly EMI</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-          )}
+          <Link
+            href="/#catalog"
+            className="btn-shimmer btn-press w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#48afff] hover:bg-[#229eff] text-white text-xs sm:text-sm font-black transition-all shadow-lg shadow-[#48afff]/30 hover:shadow-[#48afff]/50 cursor-pointer"
+          >
+            <span>Explore All Smartphones</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
           <span className="text-[11px] text-sky-200">
-            Also accepts EasyPaisa &amp; JazzCash installments
+            Open-parcel inspection before payment
           </span>
         </div>
       </div>

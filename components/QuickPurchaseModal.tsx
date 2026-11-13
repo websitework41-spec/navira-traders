@@ -14,7 +14,6 @@ import {
   Phone,
   CreditCard,
   Banknote,
-  Percent,
   Sparkles,
   ArrowRight,
   MessageSquare,
@@ -644,31 +643,6 @@ export function QuickPurchaseModal({
                       <p className="text-[10px] text-slate-500 font-medium">Instant IBFT</p>
                     </div>
                   </label>
-
-                  
-                </div>
-
-                {/* Installment Notice Box */}
-                <div className="p-3 rounded-2xl bg-purple-50/70 border border-purple-200/80 flex items-center justify-between gap-3 text-xs">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
-                      <Percent className="w-4 h-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-extrabold text-purple-950 truncate">Want to buy on Monthly Installments?</p>
-                      <p className="text-[10px] text-purple-700 font-medium">3, 6 &amp; 12-month plans processed safely via WhatsApp.</p>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onClose();
-                      window.dispatchEvent(new CustomEvent('open_installment_manual', { detail: { phone } }));
-                    }}
-                    className="shrink-0 px-3 py-1.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-[11px] transition-colors cursor-pointer shadow-xs"
-                  >
-                    View Manual
-                  </button>
                 </div>
 
                 {/* Bank & Raast Details Card (Shown when Bank Transfer is selected) */}

@@ -147,12 +147,12 @@ Every phone on Nawira Traders is legally imported with customs taxes paid in ful
 Your status will confirm: *"IMEI is Compliant (PTA Approved)"*. Never worry about SIM blockage!`;
   }
 
-  if (q.includes('installment') || q.includes('emi') || q.includes('markup') || q.includes('bank') || q.includes('card') || q.includes('credit')) {
-    return `💳 **0% Markup Easy Monthly Installments (EMI)**:
-Enjoy 0% interest installments through partner credit cards:
-- **Eligible Banks**: Meezan Bank (Islamic 0%), Bank Alfalah (3, 6, 12 mos), Faysal Bank, and Silkbank.
-- **Tenures**: 3, 6, or 12 months.
-- **Process**: Direct online checkout is disabled for installments. Open our Installment Manual popup or contact our WhatsApp helpline at +92 313 5221200 to verify and apply.`;
+  if (q.includes('installment') || q.includes('emi') || q.includes('markup')) {
+    return `ℹ️ **Payment & Purchasing Information**:
+We currently offer **100% Open-Parcel Cash on Delivery (COD)** and direct payment methods across Pakistan.
+We do not offer monthly installment plans (EMI) or markup financing at this time.
+- **Open-Parcel COD**: Open and inspect your smartphone box before paying the courier rider!
+- **Warranty**: 1-Year Official Brand Warranty included with all phones.`;
   }
 
   if (q.includes('warranty') || q.includes('repair') || q.includes('service center') || q.includes('claim')) {
@@ -223,8 +223,7 @@ I'm **NawiraBot**, your AI shopping specialist. Here is how I can help you:
 - 📱 **Phone Recommendations**: Tell me your budget (e.g. *"Best phone under 40k"* or *"Keypad phone"*).
 - 📦 **Open-Parcel COD**: How you can inspect before paying the courier rider.
 - ✅ **PTA DIRBS Approval**: Verification instructions via SMS 8484.
-- 💳 **0% EMI Installments**: Banks and tenures supported.
-- 🛡️ **Brand Warranties**: Official nationwide service centers.
+- 🛡️ **Brand Warranties & Replacement**: Official nationwide service centers & 7-Day guarantee.
 - 📞 **Helpline**: WhatsApp support available at **+92 301 8543131**.
 
 What phone or policy can I help you with today?`;

@@ -10,11 +10,13 @@ import { Smartphone, FilterState, CartItem, SmartphoneVariant, SmartphoneColor }
 import { Navbar } from '@/components/Navbar';
 import { HeroBanner } from '@/components/HeroBanner';
 import { BrandMarquee } from '@/components/BrandMarquee';
-import { BentoTrustGrid } from '@/components/BentoTrustGrid';
+const BentoTrustGrid = dynamic(
+  () => import('@/components/BentoTrustGrid').then((m) => m.BentoTrustGrid)
+);
 import { FlagshipSpotlight } from '@/components/FlagshipSpotlight';
 import { FilterSidebar } from '@/components/FilterSidebar';
 import { PhoneCard } from '@/components/PhoneCard';
-import { InstallmentManualModal } from '@/components/InstallmentManualModal';
+import { BrandLoadingScreen, BrandPreloader } from '@/components/BrandPreloader';
 import dynamic from 'next/dynamic';
 
 // Performance Optimization: Defer loading interactive checkout/compare drawers to reduce initial main-thread JS
@@ -53,7 +55,6 @@ import {
   PhoneCall,
   Mail,
   X,
-  CreditCard,
   Banknote,
   Building,
   ChevronDown,
@@ -97,19 +98,6 @@ function HomeContent() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const [activePolicyModal, setActivePolicyModal] = useState<string | null>(null);
-  const [isInstallmentManualOpen, setIsInstallmentManualOpen] = useState(false);
-  const [installmentPhone, setInstallmentPhone] = useState<Smartphone | null>(null);
-
-  useEffect(() => {
-    const handleOpen = (e: any) => {
-      if (e?.detail?.phone) {
-        setInstallmentPhone(e.detail.phone);
-      }
-      setIsInstallmentManualOpen(true);
-    };
-    window.addEventListener('open_installment_manual', handleOpen);
-    return () => window.removeEventListener('open_installment_manual', handleOpen);
-  }, []);
 
   // Quick Purchase Form Modal state
   const [quickBuyPhone, setQuickBuyPhone] = useState<Smartphone | null>(null);
@@ -748,6 +736,7 @@ function HomeContent() {
 
   return (
     <div className="min-h-screen bg-[#f1f3f6] text-slate-900 flex flex-col font-sans w-full max-w-full overflow-x-hidden">
+      <BrandPreloader />
       {/* PriceOye Inspired Navbar */}
       <Navbar
         catalog={catalog}
@@ -773,7 +762,6 @@ function HomeContent() {
           onQuickFilter={handleSelectBrand}
           onFilterBudget={handleFilterBudget}
           onFilterKeypad={handleFilterKeypad}
-          onOpenEMIModal={() => setIsInstallmentManualOpen(true)}
         />
         {/* Interactive Infinite Brand Marquee */}
         <BrandMarquee
@@ -848,7 +836,7 @@ function HomeContent() {
         </section>
 
         {/* Cinematic Flagship Deal of the Day Spotlight */}
-        <FlagshipSpotlight onOpenEMIModal={() => setIsInstallmentManualOpen(true)} />
+        <FlagshipSpotlight />
 
 
         {/* PriceOye Inspired: Shop by Budget Rail */}
@@ -1084,8 +1072,8 @@ function HomeContent() {
               </div>
               <p className="text-xs text-slate-500 mt-1">
                 {catalogCategory === 'tablets'
-                  ? 'Official PTA approved tablets, iPads, and accessories with official warranties, 0% EMI installments, and Open-Parcel delivery.'
-                  : 'PTA DIRBS approved phones with brand warranties, 0% EMI installments, and Open-Parcel COD.'}
+                  ? 'Official PTA approved tablets, iPads, and accessories with official brand warranties and Open-Parcel delivery.'
+                  : 'PTA DIRBS approved phones with brand warranties, Open-Parcel delivery, and official nationwide service.'}
               </p>
             </div>
 
@@ -1381,11 +1369,9 @@ function HomeContent() {
                             onFilterKeypad={handleFilterKeypad}
                           />
                         )}
-                        {/* Banner 3: 0% Markup Bank EMI Installments */}
+                        {/* Banner 3: Express Dispatch & Delivery */}
                         {index === 17 && (
-                          <CatalogBannerBankEMI
-                            onOpenEMIModal={() => setIsInstallmentManualOpen(true)}
-                          />
+                          <CatalogBannerBankEMI />
                         )}
                         {/* Banner 4: Open-Parcel Cash on Delivery Guarantee */}
                         {index === 23 && (
@@ -1515,15 +1501,6 @@ function HomeContent() {
       />
 
       {/* Footer */}
-      {/* Comprehensive 0% Markup Monthly Installment Guide & Manual Modal */}
-      <InstallmentManualModal
-        isOpen={isInstallmentManualOpen}
-        onClose={() => {
-          setIsInstallmentManualOpen(false);
-          setInstallmentPhone(null);
-        }}
-        phone={installmentPhone}
-      />
 
       <Footer />
 
@@ -1537,19 +1514,19 @@ function HomeContent() {
                 {activePolicyModal === 'pta-guide' && <ShieldCheck className="w-5 h-5 text-emerald-600" />}
                 {activePolicyModal === 'warranty' && <Award className="w-5 h-5 text-indigo-600" />}
                 {activePolicyModal === 'cod-terms' && <Truck className="w-5 h-5 text-amber-600" />}
-                {activePolicyModal === 'installments' && <CreditCard className="w-5 h-5 text-purple-600" />}
+                {activePolicyModal === 'replacement-guarantee' && <RotateCcw className="w-5 h-5 text-rose-600" />}
                 <h3 className="font-bold text-slate-950 text-base font-sans">
                   {activePolicyModal === 'open-parcel' && 'Open-Parcel Delivery Policy'}
                   {activePolicyModal === 'pta-guide' && 'PTA DIRBS Verification Guide'}
                   {activePolicyModal === 'warranty' && 'Official 1-Year Brand Warranty'}
                   {activePolicyModal === 'cod-terms' && 'Cash on Delivery (COD) Terms'}
-                  {activePolicyModal === 'installments' && '0% Markup Installment Plans'}
+                  {activePolicyModal === 'replacement-guarantee' && '7-Day Replacement Guarantee'}
                 </h3>
               </div>
               <button
                 onClick={() => setActivePolicyModal(null)}
-                aria-label={activePolicyModal === 'installments' ? 'Close EMI modal' : 'Close policy details dialog'}
-                title={activePolicyModal === 'installments' ? 'Close EMI modal' : 'Close dialog'}
+                aria-label="Close policy details dialog"
+                title="Close dialog"
                 className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-950 transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
@@ -1609,15 +1586,15 @@ function HomeContent() {
                 </>
               )}
 
-              {activePolicyModal === 'installments' && (
+              {activePolicyModal === 'replacement-guarantee' && (
                 <>
                   <p className="font-bold text-slate-900">
-                    0% Markup Installment Plans (Easy Monthly Installments):
+                    7-Day Replacement &amp; Quality Guarantee:
                   </p>
                   <ul className="list-disc pl-4 space-y-1">
-                    <li>Available on credit cards of: <strong>Bank Alfalah, Meezan Bank, Faysal Bank, and Silkbank</strong>.</li>
-                    <li>Select 3, 6, or 12-month tenure during checkout.</li>
-                    <li>Zero hidden fees, 100% Shariah-compliant markup arrangements.</li>
+                    <li>Prompt replacement for any out-of-the-box hardware defect or damage.</li>
+                    <li>Claim easily via WhatsApp customer care (+92 313 5221200).</li>
+                    <li>Full retail box packaging and accessories required for instant exchange.</li>
                   </ul>
                 </>
               )}
@@ -1681,13 +1658,7 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-500 font-bold">
-          Loading Nawira Traders Catalog...
-        </div>
-      }
-    >
+    <Suspense fallback={<BrandLoadingScreen />}>
       <HomeContent />
     </Suspense>
   );

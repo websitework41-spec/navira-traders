@@ -10,7 +10,6 @@ import {
   PackageCheck,
   ShieldCheck,
   RotateCcw,
-  CreditCard,
   Truck,
   Lock,
   CheckCircle2,
@@ -20,8 +19,8 @@ import {
   ChevronRight,
   FileText,
   BadgeCheck,
-  Building,
   HelpCircle,
+  MapPin,
 } from 'lucide-react';
 
 export default function PoliciesPage() {
@@ -128,58 +127,6 @@ export default function PoliciesPage() {
             <p>
               Your verification reply will state: <em>&quot;IMEI is Compliant (PTA Approved)&quot;</em>. You will enjoy lifetime unrestricted connectivity on Jazz, Zong, Telenor, Ufone, and SCO with zero risk of sudden SIM blockage.
             </p>
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: 'installments',
-      title: '0% Markup EMI Installments',
-      badge: 'Shariah-Compliant',
-      badgeColor: 'bg-purple-500/10 text-purple-700 border-purple-500/20',
-      icon: <CreditCard className="w-6 h-6 text-purple-600" />,
-      summary: 'Shop top flagship & mid-range smartphones with zero interest markup over 3, 6, or 12 monthly installments.',
-      content: (
-        <div className="space-y-4 text-sm text-slate-700 leading-relaxed">
-          <p>
-            Nawira Traders partners with leading Pakistani financial institutions to offer 0% Markup Easy Monthly Installments (EMI) on credit cards.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-1">
-              <div className="font-bold text-slate-900 flex items-center gap-1.5">
-                <Building className="w-4 h-4 text-purple-600" />
-                <span>Meezan Bank Credit Cards</span>
-              </div>
-              <p className="text-slate-500 text-xs">3 &amp; 6 Months 0% Markup Plans. Fully Shariah-compliant Islamic financing.</p>
-            </div>
-            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-1">
-              <div className="font-bold text-slate-900 flex items-center gap-1.5">
-                <Building className="w-4 h-4 text-purple-600" />
-                <span>Bank Alfalah (Alfa Mall)</span>
-              </div>
-              <p className="text-slate-500 text-xs">3, 6, &amp; 12 Months 0% Markup on Alfalah Credit Cards with instant online conversion.</p>
-            </div>
-            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-1">
-              <div className="font-bold text-slate-900 flex items-center gap-1.5">
-                <Building className="w-4 h-4 text-purple-600" />
-                <span>Faysal Bank (Noor Cards)</span>
-              </div>
-              <p className="text-slate-500 text-xs">3 &amp; 6 Months 0% Markup Islamic financing options.</p>
-            </div>
-            <div className="p-3.5 rounded-2xl bg-white border border-slate-200 space-y-1">
-              <div className="font-bold text-slate-900 flex items-center gap-1.5">
-                <Building className="w-4 h-4 text-purple-600" />
-                <span>Silkbank Credit Cards</span>
-              </div>
-              <p className="text-slate-500 text-xs">Up to 12 months installment tenure with promotional zero interest rate.</p>
-            </div>
-          </div>
-          <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-2">
-            <p className="font-bold text-amber-950">How to Apply &amp; Order on Installments:</p>
-            <p className="leading-relaxed">Direct online checkout is disabled for installments. All installment plans are processed safely via WhatsApp consultation with official partner bank coordination.</p>
-            <div className="pt-1">
-              <a href="https://wa.me/923135221200?text=Assalam-o-Alaikum%20Nawira%20Traders!%20I%20want%20to%20apply%20for%20a%200%25%20Monthly%20Installment%20Plan.%20Please%20guide%20me%20with%20the%20procedure." target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-sm transition-all"><span>Apply for Installments on WhatsApp (+92 313 5221200)</span></a>
-            </div>
           </div>
         </div>
       ),
@@ -332,7 +279,7 @@ export default function PoliciesPage() {
             Nawira Traders Customer Policies &amp; Assurances
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
-            Pakistan&apos;s most trusted mobile phone marketplace. Complete transparency on Open-Parcel Cash on Delivery, official PTA DIRBS compliance, 0% EMI installments, and manufacturer warranties.
+            Pakistan&apos;s most trusted mobile phone marketplace. Complete transparency on Open-Parcel Cash on Delivery, official PTA DIRBS compliance, and manufacturer warranties.
           </p>
         </div>
       </div>
@@ -392,6 +339,10 @@ export default function PoliciesPage() {
             <p className="text-xs text-slate-300 max-w-md leading-relaxed">
               Our phone advisors are available Mon-Sat (9:00 AM - 10:00 PM PKT) on direct phone or WhatsApp.
             </p>
+            <div className="flex items-center gap-1.5 text-xs text-sky-300 pt-1">
+              <MapPin className="w-3.5 h-3.5 shrink-0 text-[#48afff]" />
+              <span>Shop Number 4, Oppo Outlet, Lower Ground Floor, Rania Mall, Saddar, Rawalpindi</span>
+            </div>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <a

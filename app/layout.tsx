@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Nawira Traders | Pakistan's #1 PTA-Approved Mobile Marketplace",
   description:
-    "Explore 220+ PTA-Approved smartphones and button phones with official prices, 0% EMI installments, Open-Parcel delivery, and official 1-year brand warranties.",
+    "Explore 220+ PTA-Approved smartphones and button phones with official prices, Open-Parcel delivery, and official 1-year brand warranties.",
 };
 
 export default function RootLayout({
@@ -42,6 +42,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.priceoye.pk" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+        <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
       </head>
       <body className="min-h-full flex flex-col bg-[#f1f3f6] text-[#0f1111] font-sans overflow-x-hidden w-full max-w-full">
         <AuthProvider>
