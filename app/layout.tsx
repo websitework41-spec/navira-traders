@@ -23,10 +23,48 @@ export const viewport: Viewport = {
   themeColor: "#0b3c68",
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nawiratraders.com";
+
 export const metadata: Metadata = {
-  title: "Nawira Traders | Pakistan's #1 PTA-Approved Mobile Marketplace",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Nawira Traders | Pakistan's #1 PTA-Approved Mobile Marketplace",
+    template: "%s | Nawira Traders",
+  },
   description:
-    "Explore 220+ PTA-Approved smartphones and button phones with official prices, Open-Parcel delivery, and official 1-year brand warranties.",
+    "Shop 100% PTA-Approved smartphones, tablets, keypad phones, and genuine mobile accessories in Pakistan with Open-Parcel Cash on Delivery and official 1-year brand warranty.",
+  keywords: [
+    "Nawira Traders",
+    "Navira Traders",
+    "PTA approved mobile phones Pakistan",
+    "mobile prices in Pakistan",
+    "Open Parcel COD mobile",
+    "smartphones Rawalpindi",
+    "Rania Mall Saddar mobile shop",
+    "mobile installments Pakistan",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_PK",
+    url: siteUrl,
+    siteName: "Nawira Traders",
+    title: "Nawira Traders | Pakistan's #1 PTA-Approved Mobile Marketplace",
+    description:
+      "100% PTA-Approved smartphones, tablets, and accessories with Open-Parcel Cash on Delivery across Pakistan.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nawira Traders | Pakistan's #1 PTA-Approved Mobile Marketplace",
+    description:
+      "100% PTA-Approved smartphones, tablets, and accessories with Open-Parcel Cash on Delivery across Pakistan.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

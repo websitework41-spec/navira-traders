@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  Headphones,
   Sparkles,
   Send,
   X,
@@ -18,6 +17,53 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { sanitizeText } from '@/lib/security';
+
+/** Cute AI Pet Mascot ("Nawi") for Nawira Traders */
+function NawiPetAvatar({ className = 'w-11 h-11' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-hidden="true"
+    >
+      {/* Glowing Antenna */}
+      <line x1="32" y1="6" x2="32" y2="14" stroke="#48afff" strokeWidth="3" strokeLinecap="round" />
+      <circle cx="32" cy="5.5" r="3.5" fill="#f88b2a" className="animate-pulse" />
+
+      {/* Cute Cat/Fox Tech Ears */}
+      <path d="M14 24L18 11L27 19Z" fill="#0b3c68" stroke="#48afff" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M50 24L46 11L37 19Z" fill="#0b3c68" stroke="#48afff" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M17.5 21L19.8 14.5L24.5 19Z" fill="#48afff" opacity="0.65" />
+      <path d="M46.5 21L44.2 14.5L39.5 19Z" fill="#48afff" opacity="0.65" />
+
+      {/* Rounded Head */}
+      <rect x="11" y="16" width="42" height="36" rx="18" fill="#0b3c68" stroke="#48afff" strokeWidth="2.5" />
+
+      {/* Inner Face Visor */}
+      <rect x="16" y="22" width="32" height="23" rx="11.5" fill="#071e36" />
+
+      {/* Expressive Glowing Eyes */}
+      <circle cx="24.5" cy="32.5" r="3.4" fill="#48afff" />
+      <circle cx="39.5" cy="32.5" r="3.4" fill="#48afff" />
+      <circle cx="25.7" cy="31.3" r="1.2" fill="#ffffff" />
+      <circle cx="40.7" cy="31.3" r="1.2" fill="#ffffff" />
+
+      {/* Rosy Cheeks */}
+      <ellipse cx="20" cy="37.5" rx="2.5" ry="1.4" fill="#fb7185" opacity="0.7" />
+      <ellipse cx="44" cy="37.5" rx="2.5" ry="1.4" fill="#fb7185" opacity="0.7" />
+
+      {/* Happy Smile */}
+      <path d="M28.5 37.5C29.8 39.5 34.2 39.5 35.5 37.5" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" />
+
+      {/* Cute Paws / Collar Accent */}
+      <rect x="23" y="49" width="18" height="5" rx="2.5" fill="#f88b2a" />
+      <circle cx="19" cy="52" r="4" fill="#0f497a" stroke="#48afff" strokeWidth="1.8" />
+      <circle cx="45" cy="52" r="4" fill="#0f497a" stroke="#48afff" strokeWidth="1.8" />
+    </svg>
+  );
+}
 
 interface ChatMessage {
   id: string;
@@ -299,29 +345,40 @@ Tap any question below or type your question to get instant guidance!`,
 
   return (
     <>
-      {/* Floating Trigger Launcher Button */}
+      {/* Floating AI Pet Launcher ("Nawi") */}
       {!isOpen && (
         <aside
-          aria-label="Nawira Traders Live Support"
-          className="fixed bottom-[128px] sm:bottom-[88px] right-4 sm:right-6 z-40 flex items-center"
+          aria-label="Nawi AI Pet Assistant"
+          className="fixed bottom-[124px] sm:bottom-[84px] right-4 sm:right-6 z-40 flex items-center"
         >
           <button
             onClick={() => {
               setIsOpen(true);
               setHasUnread(false);
             }}
-            aria-label="Ask Nawira Traders Support"
-            title="Chat with Nawira Traders Specialist"
-            className="group relative flex items-center gap-2 pl-3.5 pr-4 py-2.5 rounded-full bg-[#0b3c68] hover:bg-[#082e50] text-white shadow-xl shadow-[#0b3c68]/30 hover:shadow-[#0b3c68]/50 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/60 cursor-pointer"
+            aria-label="Chat with Nawi, Nawira Traders AI Pet"
+            title="Ask Nawi — Nawira Traders AI Pet"
+            className="group relative flex items-center gap-2 p-1.5 sm:pr-3.5 rounded-full bg-white/95 hover:bg-white text-[#0b3c68] shadow-xl shadow-[#0b3c68]/25 hover:shadow-[#48afff]/40 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-[#48afff]/60 cursor-pointer"
           >
-            {/* Online Pulse Indicator */}
-            <span className="relative flex h-3 w-3 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-80" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-white" />
-            </span>
+            {/* Cute AI Pet Character */}
+            <div className="relative flex items-center justify-center">
+              <NawiPetAvatar className="w-10 h-10 sm:w-11 sm:h-11 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:rotate-3" />
+              {/* Online Pulse Indicator */}
+              <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-80" />
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-white" />
+              </span>
+            </div>
 
-            <Headphones className="w-4 h-4 sm:w-5 sm:h-5 text-white transition-transform group-hover:scale-110" />
-            <span className="text-xs font-black tracking-wide hidden sm:inline">Ask Specialist</span>
+            <div className="hidden sm:flex flex-col items-start leading-tight text-left">
+              <span className="text-[11px] font-black text-[#0b3c68] flex items-center gap-1">
+                Ask Nawi
+                <Sparkles className="w-3 h-3 text-[#f88b2a] fill-[#f88b2a]" />
+              </span>
+              <span className="text-[10px] font-semibold text-slate-500">
+                AI Phone Pet
+              </span>
+            </div>
           </button>
         </aside>
       )}
@@ -344,15 +401,15 @@ Tap any question below or type your question to get instant guidance!`,
           <div className="px-4 py-3.5 bg-gradient-to-r from-[#0b3c68] via-[#0f497a] to-[#136ab5] text-white flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-2xl bg-white text-[#0b3c68] flex items-center justify-center shadow-md border border-white/30">
-                  <Headphones className="w-5 h-5 text-[#0b3c68]" />
+                <div className="w-11 h-11 rounded-2xl bg-white/95 flex items-center justify-center shadow-md border border-white/40 p-0.5">
+                  <NawiPetAvatar className="w-10 h-10" />
                 </div>
                 <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 border-2 border-[#0b3c68] rounded-full"></span>
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="text-sm font-black tracking-tight text-white flex items-center gap-1">
-                    Nawira Traders Assistant
+                    Nawi — Nawira AI Pet
                     <Sparkles className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
                   </h3>
                   <span className="text-[9px] uppercase font-black tracking-wider px-1.5 py-0.5 rounded-full bg-[#f88b2a] text-white shadow-xs">
@@ -410,8 +467,8 @@ Tap any question below or type your question to get instant guidance!`,
                 className={`flex gap-2.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.sender === 'bot' && (
-                  <div className="w-7 h-7 rounded-xl bg-white border border-slate-200 text-[#0b3c68] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                    <Headphones className="w-3.5 h-3.5 text-[#0b3c68]" />
+                  <div className="w-7 h-7 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 mt-0.5 shadow-xs p-0.5">
+                    <NawiPetAvatar className="w-6 h-6" />
                   </div>
                 )}
 
@@ -441,15 +498,15 @@ Tap any question below or type your question to get instant guidance!`,
             {/* Typing Indicator */}
             {isLoading && (
               <div className="flex gap-2.5 justify-start items-center">
-                <div className="w-7 h-7 rounded-xl bg-white border border-slate-200 text-[#0b3c68] flex items-center justify-center shrink-0 shadow-xs">
-                  <Headphones className="w-3.5 h-3.5 text-[#0b3c68]" />
+                <div className="w-7 h-7 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 shadow-xs p-0.5">
+                  <NawiPetAvatar className="w-6 h-6" />
                 </div>
                 <div className="bg-white border border-slate-200/90 rounded-2xl rounded-tl-xs px-4 py-2.5 flex items-center gap-1.5 shadow-sm">
                   <span className="w-2 h-2 rounded-full bg-[#48afff] animate-bounce"></span>
                   <span className="w-2 h-2 rounded-full bg-[#48afff] animate-bounce [animation-delay:0.2s]"></span>
                   <span className="w-2 h-2 rounded-full bg-[#48afff] animate-bounce [animation-delay:0.4s]"></span>
                   <span className="text-[11px] text-slate-500 ml-1.5 font-semibold">
-                    Advisor is typing...
+                    Nawi is typing...
                   </span>
                 </div>
               </div>

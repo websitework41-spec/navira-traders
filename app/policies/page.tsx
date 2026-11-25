@@ -257,6 +257,46 @@ export default function PoliciesPage() {
         </div>
       ),
     },
+    {
+      id: 'installment-plans',
+      title: 'Installment Plans Policy',
+      badge: '3, 6, 9 & 12 Months',
+      badgeColor: 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20',
+      icon: <FileText className="w-6 h-6 text-emerald-600" />,
+      summary: 'Flexible 3, 6, 9, and 12-month installment plans are available — contact WhatsApp for plan details.',
+      content: (
+        <div className="space-y-4 text-sm text-slate-700 leading-relaxed">
+          <p>
+            Nawira Traders offers <strong>3, 6, 9, and 12-month installment plans</strong> on eligible smartphones. Because plan terms vary by device and customer profile, please contact our team directly on WhatsApp for full details.
+          </p>
+          <div className="rounded-2xl bg-emerald-50/70 p-4 border border-emerald-200/80 space-y-2">
+            <h4 className="font-bold text-emerald-950 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>Installment Eligibility Requirements:</span>
+            </h4>
+            <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-800">
+              <li>
+                <strong>Valid Pakistani ID Card:</strong> Original, valid Pakistani CNIC is mandatory.
+              </li>
+              <li>
+                <strong>No JazzCash / EasyPaisa Loans:</strong> Applicant must have no active or pending loans via JazzCash or EasyPaisa.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <a
+              href="https://wa.me/923018543131?text=Hi%20Nawira%20Traders!%20I%20would%20like%20details%20about%203%2C%206%2C%209%2C%20or%2012-month%20installment%20plans."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition-colors"
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>Contact WhatsApp (+92 301 8543131) for Details</span>
+            </a>
+          </div>
+        </div>
+      ),
+    },
   ];
 
   return (

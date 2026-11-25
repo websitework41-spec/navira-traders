@@ -849,12 +849,12 @@ function HomeContent() {
           <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
             {[
               { label: 'All Budgets', range: [0, 700000] },
-              { label: 'Under 25K', range: [0, 25000] },
-              { label: '25K - 40K', range: [25000, 40000] },
-              { label: '40K - 60K', range: [40000, 60000] },
-              { label: '60K - 100K', range: [60000, 100000] },
-              { label: '100K - 150K', range: [100000, 150000] },
-              { label: '150K+ Flagships', range: [150000, 700000] },
+              { label: 'Under 35,000', range: [0, 35000] },
+              { label: '35,000 - 45,000', range: [35000, 45000] },
+              { label: '45,000 - 65,000', range: [45000, 65000] },
+              { label: '65,000 - 100,000', range: [65000, 100000] },
+              { label: '100,000 - 150,000', range: [100000, 150000] },
+              { label: '150,000 & Above', range: [150000, 700000] },
             ].map((budget) => {
               const isSelected =
                 filters.priceRange[0] === budget.range[0] &&

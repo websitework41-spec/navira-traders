@@ -228,6 +228,47 @@ export function Footer() {
                 <span className="text-[11px] font-semibold text-slate-300">DIRBS Customs Tax Cleared</span>
               </div>
             </div>
+            {/* Social Media Links */}
+            <div className="pt-2 flex items-center gap-2.5">
+              <a
+                href="https://www.instagram.com/nawiratraders"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Nawira Traders on Instagram"
+                title="Instagram"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:border-pink-500/60 hover:text-pink-400 text-slate-400 flex items-center justify-center transition-all"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                </svg>
+              </a>
+              <a
+                href="https://www.facebook.com/nawiratraders"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Nawira Traders on Facebook"
+                title="Facebook"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:border-blue-500/60 hover:text-blue-400 text-slate-400 flex items-center justify-center transition-all"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+              </a>
+              <a
+                href="https://www.tiktok.com/@nawiratraders"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Nawira Traders on TikTok"
+                title="TikTok"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:border-cyan-400/60 hover:text-cyan-300 text-slate-400 flex items-center justify-center transition-all"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Column 2: Popular Mobile Brands */}

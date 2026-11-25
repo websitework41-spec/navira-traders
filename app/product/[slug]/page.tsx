@@ -229,7 +229,7 @@ export default function ProductDetailPage() {
   const currentStockQty = selectedColor?.stockQty || selectedVariant?.stockQty || phone.stockQty || 0;
 
   const basePrice = selectedVariant?.pricePKR || phone.basePricePKR;
-  const addonCost = addGiftWrap ? 249 : 0;
+  const addonCost = addGiftWrap ? 250 : 0;
   const currentPrice = basePrice + addonCost;
 
   const currentOriginalPrice =
@@ -344,7 +344,7 @@ export default function ProductDetailPage() {
       date: '2 weeks ago',
       verified: true,
       comment:
-        'Best price in Pakistan, even cheaper than the local market. Clean packaging and responsive WhatsApp support team answered all my questions regarding 0% EMI.',
+        'Best price in Pakistan, even cheaper than the local market. Clean packaging and responsive WhatsApp support team answered all my questions regarding installment plans.',
     },
   ];
 
@@ -802,13 +802,33 @@ export default function ProductDetailPage() {
                         <span>Premium Gift Wrapping</span>
                       </div>
                       <div className="text-[11px] text-slate-500 mt-0.5">
-                        Cost: <strong className="text-slate-900">Rs 249</strong> (Includes customized card)
+                        Cost: <strong className="text-slate-900">Rs 250</strong> (Includes customized card)
                       </div>
                     </div>
                   </label>
 
 
                 </div>
+              </div>
+
+              {/* Installment Plans Notice (3, 6, 9 & 12 Months via WhatsApp) */}
+              <div className="p-3.5 rounded-2xl bg-sky-50/70 border border-sky-200/80 space-y-1.5 text-xs">
+                <div className="font-black text-[#0b3c68] flex items-center justify-between gap-2 flex-wrap">
+                  <span>Installment Plans: 3, 6, 9 &amp; 12 Months Available</span>
+                  <a
+                    href={`https://wa.me/923018543131?text=${encodeURIComponent(
+                      `Hi Nawira Traders! I want details for 3/6/9/12-month installment plans on ${phone.name}.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold transition-colors"
+                  >
+                    Contact WhatsApp
+                  </a>
+                </div>
+                <p className="text-[11px] text-slate-600 leading-relaxed">
+                  <strong>Requirements:</strong> Valid Pakistani ID card (CNIC) and no active or pending loans via JazzCash or EasyPaisa.
+                </p>
               </div>
 
               {/* Dynamic Estimated Delivery & Cutoff Countdown */}
