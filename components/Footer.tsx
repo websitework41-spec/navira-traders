@@ -231,7 +231,7 @@ export function Footer() {
             {/* Social Media Links */}
             <div className="pt-2 flex items-center gap-2.5">
               <a
-                href="https://www.instagram.com/nawiratraders"
+                href="https://www.instagram.com/mazhar_jahangir/?utm_source=qr&r=nametag"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Nawira Traders on Instagram"
@@ -245,7 +245,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.facebook.com/nawiratraders"
+                href="https://www.facebook.com/share/1Ee2VEHCGk/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Nawira Traders on Facebook"
@@ -257,7 +257,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.tiktok.com/@nawiratraders"
+                href="https://www.tiktok.com/@j.mazhar?_r=1&_t=ZS-9BLErWUEOSw"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Nawira Traders on TikTok"
