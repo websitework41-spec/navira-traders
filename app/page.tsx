@@ -246,16 +246,20 @@ function HomeContent() {
         .then((res) => res.json())
         .then((data) => {
           if (data.success && Array.isArray(data.products)) {
-            // Guarantee canonical SMARTPHONES products (ZTE, VgoTel, Tablets, Sego, Villaon) are always merged
-            const existingIds = new Set(data.products.map((p: any) => p.id?.toLowerCase()));
-            const merged = [...data.products];
-            SMARTPHONES.forEach((basePhone) => {
-              if (basePhone.id && !existingIds.has(basePhone.id.toLowerCase())) {
-                merged.push(basePhone);
-              }
-            });
-            serverCatalogRef.current = merged;
-            setCatalog(getActiveCatalog(merged));
+            const deletedSet = new Set(
+              Array.isArray(data.deletedIds)
+                ? data.deletedIds.map((id: string) => id.toLowerCase().trim())
+                : []
+            );
+            const authoritative = deletedSet.size > 0
+              ? data.products.filter(
+                  (p: Smartphone) =>
+                    !deletedSet.has(p.id?.toLowerCase().trim()) &&
+                    !deletedSet.has(p.slug?.toLowerCase().trim())
+                )
+              : data.products;
+            serverCatalogRef.current = authoritative;
+            setCatalog(getActiveCatalog(authoritative));
           } else {
             syncCatalog();
           }
